@@ -51,8 +51,12 @@ t_linked_stack	*create_linked_stack(void)
 	ft_memset(new_stack, 0, sizeof(t_linked_stack));
 	return (new_stack);
 }
+
 /*
 	핵심!
+	1. 스택이 비어있고, 페어가 없으면 NULL 반환,
+	2. 오류 NULL 반환
+	3. 정상 들어오면 스택 반환.
 */
 t_linked_stack	*input_a_pair_stack(t_linked_stack *in_stack, char c)
 {
@@ -81,6 +85,13 @@ t_linked_stack	*input_a_pair_stack(t_linked_stack *in_stack, char c)
 	return (stack);
 }
 
+/*
+	핵심!
+	1. 스택이 비어있으면 false 반환,
+	2. stack->cnt가 0이면 false반환.
+	3. 오류 false 반환
+	4. 정상 들어오면 pop후에 enum 반환,
+*/
 int	is_a_pair_stack(t_linked_stack *stack, char c)
 {
 	if (!stack)
@@ -110,6 +121,9 @@ int	is_a_pair_stack(t_linked_stack *stack, char c)
 	return (FALSE);
 }
 
+/*
+	테스트중
+*/
 int	main()
 {
 	t_linked_stack	*stack;
