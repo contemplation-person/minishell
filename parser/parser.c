@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 09:42:06 by gyim              #+#    #+#             */
-/*   Updated: 2022/11/24 16:06:19 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/11/25 08:07:00 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	change_wspace(char *tmp)
 		i++;
 	}
 }
-
 
 void	free_line(char **words)
 {
