@@ -51,7 +51,9 @@ t_linked_stack	*create_linked_stack(void)
 	ft_memset(new_stack, 0, sizeof(t_linked_stack));
 	return (new_stack);
 }
-
+/*
+	핵심!
+*/
 t_linked_stack	*input_a_pair_stack(t_linked_stack *in_stack, char c)
 {
 	t_linked_stack	*stack;
