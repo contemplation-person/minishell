@@ -58,31 +58,32 @@ t_linked_stack	*create_linked_stack(void)
 	2. 오류 NULL 반환
 	3. 정상 들어오면 스택 반환.
 */
-t_linked_stack	*input_a_pair_stack(t_linked_stack *in_stack, char c)
+void	input_a_pair_stack(t_linked_stack **in_stack, char c)
 {
 	t_linked_stack	*stack;
-	int				check;
 
-	check = FALSE;
-	stack = in_stack;
+	if (!in_stack)
+		return ;
+	stack = *in_stack;
 	if (!stack)
 		stack = create_linked_stack();
 	if (c == '(')
-		check = push_linked_stack(stack, BACKTICK);
+		push_linked_stack(stack, BRACKET);
 	else if (c == '[')
-		check = push_linked_stack(stack, SQUARE_BRACKET);
+		push_linked_stack(stack, SQUARE_BRACKET);
 	else if (c == '\"')
-		check = push_linked_stack(stack, DOUBLE_SQUOTE);
+		push_linked_stack(stack, DOUBLE_SQUOTE);
 	else if (c == '\'')
-		check = push_linked_stack(stack, SINGLE_SQUOTE);
-	if (check == FALSE)
-		return (NULL);
+		push_linked_stack(stack, SINGLE_SQUOTE);
+	else if (c == '`')
+		push_linked_stack(stack, BACKTICK);
+	*in_stack = stack;
 	if (!(stack->cnt))
 	{
 		free(stack);
-		return (NULL);
+		*in_stack = NULL;
+		return ;
 	}
-	return (stack);
 }
 
 /*
@@ -92,33 +93,35 @@ t_linked_stack	*input_a_pair_stack(t_linked_stack *in_stack, char c)
 	3. 오류 false 반환
 	4. 정상 들어오면 pop후에 enum 반환,
 */
-int	is_a_pair_stack(t_linked_stack *stack, char c)
+
+int	is_a_pair_stack(t_linked_stack **in_stack, char c)
 {
-	if (!stack)
+	t_linked_stack	*stack;
+	int				check;
+	int				ret;
+
+	check = FALSE;
+	ret = FALSE;
+	stack = *in_stack;
+	if (!stack || !in_stack)
 		return (FALSE);
 	if (stack->cnt == 0)
 		return (FALSE);
 	if (c == ')')
-	{
-		if (stack->head->data == BRACKET)
-			return (pop_linked_stack(stack)->data);
-	}
+		check = stack->head->data == BRACKET;
 	else if (c == ']')
-	{
-		if (stack->head->data == SQUARE_BRACKET)
-			return (pop_linked_stack(stack)->data);
-	}
+		check = stack->head->data == SQUARE_BRACKET;
 	else if (c == '\"')
-	{
-		if (stack->head->data == DOUBLE_SQUOTE)
-			return (pop_linked_stack(stack)->data);
-	}
+		check = stack->head->data == DOUBLE_SQUOTE;
 	else if (c == '\'')
-	{
-		if (stack->head->data == SINGLE_SQUOTE)
-			return (pop_linked_stack(stack)->data);
-	}
-	return (FALSE);
+		check = stack->head->data == SINGLE_SQUOTE;
+	else if (c == '`')
+		check = stack->head->data == BACKTICK;
+	if (check == TRUE)
+		ret = pop_linked_stack(stack)->data;
+	if (!stack->cnt)
+		free(stack);
+	return (ret);
 }
 
 /*
@@ -126,18 +129,37 @@ int	is_a_pair_stack(t_linked_stack *stack, char c)
 */
 int	main()
 {
-	t_linked_stack	*stack;
+	static t_linked_stack	*stack;
 
 	// check NULL
-	stack = input_a_pair_stack(NULL, 'i');
+	input_a_pair_stack(NULL, 'i');
 	printf("stack = %p\n", stack);
-	// check braket
-	stack = input_a_pair_stack(NULL, '(');
-	printf("stack = %p, %d\n", stack, stack->head->data);
-	// check single
-	stack = input_a_pair_stack(NULL, '\'');
-	printf("stack = %p, %d\n", stack, stack->head->data);
-	printf("is a pair%d\n", is_a_pair_stack(stack, '\'');
-	printf("stack = %p, %d\n", stack, stack->head->data);
+	// check stack == NULL
+	input_a_pair_stack(NULL, '(');
+	printf("stack = %p, %p\n", stack, stack);
+
+	// good input
+	input_a_pair_stack(&stack, '(');
+	printf("stack = %p, %d, %d\n", stack, stack->cnt, stack->head->data);
+
+	// good input 2
+	input_a_pair_stack(&stack, '(');
+	printf("stack = %p, %d, %d\n", stack, stack->cnt, stack->head->data);
+
+	// good input 2
+	input_a_pair_stack(&stack, '(');
+	printf("stack = %p, %d, %d\n", stack, stack->cnt, stack->head->data);
+
+	printf("stack = %p, %d, %d\n", stack, stack->cnt, is_a_pair_stack(&stack, ')'));
+	printf("stack = %p, %d, %d\n", stack, stack->cnt, is_a_pair_stack(&stack, ')'));
+	printf("stack = %p, %d, %d\n", stack, stack->cnt, is_a_pair_stack(&stack, ')'));
+	printf("stack = %p, %d, %d\n", stack, stack->cnt, is_a_pair_stack(&stack, ')'));
+	printf("stack = %p, %d, %d\n", stack, stack->cnt, is_a_pair_stack(&stack, ')'));
+
+	//stack = input_a_pair_stack(NULL, '\'');
+	//printf("stack = %p, %d\n", stack, stack->head->data);
+	//printf("is a pair = %d\n", is_a_pair_stack(&stack, '\''));
+	//printf("stack = %p, %d\n", stack, stack->cnt);
+	//system("leaks a.out");
 
 }
