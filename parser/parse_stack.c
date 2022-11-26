@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 14:47:37 by juha              #+#    #+#             */
-/*   Updated: 2022/11/25 19:15:10 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/11/26 17:13:44 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,21 @@ int	check_in_stack(t_node *node, char str)
 
 }
 
+int	delete_stack(t_linked_stack *stack)
+{
+	t_stack_node	*del_node;
+	t_stack_node	*next;
+
+	del_node = stack->head;
+	while (del_node)
+	{
+		next = del_node->next;
+		free(del_node);
+		del_node = next;
+	}
+	free(stack);
+	return (0);
+}
 
 
 int main()
