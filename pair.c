@@ -1,16 +1,16 @@
 /* ************************************************************************** */
-/*																			*/
-/*														:::	  ::::::::   */
-/*   pair.c											 :+:	  :+:	:+:   */
-/*													+:+ +:+		 +:+	 */
-/*   By: juha <juha@student.42seoul.kr>			 +#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2022/11/25 14:47:37 by juha			  #+#	#+#			 */
-/*   Updated: 2022/11/25 19:17:45 by juha			 ###   ########seoul.kr  */
-/*																			*/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pair.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/26 09:06:04 by gyim              #+#    #+#             */
+/*   Updated: 2022/11/26 09:27:41 by gyim             ###   ########seoul.kr  */
+/*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "./parser/parser.h"
 
 t_stack_node	*pop_linked_stack(t_linked_stack*	stack)
 {
@@ -119,8 +119,11 @@ int	is_a_pair_stack(t_linked_stack **in_stack, char c)
 		check = stack->head->data == BACKTICK;
 	if (check == TRUE)
 		ret = pop_linked_stack(stack)->data;
-	if (!stack->cnt)
-		free(stack);
+	// if (!stack->cnt)
+	// {
+	// 	free(stack);
+	// 	*in_stack = NULL;
+	// }
 	return (ret);
 }
 
@@ -155,11 +158,9 @@ int	main()
 	printf("stack = %p, %d, %d\n", stack, stack->cnt, is_a_pair_stack(&stack, ')'));
 	printf("stack = %p, %d, %d\n", stack, stack->cnt, is_a_pair_stack(&stack, ')'));
 	printf("stack = %p, %d, %d\n", stack, stack->cnt, is_a_pair_stack(&stack, ')'));
-
 	//stack = input_a_pair_stack(NULL, '\'');
 	//printf("stack = %p, %d\n", stack, stack->head->data);
 	//printf("is a pair = %d\n", is_a_pair_stack(&stack, '\''));
 	//printf("stack = %p, %d\n", stack, stack->cnt);
 	//system("leaks a.out");
-
 }
