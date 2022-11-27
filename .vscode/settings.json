@@ -2,6 +2,7 @@
 	"files.associations": {
 		"readline.h": "c",
 		"parser.h": "c",
-		"ios": "c"
+		"ios": "c",
+		"minishell.h": "c"
 	}
 }
