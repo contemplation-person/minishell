@@ -122,7 +122,6 @@ int	delete_stack(t_linked_stack *stack)
 	return (0);
 }
 
-
 int main()
 {
 }

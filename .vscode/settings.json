@@ -1,5 +1,7 @@
 {
 	"files.associations": {
-		"readline.h": "c"
+		"readline.h": "c",
+		"parser.h": "c",
+		"ios": "c"
 	}
 }
