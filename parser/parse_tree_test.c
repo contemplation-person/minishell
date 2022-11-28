@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 18:56:37 by gyim              #+#    #+#             */
-/*   Updated: 2022/11/26 17:14:30 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/11/28 10:11:40 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	print_tree(t_node *node)
 	if (!node->op)
 	{
 		i = 0;
-		while (node->tokens[i])
+		while (node->token[i])
 		{
-			printf("%s ", node->tokens[i]);
+			printf("%s ", node->token[i]);
 			i++;
 		}
 		printf("\n");
@@ -29,15 +29,29 @@ void	print_tree(t_node *node)
 	else
 	{
 		print_tree(node->left);
+		printf("operator : %d\n", node->op);
 		print_tree(node->right);
 	}
+}
+
+void	print_token(char **token)
+{
+	int	i;
+
+	i = 0;
+	while (token[i])
+	{
+		printf("%s ", token[i]);
+		i++;
+	}
+	printf("\n");
 }
 
 int	main(int argc, char *argv[])
 {
 	t_node		*root;
 
-	root = parse_tree(argv + 1);
+	root = make_tree(argv + 1);
 	print_tree(root);
 	return (0);
 }

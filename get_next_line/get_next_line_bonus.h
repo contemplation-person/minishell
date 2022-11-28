@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 15:28:22 by gyim              #+#    #+#             */
-/*   Updated: 2022/07/26 10:16:42 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/11/28 16:01:20 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define GET_NEXT_LINE_BONUS_H
 
 # define OPEN_MAX 10240
+# define BUFFER_SIZE 1024
 
 # include <unistd.h>
 # include <stdlib.h>

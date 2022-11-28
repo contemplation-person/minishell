@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 14:10:54 by gyim              #+#    #+#             */
-/*   Updated: 2022/11/26 18:04:52 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/11/28 13:55:29 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef enum e_op
 {
 	D_AMP = 1,
 	D_PIPE,
+	PIPE
 }	t_op;
 
 typedef struct s_node
@@ -67,4 +68,22 @@ int				push_linked_stack(t_linked_stack *stack, int data);
 t_linked_stack	*create_linked_stack(void);
 void			input_a_pair_stack(t_linked_stack **in_stack, char c);
 int				is_a_pair_stack(t_linked_stack **in_stack, char c);
+int				delete_stack(t_linked_stack *stack);
+// tree.c
+t_node			*make_tree(char **token);
+int				make_sub_tree(t_node *node, int token_len);
+char			**get_sub_token(char **token, int start, int end);
+// operator.c
+int				op_check(char *token);
+int				get_op_index(char **token);
+//token.c
+int				get_token_len(char **token);
+int				p_start_check(char *token);
+int				p_end_check(char *token);
+char			**get_left_tokens(char *tokens[], int index);
+char			**get_right_tokens(char *tokens[], int index, int size);
+
+// for test
+void			print_tree(t_node *node);
+void			print_token(char **token);
 #endif

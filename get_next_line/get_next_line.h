@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 15:28:22 by gyim              #+#    #+#             */
-/*   Updated: 2022/07/26 10:15:32 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/11/28 16:01:02 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-
+# define BUFFER_SIZE 1024
 # define OPEN_MAX 10240
 
 typedef struct linkedlist

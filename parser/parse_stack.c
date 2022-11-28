@@ -1,127 +1,166 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse_stack.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/25 14:47:37 by juha              #+#    #+#             */
-/*   Updated: 2022/11/26 17:13:44 by gyim             ###   ########seoul.kr  */
-/*                                                                            */
-/* ************************************************************************** */
+// /* ************************************************************************** */
+// /*                                                                            */
+// /*                                                        :::      ::::::::   */
+// /*   parse_stack.c                                      :+:      :+:    :+:   */
+// /*                                                    +:+ +:+         +:+     */
+// /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+// /*                                                +#+#+#+#+#+   +#+           */
+// /*   Created: 2022/11/25 14:47:37 by juha              #+#    #+#             */
+// /*   Updated: 2022/11/26 19:45:36 by gyim             ###   ########seoul.kr  */
+// /*                                                                            */
+// /* ************************************************************************** */
 
-#include "parser.h"
+// #include "parser.h"
 
-/*
-	check_in_braket(char *str)
-	{
-		stack check;
-		TRUE = 괄호를 스택에 넣어놓고 1 반환 
-		FALSE = 에러 케이스 확인 후, 에러 케이스 반환)
-	}
-	check_out_braket(char *str)
-	{
-		TRUE = pop후 TRUE
-		FALSE = 에러 케이스 확인 후 에러 케이스 반환;
-	}
-*/
+// /*
+// 	check_in_braket(char *str)
+// 	{
+// 		stack check;
+// 		TRUE = 괄호를 스택에 넣어놓고 1 반환 
+// 		FALSE = 에러 케이스 확인 후, 에러 케이스 반환)
+// 	}
+// 	check_out_braket(char *str)
+// 	{
+// 		TRUE = pop후 TRUE
+// 		FALSE = 에러 케이스 확인 후 에러 케이스 반환;
+// 	}
+// */
 
-t_stack	*create_stack(void)
-{
-	t_stack *stack;
+// // t_stack	*create_stack(void)
+// // {
+// // 	t_stack *stack;
 
-	stack = malloc(sizeof(t_stack));
-    if (!stack)
-        return (NULL);
-	ft_memset(stack, 0, sizeof(t_stack));
-	return (stack);
-}
+// // 	stack = malloc(sizeof(t_stack));
+// //     if (!stack)
+// //         return (NULL);
+// // 	ft_memset(stack, 0, sizeof(t_stack));
+// // 	return (stack);
+// // }
 
-static t_stack_node	*new_stack_node(char data)
-{
-	t_stack_node *node;
+// t_stack_node	*pop_linked_stack(t_linked_stack*	stack)
+// {
+// 	t_stack_node	*ret;
 
-	node = malloc(sizeof(t_stack_node));
-    if (node)
-        return (NULL);
-	ft_memset(node, 0, sizeof(t_stack_node));
-    node->data = data;
-    return (node);
-}
+// 	if (!(stack->cnt))
+// 		return (NULL);
+// 	ret = stack->head;
+// 	stack->head = ret->prev;
+// 	stack->cnt--;
+// 	return (ret);
+// }
 
-t_stack *push(t_stack *stack, char data)
-{
-    t_stack_node *head;
-    t_stack_node *new_node;
+// int	push_linked_stack(t_linked_stack* stack, int data)
+// {
+// 	t_stack_node	*next;
+// 	t_stack_node	*temp_node;
 
-    new_node = new_stack_node(data);
-    if (new_node)
-        return (NULL);
-    stack->cnt++;
-    head = stack->head;
-    head->prev = new_node;
-    new_node->next = head;
-    stack->head = new_node;
-    return (stack);
-}
+// 	next = NULL;
+// 	temp_node = (t_stack_node *)malloc(sizeof(t_stack_node));
+// 	if (!temp_node)
+// 		return (FALSE);
+// 	ft_memset(temp_node, 0, sizeof(temp_node));
+// 	temp_node->data = data;
+// 	temp_node->prev = stack->head;
+// 	stack->head = temp_node;
+// 	stack->cnt++;
+// 	return (TRUE);
+// }
 
-t_stack_node    *pop(t_stack *stack)
-{
-    t_stack_node *pop_node;
+// t_linked_stack	*create_linked_stack(void)
+// {
+// 	t_linked_stack	*new_stack;
 
-    if (stack->cnt == 0)
-        return (NULL);
-    stack->cnt--;
-    pop_node = stack->head;
-    stack->head = pop_node->next;
-    stack->head->prev = NULL;
-    pop_node->next = NULL;
-    return (pop_node);
-}
+// 	new_stack = (t_linked_stack *)malloc(sizeof(t_linked_stack));
+// 	if (!new_stack)
+// 		return (NULL);
+// 	ft_memset(new_stack, 0, sizeof(t_linked_stack));
+// 	return (new_stack);
+// }
 
-void    display_stack(t_stack *stack)
-{
-    t_stack_node    *node;
-    while (!(stack->cnt))
-    {
-        node = pop(stack);
-        printf("%s", );
-    }
-}
+// /*
+// 	핵심!
+// 	1. 스택이 비어있고, 페어가 없으면 NULL 반환,
+// 	2. 오류 NULL 반환
+// 	3. 정상 들어오면 스택 반환.
+// */
+// void	input_a_pair_stack(t_linked_stack **in_stack, char c)
+// {
+// 	t_linked_stack	*stack;
 
-int	check_in_stack(t_node *node, char str)
-{
-	
-	while (*str)
-	{
-		if (ft_strncmp(str, "", 1))
-			push(&stack, te)
-		str++;
-	}
-	/*
-		문자에서 괄호가 있는지 판단
-		static t_stack	stack;
-		if (is_zero_in(stack.cnt))
-	*/
+// 	if (!in_stack)
+// 		return ;
+// 	stack = *in_stack;
+// 	if (!stack)
+// 		stack = create_linked_stack();
+// 	if (c == '(')
+// 		push_linked_stack(stack, BRACKET);
+// 	else if (c == '[')
+// 		push_linked_stack(stack, SQUARE_BRACKET);
+// 	else if (c == '\"')
+// 		push_linked_stack(stack, DOUBLE_SQUOTE);
+// 	else if (c == '\'')
+// 		push_linked_stack(stack, SINGLE_SQUOTE);
+// 	else if (c == '`')
+// 		push_linked_stack(stack, BACKTICK);
+// 	*in_stack = stack;
+// 	if (!(stack->cnt))
+// 	{
+// 		free(stack);
+// 		*in_stack = NULL;
+// 		return ;
+// 	}
+// }
 
-}
+// /*
+// 	핵심!
+// 	1. 스택이 비어있으면 false 반환,
+// 	2. stack->cnt가 0이면 false반환.
+// 	3. 오류 false 반환
+// 	4. 정상 들어오면 pop후에 enum 반환,
+// */
 
-int	delete_stack(t_linked_stack *stack)
-{
-	t_stack_node	*del_node;
-	t_stack_node	*next;
+// int	is_a_pair_stack(t_linked_stack **in_stack, char c)
+// {
+// 	t_linked_stack	*stack;
+// 	int				check;
+// 	int				ret;
 
-	del_node = stack->head;
-	while (del_node)
-	{
-		next = del_node->next;
-		free(del_node);
-		del_node = next;
-	}
-	free(stack);
-	return (0);
-}
+// 	check = FALSE;
+// 	ret = FALSE;
+// 	stack = *in_stack;
+// 	if (!stack || !in_stack)
+// 		return (FALSE);
+// 	if (stack->cnt == 0)
+// 		return (FALSE);
+// 	if (c == ')')
+// 		check = stack->head->data == BRACKET;
+// 	else if (c == ']')
+// 		check = stack->head->data == SQUARE_BRACKET;
+// 	else if (c == '\"')
+// 		check = stack->head->data == DOUBLE_SQUOTE;
+// 	else if (c == '\'')
+// 		check = stack->head->data == SINGLE_SQUOTE;
+// 	else if (c == '`')
+// 		check = stack->head->data == BACKTICK;
+// 	if (check == TRUE)
+// 		ret = pop_linked_stack(stack)->data;
+// 	if (!stack->cnt)
+// 		free(stack);
+// 	return (ret);
+// }
 
-int main()
-{
-}
+// int	delete_stack(t_linked_stack *stack)
+// {
+// 	t_stack_node	*del_node;
+// 	t_stack_node	*next;
+
+// 	del_node = stack->head;
+// 	while (del_node)
+// 	{
+// 		next = del_node->next;
+// 		free(del_node);
+// 		del_node = next;
+// 	}
+// 	free(stack);
+// 	return (0);
+// }
