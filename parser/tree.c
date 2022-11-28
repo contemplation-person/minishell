@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 14:48:31 by gyim              #+#    #+#             */
-/*   Updated: 2022/11/26 18:15:37 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/11/28 10:11:37 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,16 @@ t_node	*make_tree(char **token)
 	if (!node)
 		return (NULL);
 	token_len = get_token_len(token);
-	node->token = get_sub_token(token, 0, op_index);
+	op_index = get_op_index(token);
+	node->token = get_sub_token(token, 0, token_len);
+	if (op_index == -1)
+	{
+		node->left = NULL;
+		node->right = NULL;
+		return (node);
+	}
 	make_sub_tree(node, token_len);
+	return (node);
 }
 
 int	make_sub_tree(t_node *node, int token_len)
@@ -41,7 +49,7 @@ int	make_sub_tree(t_node *node, int token_len)
 		node->right = NULL;
 		return (0);
 	}
-	node->op = ft_strdup(node->token[op_index]);
+	node->op = 1;
 	left_token = get_sub_token(node->token, 0, op_index - 1);
 	right_token = get_sub_token(node->token, op_index + 1, token_len);
 	node->left = make_tree(left_token);
@@ -58,8 +66,7 @@ char	**get_sub_token(char **token, int start, int end)
 	ret = malloc(sizeof(char *) * (end - start + 2));
 	i = 0;
 	j = start;
-	ret[end] = NULL;
-	while (i <= end)
+	while (j <= end)
 	{
 		ret[i] = token[j];
 		i++;

@@ -6,11 +6,11 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 09:06:04 by gyim              #+#    #+#             */
-/*   Updated: 2022/11/26 09:27:41 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/11/26 19:45:35 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./parser/parser.h"
+#include "parser.h"
 
 t_stack_node	*pop_linked_stack(t_linked_stack*	stack)
 {
@@ -127,40 +127,57 @@ int	is_a_pair_stack(t_linked_stack **in_stack, char c)
 	return (ret);
 }
 
+int	delete_stack(t_linked_stack *stack)
+{
+	t_stack_node	*del_node;
+	t_stack_node	*next;
+
+	del_node = stack->head;
+	while (del_node)
+	{
+		next = del_node->next;
+		free(del_node);
+		del_node = next;
+	}
+	free(stack);
+	return (0);
+}
+
 /*
 	테스트중
 */
-int	main()
-{
-	static t_linked_stack	*stack;
+// int	main()
+// {
+// 	static t_linked_stack	*stack;
 
-	// check NULL
-	input_a_pair_stack(NULL, 'i');
-	printf("stack = %p\n", stack);
-	// check stack == NULL
-	input_a_pair_stack(NULL, '(');
-	printf("stack = %p, %p\n", stack, stack);
+// 	// check NULL
+// 	input_a_pair_stack(NULL, 'i');
+// 	printf("stack = %p\n", stack);
+// 	// check stack == NULL
+// 	input_a_pair_stack(NULL, '(');
+// 	printf("stack = %p, %p\n", stack, stack);
 
-	// good input
-	input_a_pair_stack(&stack, '(');
-	printf("stack = %p, %d, %d\n", stack, stack->cnt, stack->head->data);
+// 	// good input
+// 	input_a_pair_stack(&stack, '(');
+// 	printf("stack = %p, %d, %d\n", stack, stack->cnt, stack->head->data);
 
-	// good input 2
-	input_a_pair_stack(&stack, '(');
-	printf("stack = %p, %d, %d\n", stack, stack->cnt, stack->head->data);
+// 	// good input 2
+// 	input_a_pair_stack(&stack, '(');
+// 	printf("stack = %p, %d, %d\n", stack, stack->cnt, stack->head->data);
 
-	// good input 2
-	input_a_pair_stack(&stack, '(');
-	printf("stack = %p, %d, %d\n", stack, stack->cnt, stack->head->data);
+// 	// good input 2
+// 	input_a_pair_stack(&stack, '(');
+// 	printf("stack = %p, %d, %d\n", stack, stack->cnt, stack->head->data);
 
-	printf("stack = %p, %d, %d\n", stack, stack->cnt, is_a_pair_stack(&stack, ')'));
-	printf("stack = %p, %d, %d\n", stack, stack->cnt, is_a_pair_stack(&stack, ')'));
-	printf("stack = %p, %d, %d\n", stack, stack->cnt, is_a_pair_stack(&stack, ')'));
-	printf("stack = %p, %d, %d\n", stack, stack->cnt, is_a_pair_stack(&stack, ')'));
-	printf("stack = %p, %d, %d\n", stack, stack->cnt, is_a_pair_stack(&stack, ')'));
-	//stack = input_a_pair_stack(NULL, '\'');
-	//printf("stack = %p, %d\n", stack, stack->head->data);
-	//printf("is a pair = %d\n", is_a_pair_stack(&stack, '\''));
-	//printf("stack = %p, %d\n", stack, stack->cnt);
-	//system("leaks a.out");
-}
+// 	printf("stack = %p, %d, %d\n", stack, stack->cnt, is_a_pair_stack(&stack, ')'));
+// 	printf("stack = %p, %d, %d\n", stack, stack->cnt, is_a_pair_stack(&stack, ')'));
+// 	printf("stack = %p, %d, %d\n", stack, stack->cnt, is_a_pair_stack(&stack, ')'));
+// 	printf("stack = %p, %d, %d\n", stack, stack->cnt, is_a_pair_stack(&stack, ')'));
+// 	printf("stack = %p, %d, %d\n", stack, stack->cnt, is_a_pair_stack(&stack, ')'));
+// 	//stack = input_a_pair_stack(NULL, '\'');
+// 	//printf("stack = %p, %d\n", stack, stack->head->data);
+// 	//printf("is a pair = %d\n", is_a_pair_stack(&stack, '\''));
+// 	//printf("stack = %p, %d\n", stack, stack->cnt);
+// 	//system("leaks a.out");
+// }
+

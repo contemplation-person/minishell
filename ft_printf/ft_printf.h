@@ -6,14 +6,14 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 16:25:39 by gyim              #+#    #+#             */
-/*   Updated: 2022/08/12 14:16:32 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/11/28 16:02:33 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include "libft/libft.h"
+# include "../libft/libft.h"
 # include <stdarg.h>
 
 typedef struct s_node

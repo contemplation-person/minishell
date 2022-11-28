@@ -1,10 +1,10 @@
 NAME = libftprintf.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-LIB_DIR=./libft/
+LIB_DIR=../libft/
 LIBFT_NAME=libft.a
 LIB=$(LIB_DIR)$(LIBFT_NAME)
-INCLUDE=-I ./libft
+INCLUDE=-I ../libft
 AR = ar
 ARFLAGS = rcs
 RM = rm -f
