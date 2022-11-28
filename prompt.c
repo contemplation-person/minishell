@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/21 16:52:21 by juha              #+#    #+#             */
-/*   Updated: 2022/11/28 17:32:37 by juha             ###   ########seoul.kr  */
+/*   Created: 2022/11/27 22:13:33 by juha              #+#    #+#             */
+/*   Updated: 2022/11/28 17:31:40 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-// # include "/Users/juha/goinfre/brew/Cellar/readline/8.2.1/include/readline/readline.h"
+#include "minishell.h"
 
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-# include <sys/wait.h>
+int	main()
+{
+	char	*sentence;
 
-#endif
+	while (1)
+	{
+		sentence = readline("a : ");
+		if (sentence == NULL)
+			return (EXIT_SUCCESS); // 에러코드 정리 필요.
+		/* 토큰화 */
+		add_history(sentence);
+		free(sentence);
+		rl_redisplay();
+		rl_replace_line("", 0);
+		rl_on_new_line();
+	}
+	return (EXIT_SUCCESS);
+}
