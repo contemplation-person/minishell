@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 14:10:54 by gyim              #+#    #+#             */
-/*   Updated: 2022/11/28 13:55:29 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/11/25 21:44:21 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include "../libft/libft.h"
+# include "libft/libft.h"
 
 typedef enum e_check_list
 {
@@ -25,25 +25,19 @@ typedef enum e_check_list
 	SINGLE_SQUOTE,
 	DOUBLE_SQUOTE,
 	BACKTICK,
-}	t_check_list;
+}t_check_list;
 
 typedef enum e_bool
 {
 	FALSE,
 	TRUE,
-}	t_bool;
-
-typedef enum e_op
-{
-	D_AMP = 1,
-	D_PIPE,
-	PIPE
-}	t_op;
+}t_bool;
 
 typedef struct s_node
 {
-	char			**token;
-	int				op;
+	char			**tokens;
+	// int				op;
+	char			*op;
 	struct s_node	*left;
 	struct s_node	*right;
 }	t_node;
@@ -51,7 +45,6 @@ typedef struct s_node
 typedef struct s_stack_node
 {
 	int					data;
-
 	struct s_stack_node	*next;
 	struct s_stack_node	*prev;
 }t_stack_node;
@@ -62,28 +55,10 @@ typedef struct s_linked_stack
 	t_stack_node	*head;
 }t_linked_stack;
 
-//pair.c
-t_stack_node	*pop_linked_stack(t_linked_stack *stack);
-int				push_linked_stack(t_linked_stack *stack, int data);
-t_linked_stack	*create_linked_stack(void);
-void			input_a_pair_stack(t_linked_stack **in_stack, char c);
-int				is_a_pair_stack(t_linked_stack **in_stack, char c);
-int				delete_stack(t_linked_stack *stack);
-// tree.c
-t_node			*make_tree(char **token);
-int				make_sub_tree(t_node *node, int token_len);
-char			**get_sub_token(char **token, int start, int end);
-// operator.c
-int				op_check(char *token);
-int				get_op_index(char **token);
-//token.c
-int				get_token_len(char **token);
-int				p_start_check(char *token);
-int				p_end_check(char *token);
-char			**get_left_tokens(char *tokens[], int index);
-char			**get_right_tokens(char *tokens[], int index, int size);
-
-// for test
-void			print_tree(t_node *node);
-void			print_token(char **token);
+// parse_tree.c
+t_node	*parse_tree(char **tokens);
+int		make_child(t_node *parent, char **tokens, int index);
+int		get_tokens_size(char **token);
+int		op_check(char **tokens);
+int		is_op(char *token);
 #endif
