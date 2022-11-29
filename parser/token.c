@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 17:04:39 by gyim              #+#    #+#             */
-/*   Updated: 2022/11/26 19:45:32 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/11/29 11:22:02 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int	p_start_check(char *token)
 	else if (token[0] == '[')
 		return (SQUARE_BRACKET);
 	else if (token[0] == '\"')
-		return (DOUBLE_SQUOTE);
+		return (DOUBLE_QUOTE);
 	else if (token[0] == '\'')
-		return (SINGLE_SQUOTE);
+		return (SINGLE_QUOTE);
 	else if (token[0] == '`')
 		return (BACKTICK);
 	return (0);
@@ -44,9 +44,9 @@ int	p_end_check(char *token)
 	else if (token[0] == ']')
 		return (SQUARE_BRACKET);
 	else if (token[0] == '\"')
-		return (DOUBLE_SQUOTE);
+		return (DOUBLE_QUOTE);
 	else if (token[0] == '\'')
-		return (SINGLE_SQUOTE);
+		return (SINGLE_QUOTE);
 	else if (token[0] == '`')
 		return (BACKTICK);
 	return (0);
