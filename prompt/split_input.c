@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:51:34 by gyim              #+#    #+#             */
-/*   Updated: 2022/11/29 18:30:06 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/01 20:28:12 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,23 +26,7 @@ t_tlist_info	*split_input(char *input)
 	i = 0;
 	while (input[i])
 	{
-		while (input[i] && is_space(input[i]))
-			i++;
-		if (input[i] == '\0')
-			break ;
-		if (is_quote(input[i]) > 0)
-		{
-			start = i;
-			i++;
-			while (input[i] && !is_quote(input[i]))
-				i++;
-			add_substr(tinfo, input, start, i);
-		}
-		else if (is_brace(input[i]))
-		{
-			add_substr(tinfo, input, i, i);
-			i++;
-		}
+		
 	}
 	return (tinfo);
 }

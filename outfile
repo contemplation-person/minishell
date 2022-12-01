@@ -1,0 +1,19 @@
+asdf
+asdf
+asdf
+asdf
+asdf
+asdf
+total 120$
+-rw-r--r--   1 gyim  2022_seoul   1046 11 26 08:58 README.md$
+drwxr-xr-x   6 gyim  2022_seoul    204 11 23 18:49 builtin$
+drwxr-xr-x  23 gyim  2022_seoul    782 11 28 16:02 ft_printf$
+drwxr-xr-x   8 gyim  2022_seoul    272 11 22 19:06 get_next_line$
+drwxr-xr-x  47 gyim  2022_seoul   1598 11 28 15:59 libft$
+-rw-r--r--   1 gyim  2022_seoul   1077 11 22 19:24 minishell.h$
+-rw-r--r--   1 gyim  2022_seoul     30 12  1 16:48 outfile$
+-rw-rw-r--@  1 gyim  2022_seoul   4590 11 26 09:27 pair.c$
+drwxr-xr-x  11 gyim  2022_seoul    374 11 28 10:11 parser$
+drwxr-xr-x   8 gyim  2022_seoul    272 11 29 18:32 prompt$
+drwxrwxr-x@ 86 gyim  2022_seoul   2924 10  5 23:41 readline$
+-rw-rw-r--   1 gyim  2022_seoul  38147 11 28 10:45 readline.h$

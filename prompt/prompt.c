@@ -6,13 +6,14 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 10:29:21 by gyim              #+#    #+#             */
-/*   Updated: 2022/11/29 18:32:53 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/01 20:00:05 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "split_input.h"
 
 void	print_list(t_tlist_info *list);
+
 int	main(int argc, char *argv[])
 {
 	char			*user_input;
