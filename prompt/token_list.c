@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 09:00:54 by gyim              #+#    #+#             */
-/*   Updated: 2022/11/29 18:25:19 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/02 14:21:02 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_tnode	*make_node(char *str)
 	if (!new_node)
 		return (NULL);
 	new_node->token = ft_strdup(str);
+	new_node->next = NULL;
 	if (!new_node->token)
 	{
 		free(new_node);
@@ -66,4 +67,19 @@ void	list_add(t_tlist_info *list, char *str)
 		list->head = new_node;
 	else
 		last_node->next = new_node;
+}
+
+void	del_list(t_tlist_info *list)
+{
+	t_tnode	*node;
+	t_tnode	*next;
+
+	node = list->head;
+	while (node)
+	{
+		next = node->next;
+		free(node);
+		node = next;
+	}
+	free(list);
 }

@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:51:34 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/01 20:28:12 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/02 20:16:12 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,56 +24,85 @@ t_tlist_info	*split_input(char *input)
 	tinfo = tlist_init();
 	start = 0;
 	i = 0;
-	while (input[i])
+	while (input + i)
 	{
-		
+		while (input[i] && is_space(input[i]))
+			i++;
+		if (!input[i])
+			break ;
+		i += get_token(tinfo, input, i);
 	}
+	putchar('\n');
 	return (tinfo);
 }
 
-int	is_space(char ch)
+int	get_token(t_tlist_info *list, char *input, int start)
 {
-	if (ch == ' ' || ch == '\t')
+	int	end;
+
+	if (is_op(input, start))
+	{
+		end = get_op_end(input, start);
+		add_substr(list, input, start, end);
+		return (end - start + 1);
+	}
+	else if (is_brace(input, start))
+	{
+		add_substr(list, input, start, start);
 		return (1);
+	}
+	else if (is_quote(input, start))
+	{
+		end = get_quoted_end(input, start);
+		add_substr(list, input, start, end);
+		printf("start : %d, end : %d\n", start, end);
+		return (end - start + 1);
+	}
 	else
-		return (0);
+	{
+		end = get_word_end(input, start);
+		add_substr(list, input, start, end - 1);
+		printf("start : %d, end : %d\n", start, end);
+		return (end - start);
+	}
 }
 
-int	is_quote(char ch)
+int	get_op_end(char *input, int start)
 {
-	if (ch == '\'')
-		return (SINGLE_QUOTE);
-	else if (ch == '"')
-		return (DOUBLE_QUOTE);
-	else if (ch == '`')
-		return (BACKTICK);
-	else
-		return (0);
+	int	end;
+
+	
 }
 
-int	is_brace(char input)
+int	get_quoted_end(char *input, int start)
 {
-	if (input == '(' || input == ')')
-	 	return (1);
-	else if (input == '[' || input == ']')
-		return (1);
-	else
-		return (0);
+	char	quote;
+	int		end;
+
+	quote = *(input + start);
+	end = start + 1;
+	while (input[end] && input[end] != quote)
+		end++;
+	return (end);
 }
 
-int	is_op(char *str)
+int	get_word_end(char *input, int start)
 {
-	if (*str == '|')
-		return (1);
-	else
-		return (0);
+	int	end;
+
+	end = start;
+	while (input[end] && !is_op(input, end)
+		&& !is_brace(input, end) && !is_space(input[end])
+		&& !is_quote(input, end))
+		end++;
+	return (end);
 }
 
 void	add_substr(t_tlist_info *list, char *str, int start, int end)
 {
 	char	*word;
 
-	word = ft_substr(str, start, end);
+	word = ft_substr(str, start, end - start + 1);
 	if (!word)
 		return ;
 	list_add(list, word);
