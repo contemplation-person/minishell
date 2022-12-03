@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juha <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -18,13 +18,12 @@ enum e_bool
 	TRUE,
 };
 
-/* opendir, readdir, closedir*/
-
 int	main(int argc, char **argv)
 {
 	char	*str;
 
 	str = NULL;
+	(void)argv;
 	if (argc != 1)
 	{
 		ft_putstr_fd("pwd : too many arguments\n", STDERR_FILENO);
