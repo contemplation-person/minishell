@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:51:34 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/03 14:07:57 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/03 18:53:35 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ t_tlist_info	*split_input(char *input)
 			break ;
 		i += get_token(tinfo, input, i);
 	}
-	putchar('\n');
 	return (tinfo);
 }
 
@@ -42,6 +41,7 @@ int	get_token(t_tlist_info *list, char *input, int start)
 
 	if (is_op(input, start))
 	{
+		printf("1\n");
 		end = get_op_end(input, start);
 		add_substr(list, input, start, end - 1);
 		return (end - start);
@@ -70,13 +70,13 @@ int	get_op_end(char *input, int start)
 	int	end;
 
 	end = start;
-	if (ft_strncmp(input + start, "||", 2) == 0)
+	if (!ft_strncmp(input + start, "||", 2))
 		end = start + 2;
-	else if (ft_strncmp(input + start, "&&", 2) == 0)
+	else if (!ft_strncmp(input + start, "&&", 2))
 		end = start + 2;
-	else if (ft_strncmp(input + start, ">>", 2) == 0)
+	else if (!ft_strncmp(input + start, ">>", 2))
 		end = start + 2;
-	else if (ft_strncmp(input + start, ">>", 2) == 0)
+	else if (!ft_strncmp(input + start, "<<", 2))
 		end = start + 2;
 	else if (input[start] == '|')
 		end = start + 1;

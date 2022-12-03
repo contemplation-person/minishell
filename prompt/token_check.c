@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 08:22:27 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/02 18:39:07 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/03 18:53:35 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,16 @@ int	is_brace(char *input, int index)
 int	is_op(char *input, int index)
 {
 	if (input[index] == '|')
+		return (1);
+	else if (input[index] == '>')
+		return (1);
+	else if (!ft_strncmp(input + index, "||", 2))
+		return (1);
+	else if (!ft_strncmp(input + index, "&&", 2))
+		return (1);
+	else if (!ft_strncmp(input + index, ">>", 2))
+		return (1);
+	else if (!ft_strncmp(input + index, "<<", 2))
 		return (1);
 	else
 		return (0);
