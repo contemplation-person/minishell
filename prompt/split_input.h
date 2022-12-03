@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:43:32 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/02 15:48:04 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/03 12:42:50 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void			del_list(t_tlist_info *list);
 // split_input.c
 t_tlist_info	*split_input(char *input);
 int				get_token(t_tlist_info *list, char *input, int start);
+int				get_op_end(char *input, int start);
 int				get_quoted_end(char *input, int start);
 int				get_word_end(char *input, int start);
 void			add_substr(t_tlist_info *list, char *str, int start, int end);

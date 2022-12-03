@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:51:34 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/02 20:16:12 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/03 14:07:57 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int	get_token(t_tlist_info *list, char *input, int start)
 	if (is_op(input, start))
 	{
 		end = get_op_end(input, start);
-		add_substr(list, input, start, end);
-		return (end - start + 1);
+		add_substr(list, input, start, end - 1);
+		return (end - start);
 	}
 	else if (is_brace(input, start))
 	{
@@ -55,14 +55,12 @@ int	get_token(t_tlist_info *list, char *input, int start)
 	{
 		end = get_quoted_end(input, start);
 		add_substr(list, input, start, end);
-		printf("start : %d, end : %d\n", start, end);
 		return (end - start + 1);
 	}
 	else
 	{
 		end = get_word_end(input, start);
 		add_substr(list, input, start, end - 1);
-		printf("start : %d, end : %d\n", start, end);
 		return (end - start);
 	}
 }
@@ -71,7 +69,20 @@ int	get_op_end(char *input, int start)
 {
 	int	end;
 
-	
+	end = start;
+	if (ft_strncmp(input + start, "||", 2) == 0)
+		end = start + 2;
+	else if (ft_strncmp(input + start, "&&", 2) == 0)
+		end = start + 2;
+	else if (ft_strncmp(input + start, ">>", 2) == 0)
+		end = start + 2;
+	else if (ft_strncmp(input + start, ">>", 2) == 0)
+		end = start + 2;
+	else if (input[start] == '|')
+		end = start + 1;
+	else if (input[start] == '>')
+		end = start + 1;
+	return (end);
 }
 
 int	get_quoted_end(char *input, int start)
