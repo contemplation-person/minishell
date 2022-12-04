@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 18:06:40 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/03 15:20:38 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/05 08:00:18 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int		ft_isprint(int c);
 int		ft_isdigit(int c);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
-void	*ft_memccpy(void *dst, const void *src, int c, size_t n);
 void	*ft_memmove(void *dst, const void *src, size_t len);
 void	*ft_memset(void *b, int c, size_t len);
 void	*ft_memchr(const void *s1, int c, size_t n);

@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 14:10:54 by gyim              #+#    #+#             */
-/*   Updated: 2022/11/28 13:55:29 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/11/29 11:21:53 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ typedef enum e_check_list
 {
 	BRACKET = 1,
 	SQUARE_BRACKET,
-	SINGLE_SQUOTE,
-	DOUBLE_SQUOTE,
+	SINGLE_QUOTE,
+	DOUBLE_QUOTE,
 	BACKTICK,
 }	t_check_list;
 
@@ -51,7 +51,6 @@ typedef struct s_node
 typedef struct s_stack_node
 {
 	int					data;
-
 	struct s_stack_node	*next;
 	struct s_stack_node	*prev;
 }t_stack_node;
