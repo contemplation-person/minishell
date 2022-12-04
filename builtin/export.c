@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split_input.c                                      :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/28 11:51:34 by gyim              #+#    #+#             */
-/*   Updated: 2022/11/28 15:48:13 by gyim             ###   ########seoul.kr  */
+/*   Created: 2022/12/02 12:21:23 by juha              #+#    #+#             */
+/*   Updated: 2022/12/02 12:26:13 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "prompt.h"
-
-char	**split_input(char *input)
+#include "../libft/libft.h"
+#include <stdio.h>
+int	main(int argc, char **argv, char **envp)
 {
-	int	i;
+	(void)argc;
+	(void)argv;
+	(void)envp;
 
-	i = 0;
-	while (input[i])
-	{
-		
-		i++;
-	}	
+	printf("%s\n", getenv("TERM"));
+	return 0;
 }
