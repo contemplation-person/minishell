@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 09:06:04 by gyim              #+#    #+#             */
-/*   Updated: 2022/11/26 19:45:35 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/05 19:18:27 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ void	input_a_pair_stack(t_linked_stack **in_stack, char c)
 	else if (c == '[')
 		push_linked_stack(stack, SQUARE_BRACKET);
 	else if (c == '\"')
-		push_linked_stack(stack, DOUBLE_SQUOTE);
+		push_linked_stack(stack, DOUBLE_QUOTE);
 	else if (c == '\'')
-		push_linked_stack(stack, SINGLE_SQUOTE);
+		push_linked_stack(stack, SINGLE_QUOTE);
 	else if (c == '`')
 		push_linked_stack(stack, BACKTICK);
 	*in_stack = stack;
@@ -112,9 +112,9 @@ int	is_a_pair_stack(t_linked_stack **in_stack, char c)
 	else if (c == ']')
 		check = stack->head->data == SQUARE_BRACKET;
 	else if (c == '\"')
-		check = stack->head->data == DOUBLE_SQUOTE;
+		check = stack->head->data == DOUBLE_QUOTE;
 	else if (c == '\'')
-		check = stack->head->data == SINGLE_SQUOTE;
+		check = stack->head->data == SINGLE_QUOTE;
 	else if (c == '`')
 		check = stack->head->data == BACKTICK;
 	if (check == TRUE)

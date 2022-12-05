@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 14:10:54 by gyim              #+#    #+#             */
-/*   Updated: 2022/11/29 11:21:53 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/05 19:17:33 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include "../libft/libft.h"
+// # include "../prompt_temp/split_input.h"
 
 typedef enum e_check_list
 {
