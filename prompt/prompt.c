@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 10:01:26 by juha              #+#    #+#             */
-/*   Updated: 2022/12/03 15:57:11 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/05 10:45:04 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../libft/libft.h"
 /*
 	readline()은 null이 들어오거나 \0가 들어올 때 시그널 처리를 한다.
 */
-typedef enum e_bool
-{
-	FALSE,
-	TRUE,
-}t_bool;
 
 int	is_white_space(char *check_charecter)
 {
