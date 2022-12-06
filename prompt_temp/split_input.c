@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:51:34 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/03 18:53:35 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/06 10:44:08 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	get_token(t_tlist_info *list, char *input, int start)
 
 	if (is_op(input, start))
 	{
-		printf("1\n");
 		end = get_op_end(input, start);
 		add_substr(list, input, start, end - 1);
 		return (end - start);
