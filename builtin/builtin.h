@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/02 12:28:24 by juha              #+#    #+#             */
-/*   Updated: 2022/12/07 19:41:03 by juha             ###   ########seoul.kr  */
+/*   Created: 2022/12/05 13:04:03 by juha              #+#    #+#             */
+/*   Updated: 2022/12/07 19:40:47 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#ifndef BUILTIN_H
+# define BUILTIN_H
 
-t_bool	env(t_list *list)
+# include "../libft/libft.h"
+
+typedef enum e_bool
 {
-	while (list)
-	{
-		ft_putstr_fd(list->content, STDOUT_FILENO);
-		list = list->next;
-	}
-	return (TRUE);
-}
+	FALSE,
+	TRUE,
+}t_bool;
+
+#endif

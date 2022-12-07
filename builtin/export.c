@@ -6,18 +6,14 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 12:21:23 by juha              #+#    #+#             */
-/*   Updated: 2022/12/02 12:26:13 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/07 11:45:14 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
-#include <stdio.h>
-int	main(int argc, char **argv, char **envp)
-{
-	(void)argc;
-	(void)argv;
-	(void)envp;
+#include "builtin.h"
 
-	printf("%s\n", getenv("TERM"));
-	return 0;
+t_bool	export(t_list **minishell_envp, char **env)
+{
+	ft_lstadd_back(minishell_envp, ft_lstnew(*env));
+	return (TRUE);
 }
