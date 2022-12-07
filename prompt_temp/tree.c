@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:34:41 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/06 19:47:00 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/07 10:18:41 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,6 @@ int	make_child(t_node *parent_node, char **cmds, int op_index)
 	parent_node->left = make_tree(l_cmds);
 	printf("%s\n", parent_node->op);
 	parent_node->right = make_tree(r_cmds);
-	free_cmds(cmds);
+	// free_cmds(cmds);
 	return (0);
 }

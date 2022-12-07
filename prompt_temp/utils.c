@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 18:26:48 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/06 19:44:11 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/07 10:55:28 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,35 @@ int	find_op(char **cmds)
 {
 	int	i;
 	int	ret;
+	int	p_flag;
 
 	i = 0;
 	ret = -1;
+	p_flag = 0;
 	while (cmds[i])
 	{
-		if (ft_strncmp(cmds[i], "||", 3) == 0
-			|| ft_strncmp(cmds[i], "&&", 3) == 0)
+		if (cmds[i][0] == '(')
+			p_flag++;
+		else if (cmds[i][0] == ')')
+			p_flag--;
+		if (p_flag == 0 && (ft_strncmp(cmds[i], "||", 3) == 0
+				|| ft_strncmp(cmds[i], "&&", 3) == 0))
 			ret = i;
 		i++;
 	}
+	if (p_flag != 0)
+		return (-1);
 	if (ret != -1)
 		return (ret);
 	i = 0;
+	p_flag = 0;
 	while (cmds[i])
 	{
-		if (ft_strncmp(cmds[i], "|", 2) == 0)
+		if (cmds[i][0] == '(')
+			p_flag++;
+		else if (cmds[i][0] == ')')
+			p_flag--;
+		if (p_flag == 0 && cmds[i][0] == '|')
 			ret = i;
 		i++;
 	}
