@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:43:32 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/06 19:43:41 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/07 19:40:00 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void			copy_from_list(char **target, t_tlist_info *list);
 t_node			*make_tree(char **cmds);
 t_node			*make_new_node(void);
 int				make_child(t_node *parent_node, char **cmds, int op_index);
+void			del_tree(t_node *node);
 // utils.c
 int				find_op(char **cmds);
 char			**subcmds(char **cmds, int start, int end);

@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:34:41 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/07 10:18:41 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/07 20:05:59 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,30 @@ int	make_child(t_node *parent_node, char **cmds, int op_index)
 		free_cmds(l_cmds);
 		return (-1);
 	}
+	free_cmds(cmds);
 	parent_node->left = make_tree(l_cmds);
 	printf("%s\n", parent_node->op);
 	parent_node->right = make_tree(r_cmds);
-	// free_cmds(cmds);
 	return (0);
+}
+
+void	del_tree(t_node *node)
+{
+	if (node->left == NULL)
+	{
+		free(node->words);
+		node->words = NULL;
+		node = NULL;
+		return ;
+	}
+	del_tree(node->left);
+	free(node->left);
+	node->left = NULL;
+	del_tree(node->right);
+	free(node->right);
+	node->right = NULL;
+	free(node->op);
+	node->op = NULL;
+	free(node);
+	node = NULL;
 }

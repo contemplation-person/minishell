@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 10:29:21 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/07 10:17:03 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/07 20:01:00 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,18 @@ int	main(int argc, char *argv[])
 	while (1)
 	{
 		user_input = readline("minishell$ ");
+		if (ft_strncmp(user_input, "exit", 5) == 0)
+			break ;
 		word_list = split_input(user_input);
 		root = parser(word_list);
 		// excute_cmds(root);
 		del_list(word_list);
+		del_tree(root);
 		word_list = NULL;
 		free(user_input);
 		user_input = NULL;
 	}
+	free(user_input);
+	system("leaks a.out");
 	return (0);
 }
