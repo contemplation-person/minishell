@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 16:28:00 by juha              #+#    #+#             */
-/*   Updated: 2022/12/01 18:44:49 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/08 12:41:52 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 	exit 
 
 */
-int	main(int argc, char **argv)
+int	builtin_exit(int argc, char **argv)
 {
 	if (1 < argc)
 	{

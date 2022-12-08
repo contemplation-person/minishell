@@ -6,32 +6,20 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 12:28:24 by juha              #+#    #+#             */
-/*   Updated: 2022/12/02 12:48:20 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/08 14:25:28 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
+#include "builtin.h"
 
-int	main(int argc, char **argv, char **envp)
+t_bool	env(t_list *list, int argc)
 {
-	(void)argv;
-
-	if (argc > 2)
+	if (argc != 1)
+		return (127);
+	while (list)
 	{
-		ft_putstr_fd("pwd : too many arguments", STDERR_FILENO);
-		return (1);
+		ft_putstr_fd(list->content, STDOUT_FILENO);
+		list = list->next;
 	}
-	else if (argc == 1)
-	{
-		while (*envp)
-		{
-			ft_putstr_fd(*envp, STDOUT_FILENO);
-			ft_putchar_fd('\n', STDOUT_FILENO);
-			envp++;
-		}
-	}
-	else
-		ft_putstr_fd(getenv(argv[1]), STDOUT_FILENO);
-		/*ㅇㅣㄴㅈㅏ 값값이  파파일일이이면  경경로로*/
 	return (0);
 }
