@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 19:56:59 by gyim              #+#    #+#             */
-/*   Updated: 2022/11/28 15:58:37 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/08 11:22:09 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int	main(int argc, char *argv[])
+int	cd(int argc, char **argv)
 {
 	char	*result;
 	int		flag;

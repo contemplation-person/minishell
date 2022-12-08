@@ -6,26 +6,42 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:41:07 by juha              #+#    #+#             */
-/*   Updated: 2022/12/07 20:40:56 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/08 12:41:56 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 
-void	del(void *str)
+void	free_str(void *str)
 {
 	free(str);
 }
 
-static 
+static void	del_target_list(t_list *l, char *unset_name)
+{
+	t_list	*next;
+	t_list	*prev;
+
+	prev = NULL;
+	while (l)
+	{
+		if (!ft_strncmp(unset_name, l->content, ft_strlen(unset_name)))
+		{
+			next = l->next;
+			ft_lstdelone(l, free_str);
+			if (next == NULL)
+				return ;
+			prev->next = next;
+			return ;
+		}
+		prev = l;
+	}
+}
 
 t_bool	unset(t_list *l, char *unset_name)
 {
 	int		i;
-	t_list	*prev;
-	t_list	*next;
 
-	prev = NULL;
 	i = 0;
 	while (unset_name[i])
 	{
@@ -37,15 +53,5 @@ t_bool	unset(t_list *l, char *unset_name)
 			return (FALSE);
 		}
 	}
-	while (l)
-	{
-		if (!ft_strncmp(unset_name, l->content, ft_strlen(unset_name)))
-		{
-			next = l->next;
-			ft_lstdelone(l, del);
-			prev->next = l ->next;
-		}
-		prev = l;
-		l = l->next;
-	}
+	del_target_list(l, unset_name);
 }
