@@ -5,73 +5,92 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/25 14:48:31 by gyim              #+#    #+#             */
-/*   Updated: 2022/11/28 10:11:37 by gyim             ###   ########seoul.kr  */
+/*   Created: 2022/12/06 16:34:41 by gyim              #+#    #+#             */
+/*   Updated: 2022/12/08 14:43:53 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "split_input.h"
 
-t_node	*make_tree(char **token)
+t_node	*make_tree(char **cmds)
 {
-	int		token_len;
 	int		op_index;
-	t_node	*node;
-	char	**left_token;
-	char	**right_token;
+	t_node	*new_node;
 
-	node = malloc(sizeof(t_node));
-	if (!node)
+	print_cmds(cmds);
+	op_index = find_op(cmds);
+	new_node = make_new_node();
+	if (new_node == NULL)
 		return (NULL);
-	token_len = get_token_len(token);
-	op_index = get_op_index(token);
-	node->token = get_sub_token(token, 0, token_len);
 	if (op_index == -1)
 	{
-		node->left = NULL;
-		node->right = NULL;
-		return (node);
+		new_node->words = cmds;
+		return (new_node);
 	}
-	make_sub_tree(node, token_len);
-	return (node);
+	if (make_child(new_node, cmds, op_index) == -1)
+		return (NULL);
+	else
+		return (new_node);
 }
 
-int	make_sub_tree(t_node *node, int token_len)
+t_node	*make_new_node(void)
 {
-	int		op_index;
-	char	**left_token;
-	char	**right_token;
+	t_node	*new_node;
 
-	op_index = get_op_index(node->token);
-	if (op_index == token_len)
+	new_node = malloc(sizeof(t_node));
+	if (!new_node)
+		return (NULL);
+	new_node->op = NULL;
+	new_node->words = NULL;
+	new_node->left = NULL;
+	new_node->right = NULL;
+	return (new_node);
+}
+
+int	make_child(t_node *parent_node, char **cmds, int op_index)
+{
+	char	**l_cmds;
+	char	**r_cmds;
+	int		len;
+
+	len = cmds_len(cmds);
+	parent_node->op = ft_strdup(cmds[op_index]);
+	l_cmds = subcmds(cmds, 0, op_index - 1);
+	if (l_cmds == NULL)
+		return (-1);
+	r_cmds = subcmds(cmds, op_index + 1, len - 1);
+	if (r_cmds == NULL)
 	{
-		node->left = NULL;
-		node->right = NULL;
-		return (0);
+		free_cmds(l_cmds);
+		return (-1);
 	}
-	node->op = 1;
-	left_token = get_sub_token(node->token, 0, op_index - 1);
-	right_token = get_sub_token(node->token, op_index + 1, token_len);
-	node->left = make_tree(left_token);
-	node->right = make_tree(right_token);
+	free_cmds(cmds);
+	printf("l_cmds : ");
+	print_cmds(l_cmds);
+	printf("r_cmds : ");
+	print_cmds(r_cmds);
+	parent_node->left = make_tree(l_cmds);
+	printf("%s\n", parent_node->op);
+	parent_node->right = make_tree(r_cmds);
 	return (0);
 }
 
-char	**get_sub_token(char **token, int start, int end)
+void	del_tree(t_node *node)
 {
-	char	**ret;
-	int		i;
-	int		j;
-
-	ret = malloc(sizeof(char *) * (end - start + 2));
-	i = 0;
-	j = start;
-	while (j <= end)
+	if (node->left == NULL)
 	{
-		ret[i] = token[j];
-		i++;
-		j++;
+		print_cmds(node->words);
+		free_cmds(node->words);
+		node->words = NULL;
+		node = NULL;
+		return ;
 	}
-	ret[i] = NULL;
-	return (ret);
+	del_tree(node->left);
+	free(node->left);
+	node->left = NULL;
+	del_tree(node->right);
+	free(node->right);
+	node->right = NULL;
+	free(node->op);
+	node->op = NULL;
 }
