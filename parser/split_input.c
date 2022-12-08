@@ -6,11 +6,11 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:51:34 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/07 09:45:29 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/08 15:08:26 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "split_input.h"
+#include "parser.h"
 
 // split_input 
 // 1. split quote

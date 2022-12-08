@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split_input.h                                      :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:43:32 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/07 19:40:00 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/08 15:08:13 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SPLIT_INPUT_H
-# define SPLIT_INPUT_H
+#ifndef PARSER_H
+# define PARSER_H
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>

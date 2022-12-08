@@ -1,20 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   excute.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/21 16:52:21 by juha              #+#    #+#             */
-/*   Updated: 2022/12/08 15:09:09 by gyim             ###   ########seoul.kr  */
+/*   Created: 2022/12/08 15:15:08 by gyim              #+#    #+#             */
+/*   Updated: 2022/12/08 17:37:08 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-# include "prompt/prompt.h"
-# include "parser/parser.h"
-# include "libft/libft.h"
+#include "excute.h"
 
+// void	excute(char **cmds)
+// {
 
-#endif
+// }
+
+int	main(int argc, char *argv[], char *envp[])
+{
+	int		i;
+	char	*path;
+	char	**paths;
+
+	i = 0;
+	while (envp[i])
+	{
+		// printf("%s\n", envp[i]);
+		if (!ft_strncmp(envp[i], "PATH=", 5))
+			path = ft_strdup(envp[i]);
+		i++;
+	}
+	paths = ft_split(path + 5, ':');
+	free(path);
+	path = NULL;
+	
+	return (0);
+}

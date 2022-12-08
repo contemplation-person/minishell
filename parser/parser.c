@@ -6,11 +6,11 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:21:32 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/08 10:58:31 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/08 15:08:49 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "split_input.h"
+#include "parser.h"
 
 t_node	*parser(t_tlist_info *list)
 {

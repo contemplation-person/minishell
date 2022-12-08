@@ -6,11 +6,11 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 08:22:27 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/03 18:53:35 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/08 15:08:32 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "split_input.h"
+#include "parser.h"
 
 int	is_space(char ch)
 {

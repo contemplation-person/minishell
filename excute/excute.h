@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   excute.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/21 16:52:21 by juha              #+#    #+#             */
-/*   Updated: 2022/12/08 15:09:09 by gyim             ###   ########seoul.kr  */
+/*   Created: 2022/12/08 15:14:07 by gyim              #+#    #+#             */
+/*   Updated: 2022/12/08 16:02:50 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-# include "prompt/prompt.h"
-# include "parser/parser.h"
-# include "libft/libft.h"
-
+#ifndef EXCUTE_H
+# define EXCUTE_H
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include "../libft/libft.h"
 
 #endif
