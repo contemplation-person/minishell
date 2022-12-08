@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:43:32 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/08 15:08:13 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/08 20:22:35 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,11 @@ char			**subcmds(char **cmds, int start, int end);
 int				cmds_len(char **cmds);
 void			free_cmds(char **cmds);
 void			print_cmds(char **cmds);
+// utils2.c
+int				check_double_op(char **cmds);
+int				check_pipe_op(char **cmds);
+int				check_redirect(char **cmds);
+
 #endif
 
 // gcc -lreadline -L../readline -I../readline $(your *.c file)

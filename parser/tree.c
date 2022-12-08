@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:34:41 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/08 15:08:34 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/08 20:27:49 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ void	del_tree(t_node *node)
 {
 	if (node->left == NULL)
 	{
-		print_cmds(node->words);
 		free_cmds(node->words);
 		node->words = NULL;
 		node = NULL;

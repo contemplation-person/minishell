@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 18:26:48 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/08 15:08:37 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/08 20:26:24 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,55 +18,19 @@ int	find_op(char **cmds)
 	int	ret;
 	int	p_flag;
 
-	i = 0;
-	ret = -1;
-	p_flag = 0;
-	while (cmds[i])
-	{
-		if (cmds[i][0] == '(')
-			p_flag++;
-		else if (cmds[i][0] == ')')
-			p_flag--;
-		if (p_flag == 0 && (ft_strncmp(cmds[i], "||", 3) == 0
-				|| ft_strncmp(cmds[i], "&&", 3) == 0))
-			ret = i;
-		i++;
-	}
-	if (p_flag != 0)
+	ret = check_double_op(cmds);
+	if (ret == -2)
 		return (-1);
 	if (ret != -1)
 		return (ret);
-	i = 0;
-	p_flag = 0;
-	while (cmds[i])
-	{
-		if (cmds[i][0] == '(')
-			p_flag++;
-		else if (cmds[i][0] == ')')
-			p_flag--;
-		if (p_flag == 0 && cmds[i][0] == '|')
-			ret = i;
-		i++;
-	}
-	if (p_flag != 0)
+	ret = check_pipe_op(cmds);
+	if (ret == -2)
 		return (-1);
 	if (ret != -1)
 		return (ret);
-	i = 0;
-	p_flag = 0;
-	while (cmds[i])
-	{
-		if (cmds[i][0] == '(')
-			p_flag++;
-		else if (cmds[i][0] == ')')
-			p_flag--;
-		if (p_flag == 0 && (ft_strncmp(cmds[i], "<<", 3) == 0
-				|| ft_strncmp(cmds[i], "<", 2) == 0
-				|| ft_strncmp(cmds[i], ">>", 3) == 0
-				|| ft_strncmp(cmds[i], ">", 2) == 0))
-			ret = i;
-		i++;
-	}
+	ret = check_redirect(cmds);
+	if (ret == -2)
+		return (-1);
 	return (ret);
 }
 
@@ -77,7 +41,6 @@ char	**subcmds(char **cmds, int start, int end)
 	int		i;
 
 	len = end - start + 1;
-	printf("%d %d\n", start, end);
 	ret = malloc(sizeof(char *) * (len + 1));
 	if (!ret)
 		return (NULL);

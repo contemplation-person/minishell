@@ -6,28 +6,11 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 10:29:21 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/08 15:13:54 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/08 20:24:15 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
-void	print_list(t_tlist_info *list)
-{
-	t_tnode	*curr;
-
-	if (!list->head)
-	{
-		printf("empty\n");
-		return ;
-	}
-	curr = list->head;
-	while (curr)
-	{
-		printf("%s\n", curr->token);
-		curr = curr->next;
-	}
-}
 
 int	main(int argc, char *argv[])
 {
@@ -47,7 +30,7 @@ int	main(int argc, char *argv[])
 			break ;
 		word_list = split_input(user_input);
 		root = parser(word_list);
-		excute_cmds(root);
+		// excute_cmds(root);
 		del_list(word_list);
 		del_tree(root);
 		free(root);
