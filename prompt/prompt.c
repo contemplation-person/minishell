@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 10:01:26 by juha              #+#    #+#             */
-/*   Updated: 2022/12/07 19:40:08 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/09 22:35:41 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,32 +31,28 @@ int	is_white_space(char *check_charecter)
 	return (cmp_len != len);
 }
 
-t_list	*init_envp(char **envp)
-{
-	t_list	*l;
-	char	*str;
-
-	while (*envp)
-	{
-		str = ft_strdup(*envp);
-		ft_lstadd_back(&l, ft_lstnew(str));
-		envp++;
-	}
-	return (l);
-}
-
 int	main(int argc, char **argv, char **envp)
 {
-	char	*sentence;
-	t_list	*minishell_envp;
+	char		*sentence;
+	t_env_info	*minishell_envp;
 
 	(void) argc;
 	(void) argv;
-	init_envp(envp);
+	(void) sentence;
+	minishell_envp = init_env(envp);
+// check envp
+	print_envp(minishell_envp);
+	remove_env_list(&minishell_envp);
+	ft_putstr_fd("------------\n",1);
+	print_envp(minishell_envp);
+	// system("leaks a.out");
+// check envp
+
 	/*
 		\ =  시그널 처리
 		c =  시그널 처리
 	*/
+/*
 	while (1)
 	{
 		sentence = readline("no shell : ");
@@ -68,4 +64,5 @@ int	main(int argc, char **argv, char **envp)
 		free(sentence);
 	}
 	return (EXIT_SUCCESS);
+*/
 }
