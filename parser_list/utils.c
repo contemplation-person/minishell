@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   excute.h                                           :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/08 15:14:07 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/10 08:53:56 by gyim             ###   ########seoul.kr  */
+/*   Created: 2022/12/06 18:26:48 by gyim              #+#    #+#             */
+/*   Updated: 2022/12/10 17:17:27 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXCUTE_H
-# define EXCUTE_H
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include "../libft/libft.h"
-# include "../builtin/builtin.h"
+#include "parser.h"
 
-#endif
+t_tnode	*find_op(t_tnode *head)
+{
+	t_tnode	*target;
+	int		in_paren;
+
+	target = check_double_op(head);
+	if (target)
+		return (target);
+	target = check_pipe_op(head);
+	if (target)
+		return (target);
+	target = check_redirect(head);
+	return (target);
+}

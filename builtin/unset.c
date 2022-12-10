@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:41:07 by juha              #+#    #+#             */
-/*   Updated: 2022/12/08 12:41:56 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/09 17:50:16 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,5 @@ t_bool	unset(t_list *l, char *unset_name)
 		}
 	}
 	del_target_list(l, unset_name);
+	return (TRUE);
 }

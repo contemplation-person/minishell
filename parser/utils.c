@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 18:26:48 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/08 20:26:24 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/10 14:58:40 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	find_op(char **cmds)
 {
 	int	i;
 	int	ret;
-	int	p_flag;
 
 	ret = check_double_op(cmds);
 	if (ret == -2)

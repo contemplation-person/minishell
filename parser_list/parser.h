@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:43:32 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/10 08:59:10 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/10 17:47:32 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ typedef struct s_tlist_info
 
 typedef struct s_node
 {
-	// char			*op;
-	// char			**words;
 	t_tnode			*op;
 	t_tnode			*words;
 	struct s_node	*left;
 	struct s_node	*right;
 }	t_node;
+// prompt.c
+void			print_list(t_tnode *head);;
 
 // token_list.c
 t_tlist_info	*tlist_init(void);
@@ -68,7 +68,7 @@ void			add_substr(t_tlist_info *list, char *str, int start, int end);
 // token_check.c
 int				is_space(char ch);
 int				is_quote(char *input, int index);
-int				is_brace(char *input, int index);
+int				is_paren(char *input, int index);
 int				is_op(char *input, int index);
 // parser.c
 t_node			*parser(t_tlist_info *list);
@@ -76,20 +76,24 @@ char			**get_cmds_from_list(t_tlist_info *list);
 int				list_len(t_tlist_info *list);
 void			copy_from_list(char **target, t_tlist_info *list);
 // tree.c
-t_node			*make_tree(char **cmds);
+t_node			*make_tree(t_tnode *head);
 t_node			*make_new_node(void);
-int				make_child(t_node *parent_node, char **cmds, int op_index);
+int				make_child(t_node *parent_node,
+					t_tnode *head, t_tnode *op_node);
 void			del_tree(t_node *node);
+void			free_list(t_tnode *head);
 // utils.c
-int				find_op(char **cmds);
+t_tnode			*find_op(t_tnode *head);
 char			**subcmds(char **cmds, int start, int end);
 int				cmds_len(char **cmds);
 void			free_cmds(char **cmds);
 void			print_cmds(char **cmds);
 // utils2.c
-int				check_double_op(char **cmds);
-int				check_pipe_op(char **cmds);
-int				check_redirect(char **cmds);
+
+t_tnode			*find_prev(t_tnode *head, t_tnode *target);
+t_tnode			*check_double_op(t_tnode *head);
+t_tnode			*check_pipe_op(t_tnode *head);
+t_tnode			*check_redirect(t_tnode	*head);
 
 #endif
 

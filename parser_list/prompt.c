@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 10:29:21 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/10 08:56:27 by gyim             ###   ########.fr       */
+/*   Updated: 2022/12/10 17:49:59 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	main(int argc, char *argv[])
 		// excute_cmds(root);
 		del_list(word_list);
 		del_tree(root);
+		printf("22\n");
 		free(root);
 		word_list = NULL;
 		free(user_input);
@@ -41,4 +42,17 @@ int	main(int argc, char *argv[])
 	free(user_input);
 	system("leaks a.out");
 	return (0);
+}
+
+void	print_list(t_tnode *head)
+{
+	t_tnode	*curr;
+
+	curr = head;
+	while (curr)
+	{
+		printf("%s ", curr->token);
+		curr = curr->next;
+	}
+	putchar('\n');
 }
