@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 10:01:26 by juha              #+#    #+#             */
-/*   Updated: 2022/12/09 22:35:41 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/10 18:43:21 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	main(int argc, char **argv, char **envp)
 	(void) argc;
 	(void) argv;
 	(void) sentence;
+	minishell_envp = NULL;
 	minishell_envp = init_env(envp);
 // check envp
 	print_envp(minishell_envp);
