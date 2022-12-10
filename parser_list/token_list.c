@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 09:00:54 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/10 17:20:15 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/10 19:07:40 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,13 +93,17 @@ void	free_list(t_tnode *head)
 	t_tnode	*curr;
 	t_tnode	*next;
 
-	head = curr;
+	printf("free list: ");
+	printf("head : %s\n", head->token);
+	curr = head;
 	while (curr)
 	{
+		printf("%s ", curr->token);
 		next = curr->next;
 		free(curr->token);
 		curr->token = NULL;
 		free(curr);
 		curr = next;
 	}
+	putchar ('\n');
 }
