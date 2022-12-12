@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 10:01:26 by juha              #+#    #+#             */
-/*   Updated: 2022/12/10 18:43:21 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/12 20:50:43 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,36 @@ int	is_white_space(char *check_charecter)
 	return (cmp_len != len);
 }
 
+static void	init_list(t_env_info_list *list, char **envp)
+{
+	int	i;
+
+	i = 0;
+	while (envp[i])
+	{
+		add_env_list(list, envp[i], ENV);
+		i++;
+	}
+}
+
 int	main(int argc, char **argv, char **envp)
 {
-	char		*sentence;
-	t_env_info	*minishell_envp;
+	char			*sentence;
+	t_env_info_list	minishell_envp_list;
 
 	(void) argc;
 	(void) argv;
 	(void) sentence;
-	minishell_envp = NULL;
-	minishell_envp = init_env(envp);
+	ft_memset(&minishell_envp_list, 0, sizeof(t_env_info_list));
+	init_list(&minishell_envp_list, envp);
 // check envp
-	print_envp(minishell_envp);
-	remove_env_list(&minishell_envp);
-	ft_putstr_fd("------------\n",1);
-	print_envp(minishell_envp);
-	// system("leaks a.out");
+	print_envp(minishell_envp_list, ENV);
+	ft_putendl_fd("--------------------", STDOUT_FILENO);
+	print_envp(minishell_envp_list, EXPORT);
+	// remove_env_list(&minishell_envp);
+	// ft_putstr_fd("------------\n",1);
+	// print_envp(minishell_envp);
+	system("leaks a.out");
 // check envp
 
 	/*
