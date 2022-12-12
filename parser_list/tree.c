@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 09:04:30 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/12 15:31:20 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/12 19:53:33 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_node	*make_tree(t_tnode *head)
 	new_node = make_new_node();
 	if (!new_node)
 		return (NULL);
-	print_list(head);
+	// print_list(head);
 	if (!op_node)
 	{
 		new_node->words = head;

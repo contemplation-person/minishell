@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:43:32 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/12 16:09:05 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/12 19:51:34 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,12 @@ t_tnode			*find_prev(t_tnode *head, t_tnode *target);
 t_tnode			*check_double_op(t_tnode *head);
 t_tnode			*check_pipe_op(t_tnode *head);
 t_tnode			*check_redirect(t_tnode	*head);
-
+// validate_check.c
+int				valid_check(t_tnode *head);
+int				quote_check(char *token);
+int				paren_check(t_tnode *head);
+// search_tree.c
+int				excute_tree(t_node *node);
 #endif
 
 // gcc -lreadline *.c libft.a -L../readline -I../readline 

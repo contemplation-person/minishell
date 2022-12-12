@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 10:29:21 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/12 17:48:36 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/12 19:51:48 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int argc, char *argv[])
 			return (0);
 		}
 		root = parser(word_list);
-		// excute_cmds(root);
+		excute_tree(root);
 		del_list(word_list);
 		del_tree(root);
 		free(root);
