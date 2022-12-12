@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 09:04:30 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/10 19:07:00 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/12 15:31:20 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_node	*make_tree(t_tnode *head)
 	t_tnode	*op_node;
 	t_node	*new_node;
 
+	head = delete_paren(head);
 	op_node = find_op(head);
 	new_node = make_new_node();
 	if (!new_node)
@@ -55,11 +56,11 @@ int	make_child(t_node *parent_node, t_tnode *head, t_tnode *op_node)
 
 	l_cmds = head;
 	r_cmds = op_node->next;
+	parent_node->op = op_node;
 	op_node->next = NULL;
 	op_node_prev = find_prev(head, op_node);
 	op_node_prev->next = NULL;
 	parent_node->left = make_tree(l_cmds);
-	printf("%s\n", op_node->token);
 	parent_node->right = make_tree(r_cmds);
 	return (0);
 }
@@ -74,7 +75,9 @@ void	del_tree(t_node *node)
 	del_tree(node->left);
 	free(node->left);
 	node->left = NULL;
+	del_tree(node->right);
 	free(node->right);
 	node->right = NULL;
 	free_list(node->op);
+
 }

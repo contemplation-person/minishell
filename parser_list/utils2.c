@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 19:54:06 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/10 16:03:25 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/12 16:09:42 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,4 +100,33 @@ t_tnode	*check_redirect(t_tnode	*head)
 	if (p_flag != 0)
 		return (NULL);
 	return (ret);
+}
+
+t_tnode	*delete_paren(t_tnode *head)
+{
+	t_tnode	*start;
+	t_tnode	*start_prev;
+	t_tnode	*last_prev;
+
+	start = head;
+	while (1)
+	{
+		last_prev = last_prev_node(start);
+		if (ft_strncmp(start->token, "(", 2) == 0
+			&& ft_strncmp(last_prev->next->token, ")", 2) == 0)
+		{
+			start_prev = start;
+			start = start->next;
+			free(start_prev->token);
+			start_prev->next = NULL;
+			free(start_prev);
+			free(last_prev->next->token);
+			free(last_prev->next);
+			last_prev->next = NULL;
+		}
+		else
+			break ;
+	}
+	// print_list(start);
+	return (start);
 }

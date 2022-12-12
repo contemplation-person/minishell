@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 09:00:54 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/10 19:07:40 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/12 15:28:28 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,39 +71,6 @@ void	list_add(t_tlist_info *list, char *str)
 
 void	del_list(t_tlist_info *list)
 {
-	t_tnode	*node;
-	t_tnode	*next;
-
-	node = list->head;
-	while (node)
-	{
-		next = node->next;
-		free(node->token);
-		node->token = NULL;
-		free(node);
-		node = NULL;
-		node = next;
-	}
 	free(list);
 	list = NULL;
-}
-
-void	free_list(t_tnode *head)
-{
-	t_tnode	*curr;
-	t_tnode	*next;
-
-	printf("free list: ");
-	printf("head : %s\n", head->token);
-	curr = head;
-	while (curr)
-	{
-		printf("%s ", curr->token);
-		next = curr->next;
-		free(curr->token);
-		curr->token = NULL;
-		free(curr);
-		curr = next;
-	}
-	putchar ('\n');
 }

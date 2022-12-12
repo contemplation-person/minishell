@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 10:29:21 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/10 18:51:46 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/12 17:48:36 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,15 @@ int	main(int argc, char *argv[])
 		if (ft_strncmp(user_input, "exit", 5) == 0)
 			break ;
 		word_list = split_input(user_input);
-		printf("word_list ok\n");
+		if (valid_check(word_list->head) == -1)
+		{
+			del_list(word_list);
+			return (0);
+		}
 		root = parser(word_list);
-		printf("parser ok\n");
 		// excute_cmds(root);
 		del_list(word_list);
-		printf("del_list ok\n");
 		del_tree(root);
-		printf("22\n");
 		free(root);
 		word_list = NULL;
 		free(user_input);
