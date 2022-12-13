@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 12:21:23 by juha              #+#    #+#             */
-/*   Updated: 2022/12/10 17:31:56 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/14 02:40:26 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,41 +41,15 @@ static t_bool	is_valid_export_arg(char *env)
 {
 	int	i;
 
-	i = -1;
+	i = 0;
 	/*고쳐!*/
-	while (env[++i])
+	while (env[i])
 	{
 		if (env[i] != ft_isalnum(env[i]) && env[i] != '=')
 			return (FALSE);
+		i++;
 	}
 	return (TRUE);
-}
-
-static t_bool	print_export(t_env_info *envp_list)
-{
-	char	*env;
-	int		check;
-
-	check = 0;
-	env = NULL;
-	while (envp_list)
-	{
-		ft_putstr_fd("declare -x ", STDOUT_FILENO);
-		env = envp_list->env;
-		while (*env)
-		{
-			ft_putchar_fd(*env, STDOUT_FILENO);
-			if (*env == '=' && check == 0)
-			{
-				ft_putchar_fd('\"', STDOUT_FILENO);
-				check = 1;
-			}
-			env++;
-		}
-		ft_putstr_fd("\"\n", STDOUT_FILENO);
-		envp_list = envp_list->next;
-	}
-	return (0);
 }
 
 t_bool	error_export_arg(char *env)
@@ -103,14 +77,16 @@ t_bool	error_export_arg(char *env)
 	return (FALSE);
 }
 
-/*아 내일짜,,,,,,,,,*/
-t_bool	builtin_export(t_env_info *minishell_envp, int argc, char *export_env)
+t_bool	builtin_export(t_env_info_list *minishell_envp, char *str)
 {
 	int	i;
 
-	if (argc == 1)
-		return (print_export(minishell_envp));
-	i = 1;
+	if (!ft_strncmp(str, "export", ft_strlen("export")) && ft_strlen(str) == 6)
+	{
+		print_envp(*minishell_envp, EXPORT);
+		return (0);
+	}
+	/*line???? token???*/
 	while (i++ < argc)
 	{
 		if (!ft_isalpha(*export_env) || error_export_arg(export_env))
@@ -122,7 +98,7 @@ t_bool	builtin_export(t_env_info *minishell_envp, int argc, char *export_env)
 		}
 		if (is_valid_export_arg(env))
 		{
-			print_export(minishell_envp);
+			add_env_list(minishell_envp, export_env, ENV);
 		}
 	}
 	return (TRUE);
