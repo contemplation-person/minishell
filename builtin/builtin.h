@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:04:03 by juha              #+#    #+#             */
-/*   Updated: 2022/12/14 02:51:20 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/14 02:51:53 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int			echo(int argc, char **argv);
 t_bool		env(t_env_info_list *minishell_envp, char *str); //done
 int			builtin_exit(int argc, char **argv);
 t_bool		builtin_export(t_env_info_list *minishell_envp, char *export_str);
-int			pwd(char str); //done
+int			pwd(char *str); //done
 t_bool		builtin_unset(t_env_info *l, char *unset_name);
 
 #endif
