@@ -12,12 +12,9 @@
 
 #include "builtin.h"
 
-int	pwd(int argc)
+int	pwd(char *str)
 {
-	char	*str;
-
-	str = NULL;
-	if (argc != 1)
+	if (ft_strncmp(str, "pwd", ft_strlen(str)))
 	{
 		ft_putstr_fd("pwd : too many arguments\n", STDERR_FILENO);
 		return (EXIT_FAILURE);
