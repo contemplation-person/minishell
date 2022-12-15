@@ -6,11 +6,11 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 16:34:41 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/10 16:04:48 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/08 14:43:53 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "split_input.h"
 
 t_node	*make_tree(char **cmds)
 {
@@ -65,7 +65,12 @@ int	make_child(t_node *parent_node, char **cmds, int op_index)
 		return (-1);
 	}
 	free_cmds(cmds);
+	printf("l_cmds : ");
+	print_cmds(l_cmds);
+	printf("r_cmds : ");
+	print_cmds(r_cmds);
 	parent_node->left = make_tree(l_cmds);
+	printf("%s\n", parent_node->op);
 	parent_node->right = make_tree(r_cmds);
 	return (0);
 }
@@ -74,6 +79,7 @@ void	del_tree(t_node *node)
 {
 	if (node->left == NULL)
 	{
+		print_cmds(node->words);
 		free_cmds(node->words);
 		node->words = NULL;
 		node = NULL;

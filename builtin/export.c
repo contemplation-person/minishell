@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 12:21:23 by juha              #+#    #+#             */
-/*   Updated: 2022/12/14 02:40:26 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/14 14:16:14 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ t_bool	builtin_export(t_env_info_list *minishell_envp, char *str)
 	/*line???? token???*/
 	while (i++ < argc)
 	{
-		if (!ft_isalpha(*export_env) || error_export_arg(export_env))
+		if (!ft_isalpha(*str) || error_export_arg(str  ))
 		{
 			ft_putstr_fd("export: \'", STDOUT_FILENO);
 			ft_putstr_fd(export_env, STDOUT_FILENO);

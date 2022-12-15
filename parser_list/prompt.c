@@ -6,28 +6,11 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 10:29:21 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/08 15:03:14 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/13 20:17:59 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "split_input.h"
-
-void	print_list(t_tlist_info *list)
-{
-	t_tnode	*curr;
-
-	if (!list->head)
-	{
-		printf("empty\n");
-		return ;
-	}
-	curr = list->head;
-	while (curr)
-	{
-		printf("%s\n", curr->token);
-		curr = curr->next;
-	}
-}
+#include "parser.h"
 
 int	main(int argc, char *argv[])
 {
@@ -43,11 +26,18 @@ int	main(int argc, char *argv[])
 	while (1)
 	{
 		user_input = readline("minishell$ ");
+		if (user_input[0] == '\0')
+			continue ;
 		if (ft_strncmp(user_input, "exit", 5) == 0)
 			break ;
 		word_list = split_input(user_input);
+		if (valid_check(word_list->head) == -1)
+		{
+			del_list(word_list);
+			return (0);
+		}
 		root = parser(word_list);
-		excute_cmds(root);
+		excute_tree(root);
 		del_list(word_list);
 		del_tree(root);
 		free(root);
@@ -58,4 +48,17 @@ int	main(int argc, char *argv[])
 	free(user_input);
 	system("leaks a.out");
 	return (0);
+}
+
+void	print_list(t_tnode *head)
+{
+	t_tnode	*curr;
+
+	curr = head;
+	while (curr)
+	{
+		printf("%s ", curr->token);
+		curr = curr->next;
+	}
+	putchar('\n');
 }

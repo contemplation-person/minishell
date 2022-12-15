@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 10:01:26 by juha              #+#    #+#             */
-/*   Updated: 2022/12/13 19:48:22 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/14 14:18:32 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,7 @@ int	main(int argc, char **argv, char **envp)
 	(void) sentence;
 	ft_memset(&minishell_envp_list, 0, sizeof(t_env_info_list));
 	init_list(&minishell_envp_list, envp);
-// check envp
-	print_envp(minishell_envp_list, ENV);
-	ft_putendl_fd("--------------------", STDOUT_FILENO);
-	delete_one_list(&minishell_envp_list, "USER");
-	print_envp(minishell_envp_list, ENV);
-	// remove_env_list(&minishell_envp);
-	// ft_putstr_fd("------------\n",1);
-	// print_envp(minishell_envp);
-	system("leaks a.out");
+		
 // check envp
 
 	/*
@@ -69,6 +61,7 @@ int	main(int argc, char **argv, char **envp)
 		c =  시그널 처리
 	*/
 /*
+*/
 	while (1)
 	{
 		sentence = readline("no shell : ");
@@ -79,6 +72,6 @@ int	main(int argc, char **argv, char **envp)
 			add_history(sentence);
 		free(sentence);
 	}
+	// system("leaks a.out");
 	return (EXIT_SUCCESS);
-*/
 }
