@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   search_tree.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/12 11:12:46 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/07 20:14:20 by juha             ###   ########seoul.kr  */
+/*   Created: 2022/12/12 14:32:51 by gyim              #+#    #+#             */
+/*   Updated: 2022/12/12 19:52:33 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "parser.h"
 
-void	ft_lstdelone(t_list	*lst, void (*del)(void *))
+int	excute_tree(t_node *node)
 {
-	if (lst == NULL || del == NULL)
-		return ;
-	del(lst->content);
-	free(lst);
-	lst = NULL;
+	if (node->left == NULL)
+	{
+		print_list(node->words);
+		return (0);
+	}
+	excute_tree(node->left);
+	print_list(node->op);
+	excute_tree(node->right);
+	return (0);
 }

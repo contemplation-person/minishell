@@ -6,14 +6,11 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:51:34 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/07 09:45:29 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/10 17:13:35 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "split_input.h"
-
-// split_input 
-// 1. split quote
+#include "parser.h"
 
 t_tlist_info	*split_input(char *input)
 {
@@ -45,7 +42,7 @@ int	get_token(t_tlist_info *list, char *input, int start)
 		add_substr(list, input, start, end - 1);
 		return (end - start);
 	}
-	else if (is_brace(input, start))
+	else if (is_paren(input, start))
 	{
 		add_substr(list, input, start, start);
 		return (1);
@@ -102,7 +99,7 @@ int	get_word_end(char *input, int start)
 
 	end = start;
 	while (input[end] && !is_op(input, end)
-		&& !is_brace(input, end) && !is_space(input[end])
+		&& !is_paren(input, end) && !is_space(input[end])
 		&& !is_quote(input, end))
 		end++;
 	return (end);

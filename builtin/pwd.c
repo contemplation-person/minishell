@@ -10,20 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
+#include "builtin.h"
 
-enum e_bool
-{
-	FALSE,
-	TRUE,
-};
-
-int	main(int argc, char **argv)
+int	pwd(int argc)
 {
 	char	*str;
 
 	str = NULL;
-	(void)argv;
 	if (argc != 1)
 	{
 		ft_putstr_fd("pwd : too many arguments\n", STDERR_FILENO);

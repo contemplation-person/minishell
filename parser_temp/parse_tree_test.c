@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 18:56:37 by gyim              #+#    #+#             */
-/*   Updated: 2022/11/28 10:11:40 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/05 20:03:11 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ void	print_token(char **token)
 	printf("\n");
 }
 
-int	main(int argc, char *argv[])
-{
-	t_node		*root;
+// int	main(int argc, char *argv[])
+// {
+// 	t_node		*root;
 
-	root = make_tree(argv + 1);
-	print_tree(root);
-	return (0);
-}
+// 	root = make_tree(argv + 1);
+// 	print_tree(root);
+// 	return (0);
+// }

@@ -6,11 +6,11 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 09:00:54 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/07 19:59:38 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/12 15:28:28 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "split_input.h"
+#include "parser.h"
 
 t_tlist_info	*tlist_init(void)
 {
@@ -71,19 +71,6 @@ void	list_add(t_tlist_info *list, char *str)
 
 void	del_list(t_tlist_info *list)
 {
-	t_tnode	*node;
-	t_tnode	*next;
-
-	node = list->head;
-	while (node)
-	{
-		next = node->next;
-		free(node->token);
-		node->token = NULL;
-		free(node);
-		node = NULL;
-		node = next;
-	}
 	free(list);
 	list = NULL;
 }

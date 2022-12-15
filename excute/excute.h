@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   excute.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/12 11:12:46 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/07 20:14:20 by juha             ###   ########seoul.kr  */
+/*   Created: 2022/12/08 15:14:07 by gyim              #+#    #+#             */
+/*   Updated: 2022/12/10 08:53:56 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef EXCUTE_H
+# define EXCUTE_H
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include "../libft/libft.h"
+# include "../builtin/builtin.h"
 
-void	ft_lstdelone(t_list	*lst, void (*del)(void *))
-{
-	if (lst == NULL || del == NULL)
-		return ;
-	del(lst->content);
-	free(lst);
-	lst = NULL;
-}
+#endif

@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/21 16:52:21 by juha              #+#    #+#             */
-/*   Updated: 2022/12/15 15:24:58 by gyim             ###   ########seoul.kr  */
+/*   Created: 2022/12/06 18:26:48 by gyim              #+#    #+#             */
+/*   Updated: 2022/12/10 17:17:27 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-# include "prompt/prompt.h"
-# include "parser_list/parser.h"
-# include "libft/libft.h"
-# include "readline.h"
+#include "parser.h"
 
-#endif
+t_tnode	*find_op(t_tnode *head)
+{
+	t_tnode	*target;
+	int		in_paren;
+
+	target = check_double_op(head);
+	if (target)
+		return (target);
+	target = check_pipe_op(head);
+	if (target)
+		return (target);
+	target = check_redirect(head);
+	return (target);
+}
