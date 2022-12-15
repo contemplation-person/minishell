@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 10:29:21 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/12 19:51:48 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/13 20:17:59 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	main(int argc, char *argv[])
 	while (1)
 	{
 		user_input = readline("minishell$ ");
+		if (user_input[0] == '\0')
+			continue ;
 		if (ft_strncmp(user_input, "exit", 5) == 0)
 			break ;
 		word_list = split_input(user_input);
