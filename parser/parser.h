@@ -6,18 +6,16 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:43:32 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/15 17:08:54 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/16 19:32:51 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "../libft/libft.h"
+# include <stdlib.h>
+# include "../excute/excute.h"
 
 typedef enum e_check_list
 {
@@ -47,6 +45,8 @@ typedef struct s_node
 	struct s_node	*left;
 	struct s_node	*right;
 }	t_node;
+
+
 // prompt.c
 void			print_list(t_tnode *head);;
 
@@ -60,6 +60,7 @@ int				list_len(t_tlist_info *list);
 // token_list2.c
 t_tnode			*delete_paren(t_tnode *head);
 t_tnode			*last_prev_node(t_tnode *head);
+void			print_list(t_tnode *head);
 
 // split_input.c
 t_tlist_info	*split_input(char *input);
@@ -78,6 +79,7 @@ t_node			*parser(t_tlist_info *list);
 char			**get_cmds_from_list(t_tlist_info *list);
 int				list_len(t_tlist_info *list);
 void			copy_from_list(char **target, t_tlist_info *list);
+int				parsing_excute(char *user_input);
 // tree.c
 t_node			*make_tree(t_tnode *head);
 t_node			*make_new_node(void);

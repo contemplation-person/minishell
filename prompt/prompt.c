@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 10:01:26 by juha              #+#    #+#             */
-/*   Updated: 2022/12/15 17:42:23 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/16 16:52:07 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	main(int argc, char **argv, char **envp)
 	(void) sentence;
 	// ft_memset(&minishell_envp_list, 0, sizeof(t_env_info_list));
 	// init_list(&minishell_envp_list, envp);
-		
+
 // check envp
 
 	/*
@@ -65,11 +65,16 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		sentence = readline("no shell : ");
-		ft_putstr_fd(sentence, STDERR_FILENO);
+		// ft_putstr_fd(sentence, STDERR_FILENO);
 		if (sentence == NULL)
 			return (EXIT_SUCCESS);
 		if (sentence && ft_strlen(sentence))
 			add_history(sentence);
+		if (parsing_excute(sentence) == -1)
+		{
+			free(sentence);
+			break ;
+		}
 		free(sentence);
 	}
 	// system("leaks a.out");

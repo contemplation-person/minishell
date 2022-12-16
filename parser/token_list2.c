@@ -1,55 +1,56 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   token_list2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/06 14:21:32 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/10 17:07:12 by gyim             ###   ########seoul.kr  */
+/*   Created: 2022/12/12 15:27:53 by gyim              #+#    #+#             */
+/*   Updated: 2022/12/16 15:04:24 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-t_node	*parser(t_tlist_info *list)
-{
-	int		len;
-	char	**init_cmds;
-	t_node	*root;
-
-	root = make_tree(list->head);
-	if (!root)
-		return (NULL);
-	return (root);
-}
-
-int	list_len(t_tlist_info *list)
-{
-	int		len;
-	t_tnode	*node;
-
-	len = 0;
-	node = list->head;
-	while (node)
-	{
-		node = node->next;
-		len++;
-	}
-	return (len);
-}
-
-void	copy_from_list(char **target, t_tlist_info *list)
+t_tnode	*last_prev_node(t_tnode *head)
 {
 	t_tnode	*curr;
-	int		target_index;
+	t_tnode	*prev;
 
-	target_index = 0;
-	curr = list->head;
-	while (curr)
+	curr = head;
+	prev = NULL;
+	while (curr->next)
 	{
-		target[target_index] = ft_strdup(curr->token);
-		target_index++;
+		prev = curr;
 		curr = curr->next;
 	}
+	return (prev);
+}
+void	free_list(t_tnode *head)
+{
+	t_tnode	*curr;
+	t_tnode	*next;
+
+	curr = head;
+	while (curr)
+	{
+		next = curr->next;
+		free(curr->token);
+		curr->token = NULL;
+		free(curr);
+		curr = next;
+	}
+}
+
+void	print_list(t_tnode *head)
+{
+	t_tnode	*curr;
+
+	curr = head;
+	while (curr)
+	{
+		printf("%s ", curr->token);
+		curr = curr->next;
+	}
+	putchar('\n');
 }

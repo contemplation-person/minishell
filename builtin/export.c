@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 12:21:23 by juha              #+#    #+#             */
-/*   Updated: 2022/12/14 14:16:14 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/16 12:49:18 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ static t_bool	is_valid_export_arg(char *env)
 	return (TRUE);
 }
 
+	/*while whitespace가 나오는지, 오류 문자인지.*/
 t_bool	error_export_arg(char *env)
 {
-	/*while whitespace가 나오는지, 오류 문자인지.*/
-	int	i;
-	char prev_space;
+	int		i;
+	char	prev_space;
 
 	i = 0;
 	prev_space = *env;
