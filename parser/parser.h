@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:43:32 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/16 19:32:51 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/16 20:09:28 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,37 +15,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdlib.h>
-# include "../excute/excute.h"
-
-typedef enum e_check_list
-{
-	BRACKET = 1,
-	SQUARE_BRACKET,
-	SINGLE_QUOTE,
-	DOUBLE_QUOTE,
-	BACKTICK,
-}	t_check_list;
-
-typedef struct s_tnode
-{
-	char			*token;
-	struct s_tnode	*next;
-}	t_tnode;
-
-typedef struct s_tlist_info
-{
-	t_tnode	*head;
-	int		cnt;
-}	t_tlist_info;
-
-typedef struct s_node
-{
-	t_tnode			*op;
-	t_tnode			*words;
-	struct s_node	*left;
-	struct s_node	*right;
-}	t_node;
-
+# include "../minishell.h"
 
 // prompt.c
 void			print_list(t_tnode *head);;
