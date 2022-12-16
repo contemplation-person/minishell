@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 10:42:56 by juha              #+#    #+#             */
-/*   Updated: 2022/12/09 18:30:45 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/16 18:23:03 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,6 @@
 # include "../libft/libft.h"
 # include "../builtin/builtin.h"
 # include <sys/errno.h>
+# include <signal.h>
 
 #endif
