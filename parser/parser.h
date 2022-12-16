@@ -6,15 +6,12 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:43:32 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/16 20:09:28 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/16 20:17:37 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <stdlib.h>
 # include "../minishell.h"
 
 // prompt.c
