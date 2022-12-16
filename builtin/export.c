@@ -6,64 +6,100 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 12:21:23 by juha              #+#    #+#             */
-/*   Updated: 2022/12/08 17:31:55 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/14 14:16:14 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 /*
-	test ===이이면  문제  있음
-	bash: export: `===': not a valid identifier
-	export test/
-	bash: export: `test/': not a valid identifier
-	/t 슬러시는 사라짐
-	0test= 비정상.
+	- first char is number
+	bash-5.2$ export 0test
+	bash: export: `0test': not a valid identifier
 
+	- whitespace after equire
+	bash-5.2$ export test =
+	bash: export: `=': not a valid identifier
+	
+	- valid char ;
+	bash-5.2$ export test/
+	bash: export: `test/': not a valid identifier
+
+	bash-5.2$ export test!=
+	bash: export: `test!=': not a valid identifier
+	
+	갯수가 여러개면 여러번 출력.
+	ex) test1=test test2=test test -> export ->>> test1,  test2 // no space
 
 	같은 값이면, 덮어씀.
 	띄어어쓰기 문제.
 	test0=test 정상  
 	test=====  정상 출력
 	test       정상 출력 (저장  안함.)
-
 */
 
 static t_bool	is_valid_export_arg(char *env)
 {
 	int	i;
 
-	i = -1;
-	while (env[++i])
+	i = 0;
+	/*고쳐!*/
+	while (env[i])
 	{
 		if (env[i] != ft_isalnum(env[i]) && env[i] != '=')
 			return (FALSE);
+		i++;
 	}
 	return (TRUE);
 }
 
-static t_bool	print_export(t_list *envp_list)
+t_bool	error_export_arg(char *env)
 {
-	while (envp_list)
+	/*while whitespace가 나오는지, 오류 문자인지.*/
+	int	i;
+	char prev_space;
+
+	i = 0;
+	prev_space = *env;
+	while (env[i])
 	{
-		ft_putstr_fd("declare -x ", STDOUT_FILENO);
-		ft_putstr_fd(envp_list->content, STDOUT_FILENO);
-		ft_putchar_fd('\n', STDOUT_FILENO);
-		envp_list = envp_list->next;
+		if (!ft_strncmp(&(env[i]), "=", 1) && \
+			((8 < prev_space && prev_space < 14) || prev_space == 32))
+		{
+			return (TRUE);
+		}
+		else if (!ft_isalnum(env[i]))
+			return (TRUE);
+		else if (!ft_strncmp(&(env[i]), "=", 1))
+			break ;
+		prev_space = env[i];
+		i++;
 	}
-	return (0);
+	return (FALSE);
 }
 
-t_bool	builtin_export(t_list **minishell_envp, int argc, char *env)
+t_bool	builtin_export(t_env_info_list *minishell_envp, char *str)
 {
-	if (argc == 1)
-		return (print_export(*minishell_envp));
-	if (!ft_isdigit(*env))
+	int	i;
+
+	if (!ft_strncmp(str, "export", ft_strlen("export")) && ft_strlen(str) == 6)
 	{
-		return (1);
+		print_envp(*minishell_envp, EXPORT);
+		return (0);
 	}
-	if (is_valid_export_arg(env))
+	/*line???? token???*/
+	while (i++ < argc)
 	{
-		ft_lstadd_back(minishell_envp, ft_lstnew(ft_strdup(env)));
+		if (!ft_isalpha(*str) || error_export_arg(str  ))
+		{
+			ft_putstr_fd("export: \'", STDOUT_FILENO);
+			ft_putstr_fd(export_env, STDOUT_FILENO);
+			ft_putstr_fd("\': not a valid identifier\n", STDOUT_FILENO);
+			return (1);
+		}
+		if (is_valid_export_arg(env))
+		{
+			add_env_list(minishell_envp, export_env, ENV);
+		}
 	}
 	return (TRUE);
 }

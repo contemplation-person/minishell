@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 10:42:56 by juha              #+#    #+#             */
-/*   Updated: 2022/12/05 10:44:19 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/16 07:58:12 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 # define PROMPT_H
 
 # include "../libft/libft.h"
-
-typedef enum e_bool
-{
-	FALSE,
-	TRUE,
-}t_bool;
+// # include "../builtin/builtin.h"
+# include <sys/errno.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 #endif
