@@ -6,16 +6,19 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:43:32 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/16 20:17:37 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/17 13:13:15 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 # include "../minishell.h"
+# include "../libft/libft.h"
+# include "../excute/excute.h"
+# include <stdlib.h>
 
 // prompt.c
-void			print_list(t_tnode *head);;
+void			print_list(t_tnode *head);
 
 // token_list.c
 t_tlist_info	*tlist_init(void);

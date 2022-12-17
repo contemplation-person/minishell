@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 14:32:51 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/16 17:09:26 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/17 15:36:23 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	excute_tree(t_node *node)
 {
 	if (node->left == NULL)
 	{
-		excute_cmd(node);
+		excute_cmd(node->words);
 		return (0);
 	}
 	excute_tree(node->left);
