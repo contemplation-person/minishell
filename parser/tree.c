@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 09:04:30 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/17 13:00:44 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/17 19:48:44 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,4 @@ void	del_tree(t_node *node)
 	free(node->right);
 	node->right = NULL;
 	free_list(node->op);
-
 }

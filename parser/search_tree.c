@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 14:32:51 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/17 15:36:23 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/17 19:48:46 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	excute_tree(t_node *node)
 		return (0);
 	}
 	excute_tree(node->left);
-	print_list(node->op);
 	excute_tree(node->right);
 	return (0);
 }

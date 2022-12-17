@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:21:32 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/17 13:11:21 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/17 16:24:11 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int	parsing_excute(char *user_input)
 	if (user_input[0] == '\0')
 		return (0);
 	if (ft_strncmp(user_input, "exit", 5) == 0)
+	
 		return (-1);
 	word_list = split_input(user_input);
 	if (valid_check(word_list->head) == -1)

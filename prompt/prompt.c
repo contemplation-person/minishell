@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 10:01:26 by juha              #+#    #+#             */
-/*   Updated: 2022/12/16 16:52:07 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/17 19:48:45 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	main(int argc, char **argv, char **envp)
 		// ft_putstr_fd(sentence, STDERR_FILENO);
 		if (sentence == NULL)
 			return (EXIT_SUCCESS);
-		if (sentence && ft_strlen(sentence))
+		else if (ft_strlen(sentence))
 			add_history(sentence);
 		if (parsing_excute(sentence) == -1)
 		{
