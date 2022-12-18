@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 12:21:23 by juha              #+#    #+#             */
-/*   Updated: 2022/12/19 08:21:24 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/19 08:26:25 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,14 +90,14 @@ t_bool	builtin_export(t_env_info_list *minishell_envp, char *str)
 	i = 0;
 	while (i < minishell_envp->cnt)
 	{
-		if (!ft_isalpha(str[i++]) || error_export_arg(str))
+		if (!ft_isalpha(str[i++]) && error_export_arg(str))
 		{
 			ft_putstr_fd("export: \'", STDOUT_FILENO);
 			ft_putstr_fd(str, STDOUT_FILENO);
 			ft_putstr_fd("\': not a valid identifier\n", STDOUT_FILENO);
 			return (1);
 		}
-		if (is_valid_export_arg(env))
+		else if (is_valid_export_arg(env))
 		{
 			print_envp(*minishell_envp, ENV);
 		}
