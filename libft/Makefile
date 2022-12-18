@@ -6,7 +6,7 @@
 #    By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/09 15:47:34 by gyim              #+#    #+#              #
-#    Updated: 2022/07/15 12:49:59 by gyim             ###   ########seoul.kr   #
+#    Updated: 2022/12/18 12:05:42 by gyim             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,7 +79,7 @@ $(NAME) :$(OBJ)
 	$(AR) $(ARFLAGS) $@ $^
 
 %.o : %.c libft.h
-	$(CC) $(CFLAGS) -c $< -I libft.h
+	$(CC) $(CFLAGS) -c $<
 
 clean :
 	rm $(RMFLAGS) $(OBJS) $(BONUS_OBJS)

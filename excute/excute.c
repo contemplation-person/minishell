@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/17 19:48:45 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/18 12:02:48 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	**get_cmd(t_tnode *head)
 
 int	find_cmd(char **cmd)
 {
-	char	**test[2];
+	char	*test[2];
 
 	test[0] = "ls";
 	test[1] = NULL;
