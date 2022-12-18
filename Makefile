@@ -6,7 +6,7 @@
 #    By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2022/12/17 13:05:11 by gyim             ###   ########seoul.kr   #
+#    Updated: 2022/12/18 12:51:09 by gyim             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,12 +30,15 @@ SRC 			:=	parser/parser.c	\
 					excute/excute.c \
 					#builtin/builtin_list.c	builtin/cd.c				builtin/echo.c			builtin/env.c	builtin/exit.c	builtin/export.c	builtin/pwd.c	builtin/unset.c
 LIBFT			:= libft/libft.a
-OBJ 			:= $(SRC:.c=.o);
+OBJ 			:= $(SRC:.c=.o)
 
 
-$(NAME) : $(OBJ)
+$(NAME) : $(OBJ) $(LIBFT)
+	$(CC) $(CFLAGS) -o $(NAME)  $(OBJ) $(LIBFT) $(READLINE_LIB) $(READLINE_INC)
+
+$(LIBFT) :
 	make -C libft bonus
-	$(CC) $(CFLAGS) -o $(NAME) $(READLINE_LIB) $(READLINE_INC) $(LIBFT) $(OBJ)
+
 
 clean :
 	make -C libft fclean
