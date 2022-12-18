@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 12:21:23 by juha              #+#    #+#             */
-/*   Updated: 2022/12/16 12:49:18 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/19 07:25:27 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ t_bool	builtin_export(t_env_info_list *minishell_envp, char *str)
 	/*line???? token???*/
 	while (i++ < argc)
 	{
-		if (!ft_isalpha(*str) || error_export_arg(str  ))
+		if (!ft_isalpha(*str) || error_export_arg(str))
 		{
 			ft_putstr_fd("export: \'", STDOUT_FILENO);
 			ft_putstr_fd(export_env, STDOUT_FILENO);
