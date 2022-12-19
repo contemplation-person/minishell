@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:41:07 by juha              #+#    #+#             */
-/*   Updated: 2022/12/19 15:53:12 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/19 19:34:15 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	unset_len(char *unset_target)
 	return (i);
 }
 
-t_bool	builtin_unset(t_env_info *l, char *unset_name)
+t_bool	builtin_unset(t_env_info_list *l, char **excute_str_form)
 {
 	int		i;
 	int		exist;

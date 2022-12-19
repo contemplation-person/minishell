@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 12:21:23 by juha              #+#    #+#             */
-/*   Updated: 2022/12/19 17:46:59 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/19 19:57:30 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@
 
 static t_bool	is_valid_arg(char *str)
 {
+	if (ft_isdigit(*str))
+		return (FALSE);
 	while (*str)
 	{
 		if (!ft_isalnum(*str) && *str != '=')
@@ -64,48 +66,43 @@ t_bool	builtin_export(t_env_info_list *minishell_envp, char **excute_str_form)
 	int		size;
 	t_bool	print_flag;
 	int		i;
-	int		error_code; //
+	int		error_code; //error_code ㄴ는 전역  변수;
 
-	size = 0;
+	size = 1;
 	while (*(excute_str_form[size]))
 	{
 		print_flag = is_valid_arg(excute_str_form[size]);
 		if (!print_flag)
+			error_code = builtin_error_message("export: \'", \
+						excute_str_form[size], "\': not a valid identifier");
+		else
 		{
-			error_code = builtin_error_message("export: \'", excute_str_form[size], "\': not a valid identifier");
-			return (FALSE);
+			if (is_equal_sign(excute_str_form[size]))
+				add_env_list(minishell_envp, excute_str_form[size], ENV);
+			else
+				add_env_list(minishell_envp, excute_str_form[size], EXPORT);
 		}
 		size++;
 	}
 	if (size == 1)
 		print_envp(*minishell_envp, EXPORT);
-	i = 1;
-	while (i < size)
-	{
-		if (is_equal_sign(excute_str_form[i]))
-			add_env_list(minishell_envp, excute_str_form[i], ENV);
-		else
-			add_env_list(minishell_envp, excute_str_form[i], EXPORT);
-		i++;
-	}
 	return (TRUE);
 }
 
 int main()
 {
 	t_env_info_list	l;
+	
 	ft_bzero(&l, sizeof(t_env_info_list));
-
 	add_env_list(&l, "testa", EXPORT);
-
 	char **test;
 	test = calloc (sizeof(char **), 4);
-	test[0] = ft_strdup("test");
-	test[2] = ft_strdup("test=");
-	test[1] = ft_strdup("test===");
-	test[3]= calloc(sizeof(char *), 1);
+	test[0] = ft_strdup("export");
+	test[3] = ft_strdup("test.=");
+	test[2] = ft_strdup("testte===");
+	test[1]= calloc(sizeof(char *), 1);
 	builtin_export(&l, (char **)test);
-	print_envp(l, ENV);
+	//print_envp(l, ENV);
 	print_envp(l, EXPORT);
 	//system("leaks a.out");
 }
