@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 12:21:23 by juha              #+#    #+#             */
-/*   Updated: 2022/12/19 19:57:30 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/19 20:21:30 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,11 @@ int main()
 	char **test;
 	test = calloc (sizeof(char **), 4);
 	test[0] = ft_strdup("export");
-	test[3] = ft_strdup("test.=");
+	test[1] = ft_strdup("test==");
 	test[2] = ft_strdup("testte===");
-	test[1]= calloc(sizeof(char *), 1);
+	test[3]= calloc(sizeof(char *), 1);
 	builtin_export(&l, (char **)test);
-	//print_envp(l, ENV);
-	print_envp(l, EXPORT);
+	print_envp(l, ENV);
+	//print_envp(l, EXPORT);
 	//system("leaks a.out");
 }
