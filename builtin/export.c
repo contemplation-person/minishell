@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 12:21:23 by juha              #+#    #+#             */
-/*   Updated: 2022/12/19 08:26:25 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/19 17:46:59 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,70 +37,75 @@
 	test       정상 출력 (저장  안함.)
 */
 
-static t_bool	is_valid_export_arg(char *env)
+static t_bool	is_valid_arg(char *str)
 {
-	int	i;
-
-	i = 0;
-	/*고쳐!*/
-	while (env[i])
+	while (*str)
 	{
-		if (env[i] != ft_isalnum(env[i]) && env[i] != '=')
+		if (!ft_isalnum(*str) && *str != '=')
 			return (FALSE);
-		i++;
+		str++;
 	}
 	return (TRUE);
 }
 
-t_bool	error_export_arg(char *env)
+t_bool	is_equal_sign(char *excute_str_form)
 {
-	/*while whitespace가 나오는지, 오류 문자인지.*/
-	int	i;
-	char prev_space;
-
-	i = 0;
-	prev_space = *env;
-	while (env[i])
+	while (*excute_str_form)
 	{
-		if (!ft_strncmp(&(env[i]), "=", 1) && \
-			((8 < prev_space && prev_space < 14) || prev_space == 32))
-		{
+		if (*excute_str_form == '=')
 			return (TRUE);
-		}
-		else if (!ft_isalnum(env[i]))
-			return (TRUE);
-		else if (!ft_strncmp(&(env[i]), "=", 1))
-			break ;
-		prev_space = env[i];
-		i++;
+		excute_str_form++;
 	}
 	return (FALSE);
 }
 
-t_bool	builtin_export(t_env_info_list *minishell_envp, char *str)
+t_bool	builtin_export(t_env_info_list *minishell_envp, char **excute_str_form)
 {
-	int	i;
+	int		size;
+	t_bool	print_flag;
+	int		i;
+	int		error_code; //
 
-	if (!ft_strncmp(str, "export", ft_strlen("export")) && ft_strlen(str) == 6)
+	size = 0;
+	while (*(excute_str_form[size]))
 	{
-		print_envp(*minishell_envp, EXPORT);
-		return (0);
+		print_flag = is_valid_arg(excute_str_form[size]);
+		if (!print_flag)
+		{
+			error_code = builtin_error_message("export: \'", excute_str_form[size], "\': not a valid identifier");
+			return (FALSE);
+		}
+		size++;
 	}
-	/*line???? token???*/
-	i = 0;
-	while (i < minishell_envp->cnt)
+	if (size == 1)
+		print_envp(*minishell_envp, EXPORT);
+	i = 1;
+	while (i < size)
 	{
-		if (!ft_isalpha(str[i++]) && error_export_arg(str))
-		{
-			ft_putstr_fd("export: \'", STDOUT_FILENO);
-			ft_putstr_fd(str, STDOUT_FILENO);
-			ft_putstr_fd("\': not a valid identifier\n", STDOUT_FILENO);
-			return (1);
-		}
-		else if (is_valid_export_arg(env))
-		{
-			print_envp(*minishell_envp, ENV);
-		}
+		if (is_equal_sign(excute_str_form[i]))
+			add_env_list(minishell_envp, excute_str_form[i], ENV);
+		else
+			add_env_list(minishell_envp, excute_str_form[i], EXPORT);
+		i++;
 	}
 	return (TRUE);
+}
+
+int main()
+{
+	t_env_info_list	l;
+	ft_bzero(&l, sizeof(t_env_info_list));
+
+	add_env_list(&l, "testa", EXPORT);
+
+	char **test;
+	test = calloc (sizeof(char **), 4);
+	test[0] = ft_strdup("test");
+	test[2] = ft_strdup("test=");
+	test[1] = ft_strdup("test===");
+	test[3]= calloc(sizeof(char *), 1);
+	builtin_export(&l, (char **)test);
+	print_envp(l, ENV);
+	print_envp(l, EXPORT);
+	//system("leaks a.out");
 }
