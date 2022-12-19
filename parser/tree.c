@@ -6,23 +6,22 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 09:04:30 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/12 00:13:03 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/19 11:10:51 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-t_node	*make_tree(t_tnode *head)
+t_tree_node	*make_tree(t_tnode *head)
 {
-	t_tnode	*op_node;
-	t_node	*new_node;
+	t_tnode		*op_node;
+	t_tree_node	*new_node;
 
 	head = delete_paren(head);
 	op_node = find_op(head);
 	new_node = make_new_node();
 	if (!new_node)
 		return (NULL);
-	// print_list(head);
 	if (!op_node)
 	{
 		new_node->words = head;
@@ -34,11 +33,11 @@ t_node	*make_tree(t_tnode *head)
 		return (new_node);
 }
 
-t_node	*make_new_node(void)
+t_tree_node	*make_new_node(void)
 {
-	t_node	*new_node;
+	t_tree_node	*new_node;
 
-	new_node = malloc(sizeof(t_node));
+	new_node = malloc(sizeof(t_tree_node));
 	if (!new_node)
 		return (NULL);
 	new_node->op = NULL;
@@ -48,7 +47,7 @@ t_node	*make_new_node(void)
 	return (new_node);
 }
 
-int	make_child(t_node *parent_node, t_tnode *head, t_tnode *op_node)
+int	make_child(t_tree_node *parent_node, t_tnode *head, t_tnode *op_node)
 {
 	t_tnode	*l_cmds;
 	t_tnode	*r_cmds;
@@ -65,7 +64,7 @@ int	make_child(t_node *parent_node, t_tnode *head, t_tnode *op_node)
 	return (0);
 }
 
-void	del_tree(t_node *node)
+void	del_tree(t_tree_node *node)
 {
 	if (node->left == NULL)
 	{

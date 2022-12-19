@@ -6,17 +6,19 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 14:32:51 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/12 00:13:06 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/19 19:14:43 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int	excute_tree(t_node *node)
+int	excute_tree(t_tree_node *node)
 {
 	if (node->left == NULL)
 	{
-		excute_cmd(node->words);
+		p_expansion(node->words);
+		// excute_cmd(node->words);
+		print_list(node->words);
 		return (0);
 	}
 	excute_tree(node->left);

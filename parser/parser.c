@@ -6,17 +6,17 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:21:32 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/12 00:13:07 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/19 14:57:33 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-t_node	*parser(t_tlist_info *list)
+t_tree_node	*parser(t_tlist_info *list)
 {
-	int		len;
-	char	**init_cmds;
-	t_node	*root;
+	int			len;
+	char		**init_cmds;
+	t_tree_node	*root;
 
 	root = make_tree(list->head);
 	if (!root)
@@ -57,14 +57,14 @@ void	copy_from_list(char **target, t_tlist_info *list)
 int	parsing_excute(char *user_input)
 {
 	t_tlist_info	*word_list;
-	t_node			*root;
+	t_tree_node		*root;
 
 	if (user_input[0] == '\0')
 		return (0);
 	if (ft_strncmp(user_input, "exit", 5) == 0)
-	
 		return (-1);
 	word_list = split_input(user_input);
+	print_list(word_list->head);
 	if (valid_check(word_list->head) == -1)
 	{
 		del_list(word_list);

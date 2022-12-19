@@ -6,7 +6,7 @@
 #    By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2022/12/19 07:24:49 by gyim             ###   ########seoul.kr   #
+#    Updated: 2022/12/19 11:18:13 by gyim             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRC 			:=	parser/parser.c	\
 					parser/valid_check.c \
 					prompt/prompt.c	\
 					excute/excute.c \
-					builtin/builtin_list.c \
+					#builtin/builtin_list.c \
 					builtin/cd.c \
 					builtin/echo.c \
 					builtin/env.c \
@@ -37,14 +37,17 @@ SRC 			:=	parser/parser.c	\
 					builtin/pwd.c \
 					builtin/unset.c
 LIBFT			:= libft/libft.a
+FT_PRINTF		:= ft_printf/libftprintf.a
 OBJ 			:= $(SRC:.c=.o)
 
 
-$(NAME) : $(OBJ) $(LIBFT)
-	$(CC) $(CFLAGS) -o $(NAME)  $(OBJ) $(LIBFT) $(READLINE_LIB) $(READLINE_INC)
+$(NAME) : $(OBJ) $(LIBFT) $(FT_PRINTF)
+	$(CC) $(CFLAGS) -o $(NAME)  $(OBJ) $(LIBFT) $(FT_PRINTF) $(READLINE_LIB) $(READLINE_INC)
 
 $(LIBFT) :
 	make -C libft bonus
+$(FT_PRINTF) :
+	make -C ft_printf all
 
 
 clean :

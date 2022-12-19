@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 12:32:14 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/18 12:32:57 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/19 11:11:29 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,12 @@ typedef struct s_tlist_info
 	int		cnt;
 }	t_tlist_info;
 
-typedef struct s_node
+typedef struct s_tree_node
 {
-	t_tnode			*op;
-	t_tnode			*words;
-	struct s_node	*left;
-	struct s_node	*right;
-}	t_node;
-
+	t_tnode				*op;
+	t_tnode				*words;
+	struct s_tree_node	*left;
+	struct s_tree_node	*right;
+}	t_tree_node;
 
 #endif

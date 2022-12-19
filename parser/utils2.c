@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 19:54:06 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/12 00:13:01 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/19 14:48:23 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,5 @@ t_tnode	*delete_paren(t_tnode *head)
 		else
 			break ;
 	}
-	// print_list(start);
 	return (start);
 }

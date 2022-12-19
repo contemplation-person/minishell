@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:27:53 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/12 00:13:03 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/19 17:22:21 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,22 +50,8 @@ void	print_list(t_tnode *head)
 	curr = head;
 	while (curr)
 	{
-		printf("%s ", curr->token);
+		printf("[%s]", curr->token);
 		curr = curr->next;
 	}
 	putchar('\n');
 }
-
-// int	list_len(t_tnode *head)
-// {
-// 	int		len;
-// 	t_tnode	*curr;
-
-// 	len = 0;
-// 	while (curr)
-// 	{
-// 		len++;
-// 		curr = curr->next;
-// 	}
-// 	return (len);
-// }

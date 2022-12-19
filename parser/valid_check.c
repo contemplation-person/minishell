@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 17:52:44 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/12 00:12:59 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/19 15:24:45 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,41 +14,47 @@
 
 int	valid_check(t_tnode *head)
 {
-	t_tnode	*curr;
-
-	curr = head;
-	while (curr)
-	{
-		if (quote_check(curr->token) == -1)
-			return (-1);
-		curr = curr->next;
-	}
-	return (paren_check(head));
+	if (quote_check(head) == -1 || paren_check(head) == -1)
+		return (-1);
+	return (0);
 }
 
-int	quote_check(char *token)
+int	in_quote_check(char ch, int in_quote)
 {
-	int	i;
-	int	in_quote;
+	if (in_quote == 0 && ch == '\'')
+		return (1);
+	else if (in_quote == 0 && ch == '\"')
+		return (2);
+	else if (in_quote == 1 && ch == '\'')
+		return (0);
+	else if (in_quote == 2 && ch == '\"')
+		return (0);
+	return (in_quote);
+}
+
+int	quote_check(t_tnode *head)
+{
+	int		i;
+	int		in_quote;
+	t_tnode	*curr;
 
 	in_quote = 0;
 	i = 0;
-	while (token[i])
+	curr = head;
+	while (curr)
 	{
-		if (in_quote == 0 && token[i] == '\'')
-			in_quote = 1;
-		else if (in_quote == 0 && token[i] == '\"')
-			in_quote = 2;
-		else if (in_quote == 1 && token[i] == '\'')
-			in_quote = 0;
-		else if (in_quote == 2 && token[i] == '\"')
-			in_quote = 0;
-		i++;
-	}
-	if (in_quote != 0)
-	{
-		printf("quote not paired\n");
-		return (-1);
+		i = 0;
+		while (curr->token[i])
+		{
+			in_quote = in_quote_check(curr->token[i], in_quote);
+			i++;
+		}
+		if (in_quote != 0)
+		{
+			printf("quote not paired\n");
+			return (-1);
+		}
+		curr = curr->next;
 	}
 	return (0);
 }
