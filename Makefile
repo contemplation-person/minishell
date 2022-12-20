@@ -6,7 +6,7 @@
 #    By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2022/12/20 16:17:34 by gyim             ###   ########seoul.kr   #
+#    Updated: 2022/12/20 18:11:54 by gyim             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRC 			:=	parser/parser.c	\
 					prompt/prompt.c	\
 					excute/excute.c \
 					excute/path.c \
+					excute/cmd.c \
 					builtin_list/builtin_list.c \
 					#builtin/cd.c \
 					builtin/echo.c \

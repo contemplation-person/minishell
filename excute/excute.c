@@ -6,66 +6,49 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/20 15:40:07 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/20 18:29:06 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "excute.h"
 
-int	excute_cmd(t_tnode *cmd_list, t_env_info_list *env_list)
+int	excute_leaf(t_tnode *cmd_list, t_env_info_list *env_list)
 {
-	t_tnode	*curr;
 	char	**cmd;
 
-	curr = cmd_list;
 	cmd = get_cmd(cmd_list);
-	find_cmd(cmd, env_list);
+	excute_cmd(cmd, env_list);
+	free_cmd(cmd);
 	return (0);
 }
 
-int	get_cmd_list_len(t_tnode *head)
-{
-	int		len;
-	t_tnode	*curr;
-
-	len = 0;
-	curr = head;
-	while (curr)
-	{
-		len++;
-		curr = curr->next;
-	}
-	return (len);
-}
-
-char	**get_cmd(t_tnode *head)
-{
-	int		len;
-	t_tnode	*curr;
-	char	**cmd;
-	int		i;
-
-	len = get_cmd_list_len(head);
-	cmd = malloc(sizeof(char *) * (len + 1));
-	curr = head;
-	i = 0;
-	while (curr)
-	{
-		cmd[i++] = ft_strdup(curr->token);
-		curr = curr->next;
-	}
-	cmd[i] = NULL;
-	return (cmd);
-}
-
-int	find_cmd(char **cmd, t_env_info_list *env_list)
+int	excute_cmd(char **cmd, t_env_info_list *env_list)
 {
 	char	**path;
+	int		i;
+	char	*cmd_path;
+	pid_t	pid;
+	int		code;
 
 	path = get_path(env_list);
-	env_list = NULL;
-	cmd = NULL;
-	// execve("/bin/ls", test, NULL);
+	i = 0;
+
+	pid = fork();
+	if (pid == 0)
+	{
+		while (path[i])
+		{
+			cmd_path = ft_strjoin(path[i], "/");
+			cmd_path = ft_strjoin(cmd_path, cmd[0]);
+			execve(cmd_path, cmd, NULL);		
+			i++;
+		}
+		execve(cmd_path, cmd, NULL);
+		perror(NULL);
+		exit(0);
+	}
+	wait(&code);
+	printf("code : %d\n", code);
 	free_path(path);
 	return (0);
 }

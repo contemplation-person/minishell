@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 10:01:26 by juha              #+#    #+#             */
-/*   Updated: 2022/12/20 16:25:55 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/20 18:24:51 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 		}
 		free(sentence);
+		// system("leaks minishell");
 	}
 	system("leaks minishell");
 	return (EXIT_SUCCESS);
