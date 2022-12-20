@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:36:08 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/20 10:01:53 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/20 16:23:20 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ char	*p_expansion(char *token)
 	i = 0;
 	start = 0;
 	ret = calloc(sizeof(char), 1);
+	if (!ret)
+		return (NULL);
 	while (token[i])
 	{
 		if (token[i + 1] == '$' || token[i + 1] == '\0')
@@ -63,7 +65,7 @@ char	*p_expansion(char *token)
 	return (ret);
 }
 
-int	*expansion(t_tnode *head)
+int	expansion(t_tnode *head)
 {
 	t_tnode	*curr;
 	char	*expanded;
@@ -73,6 +75,7 @@ int	*expansion(t_tnode *head)
 	{
 		expanded = p_expansion(curr->token);
 		free(curr->token);
+		curr->token = NULL;
 		curr->token = expanded;
 		curr = curr->next;
 	}

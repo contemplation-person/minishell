@@ -10,7 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "../libft/libft.h"
+
+enum e_bool
+{
+	FALSE,
+	TRUE,
+};
 
 int	echo(int argc, char **argv)
 {

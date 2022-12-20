@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:43:32 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/20 11:34:12 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/20 15:47:33 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int				excute_tree(t_tree_node *node, t_env_info_list *env_list);
 char			*find_variable(char *token, int start, int end);
 char			*dollar_expand(char *token, int start, int end);
 char			*p_expansion(char *token);
-int				*expansion(t_tnode *head);
+int				expansion(t_tnode *head);
 #endif
 
 // gcc -lreadline *.c libft.a -L../readline -I../readline 

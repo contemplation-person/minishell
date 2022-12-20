@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 19:56:59 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/19 10:49:16 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/08 19:56:01 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
-
+#include "../libft/libft.h"
+#include "../ft_printf/ft_printf.h"
+#include <unistd.h>
+#include <stdlib.h>
 /* 새로 만들 것.*/
 int	cd(int argc, char **argv)
 {

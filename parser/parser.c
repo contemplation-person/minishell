@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:21:32 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/20 13:27:10 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/20 16:32:01 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,13 @@ int	parsing_excute(char *user_input, t_env_info_list *env_list)
 		del_list(word_list);
 		return (0);
 	}
+	system("leaks minishell");
 	root = parser(word_list);
 	excute_tree(root, env_list);
 	del_list(word_list);
+	word_list = NULL;
 	del_tree(root);
 	free(root);
-	word_list = NULL;
+	root = NULL;
 	return (0);
 }

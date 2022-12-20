@@ -1,22 +1,21 @@
 /* ************************************************************************** */
-
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 12:21:23 by juha              #+#    #+#             */
-/*   Updated: 2022/12/19 07:25:27 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/19 20:21:30 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
 #include "builtin.h"
 /*
 	- first char is number
 	bash-5.2$ export 0test
 	bash: export: `0test': not a valid identifier
+
 	- whitespace after equire
 	bash-5.2$ export test =
 	bash: export: `=': not a valid identifier
@@ -24,11 +23,13 @@
 	- valid char ;
 	bash-5.2$ export test/
 	bash: export: `test/': not a valid identifier
+
 	bash-5.2$ export test!=
 	bash: export: `test!=': not a valid identifier
 	
 	갯수가 여러개면 여러번 출력.
 	ex) test1=test test2=test test -> export ->>> test1,  test2 // no space
+
 	같은 값이면, 덮어씀.
 	띄어어쓰기 문제.
 	test0=test 정상  
@@ -36,70 +37,72 @@
 	test       정상 출력 (저장  안함.)
 */
 
-	/*고쳐!*/
-static t_bool	is_valid_export_arg(char *env)
+static t_bool	is_valid_arg(char *str)
 {
-	int	i;
-
-	i = 0;
-	while (env[i])
+	if (ft_isdigit(*str))
+		return (FALSE);
+	while (*str)
 	{
-		if (env[i] != ft_isalnum(env[i]) && env[i] != '=')
+		if (!ft_isalnum(*str) && *str != '=')
 			return (FALSE);
-		i++;
+		str++;
 	}
 	return (TRUE);
 }
 
-	/*while whitespace가 나오는지, 오류 문자인지.*/
-t_bool	error_export_arg(char *env)
+t_bool	is_equal_sign(char *excute_str_form)
 {
-	int		i;
-	char	prev_space;
-
-	i = 0;
-	prev_space = *env;
-	while (env[i])
+	while (*excute_str_form)
 	{
-		if (!ft_strncmp(&(env[i]), "=", 1) && \
-			((8 < prev_space && prev_space < 14) || prev_space == 32))
-		{
+		if (*excute_str_form == '=')
 			return (TRUE);
-		}
-		else if (!ft_isalnum(env[i]))
-			return (TRUE);
-		else if (!ft_strncmp(&(env[i]), "=", 1))
-			break ;
-		prev_space = env[i];
-		i++;
+		excute_str_form++;
 	}
 	return (FALSE);
 }
 
-t_bool	builtin_export(t_env_info_list *minishell_envp, char *str)
+t_bool	builtin_export(t_env_info_list *minishell_envp, char **excute_str_form)
 {
-	int	i;
+	int		size;
+	t_bool	print_flag;
+	int		i;
+	int		error_code; //error_code ㄴ는 전역  변수;
 
-	if (!ft_strncmp(str, "export", ft_strlen("export")) && ft_strlen(str) == 6)
+	size = 1;
+	while (*(excute_str_form[size]))
 	{
+		print_flag = is_valid_arg(excute_str_form[size]);
+		if (!print_flag)
+			error_code = builtin_error_message("export: \'", \
+						excute_str_form[size], "\': not a valid identifier");
+		else
+		{
+			if (is_equal_sign(excute_str_form[size]))
+				add_env_list(minishell_envp, excute_str_form[size], ENV);
+			else
+				add_env_list(minishell_envp, excute_str_form[size], EXPORT);
+		}
+		size++;
+	}
+	if (size == 1)
 		print_envp(*minishell_envp, EXPORT);
-		return (0);
-	}
-	/*line???? token???*/
-	i = 0;
-	while (i < minishell_envp->cnt)
-	{
-		if (!ft_isalpha(str[i++]) && error_export_arg(str))
-		{
-			ft_putstr_fd("export: \'", STDOUT_FILENO);
-			ft_putstr_fd(str, STDOUT_FILENO);
-			ft_putstr_fd("\': not a valid identifier\n", STDOUT_FILENO);
-			return (1);
-		}
-		else if (is_valid_export_arg(env))
-		{
-			print_envp(*minishell_envp, ENV);
-		}
-	}
 	return (TRUE);
+}
+
+int main()
+{
+	t_env_info_list	l;
+	
+	ft_bzero(&l, sizeof(t_env_info_list));
+	add_env_list(&l, "testa", EXPORT);
+	char **test;
+	test = calloc (sizeof(char **), 4);
+	test[0] = ft_strdup("export");
+	test[1] = ft_strdup("test==");
+	test[2] = ft_strdup("testte===");
+	test[3]= calloc(sizeof(char *), 1);
+	builtin_export(&l, (char **)test);
+	print_envp(l, ENV);
+	//print_envp(l, EXPORT);
+	//system("leaks a.out");
 }

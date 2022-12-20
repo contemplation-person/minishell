@@ -15,10 +15,7 @@
 int	pwd(char *str)
 {
 	if (ft_strncmp(str, "pwd", ft_strlen(str)))
-	{
-		ft_putstr_fd("pwd : too many arguments\n", STDERR_FILENO);
-		return (EXIT_FAILURE);
-	}
+		return (builtin_error_message("pwd", " : ", "too many arguments"));
 	str = getcwd(str, 1);
 	ft_putstr_fd(str, STDIN_FILENO);
 	return (EXIT_SUCCESS);

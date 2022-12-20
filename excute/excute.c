@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/20 13:35:37 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/20 15:40:07 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,34 +58,15 @@ char	**get_cmd(t_tnode *head)
 	return (cmd);
 }
 
-char	**get_path(t_env_info_list *env_list)
-{
-	t_env_info	*curr;
-	char		*value;
-	char		**path;
-
-	curr = env_list->env_info;
-	while (curr)
-	{
-		if (!ft_strncmp(curr->key, "PATH", 5) == 0)
-		{
-			value = curr->value;
-			break ;
-		}
-	}
-	return (NULL);
-}
-
 int	find_cmd(char **cmd, t_env_info_list *env_list)
 {
-	// char	*test[2];
+	char	**path;
 
-	get_path(env_list);
+	path = get_path(env_list);
 	env_list = NULL;
 	cmd = NULL;
-	// test[0] = "ls";
-	// test[1] = NULL;
 	// execve("/bin/ls", test, NULL);
+	free_path(path);
 	return (0);
 }
 
