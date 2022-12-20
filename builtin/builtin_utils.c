@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.h                                           :+:      :+:    :+:   */
+/*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/05 10:42:56 by juha              #+#    #+#             */
-/*   Updated: 2022/12/19 08:10:32 by juha             ###   ########seoul.kr  */
+/*   Created: 2022/12/19 11:36:45 by juha              #+#    #+#             */
+/*   Updated: 2022/12/19 16:21:06 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PROMPT_H
-# define PROMPT_H
+#include "builtin.h"
 
-# include "../libft/libft.h"
-# include "../builtin/builtin.h"
-# include <sys/errno.h>
-# include <signal.h>
-
-#endif
+t_bool	builtin_error_message(char *builtin_name, char *error, char *message)
+{
+	ft_putstr_fd(builtin_name, STDERR_FILENO);
+	ft_putstr_fd(error, STDERR_FILENO);
+	ft_putendl_fd(message, STDERR_FILENO);
+	//error_code = 1;
+	return (1);
+}
