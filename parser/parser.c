@@ -3,38 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@studet.42seoul.kr>             +#+  +:+       +#+         */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:21:32 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/10 14:14:15 by gyim             ###   ########.fr       */
+/*   Updated: 2022/12/20 16:32:01 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-t_node	*parser(t_tlist_info *list)
+t_tree_node	*parser(t_tlist_info *list)
 {
-	int		len;
-	char	**init_cmds;
-	t_node	*root;
+	t_tree_node	*root;
 
-	init_cmds = get_cmds_from_list(list);
-	root = make_tree(init_cmds);
+	root = make_tree(list->head);
 	if (!root)
 		return (NULL);
 	return (root);
-}
-
-char	**get_cmds_from_list(t_tlist_info *list)
-{
-	int		len;
-	char	**cmds;
-
-	len = list_len(list);
-	cmds = malloc(sizeof(char *) * (len + 1));
-	cmds[len] = NULL;
-	copy_from_list(cmds, list);
-	return (cmds);
 }
 
 int	list_len(t_tlist_info *list)
@@ -65,4 +50,31 @@ void	copy_from_list(char **target, t_tlist_info *list)
 		target_index++;
 		curr = curr->next;
 	}
+}
+
+int	parsing_excute(char *user_input, t_env_info_list *env_list)
+{
+	t_tlist_info	*word_list;
+	t_tree_node		*root;
+
+	if (user_input[0] == '\0')
+		return (0);
+	if (ft_strncmp(user_input, "exit", 5) == 0)
+		return (-1);
+	word_list = split_input(user_input);
+	print_list(word_list->head);
+	if (valid_check(word_list->head) == -1)
+	{
+		del_list(word_list);
+		return (0);
+	}
+	system("leaks minishell");
+	root = parser(word_list);
+	excute_tree(root, env_list);
+	del_list(word_list);
+	word_list = NULL;
+	del_tree(root);
+	free(root);
+	root = NULL;
+	return (0);
 }

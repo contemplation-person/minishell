@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:50:23 by juha              #+#    #+#             */
-/*   Updated: 2022/12/19 20:14:43 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/20 18:02:03 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	add_env_list(t_env_info_list *list,\
 
 	temp = list->env_info;
 	n_temp = new_env_list(env);
+	n_temp->feature = feature;
 	if (find_same_key(&temp, &n_temp))
 		return ;
 	list->cnt++;

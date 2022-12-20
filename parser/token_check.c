@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 08:22:27 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/08 15:08:32 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/12 00:13:05 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	is_quote(char *input, int index)
 		return (0);
 }
 
-int	is_brace(char *input, int index)
+int	is_paren(char *input, int index)
 {
 	if (input[index] == '(' || input[index] == ')')
 		return (1);

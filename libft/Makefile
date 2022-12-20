@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+         #
+#    By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/09 15:47:34 by gyim              #+#    #+#              #
-#    Updated: 2022/07/15 12:49:59 by gyim             ###   ########seoul.kr   #
+#    Updated: 2022/12/20 18:02:05 by juha             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,10 +76,10 @@ bonus:
 	make WITH_BONUS=1 all
 
 $(NAME) :$(OBJ) 
-	$(AR) $(ARFLAGS) $@ $^
+	$(AR) $(ARFLAGS) $@ $^ 
 
 %.o : %.c libft.h
-	$(CC) $(CFLAGS) -c $< -I libft.h
+	$(CC) $(CFLAGS) -c $< -I.
 
 clean :
 	rm $(RMFLAGS) $(OBJS) $(BONUS_OBJS)
