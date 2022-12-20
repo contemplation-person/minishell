@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 12:21:23 by juha              #+#    #+#             */
-/*   Updated: 2022/12/19 20:21:30 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/20 18:51:45 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,10 @@ t_bool	builtin_export(t_env_info_list *minishell_envp, char **excute_str_form)
 {
 	int		size;
 	t_bool	print_flag;
-	int		i;
-	int		error_code; //error_code ㄴ는 전역  변수;
+	int		error_code; //error_code는 전역  변수;
 
 	size = 1;
-	while (*(excute_str_form[size]))
+	while ((excute_str_form[size]))
 	{
 		print_flag = is_valid_arg(excute_str_form[size]);
 		if (!print_flag)
@@ -91,18 +90,22 @@ t_bool	builtin_export(t_env_info_list *minishell_envp, char **excute_str_form)
 
 int main()
 {
+	t_env_info	info;
 	t_env_info_list	l;
+	char **test;
 	
+	l.env_info = &info;
 	ft_bzero(&l, sizeof(t_env_info_list));
 	add_env_list(&l, "testa", EXPORT);
-	char **test;
 	test = calloc (sizeof(char **), 4);
 	test[0] = ft_strdup("export");
-	test[1] = ft_strdup("test==");
+	test[1] = ft_strdup("test1");
 	test[2] = ft_strdup("testte===");
-	test[3]= calloc(sizeof(char *), 1);
+	test[3] = NULL;
 	builtin_export(&l, (char **)test);
 	print_envp(l, ENV);
+	builtin_unset(&l, test);
+	print_envp(l, EXPORT);
 	//print_envp(l, EXPORT);
 	//system("leaks a.out");
 }
