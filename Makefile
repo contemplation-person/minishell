@@ -6,16 +6,17 @@
 #    By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2022/12/19 11:18:13 by gyim             ###   ########seoul.kr   #
+#    Updated: 2022/12/20 13:26:39 by gyim             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME			:=	minishell
 CC 				:=	cc
-CFLAGES 		:=	-Wall -Werror -Wextra
-READLINE_LIB	:=	-lreadline -Lreadline
-READLINE_INC	:=	-I./readline
+CFLAGS 		:=	-Wall -Werror -Wextra
+READLINE_LIB	:=	-lreadline -L$(shell brew --prefix readline)/lib
+READLINE_INC	:=	-I$(shell brew --prefix readline)/include
+
 SRC 			:=	parser/parser.c	\
 					parser/search_tree.c \
 					parser/split_input.c \
@@ -26,10 +27,11 @@ SRC 			:=	parser/parser.c	\
 			 		parser/utils.c \
 					parser/utils2.c	\
 					parser/valid_check.c \
+					parser/param_expansion.c \
 					prompt/prompt.c	\
 					excute/excute.c \
-					#builtin/builtin_list.c \
-					builtin/cd.c \
+					builtin/builtin_list.c \
+					#builtin/cd.c \
 					builtin/echo.c \
 					builtin/env.c \
 					builtin/exit.c \
@@ -65,8 +67,8 @@ re :
 
 
 
-
-
+# READLINE_LIB	:=	-lreadline -Lreadline
+# READLINE_INC	:=	-I./readline
 
 # READLINE_LIB	:=	-lreadline -L$(shell brew --prefix readline)/lib
 # READLINE_INC	:=	-I$(shell brew --prefix readline)/include

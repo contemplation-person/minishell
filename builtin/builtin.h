@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:04:03 by juha              #+#    #+#             */
-/*   Updated: 2022/12/19 10:32:06 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/20 11:31:19 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,33 +16,33 @@
 # include "../minishell.h"
 # include <sys/errno.h>
 
-typedef enum e_bool
-{
-	FALSE,
-	TRUE,
-}t_bool;
+// typedef enum e_bool
+// {
+// 	FALSE,
+// 	TRUE,
+// }t_bool;
 
-typedef enum e_env_feature
-{
-	ENV,	// 전역변수
-	EXPORT, // 지역변수
-}t_env_feature;
+// typedef enum e_env_feature
+// {
+// 	ENV,	// 전역변수
+// 	EXPORT, // 지역변수
+// }t_env_feature;
 
-typedef struct s_env_info
-{
-	char				*key;
-	char				*value;
-	t_env_feature		feature;
-	int					index;
-	struct s_env_info	*prev;
-	struct s_env_info	*next;
-}t_env_info;
+// typedef struct s_env_info
+// {
+// 	char				*key;
+// 	char				*value;
+// 	t_env_feature		feature;
+// 	int					index;
+// 	struct s_env_info	*prev;
+// 	struct s_env_info	*next;
+// }	t_env_info;
 
-typedef struct s_env_info_list
-{
-	int			cnt;
-	t_env_info	*env_info;	
-}t_env_info_list;
+// typedef struct s_env_info_list
+// {
+// 	int			cnt;
+// 	t_env_info	*env_info;	
+// }	t_env_info_list;
 
 t_env_info	*new_env_list(char *env, t_env_feature feature);
 void		add_env_list(t_env_info_list *list,\

@@ -6,17 +6,22 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:36:08 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/19 19:56:45 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/20 10:01:53 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-char	*find_variable(char *token, int srart, int end)
+char	*find_variable(char *token, int start, int end)
 {
-	const char	*test = "dollar_changed";
+	const char	*test = "$$$$$";
+	const char	*target = "$asdf";
 
-	return (ft_strdup(test));
+	if (ft_strncmp(token + start, target, 5) == 0
+		&& (token[start + 5] == '\0' || token[start + 5] == '$'))
+		return (ft_strdup(test));
+	else
+		return (ft_substr(token, start, end - start + 1));
 }
 
 char	*dollar_expand(char *token, int start, int end)
@@ -27,6 +32,7 @@ char	*dollar_expand(char *token, int start, int end)
 		ret = ft_substr(token, start, end - start + 1);
 	else
 		ret = find_variable(token, start, end - start + 1);
+	return (ret);
 }
 
 char	*p_expansion(char *token)
@@ -36,17 +42,39 @@ char	*p_expansion(char *token)
 	int		i;
 	char	*temp;
 	char	*ret;
+	char	*prev;
 
 	i = 0;
 	start = 0;
+	ret = calloc(sizeof(char), 1);
 	while (token[i])
 	{
 		if (token[i + 1] == '$' || token[i + 1] == '\0')
 		{
+			prev = ret;
 			temp = dollar_expand(token, start, i - start + 1);
+			ret = ft_strjoin(prev, temp);
+			free(temp);
+			free(prev);
 			start = i + 1;
 		}
 		i++;
 	}
+	return (ret);
 }
 
+int	*expansion(t_tnode *head)
+{
+	t_tnode	*curr;
+	char	*expanded;
+
+	curr = head;
+	while (curr)
+	{
+		expanded = p_expansion(curr->token);
+		free(curr->token);
+		curr->token = expanded;
+		curr = curr->next;
+	}
+	return (0);
+}

@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 10:01:26 by juha              #+#    #+#             */
-/*   Updated: 2022/12/19 14:52:57 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/20 11:29:07 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,15 @@ static void	init_list(t_env_info_list *list, char **envp)
 int	main(int argc, char **argv, char **envp)
 {
 	char				*sentence;
-	// t_env_info_list		minishell_envp_list;
+	t_env_info_list		minishell_envp_list;
 	// struct sigaction	sa;
 
 	// _set_signal(&sa);
 	if (argc != 1)
 		return (1);
 	(void) argv;
-	// ft_memset(&minishell_envp_list, 0, sizeof(t_env_info_list));
-	// init_list(&minishell_envp_list, envp);
+	ft_memset(&minishell_envp_list, 0, sizeof(t_env_info_list));
+	init_list(&minishell_envp_list, envp);
 	while (1)
 	{
 		sentence = readline("no shell : ");
@@ -82,13 +82,13 @@ int	main(int argc, char **argv, char **envp)
 			return (EXIT_SUCCESS);
 		if (sentence && ft_strlen(sentence))
 			add_history(sentence);
-		if (parsing_excute(sentence) == -1)
+		if (parsing_excute(sentence, &minishell_envp_list) == -1)
 		{
 			free(sentence);
 			break ;
 		}
 		free(sentence);
 	}
-	// system("leaks a.out");
+	system("leaks minishell");
 	return (EXIT_SUCCESS);
 }

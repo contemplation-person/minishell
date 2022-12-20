@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 18:26:48 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/12 00:13:02 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/20 13:27:22 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 t_tnode	*find_op(t_tnode *head)
 {
 	t_tnode	*target;
-	int		in_paren;
 
 	target = check_double_op(head);
 	if (target)

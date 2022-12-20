@@ -6,20 +6,20 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/18 12:02:48 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/20 13:35:37 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "excute.h"
 
-int	excute_cmd(t_tnode *cmd_list)
+int	excute_cmd(t_tnode *cmd_list, t_env_info_list *env_list)
 {
 	t_tnode	*curr;
 	char	**cmd;
 
 	curr = cmd_list;
 	cmd = get_cmd(cmd_list);
-	find_cmd(cmd);
+	find_cmd(cmd, env_list);
 	return (0);
 }
 
@@ -58,12 +58,34 @@ char	**get_cmd(t_tnode *head)
 	return (cmd);
 }
 
-int	find_cmd(char **cmd)
+char	**get_path(t_env_info_list *env_list)
 {
-	char	*test[2];
+	t_env_info	*curr;
+	char		*value;
+	char		**path;
 
-	test[0] = "ls";
-	test[1] = NULL;
-	execve("/bin/ls", test, NULL);
+	curr = env_list->env_info;
+	while (curr)
+	{
+		if (!ft_strncmp(curr->key, "PATH", 5) == 0)
+		{
+			value = curr->value;
+			break ;
+		}
+	}
+	return (NULL);
+}
+
+int	find_cmd(char **cmd, t_env_info_list *env_list)
+{
+	// char	*test[2];
+
+	get_path(env_list);
+	env_list = NULL;
+	cmd = NULL;
+	// test[0] = "ls";
+	// test[1] = NULL;
+	// execve("/bin/ls", test, NULL);
 	return (0);
 }
+
