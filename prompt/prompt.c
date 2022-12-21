@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 10:01:26 by juha              #+#    #+#             */
-/*   Updated: 2022/12/20 18:02:06 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/21 14:59:37 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,40 @@
 // 	return (cmp_len != len);
 // }
 
-static void	init_list(t_env_info_list *list, char **envp)
+void	split_key_value(char *env, char **key, char **value)
+{
+	int	key_len;
+
+	key_len = 0;
+	while (env[key_len])
+	{
+		if (env[key_len++] == '=')
+			break ;
+	}
+	*key = ft_substr(env, 0, key_len);
+	if (*key)
+		return ;
+	if (!key_len)
+	{
+		free(*key);
+		*key = NULL;
+		return ;
+	}
+	*value = ft_substr(env, key_len, ft_strlen(env));
+}
+static void	init_list(t_list *list, char **envp)
 {
 	int	i;
+	char *key;
+	char *value;
 
 	i = 0;
 	while (envp[i])
 	{
-		add_env_list(list, envp[i], ENV);
+		split_key_value(envp[i], key, value);
+		ft_lstadd_back(&list, ft_lstnew(new_env_node(key, value)));
+		if (*key && !(*value))
+			free(value);
 		i++;
 	}
 }
@@ -63,32 +89,31 @@ static void	init_list(t_env_info_list *list, char **envp)
 int	main(int argc, char **argv, char **envp)
 {
 	char				*sentence;
-	t_env_info_list		minishell_envp_list;
+	t_list				*env_list;
 	// struct sigaction	sa;
 
 	// _set_signal(&sa);
 	if (argc != 1)
 		return (1);
 	(void) argv;
-	ft_memset(&minishell_envp_list, 0, sizeof(t_env_info_list));
-	init_list(&minishell_envp_list, envp);
-	while (1)
-	{
-		sentence = readline("no shell : ");
-		// sigaction(SIGINT, &sa, NULL);
-		// sigaction(SIGQUIT, &sa, NULL);
-		// ft_putstr_fd(sentence, STDERR_FILENO);
-		if (sentence == NULL)
-			return (EXIT_SUCCESS);
-		if (sentence && ft_strlen(sentence))
-			add_history(sentence);
-		if (parsing_excute(sentence, &minishell_envp_list) == -1)
-		{
-			free(sentence);
-			break ;
-		}
-		free(sentence);
-	}
-	system("leaks minishell");
-	return (EXIT_SUCCESS);
+	init_list(env_list, envp);
+	//while (1)
+	//{
+	//	sentence = readline("no shell : ");
+	//	// sigaction(SIGINT, &sa, NULL);
+	//	// sigaction(SIGQUIT, &sa, NULL);
+	//	// ft_putstr_fd(sentence, STDERR_FILENO);
+	//	if (sentence == NULL)
+	//		return (EXIT_SUCCESS);
+	//	if (sentence && ft_strlen(sentence))
+	//		add_history(sentence);
+	//	if (parsing_excute(sentence, &minishell_envp_list) == -1)
+	//	{
+	//		free(sentence);
+	//		break ;
+	//	}
+	//	free(sentence);
+	//}
+	//system("leaks minishell");
+	//return (EXIT_SUCCESS);
 }

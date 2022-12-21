@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:04:03 by juha              #+#    #+#             */
-/*   Updated: 2022/12/20 18:02:04 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/21 14:18:55 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,31 +25,12 @@ typedef enum e_bool
 	TRUE,
 }t_bool;
 
-typedef enum e_env_feature
-{
-	ENV,
-	EXPORT,
-}t_env_feature;
-
-typedef struct s_env_info
+typedef struct s_env_node
 {
 	char				*key;
 	char				*value;
-	t_env_feature		feature;
-	int					index;
-	struct s_env_info	*prev;
-	struct s_env_info	*next;
-}t_env_info;
+}t_env_node;
 
-typedef struct s_env_info_list
-{
-	int			cnt;
-	t_env_info	*env_info;
-}t_env_info_list;
-
-t_env_info	*new_env_list(char *env);
-void		add_env_list(t_env_info_list *list,\
-						char *env, t_env_feature feature);
-void		print_envp(t_env_info_list minishell_envp, t_env_feature feature);
-void		delete_one_list(t_env_info_list *list, char *key);
+t_env_node	*new_env_node(char *key, char *value);
+void		env_del(t_env_node *target);
 #endif
