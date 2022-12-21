@@ -6,16 +6,16 @@
 #    By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2022/12/21 20:15:06 by juha             ###   ########seoul.kr   #
+#    Updated: 2022/12/21 20:41:06 by juha             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME			:=	minishell
-CC 				:=	cc
-CFLAGS 			:=	-Wall -Werror -Wextra
 READLINE_LIB	:=	-lreadline -L$(shell brew --prefix readline)/lib
-READLINE_INC	:=	-I$(shell brew --prefix readline)/include
+READLINE_INC	:=	$(shell brew --prefix readline)/include
+CC 				:=	cc
+CFLAGS 			:=	-Wall -Werror -Wextra -I$(READLINE_INC)
 
 SRC 			:=	parser/parser.c	\
 					parser/search_tree.c \
@@ -47,7 +47,7 @@ OBJ 			:= $(SRC:.c=.o)
 
 
 $(NAME) : $(OBJ) $(LIBFT) $(FT_PRINTF)
-	$(CC) $(CFLAGS) -o $(NAME)  $(OBJ) $(LIBFT) $(FT_PRINTF) $(READLINE_LIB) $(READLINE_INC)
+	$(CC) -o $(NAME)  $(OBJ) $(LIBFT) $(FT_PRINTF) $(READLINE_LIB)
 
 $(LIBFT) :
 	make -C libft bonus

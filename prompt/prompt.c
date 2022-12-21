@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 10:01:26 by juha              #+#    #+#             */
-/*   Updated: 2022/12/21 20:04:15 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/21 21:17:10 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ static void	init_list(t_env_info_list *list, char **envp)
 
 void	signal_handler(int signal_int)
 {
-	(void) signal_int;
+	if (signal_int == SIGINT)
+		write(1, "\n", 1);
+	rl_replace_line("", 1);
 	rl_on_new_line();
 	rl_redisplay();
 	return ;
@@ -55,9 +57,8 @@ int	main(int argc, char **argv, char **envp)
 	init_list(&minishell_envp_list, envp);
 	while (1)
 	{
-		signal(SIGQUIT, signal_handler);
+		signal(SIGQUIT, SIG_IGN);
 		signal(SIGINT, signal_handler);
-		rl_redisplay();
 		sentence = readline("MINISHELL : ");
 		ft_putstr_fd(sentence, STDERR_FILENO);
 		if (sentence == NULL)
