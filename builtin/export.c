@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 12:21:23 by juha              #+#    #+#             */
-/*   Updated: 2022/12/21 17:27:03 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/21 20:03:31 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,14 @@ t_bool	builtin_export(t_env_info_list *minishell_envp, char **excute_str_form)
 {
 	int		size;
 	t_bool	print_flag;
-	int		error_code; //error_code는 전역  변수;
 
 	size = 1;
 	while ((excute_str_form[size]))
 	{
 		print_flag = is_valid_arg(excute_str_form[size]);
 		if (!print_flag)
-			error_code = builtin_error_message("export: \'", \
-						excute_str_form[size], "\': not a valid identifier");
+			builtin_error_message("export: \'", \
+						excute_str_form[size], "\': not a valid identifier", 1);
 		else
 		{
 			if (is_equal_sign(excute_str_form[size]))

@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:04:03 by juha              #+#    #+#             */
-/*   Updated: 2022/12/21 19:53:47 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/21 20:09:53 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define BUILTIN_H
 
 # include "../builtin_list/builtin_list.h"
+
+extern int	g_error_code;
 
 void		builtin_error_message(char *name, char *error, \
 									char *message, int error_code);

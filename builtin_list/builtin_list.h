@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:04:03 by juha              #+#    #+#             */
-/*   Updated: 2022/12/20 18:02:04 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/21 19:56:14 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 # include "../libft/libft.h"
 # include <stdio.h>
 # include <sys/errno.h>
-
-//extern int	error_code;
 
 typedef enum e_bool
 {
