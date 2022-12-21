@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:04:03 by juha              #+#    #+#             */
-/*   Updated: 2022/12/21 19:51:40 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/21 19:53:47 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "../builtin_list/builtin_list.h"
 
-void		builtin_error_message(char *builtin, char *error, \
+void		builtin_error_message(char *name, char *error, \
 									char *message, int error_code);
 
 int			cd(int argc, char **argv);
