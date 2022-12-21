@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_struct.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 12:32:14 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/20 14:37:37 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/21 19:37:09 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_STRUCT_H
 # define MINISHELL_STRUCT_H
+
+static int	g_error_code;
 
 typedef enum e_check_list
 {

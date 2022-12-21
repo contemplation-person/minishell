@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 10:01:26 by juha              #+#    #+#             */
-/*   Updated: 2022/12/21 17:13:50 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/21 19:37:28 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static void	init_list(t_env_info_list *list, char **envp)
 	int	i;
 
 	i = 0;
+	ft_memset(list, 0, sizeof(list));
 	while (envp[i])
 	{
 		add_env_list(list, envp[i], ENV);
@@ -40,46 +41,46 @@ static void	init_list(t_env_info_list *list, char **envp)
 	}
 }
 
-// void	signal_handler(int signal_int, struct __siginfo *signint, void *test)
-// {
-// 	if (signal_int == SIGQUIT)
-// 		return ;
-// 	else if (signal_int == SIGINT)
-// 		exit(1);
-// 	else
-// 		printf("test2 : %d\n",signal_int);
-// 	return ;
-// }
+void	signal_handler(int signal_int)
+{
+	if (signal_int == SIGQUIT)
+		rl_
+	rl_on_new_line();
+	rl_redisplay();
+	return ;
+}
 
-// void	_set_signal(struct sigaction *sa)
-// {
-// 	sa->sa_flags = SIGINFO;
-// 	sigemptyset(&sa->sa_mask);
-// 	sigaddset(&sa->sa_mask, SIGQUIT);
-// 	sigaddset(&sa->sa_mask, SIGINT);
-// 	sa->__sigaction_u.__sa_sigaction = signal_handler;
-// }
+void	_set_signal(struct sigaction *sa)
+{
+	sa->sa_flags = 0;
+	sigemptyset(&sa->sa_mask);
+	sigaddset(&sa->sa_mask, SIGQUIT);
+	sigaddset(&sa->sa_mask, SIGINT);
+	sa->__sigaction_u.__sa_handler = signal_handler;
+}
 
 int	main(int argc, char **argv, char **envp)
 {
 	char				*sentence;
 	t_env_info_list		minishell_envp_list;
-	// struct sigaction	sa;
+	struct sigaction	sa;
 
-	// _set_signal(&sa);
+	_set_signal(&sa);
 	if (argc != 1)
 		return (1);
 	(void) argv;
-	ft_memset(&minishell_envp_list, 0, sizeof(t_env_info_list));
 	init_list(&minishell_envp_list, envp);
 	while (1)
 	{
+		signal(SIGQUIT, signal_handler);
+		signal(SIGINT, signal_handler);
 		sentence = readline("MINISHELL : ");
-		// sigaction(SIGINT, &sa, NULL);
-		// sigaction(SIGQUIT, &sa, NULL);
-		// ft_putstr_fd(sentence, STDERR_FILENO);
+		ft_putstr_fd(sentence, STDERR_FILENO);
 		if (sentence == NULL)
+		{
+			ft_putendl_fd("exit", STDOUT_FILENO);
 			return (EXIT_SUCCESS);
+		}
 		if (sentence && ft_strlen(sentence))
 			add_history(sentence);
 		if (parsing_excute(sentence, &minishell_envp_list) == -1)
@@ -88,8 +89,7 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 		}
 		free(sentence);
-		// system("leaks minishell");
+		//system("leaks minishell");
 	}
 	system("leaks minishell");
-	return (EXIT_SUCCESS);
 }

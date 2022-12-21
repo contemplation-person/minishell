@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   search_tree.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 14:32:51 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/21 13:54:01 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/21 17:14:33 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ int	excute_tree(t_tree_node *node, t_env_info_list *env_list)
 	}
 	else
 	{
-		operator_check(node->op->token);
+		//operator_check(node->op->token);
 		excute_tree(node->left, env_list);
 		excute_tree(node->right, env_list);
 	}
 	return (0);
 }
 
-void	operator_check(char *op)
-{
+//void	operator_check(char *op)
+//{
 	
-}
+//}
