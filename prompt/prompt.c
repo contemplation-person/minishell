@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 10:01:26 by juha              #+#    #+#             */
-/*   Updated: 2022/12/20 18:24:51 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/21 13:18:58 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	main(int argc, char **argv, char **envp)
 	init_list(&minishell_envp_list, envp);
 	while (1)
 	{
-		sentence = readline("no shell : ");
+		sentence = readline("MINISHELL : ");
 		// sigaction(SIGINT, &sa, NULL);
 		// sigaction(SIGQUIT, &sa, NULL);
 		// ft_putstr_fd(sentence, STDERR_FILENO);
