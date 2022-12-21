@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 10:01:26 by juha              #+#    #+#             */
-/*   Updated: 2022/12/20 18:02:06 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/21 17:13:50 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	main(int argc, char **argv, char **envp)
 	init_list(&minishell_envp_list, envp);
 	while (1)
 	{
-		sentence = readline("no shell : ");
+		sentence = readline("MINISHELL : ");
 		// sigaction(SIGINT, &sa, NULL);
 		// sigaction(SIGQUIT, &sa, NULL);
 		// ft_putstr_fd(sentence, STDERR_FILENO);
@@ -88,6 +88,7 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 		}
 		free(sentence);
+		// system("leaks minishell");
 	}
 	system("leaks minishell");
 	return (EXIT_SUCCESS);

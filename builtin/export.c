@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 12:21:23 by juha              #+#    #+#             */
-/*   Updated: 2022/12/20 18:51:45 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/21 17:11:53 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,10 @@ t_bool	builtin_export(t_env_info_list *minishell_envp, char **excute_str_form)
 
 int main()
 {
-	t_env_info	info;
+	t_env_info		info;
 	t_env_info_list	l;
-	char **test;
-	
+	char			**test;
+
 	l.env_info = &info;
 	ft_bzero(&l, sizeof(t_env_info_list));
 	add_env_list(&l, "testa", EXPORT);
