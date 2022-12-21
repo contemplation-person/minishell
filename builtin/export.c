@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 12:21:23 by juha              #+#    #+#             */
-/*   Updated: 2022/12/21 21:34:04 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/21 22:15:55 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,11 @@ t_bool	builtin_export(t_env_info_list *minishell_envp, char **excute_str_form)
 //	test[3] = NULL;
 //	builtin_export(&l, (char **)test);
 //	print_envp(l, ENV);
+//	test[1] = "testa= 123";
+//	builtin_export(&l, (char **)test);
+
 //	builtin_unset(&l, test);
-//	print_envp(l, EXPORT);
-//	print_envp(l, EXPORT);
+//	print_envp(l, ENV);
+//	//print_envp(l, EXPORT);
 //	//system("leaks a.out");
 //}
