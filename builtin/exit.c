@@ -6,37 +6,50 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 16:28:00 by juha              #+#    #+#             */
-/*   Updated: 2022/12/19 19:32:25 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/22 21:47:04 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
+#include "../minishell.h"
 
 /*
-	Exit the shell, returning a status of n to the shell’s parent. 
-	If n is omitted, the exit status is that of the last command executed. 
-	Any trap on EXIT is executed before the shell terminates.
-	
-	exit number -> exit number
-	exit number(131) -> exit (131);
-	argc > 2 && first char == not digit -> too many argument(2) -> exit(2);
-	argc > 2 && first char == digit && second char == not digit -> too many argument(2) -> not exit and 127;
+excute_str = exit 123d
+return value = 2
+error_massage = exit\nbash: exit: 123d: numeric argument required
 
-	exit 
+undo_part
 
+excute_str = exit 123 123
+return value = 1
+error_massage = bash: exit: too many arguments
+
+excute_str = exit
+return value = 0
+massage = exit\n
+
+excute_str = exit number
+return value = number
+massage = exit
+
+1. check first
 */
-int	builtin_exit(int argc, char **argv)
+int	builtin_exit(char **excute_str_form)
 {
-	if (1 < argc)
+	int	word_cnt;
+
+	word_cnt = 0;
+	while (excute_str_form[word_cnt++])
+		;
+	if (1 < word_cnt)
 	{
 		ft_putstr_fd("exit : ", STDERR_FILENO);
-		ft_putstr_fd(argv[1], STDERR_FILENO);
+		ft_putstr_fd(excute_str_form[1], STDERR_FILENO);
 		ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
 		exit(2);
 	}
 	else
 	{
 		ft_putstr_fd("exit", STDIN_FILENO);
-		exit(EXIT_SUCCESS);
+		exit(g_error_code % 256);
 	}
 }

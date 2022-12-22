@@ -18,7 +18,7 @@ enum e_bool
 	TRUE,
 };
 
-int	echo(int argc, char **argv)
+int	echo(char **str)
 {
 	char	*option;
 	int		option_len;
