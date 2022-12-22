@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/21 19:05:34 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/22 17:43:18 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	excute_cmd(char **cmd, t_env_info_list *env_list)
 		exit(0);
 	}
 	wait(&code);
-	printf("code : %d\n", code);
+	// printf("code : %d\n", code);
 	free_path(path);
 	return (0);
 }

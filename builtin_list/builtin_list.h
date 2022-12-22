@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_list.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:04:03 by juha              #+#    #+#             */
-/*   Updated: 2022/12/20 14:37:38 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/21 19:56:14 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 # include "../libft/libft.h"
 # include <stdio.h>
 # include <sys/errno.h>
-
-//extern int	error_code;
 
 typedef enum e_bool
 {

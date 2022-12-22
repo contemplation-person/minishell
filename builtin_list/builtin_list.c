@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:50:23 by juha              #+#    #+#             */
-/*   Updated: 2022/12/20 15:34:00 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/21 22:12:37 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	print_envp(t_env_info_list minishell_envp, t_env_feature feature)
 		{
 			ft_putstr_fd("declare -x ", STDOUT_FILENO);
 			ft_putstr_fd(temp->key, STDOUT_FILENO);
-			if (temp->value)
+			if (*(temp->value))
 			{
 				ft_putstr_fd("=\"", STDOUT_FILENO);
 				ft_putstr_fd(temp->value, STDOUT_FILENO);

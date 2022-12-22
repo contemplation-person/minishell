@@ -6,16 +6,16 @@
 #    By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2022/12/20 18:11:54 by gyim             ###   ########seoul.kr   #
+#    Updated: 2022/12/22 13:20:51 by gyim             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME			:=	minishell
-CC 				:=	cc
-CFLAGS 		:=	-Wall -Werror -Wextra
 READLINE_LIB	:=	-lreadline -L$(shell brew --prefix readline)/lib
-READLINE_INC	:=	-I$(shell brew --prefix readline)/include
+READLINE_INC	:=	$(shell brew --prefix readline)/include
+CC 				:=	cc
+CFLAGS 			:=	-Wall -Werror -Wextra -I$(READLINE_INC)
 
 SRC 			:=	parser/parser.c	\
 					parser/search_tree.c \
@@ -33,6 +33,7 @@ SRC 			:=	parser/parser.c	\
 					excute/path.c \
 					excute/cmd.c \
 					builtin_list/builtin_list.c \
+					builtin/builtin_utils.c \
 					#builtin/cd.c \
 					builtin/echo.c \
 					builtin/env.c \
@@ -46,7 +47,7 @@ OBJ 			:= $(SRC:.c=.o)
 
 
 $(NAME) : $(OBJ) $(LIBFT) $(FT_PRINTF)
-	$(CC) $(CFLAGS) -o $(NAME)  $(OBJ) $(LIBFT) $(FT_PRINTF) $(READLINE_LIB) $(READLINE_INC)
+	$(CC) -o $(NAME)  $(OBJ) $(LIBFT) $(FT_PRINTF) $(READLINE_LIB)
 
 $(LIBFT) :
 	make -C libft bonus

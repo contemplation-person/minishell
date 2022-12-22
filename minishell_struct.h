@@ -6,14 +6,16 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 12:32:14 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/21 18:52:52 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/22 13:25:21 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_STRUCT_H
 # define MINISHELL_STRUCT_H
 
-#define CMD_NOT_FOUND ": command not found\n"
+# define CMD_NOT_FOUND ": command not found\n"
+
+int	g_error_code;
 
 typedef enum e_check_list
 {

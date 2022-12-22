@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:43:32 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/21 19:52:09 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/22 16:56:46 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,14 @@ t_tlist_info	*tlist_init(void);
 t_tnode			*make_node(char *str);
 t_tnode			*lst_last(t_tlist_info *list_info);
 void			list_add(t_tlist_info *list, char *str);
-void			del_list(t_tlist_info *list);
+
 
 // token_list2.c
 t_tnode			*delete_paren(t_tnode *head);
 t_tnode			*last_prev_node(t_tnode *head);
 void			print_list(t_tnode *head);
+void			del_list(t_tlist_info *list);
+void			del_sublist(t_tnode	*head);
 
 // split_input.c
 t_tlist_info	*split_input(char *input);

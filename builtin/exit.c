@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 16:28:00 by juha              #+#    #+#             */
-/*   Updated: 2022/12/19 19:32:25 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/22 17:45:08 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@
 	argc > 2 && first char == not digit -> too many argument(2) -> exit(2);
 	argc > 2 && first char == digit && second char == not digit -> too many argument(2) -> not exit and 127;
 
-	exit 
-
+	exit
 */
 int	builtin_exit(int argc, char **argv)
 {
