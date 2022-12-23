@@ -6,16 +6,23 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 17:52:44 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/19 15:24:45 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/23 19:35:27 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
+#define PAREN_ERROR	"unexpedted token ')' near grammer error\n"
+
 int	valid_check(t_tnode *head)
 {
-	if (quote_check(head) == -1 || paren_check(head) == -1)
+	if (quote_check(head) == -1)
 		return (-1);
+	if (paren_check(head) == -1)
+	{
+		write(2, PAREN_ERROR, ft_strlen(PAREN_ERROR));
+		return (-1);
+	}
 	return (0);
 }
 
@@ -72,6 +79,8 @@ int	paren_check(t_tnode *head)
 			in_paren++;
 		else if (curr->token[0] == ')')
 			in_paren--;
+		if (curr->token[0] == '(' && curr->next && curr->next->token[0] == ')')
+			return (-1);
 		if (in_paren < 0)
 			return (-1);
 		curr = curr->next;

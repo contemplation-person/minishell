@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 14:32:51 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/22 17:44:09 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/23 18:35:44 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	excute_tree(t_tree_node *node, t_env_info_list *env_list)
 {
+	return (0);
 	if (node->op != NULL)
 	{
 		if (node->left == NULL || node->right == NULL)
@@ -31,5 +32,24 @@ int	excute_tree(t_tree_node *node, t_env_info_list *env_list)
 		excute_leaf(node->words, env_list);
 		print_list(node->words);
 	}
+	return (0);
+}
+
+int	search_tree(t_tree_node *node)
+{
+	if (node->op != NULL)
+	{
+		print_list(node->op);
+		if (node->left == NULL || node->right == NULL)
+		{
+			write(2, "error near operator\n", 20);
+			return (-1);
+		}
+		if (search_tree(node->left) == -1)
+			return (-1);
+		if (search_tree(node->right) == -1)
+			return (-1);
+	}
+	
 	return (0);
 }

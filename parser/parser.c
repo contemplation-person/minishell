@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:21:32 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/22 17:41:01 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/23 18:25:07 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	parsing_excute(char *user_input, t_env_info_list *env_list)
 	t_tlist_info	*word_list;
 	t_tree_node		*root;
 
+	env_list = NULL;
 	if (user_input[0] == '\0')
 		return (0);
 	word_list = split_input(user_input);
@@ -68,7 +69,8 @@ int	parsing_excute(char *user_input, t_env_info_list *env_list)
 	root = parser(word_list);
 	if (root)
 	{
-		excute_tree(root, env_list);
+		if (search_tree(root) != -1)
+			excute_tree(root, env_list);
 		del_tree(root);
 		free(root);
 		free(word_list);
