@@ -18,7 +18,7 @@ enum e_bool
 	TRUE,
 };
 
-int	echo(char **str)
+int	echo(char **excute_str_form)
 {
 	char	*option;
 	int		option_len;
