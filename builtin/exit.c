@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 16:28:00 by juha              #+#    #+#             */
-/*   Updated: 2022/12/22 21:47:04 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/23 15:05:46 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,23 +33,35 @@ massage = exit
 
 1. check first
 */
+t_bool	is_error_word(char *word)
+{
+	while (*word)
+	{
+		if (!ft_isdigit(*word))
+			return (TRUE);
+		word++;
+	}
+	return (FALSE);
+}
+
 int	builtin_exit(char **excute_str_form)
 {
 	int	word_cnt;
 
 	word_cnt = 0;
-	while (excute_str_form[word_cnt++])
-		;
-	if (1 < word_cnt)
+	while (excute_str_form[word_cnt])
+		word_cnt++;
+	if (word_cnt == 2 && is_error_word(excute_str_form[1]))
 	{
-		ft_putstr_fd("exit : ", STDERR_FILENO);
-		ft_putstr_fd(excute_str_form[1], STDERR_FILENO);
-		ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
-		exit(2);
+		builtin_error_message("exit", excute_str_form[1], "numeric argument required", 2);
+		exit (g_error_code);
 	}
+	else if (word_cnt > 2)
+	{
+		builtin_error_message("exit", "", "too many arguments", 1);
+	}
+	else if (word_cnt == 2)
+		exit(ft_atoi(excute_str_form[1]));
 	else
-	{
-		ft_putstr_fd("exit", STDIN_FILENO);
-		exit(g_error_code % 256);
-	}
+		exit(0);
 }
