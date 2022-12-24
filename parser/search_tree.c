@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 14:32:51 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/24 16:35:30 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/24 17:26:47 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	excute_tree(t_tree_node *node, t_env_info_list *env_list)
 	return (0);
 }
 
-int	search_tree(t_tree_node *node)
+int	tree_valid_check(t_tree_node *node)
 {
 	if (node->op != NULL)
 	{
@@ -51,31 +51,4 @@ int	search_tree(t_tree_node *node)
 			return (-1);
 	}
 	return (0);
-}
-
-int	excute_all_cmds(t_tree_node *node, t_env_info_list *env_list, t_fds *parent_fds)
-{
-	pid_t	left_child;
-	pit_t	right_child;
-	t_fds	left_child_fds;
-	t_fds	right_child_fds;
-	int		fds[2];
-
-	if (node->op != NULL)
-	{
-		if (node->op->token[0] == '|')
-		{
-			pipe(fds);
-			//left
-			
-			//right
-		}
-	}
-	else
-	{
-		expansion(node->words);
-		excute_leaf(node->words, env_list);
-		print_list(node->words);
-	}
-
 }

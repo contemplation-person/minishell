@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:43:32 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/23 18:21:08 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/24 17:25:38 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int				quote_check(t_tnode *head);
 int				paren_check(t_tnode *head);
 // search_tree.c
 int				excute_tree(t_tree_node *node, t_env_info_list *env_list);
-int				search_tree(t_tree_node *node);
+int				tree_valid_check(t_tree_node *node);
 
 // param_expansion.c
 char			*find_variable(char *token, int start, int end);
