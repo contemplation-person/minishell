@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 12:32:14 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/22 13:25:21 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/24 09:53:31 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,11 @@ typedef struct s_tree_node
 	struct s_tree_node	*left;
 	struct s_tree_node	*right;
 }	t_tree_node;
+
+typedef struct s_fds
+{
+	int	in_fd;
+	int	out_fd;
+}	t_fds;
 
 #endif
