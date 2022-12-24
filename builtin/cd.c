@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 19:56:59 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/22 19:57:54 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/24 14:10:07 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 #include <unistd.h>
 #include <stdlib.h>
 /* 새로 만들 것.*/
-int	cd(int argc, char **argv)
+
+int	cd(char **excute_str_form)
 {
 	char	*result;
 	int		flag;

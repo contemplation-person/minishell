@@ -21,13 +21,13 @@ void	print_asterisk(char *argv, struct dirent *file)
             if (asterisk_cnt > 1 && argv[asterisk_point2] != '*')
                 return ;
 			asterisk_cnt++;
-        }
+		}
         asterisk_point2++;
 	}
 	while (argv[asterisk_point])
 	{
 		if (argv[asterisk_point] == '*')
-			break;
+			break ;
 		asterisk_point++;
 	}
 	if (asterisk_cnt > 1)
