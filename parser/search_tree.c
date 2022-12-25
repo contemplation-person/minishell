@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 14:32:51 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/24 17:26:47 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/25 13:43:50 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,23 @@ int	tree_valid_check(t_tree_node *node)
 			write(2, "error near operator\n", 20);
 			return (-1);
 		}
-		if (search_tree(node->left) == -1)
+		if (tree_valid_check(node->left) == -1)
 			return (-1);
-		if (search_tree(node->right) == -1)
+		if (tree_valid_check(node->right) == -1)
 			return (-1);
 	}
 	return (0);
+}
+
+int	search_tree(t_tree_node *node, t_fds *fd_info, t_env_info_list *env_list)
+{
+	if (node->op != NULL)
+	{
+		if (node->op->token[0] == '|')
+			op_pipe(node, fd_info, env_list);
+	}
+	else
+	{
+		excute_cmd(node->words, env_list);
+	}
 }
