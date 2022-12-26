@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 10:01:26 by juha              #+#    #+#             */
-/*   Updated: 2022/12/23 18:33:35 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/26 14:52:56 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ int	main(int argc, char **argv, char **envp)
 		sentence = readline("MINISHELL : ");
 		sigaction(SIGINT, &sa, NULL);
 		sigaction(SIGQUIT, &sa, NULL);
-		// ft_putstr_fd(sentence, STDERR_FILENO);
 		if (sentence == NULL)
 			return (EXIT_SUCCESS);
 		if (sentence && ft_strlen(sentence))

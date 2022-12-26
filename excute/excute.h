@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:14:07 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/21 19:03:00 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/26 10:08:02 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 # include "../builtin_list/builtin_list.h"
 # include "../minishell.h"
 
-int		excute_leaf(t_tnode *cmd_list, t_env_info_list *env_list);
+int		excute_leaf(t_tnode *cmd_list, t_fds *fd_info, t_env_info_list *env_list);
 void	print_error(char *cmd, char *msg);
-int		excute_cmd(char **cmd, t_env_info_list *env_list);
+int		excute_cmd(char **cmd, t_fds *fd_info, t_env_info_list *env_list);
 void	cmd_path_check(char **path, char **cmd);
 
 char	**get_path(t_env_info_list *env_list);

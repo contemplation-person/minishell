@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:43:32 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/25 13:17:14 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/26 10:37:11 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,15 @@ int				in_quote_check(char ch, int in_quote);
 int				quote_check(t_tnode *head);
 int				paren_check(t_tnode *head);
 // search_tree.c
-int				excute_tree(t_tree_node *node, t_env_info_list *env_list);
 int				tree_valid_check(t_tree_node *node);
-
+int				search_tree(t_tree_node *node, t_fds *fd_info, t_env_info_list *env_list);
 // param_expansion.c
 char			*find_variable(char *token, int start, int end);
 char			*dollar_expand(char *token, int start, int end);
 char			*p_expansion(char *token);
 int				expansion(t_tnode *head);
+// pipe_excute.c
+int				op_pipe(t_tree_node *node, t_fds *fd_info, t_env_info_list *env_list);
 #endif
 
 // gcc -lreadline *.c libft.a -L../readline -I../readline 
