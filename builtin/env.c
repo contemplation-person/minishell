@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 12:28:24 by juha              #+#    #+#             */
-/*   Updated: 2022/12/23 16:12:26 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/26 15:35:01 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ t_bool	builtin_env(t_env_info_list *minishell_envp, char **excute_str_form)
 	if (i > 1)
 	{
 		builtin_error_message("42가", "구현하지말래요", "", 127);
-		return (1);
+		return (FALSE);
 	}
 	else
 		print_envp(*minishell_envp, ENV);
-	return (0);
+	return (TRUE);
 }

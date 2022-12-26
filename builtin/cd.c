@@ -6,14 +6,12 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 19:56:59 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/24 17:45:59 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/26 20:14:30 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
-#include "../ft_printf/ft_printf.h"
-#include <unistd.h>
-#include <stdlib.h>
+#include <builtin.h>
+#include <dirent.h>
 /*
 	새로 만들 것.
 	input : cd aklsdfj
@@ -31,11 +29,6 @@
 	return value : 0
 
 
-
-#include <dirent.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
 
 int main()
 {
@@ -92,10 +85,44 @@ int main()
 	}
 	closedir(dp);
 
-}%
+}
 */
 
-int	cd(char **excute_str_form)
+t_env_info	*find_env(t_env_info_list *envp, char *key)
 {
-	return (0);
+	t_env_info	*ret;
+
+	ret = envp->env_info;
+	while (ret)
+	{
+		if (ft_strncmp(ret->key, key, ft_strlen(key)))
+			break ;
+		ret = ret->next;
+	}
+	return (ret);
+}
+
+t_bool	builtin_cd(t_env_info_list *minishell_envp, char **excute_str_form)
+{
+	char		*old_pwd;
+	int			excute_str_cnt;
+	t_env_info	*home;
+
+	excute_str_cnt = cnt_argc(excute_str_form);
+	/*
+		절대 상대 경로만...
+	*/
+	if (excute_str_cnt == 1)
+	{
+		home = find_home(minishell_envp);
+		if (!home)
+		{
+			builtin_error_message("cd", "HOME NOT set", "", 1);
+			return (FALSE);
+		}
+		add_env_list()
+	}
+
+
+	return (TRUE);
 }

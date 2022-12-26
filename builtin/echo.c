@@ -10,25 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
+#include "builtin.h"
 
-enum e_bool
-{
-	FALSE,
-	TRUE,
-};
+/*
+	add arror code 
+*/
 
-int	cnt_argc(char **excute_str_form)
-{
-	int	i;
-
-	i = 0;
-	while (excute_str_form[i])
-		i++;
-	return (i);
-}
-
-int	echo(char **excute_str_form)
+t_bool	echo(char **excute_str_form)
 {
 	char	*option;
 	int		option_len;
@@ -60,5 +48,5 @@ int	echo(char **excute_str_form)
 	}
 	if ((option_len == ft_strlen(option)) == FALSE)
 		ft_putstr_fd("\n", STDOUT_FILENO);
-	return (EXIT_SUCCESS);
+	return (TRUE);
 }
