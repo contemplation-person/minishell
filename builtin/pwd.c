@@ -27,7 +27,7 @@ void	builtin_pwd(char **excute_str_form)
 	str = NULL;
 	str = getcwd(str, 1);
 	ft_putstr_fd(str, STDIN_FILENO);
-	g_error_code = 1;
+	g_error_code = 0;
 }
 
 //int	main()
