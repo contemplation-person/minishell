@@ -6,7 +6,7 @@
 #    By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2022/12/26 09:32:22 by gyim             ###   ########seoul.kr   #
+#    Updated: 2022/12/27 07:59:17 by gyim             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,9 +51,9 @@ $(NAME) : $(OBJ) $(LIBFT) $(FT_PRINTF)
 	$(CC) -o $(NAME)  $(OBJ) $(LIBFT) $(FT_PRINTF) $(READLINE_LIB)
 
 $(LIBFT) :
-	make -C libft bonus
+	make -j 4 -C libft bonus
 $(FT_PRINTF) :
-	make -C ft_printf all
+	make -j 4 -C ft_printf all
 
 all : $(NAME)
 

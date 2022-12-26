@@ -6,20 +6,25 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 12:28:24 by juha              #+#    #+#             */
-/*   Updated: 2022/12/19 11:23:39 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/26 15:35:01 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 
-t_bool	env(t_env_info_list *minishell_envp, char *str)
+t_bool	builtin_env(t_env_info_list *minishell_envp, char **excute_str_form)
 {
-	if (ft_strncmp(str, "env", ft_strlen(str)))
+	int	i;
+
+	i = 0;
+	while (excute_str_form[0])
+		i++;
+	if (i > 1)
 	{
-		ft_putstr_fd("42가 구현하지말래요.\n", STDERR_FILENO);
-		return (127);
+		builtin_error_message("42가", "구현하지말래요", "", 127);
+		return (FALSE);
 	}
 	else
 		print_envp(*minishell_envp, ENV);
-	return (0);
+	return (TRUE);
 }

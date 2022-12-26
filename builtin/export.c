@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 12:21:23 by juha              #+#    #+#             */
-/*   Updated: 2022/12/22 13:38:30 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/24 00:15:40 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,14 +90,14 @@ t_bool	builtin_export(t_env_info_list *minishell_envp, char **excute_str_form)
 
 //int main()
 //{
-//	t_env_info		info;
-//	t_env_info_list	l;
-//	char			**test;
+//	t_env_info info;
+//	t_env_info_list l;
+//	char **test;
 
 //	l.env_info = &info;
 //	ft_bzero(&l, sizeof(t_env_info_list));
 //	add_env_list(&l, "testa", EXPORT);
-//	test = calloc (sizeof(char **), 4);
+//	test = calloc(sizeof(char **), 4);
 //	test[0] = ft_strdup("export");
 //	test[1] = ft_strdup("test1");
 //	test[2] = ft_strdup("testte===");
@@ -109,6 +109,6 @@ t_bool	builtin_export(t_env_info_list *minishell_envp, char **excute_str_form)
 
 //	builtin_unset(&l, test);
 //	print_envp(l, ENV);
-//	//print_envp(l, EXPORT);
-//	//system("leaks a.out");
+//	// print_envp(l, EXPORT);
+//	// system("leaks a.out");
 //}

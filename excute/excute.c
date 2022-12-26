@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/26 14:53:54 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/27 08:07:28 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	excute_cmd(char **cmd, t_fds *fd_info, t_env_info_list *env_list)
 {
 	char	**path;
 
+	cmd_builtin_check(cmd, env_list);
 	path = get_path(env_list);
 	dup2(fd_info->in_fd, STDIN_FILENO);
 	dup2(fd_info->out_fd, STDOUT_FILENO);
@@ -39,6 +40,14 @@ int	excute_cmd(char **cmd, t_fds *fd_info, t_env_info_list *env_list)
 	cmd_path_check(path, cmd);
 	print_error(cmd[0], CMD_NOT_FOUND);
 	exit(0);
+}
+
+void	cmd_builtin_check(char **cmd, t_env_info_list *env_list)
+{
+	if (ft_strncmp(cmd[0], "cd", 3) == 0)
+		cd(2, cmd);
+	else if (ft_strncmp(cmd[0], "echo", 5) == 0)
+		echo()
 }
 
 void	cmd_path_check(char **path, char **cmd)

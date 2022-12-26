@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:21:32 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/26 14:52:42 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/27 07:56:03 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ int	parsing_excute(char *user_input, t_env_info_list *env_list)
 		return (0);
 	}
 	root = parser(word_list);
-	fds.in_fd = STDIN_FILENO;
-	fds.out_fd = STDOUT_FILENO;
+	fds.in_fd = dup(STDIN_FILENO);
+	fds.out_fd = dup(STDOUT_FILENO);
 	if (root)
 	{
 		if (tree_valid_check(root) != -1)
