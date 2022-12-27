@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 16:28:00 by juha              #+#    #+#             */
-/*   Updated: 2022/12/27 15:04:35 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/27 15:05:57 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,5 @@ int	builtin_exit(char **excute_str_form)
 		exit(ft_atoi(excute_str_form[1]));
 	else
 		exit(0);
+	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2022/12/27 15:04:42 by juha             ###   ########seoul.kr   #
+#    Updated: 2022/12/27 15:06:03 by juha             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ SRC 			:=	parser/parser.c	\
 					excute/cmd.c \
 					builtin_list/builtin_list.c \
 					builtin/builtin_utils.c \
-					# builtin/cd.c \
+					builtin/cd.c \
 					builtin/echo.c \
 					builtin/env.c \
 					builtin/exit.c \

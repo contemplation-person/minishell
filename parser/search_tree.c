@@ -6,11 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 14:32:51 by gyim              #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/12/21 21:31:09 by juha             ###   ########seoul.kr  */
-=======
-/*   Updated: 2022/12/27 11:20:36 by gyim             ###   ########seoul.kr  */
->>>>>>> 60ba5385eebb04ab90c50d614939174bfa5dfd22
+/*   Updated: 2022/12/27 15:06:01 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,22 +41,8 @@ int	search_tree(t_tree_node *node, t_fds *fd_info, t_env_info_list *env_list)
 	}
 	else
 	{
-<<<<<<< HEAD
-		//operator_check(node->op->token);
-		excute_tree(node->left, env_list);
-		excute_tree(node->right, env_list);
-	}
-	return (0);
-}
-
-//void	operator_check(char *op)
-//{
-	
-//}
-=======
 		print_list(node->words);
 		excute_leaf(node->words, fd_info, env_list);
 	}
 	return (0);
 }
->>>>>>> 60ba5385eebb04ab90c50d614939174bfa5dfd22
