@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 19:56:59 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/27 13:07:00 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/27 13:09:11 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ t_bool	builtin_cd(t_env_info_list *minishell_envp, char **excute_str_form)
 			return (FALSE);
 		}
 		chdir(home);
+		g_error_code = 0;
 	}
 	else if (excute_str_cnt == 2) // 2개 일때 상대, 절대.
 	{
@@ -139,6 +140,7 @@ t_bool	builtin_cd(t_env_info_list *minishell_envp, char **excute_str_form)
 		}
 		else
 			chdir(excute_str_form[1]);
+		g_error_code = 0;
 	}
 	if (find_env(minishell_envp, "OLDPWD"))
 	{
