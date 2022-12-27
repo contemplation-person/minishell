@@ -24,9 +24,10 @@ void	builtin_pwd(char **excute_str_form)
 		i++;
 	if (i != 1)
 		return (builtin_error_message("bash", "pwd", "too many arguments", 127));
-	str = NULL;
+	str = NULL; 
 	str = getcwd(str, 1);
 	ft_putstr_fd(str, STDIN_FILENO);
+	ft_putstr_fd("\n", STDIN_FILENO);
 	g_error_code = 0;
 }
 
