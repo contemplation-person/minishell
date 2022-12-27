@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 09:04:30 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/23 07:53:02 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/27 19:42:11 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,4 +104,3 @@ void	del_tree(t_tree_node *node)
 	del_sublist(node->op);
 	del_sublist(node->words);
 }
-
