@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:43:32 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/20 15:47:33 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/27 11:34:19 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,14 @@ t_tlist_info	*tlist_init(void);
 t_tnode			*make_node(char *str);
 t_tnode			*lst_last(t_tlist_info *list_info);
 void			list_add(t_tlist_info *list, char *str);
-void			del_list(t_tlist_info *list);
+
 
 // token_list2.c
 t_tnode			*delete_paren(t_tnode *head);
 t_tnode			*last_prev_node(t_tnode *head);
 void			print_list(t_tnode *head);
+void			del_list(t_tlist_info *list);
+void			del_sublist(t_tnode	*head);
 
 // split_input.c
 t_tlist_info	*split_input(char *input);
@@ -68,13 +70,19 @@ int				in_quote_check(char ch, int in_quote);
 int				quote_check(t_tnode *head);
 int				paren_check(t_tnode *head);
 // search_tree.c
-int				excute_tree(t_tree_node *node, t_env_info_list *env_list);
-
+int				tree_valid_check(t_tree_node *node);
+int				search_tree(t_tree_node *node, t_fds *fd_info, t_env_info_list *env_list);
 // param_expansion.c
 char			*find_variable(char *token, int start, int end);
 char			*dollar_expand(char *token, int start, int end);
 char			*p_expansion(char *token);
 int				expansion(t_tnode *head);
+// pipe_excute.c
+int				op_pipe(t_tree_node *node, t_fds *fd_info, t_env_info_list *env_list);
+// cmds_check.c
+int				multiple_cmds_check(t_tlist_info *word_list);
+void			one_cmd_excute(t_tlist_info *word_list, t_env_info_list *env_list);
+void			multiple_cmds_excute(t_tlist_info *word_list, t_env_info_list *env_list);
 #endif
 
 // gcc -lreadline *.c libft.a -L../readline -I../readline 

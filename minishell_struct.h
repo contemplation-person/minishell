@@ -6,12 +6,14 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 12:32:14 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/26 14:10:45 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/27 15:04:43 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_STRUCT_H
 # define MINISHELL_STRUCT_H
+
+# define CMD_NOT_FOUND ": command not found\n"
 
 int	g_error_code;
 
@@ -43,5 +45,11 @@ typedef struct s_tree_node
 	struct s_tree_node	*left;
 	struct s_tree_node	*right;
 }	t_tree_node;
+
+typedef struct s_fds
+{
+	int	in_fd;
+	int	out_fd;
+}	t_fds;
 
 #endif

@@ -6,7 +6,11 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:21:32 by gyim              #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/12/27 14:59:48 by juha             ###   ########seoul.kr  */
+=======
+/*   Updated: 2022/12/27 11:47:46 by gyim             ###   ########seoul.kr  */
+>>>>>>> 60ba5385eebb04ab90c50d614939174bfa5dfd22
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +59,6 @@ void	copy_from_list(char **target, t_tlist_info *list)
 int	parsing_excute(char *user_input, t_env_info_list *env_list)
 {
 	t_tlist_info	*word_list;
-	t_tree_node		*root;
 
 	if (user_input[0] == '\0')
 		return (0);
@@ -66,12 +69,11 @@ int	parsing_excute(char *user_input, t_env_info_list *env_list)
 		del_list(word_list);
 		return (0);
 	}
-	root = parser(word_list);
-	excute_tree(root, env_list);
-	del_list(word_list);
+	if (multiple_cmds_check(word_list) == 0)
+		one_cmd_excute(word_list, env_list);
+	else
+		multiple_cmds_excute(word_list, env_list);
+	free(word_list);
 	word_list = NULL;
-	del_tree(root);
-	free(root);
-	root = NULL;
 	return (0);
 }

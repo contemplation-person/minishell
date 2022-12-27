@@ -6,23 +6,46 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 14:32:51 by gyim              #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/12/21 21:31:09 by juha             ###   ########seoul.kr  */
+=======
+/*   Updated: 2022/12/27 11:20:36 by gyim             ###   ########seoul.kr  */
+>>>>>>> 60ba5385eebb04ab90c50d614939174bfa5dfd22
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int	excute_tree(t_tree_node *node, t_env_info_list *env_list)
+int	tree_valid_check(t_tree_node *node)
 {
-	if (node->left == NULL)
+	if (node->op != NULL)
 	{
-		expansion(node->words);
-		excute_leaf(node->words, env_list);
-		print_list(node->words);
-		return (0);
+		print_list(node->op);
+		if (node->left == NULL || node->right == NULL)
+		{
+			write(2, "error near operator\n", 20);
+			return (-1);
+		}
+		if (tree_valid_check(node->left) == -1)
+			return (-1);
+		if (tree_valid_check(node->right) == -1)
+			return (-1);
+	}
+	return (0);
+}
+
+int	search_tree(t_tree_node *node, t_fds *fd_info, t_env_info_list *env_list)
+{
+	if (node->op != NULL)
+	{
+		if (node->op->token[0] == '|')
+			op_pipe(node, fd_info, env_list);
+		else
+			return (-1);
 	}
 	else
 	{
+<<<<<<< HEAD
 		//operator_check(node->op->token);
 		excute_tree(node->left, env_list);
 		excute_tree(node->right, env_list);
@@ -34,3 +57,10 @@ int	excute_tree(t_tree_node *node, t_env_info_list *env_list)
 //{
 	
 //}
+=======
+		print_list(node->words);
+		excute_leaf(node->words, fd_info, env_list);
+	}
+	return (0);
+}
+>>>>>>> 60ba5385eebb04ab90c50d614939174bfa5dfd22
