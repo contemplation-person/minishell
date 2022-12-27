@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 19:56:59 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/27 15:22:04 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/27 17:04:29 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,33 +119,32 @@ char	*find_home(t_env_info_list *minishell_envp)
 		home 이 있으면 홈으로, 없으면 getenv로.
 	*/
 
-/*
+void	set_pwd_node(t_env_info_list *minishell_envp, char **old_pwd)
 {
-	if (excute_str_cnt == 1)
+	if (find_env(minishell_envp, "OLDPWD"))
 	{
-		if (!find_env(minishell_envp, "HOME"))
-		{
-			free(old_pwd);
-			builtin_error_message("cd", "HOME NOT set", "", 1);
-			return (FALSE);
-		}
-		chdir(home);
-		g_error_code = 0;
+		free(find_env(minishell_envp, "OLDPWD")->value);
+		(find_env(minishell_envp, "OLDPWD")->value) = *old_pwd;
 	}
-	else if (excute_str_cnt == 2) // 2개 일때 상대, 절대.
+	else
+		free(*old_pwd);
+	if (find_env(minishell_envp, "PWD"))
 	{
-		pwd = NULL;
-		if (excute_str_form[1][0] == '~')
-		{
-			pwd = ft_strjoin(home, "/");
-			pwd = ft_strjoin(pwd, excute_str_form[1] + 1);
-		}
-		else
-			chdir(excute_str_form[1]);
-		g_error_code = 0;
+		free(find_env(minishell_envp, "PWD")->value);
+		(find_env(minishell_envp, "PWD")->value) = getcwd(NULL, 1);
 	}
 }
-*/
+
+void	set_pwd(char **excute_str_form, char **pwd, char *home)
+{
+	if (excute_str_form[1][0] == '~')
+	{
+		*pwd = ft_strjoin(home, "/");
+		*pwd = ft_strjoin(*pwd, excute_str_form[1] + 1);
+	}
+	else
+		chdir(excute_str_form[1]);
+}
 
 t_bool	builtin_cd(t_env_info_list *minishell_envp, char **excute_str_form)
 {
@@ -157,6 +156,8 @@ t_bool	builtin_cd(t_env_info_list *minishell_envp, char **excute_str_form)
 	excute_str_cnt = cnt_argc(excute_str_form);
 	home = find_home(minishell_envp);
 	old_pwd = getcwd(NULL, 1);
+	g_error_code = 0;
+	pwd = NULL;
 	if (excute_str_cnt == 1)
 	{
 		if (!find_env(minishell_envp, "HOME"))
@@ -166,31 +167,9 @@ t_bool	builtin_cd(t_env_info_list *minishell_envp, char **excute_str_form)
 			return (FALSE);
 		}
 		chdir(home);
-		g_error_code = 0;
 	}
 	else if (excute_str_cnt == 2) // 2개 일때 상대, 절대.
-	{
-		pwd = NULL;
-		if (excute_str_form[1][0] == '~')
-		{
-			pwd = ft_strjoin(home, "/");
-			pwd = ft_strjoin(pwd, excute_str_form[1] + 1);
-		}
-		else
-			chdir(excute_str_form[1]);
-		g_error_code = 0;
-	}
-	if (find_env(minishell_envp, "OLDPWD"))
-	{
-		free(find_env(minishell_envp, "OLDPWD")->value);
-		(find_env(minishell_envp, "OLDPWD")->value) = old_pwd;
-	}
-	else
-		free(old_pwd);
-	if (find_env(minishell_envp, "PWD"))
-	{
-		free(find_env(minishell_envp, "PWD")->value);
-		(find_env(minishell_envp, "PWD")->value) = getcwd(NULL, 1);
-	}
+		set_pwd(excute_str_form, &pwd, home);
+	set_pwd_node(minishell_envp, &old_pwd);
 	return (TRUE);
 }

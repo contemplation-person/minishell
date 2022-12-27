@@ -27,7 +27,7 @@ t_bool	echo(char **excute_str_form)
 	if (argc == 1)
 		ft_putchar_fd('\n', 1);
 	if (argc < 2)
-		return (EXIT_SUCCESS);
+		return (TRUE);
 	option_len = 0;
 	option = excute_str_form[1];
 	if ('-' == *option)
@@ -48,5 +48,6 @@ t_bool	echo(char **excute_str_form)
 	}
 	if ((option_len == (int)ft_strlen(option)) == FALSE)
 		ft_putstr_fd("\n", STDOUT_FILENO);
+	g_error_code = 0;
 	return (TRUE);
 }
