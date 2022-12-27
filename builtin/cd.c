@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 19:56:59 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/27 13:03:15 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/27 13:06:38 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,12 +133,13 @@ t_bool	builtin_cd(t_env_info_list *minishell_envp, char **excute_str_form)
 	{
 		pwd = NULL;
 		if (excute_str_form[1][0] == '~')
-			pwd = ft_strjoin(home, excute_str_form[1] + 1);
+		{
+			pwd = ft_strjoin(home, "/");
+			pwd = ft_strjoin(pwd, excute_str_form[1] + 1);
+		}
 		else
 			chdir(excute_str_form[1]);
 	}
-
-
 	if (find_env(minishell_envp, "OLDPWD"))
 	{
 		free(find_env(minishell_envp, "OLDPWD")->value);
