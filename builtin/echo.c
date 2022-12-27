@@ -34,7 +34,7 @@ t_bool	echo(char **excute_str_form)
 		option_len++;
 	while (option[option_len] == 'n')
 		option_len++;
-	if ((option_len == ft_strlen(option)) == FALSE)
+	if ((option_len == (int)ft_strlen(option)) == FALSE)
 	{
 		ft_putstr_fd(excute_str_form[1], STDOUT_FILENO);
 		ft_putchar_fd(' ', STDOUT_FILENO);
@@ -46,7 +46,7 @@ t_bool	echo(char **excute_str_form)
 		if (i < argc)
 			ft_putchar_fd(' ', STDOUT_FILENO);
 	}
-	if ((option_len == ft_strlen(option)) == FALSE)
+	if ((option_len == (int)ft_strlen(option)) == FALSE)
 		ft_putstr_fd("\n", STDOUT_FILENO);
 	return (TRUE);
 }
