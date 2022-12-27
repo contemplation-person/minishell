@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 19:56:59 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/27 14:22:22 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/27 15:22:04 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int main()
 }
 */
 
+//check leaks plz
 t_env_info	*find_env(t_env_info_list *envp, char *key)
 {
 	t_env_info	*ret;
@@ -102,6 +103,50 @@ t_env_info	*find_env(t_env_info_list *envp, char *key)
 	return (ret);
 }
 
+char	*find_home(t_env_info_list *minishell_envp)
+{
+	char *home;
+
+	if (find_env(minishell_envp, "HOME"))
+		home = find_env(minishell_envp, "HOME")->value;
+	else
+		home = getenv("HOME");
+	return (home);
+}
+
+	/*
+		절대 상대 경로만...
+		home 이 있으면 홈으로, 없으면 getenv로.
+	*/
+
+/*
+{
+	if (excute_str_cnt == 1)
+	{
+		if (!find_env(minishell_envp, "HOME"))
+		{
+			free(old_pwd);
+			builtin_error_message("cd", "HOME NOT set", "", 1);
+			return (FALSE);
+		}
+		chdir(home);
+		g_error_code = 0;
+	}
+	else if (excute_str_cnt == 2) // 2개 일때 상대, 절대.
+	{
+		pwd = NULL;
+		if (excute_str_form[1][0] == '~')
+		{
+			pwd = ft_strjoin(home, "/");
+			pwd = ft_strjoin(pwd, excute_str_form[1] + 1);
+		}
+		else
+			chdir(excute_str_form[1]);
+		g_error_code = 0;
+	}
+}
+*/
+
 t_bool	builtin_cd(t_env_info_list *minishell_envp, char **excute_str_form)
 {
 	char		*old_pwd;
@@ -110,14 +155,7 @@ t_bool	builtin_cd(t_env_info_list *minishell_envp, char **excute_str_form)
 	char		*pwd;
 
 	excute_str_cnt = cnt_argc(excute_str_form);
-	/*
-		절대 상대 경로만...
-		home 이 있으면 홈으로, 없으면 getenv로.
-	*/
-	if (find_env(minishell_envp, "HOME"))
-		home = find_env(minishell_envp, "HOME")->value;
-	else
-		home = getenv("HOME");
+	home = find_home(minishell_envp);
 	old_pwd = getcwd(NULL, 1);
 	if (excute_str_cnt == 1)
 	{

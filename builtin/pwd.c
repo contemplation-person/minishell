@@ -19,14 +19,14 @@ void	builtin_pwd(char **excute_str_form)
 	int		i;
 	char	*str;
 
-	i = 0;
-	while (excute_str_form[i])
-		i++;
+	i = cnt_argc(excute_str_form);
 	if (i != 1)
-		return (builtin_error_message("bash", "pwd", "too many arguments", 127));
+		return (builtin_error_message("bash", "pwd", "too many arguments", \
+				127));
 	str = NULL;
 	str = getcwd(str, 1);
 	ft_putstr_fd(str, STDIN_FILENO);
+	free(str);
 	g_error_code = 0;
 }
 

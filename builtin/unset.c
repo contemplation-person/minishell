@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:41:07 by juha              #+#    #+#             */
-/*   Updated: 2022/12/26 15:35:59 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/27 15:10:30 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ t_bool	builtin_unset(t_env_info_list *l, char **excute_str_form)
 		node = l->env_info;
 		while (node)
 		{
-			if (!ft_strncmp(node->key, *excute_str_form, ft_strlen(*excute_str_form)))
+			if (!ft_strncmp(node->key, *excute_str_form, \
+				ft_strlen(*excute_str_form)))
 				delete_one_list(l, *excute_str_form);
 			node = node->next;
 		}
