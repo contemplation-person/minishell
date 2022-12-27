@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:21:32 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/27 10:42:33 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/27 11:47:46 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,42 +55,20 @@ void	copy_from_list(char **target, t_tlist_info *list)
 int	parsing_excute(char *user_input, t_env_info_list *env_list)
 {
 	t_tlist_info	*word_list;
-	t_tree_node		*root;
-	t_fds			fds;
 
 	if (user_input[0] == '\0')
 		return (0);
 	word_list = split_input(user_input);
+	print_list(word_list->head);
 	if (valid_check(word_list->head) == -1)
 	{
 		del_list(word_list);
 		return (0);
 	}
-	root = parser(word_list);
-	if (multiple_cmds(word_list) == 0)
-		one_cmd_excute(root, env_list);
+	if (multiple_cmds_check(word_list) == 0)
+		one_cmd_excute(word_list, env_list);
 	else
-	{
-		fds.in_fd = dup(STDIN_FILENO);
-		fds.out_fd = dup(STDOUT_FILENO);
-		if (root)
-		{
-			if (tree_valid_check(root) != -1)
-			{
-				search_tree(root, &fds, env_list);
-				while (waitpid(-1, NULL, WNOHANG) != -1)
-					;
-			}
-			del_tree(root);
-			free(root);
-			free(word_list);
-			word_list = NULL;
-		}
-		else
-			del_list(word_list);
-	}
-	del_tree(root);
-	free(root);
+		multiple_cmds_excute(word_list, env_list);
 	free(word_list);
 	word_list = NULL;
 	return (0);

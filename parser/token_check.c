@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 08:22:27 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/12 00:13:05 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/27 11:03:00 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int	is_op(char *input, int index)
 	if (input[index] == '|')
 		return (1);
 	else if (input[index] == '>')
+		return (1);
+	else if (input[index] == '<')
 		return (1);
 	else if (!ft_strncmp(input + index, "||", 2))
 		return (1);
