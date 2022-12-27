@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:43:32 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/26 10:37:11 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/27 11:00:41 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,9 @@ char			*p_expansion(char *token);
 int				expansion(t_tnode *head);
 // pipe_excute.c
 int				op_pipe(t_tree_node *node, t_fds *fd_info, t_env_info_list *env_list);
+// cmds_check.c
+int				multiple_cmds_check(t_tlist_info *word_list);
+void			one_cmd_excute(t_tree_node *root, t_env_info_list *env_list);
 #endif
 
 // gcc -lreadline *.c libft.a -L../readline -I../readline 

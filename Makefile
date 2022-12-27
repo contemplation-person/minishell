@@ -6,7 +6,7 @@
 #    By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2022/12/27 07:59:17 by gyim             ###   ########seoul.kr   #
+#    Updated: 2022/12/27 10:37:48 by gyim             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC 			:=	parser/parser.c	\
 					parser/utils2.c	\
 					parser/valid_check.c \
 					parser/param_expansion.c \
+					parser/one_cmd.c \
 					parser/pipe_excute.c \
 					prompt/prompt.c	\
 					excute/excute.c \
@@ -35,7 +36,7 @@ SRC 			:=	parser/parser.c	\
 					excute/cmd.c \
 					builtin_list/builtin_list.c \
 					builtin/builtin_utils.c \
-					#builtin/cd.c \
+					# builtin/cd.c \
 					builtin/echo.c \
 					builtin/env.c \
 					builtin/exit.c \
@@ -59,6 +60,7 @@ all : $(NAME)
 
 clean :
 	make -C libft fclean
+	make -C ft_printf fclean
 	rm -rf $(OBJ)
 
 fclean : clean

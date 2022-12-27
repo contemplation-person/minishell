@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   one_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/21 16:52:21 by juha              #+#    #+#             */
-/*   Updated: 2022/12/27 08:19:28 by gyim             ###   ########seoul.kr  */
+/*   Created: 2022/12/27 10:34:58 by gyim              #+#    #+#             */
+/*   Updated: 2022/12/27 11:00:37 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-# include "minishell_struct.h"
-# include "libft/libft.h"
-# include "excute/excute.h"
-# include "builtin/builtin.h"
-# include "parser/parser.h"
-# include "builtin/builtin.h"
-# include "ft_printf/ft_printf.h"
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <sys/errno.h>
+#include "parser.h"
 
-#endif
+int	multiple_cmds_check(t_tlist_info *word_list)
+{
+	t_tnode	*curr;
+
+	curr = word_list->head;
+	while (curr)
+	{
+		if (curr->token[0] == '|')
+			return (1);
+		curr = curr->next;
+	}
+	return (0);
+}
+
+void	one_cmd_excute(t_tree_node *root, t_env_info_list *env_list)
+{
+	t_fds	fds;
+	pid_t	pid;
+
+	fds.in_fd = dup(STDIN_FILENO);
+	fds.out_fd = dup(STDOUT_FILENO);
+	printf("one_cmds\n");
+}

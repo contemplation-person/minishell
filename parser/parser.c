@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:21:32 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/27 07:56:03 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/27 10:42:33 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,22 +67,31 @@ int	parsing_excute(char *user_input, t_env_info_list *env_list)
 		return (0);
 	}
 	root = parser(word_list);
-	fds.in_fd = dup(STDIN_FILENO);
-	fds.out_fd = dup(STDOUT_FILENO);
-	if (root)
-	{
-		if (tree_valid_check(root) != -1)
-		{
-			search_tree(root, &fds, env_list);
-			while (waitpid(-1, NULL, WNOHANG) != -1)
-				;
-		}
-		del_tree(root);
-		free(root);
-		free(word_list);
-		word_list = NULL;
-	}
+	if (multiple_cmds(word_list) == 0)
+		one_cmd_excute(root, env_list);
 	else
-		del_list(word_list);
+	{
+		fds.in_fd = dup(STDIN_FILENO);
+		fds.out_fd = dup(STDOUT_FILENO);
+		if (root)
+		{
+			if (tree_valid_check(root) != -1)
+			{
+				search_tree(root, &fds, env_list);
+				while (waitpid(-1, NULL, WNOHANG) != -1)
+					;
+			}
+			del_tree(root);
+			free(root);
+			free(word_list);
+			word_list = NULL;
+		}
+		else
+			del_list(word_list);
+	}
+	del_tree(root);
+	free(root);
+	free(word_list);
+	word_list = NULL;
 	return (0);
 }
