@@ -6,7 +6,7 @@
 #    By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2022/12/28 11:04:40 by gyim             ###   ########seoul.kr   #
+#    Updated: 2022/12/28 18:09:46 by gyim             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ SRC 			:=	parser/parser.c	\
 					parser/param_expansion.c \
 					parser/cmds_check.c \
 					parser/pipe_excute.c \
-					parser/redirection_excute.c \
+					redirection/redirection_excute.c \
+					redirection/here_doc.c \
 					prompt/prompt.c	\
 					excute/excute.c \
 					excute/path.c \
@@ -43,8 +44,10 @@ SRC 			:=	parser/parser.c	\
 					builtin/exit.c \
 					builtin/export.c \
 					builtin/pwd.c \
-					builtin/unset.c
-LIBFT			:= libft/libft.a
+					builtin/unset.c \
+					get_next_line/get_next_line_bonus.c \
+					get_next_line/get_next_line_utils_bonus.c 
+LIBFT			:= libft/libft.a 
 FT_PRINTF		:= ft_printf/libftprintf.a
 OBJ 			:= $(SRC:.c=.o)
 

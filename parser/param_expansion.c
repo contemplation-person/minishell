@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:36:08 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/27 16:40:25 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/28 16:22:05 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ char	*dollar_expand(char *token, int start, int end)
 }
 
 char	*p_expansion(char *token)
-
 {
 	int		start;
 	int		i;
@@ -74,6 +73,7 @@ int	expansion(t_tnode *head)
 	while (curr)
 	{
 		expanded = p_expansion(curr->token);
+		// * expansion
 		free(curr->token);
 		curr->token = NULL;
 		curr->token = expanded;

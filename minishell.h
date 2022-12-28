@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 16:52:21 by juha              #+#    #+#             */
-/*   Updated: 2022/12/28 09:46:17 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/28 17:08:12 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # include "builtin/builtin.h"
 # include "parser/parser.h"
 # include "builtin/builtin.h"
+# include "redirection/redirection.h"
 # include "ft_printf/ft_printf.h"
+# include "get_next_line/get_next_line_bonus.h"
 
 #endif

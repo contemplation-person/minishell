@@ -6,11 +6,11 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 19:58:17 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/28 13:43:25 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/28 17:07:24 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "redirection.h"
 
 int	op_infile(t_tree_node *node, t_fds *fd_info, t_env_info_list *env_list)
 {
@@ -53,7 +53,17 @@ int	op_append(t_tree_node *node, t_fds *fd_info, t_env_info_list *env_list)
 	return (0);
 }
 
-// int	op_here_doc(t_tree_node *node, t_fds *fd_info, t_env_info_list *env_list)
-// {
+int	op_here_doc(t_tree_node *node, t_fds *fd_info, t_env_info_list *env_list)
+{
+	int		fd[2];
+	char	*limiter;
+	t_fds	cmd_fds;
 
-// }
+	limiter = node->right->words->token;
+	pipe(fd);
+	read_lines(limiter, fd[1]);
+	cmd_fds.in_fd = fd[0];
+	cmd_fds.out_fd = fd_info->out_fd;
+	excute_leaf(node->left->words, &cmd_fds, env_list);
+	return (0);
+}
