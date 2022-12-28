@@ -6,7 +6,11 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 10:34:58 by gyim              #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/12/27 15:07:21 by juha             ###   ########seoul.kr  */
+=======
+/*   Updated: 2022/12/27 18:44:57 by gyim             ###   ########seoul.kr  */
+>>>>>>> 8a500e446c1d86948b092176219bad682b47233a
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +66,7 @@ void	multiple_cmds_excute(t_tlist_info *word_list, t_env_info_list *env_list)
 		if (tree_valid_check(root) != -1)
 		{
 			search_tree(root, &fds, env_list);
-			while (waitpid(-1, NULL, WNOHANG) != -1)
-				;
+			wait(0);
 		}
 		del_tree(root);
 		free(root);

@@ -6,7 +6,11 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:21:32 by gyim              #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/12/27 15:07:09 by juha             ###   ########seoul.kr  */
+=======
+/*   Updated: 2022/12/27 18:38:19 by gyim             ###   ########seoul.kr  */
+>>>>>>> 8a500e446c1d86948b092176219bad682b47233a
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +69,10 @@ int	parsing_excute(char *user_input, t_env_info_list *env_list)
 		del_list(word_list);
 		return (0);
 	}
-	if (multiple_cmds_check(word_list) == 0)
-		one_cmd_excute(word_list, env_list);
-	else
-		multiple_cmds_excute(word_list, env_list);
+	// if (multiple_cmds_check(word_list) == 0)
+	// 	one_cmd_excute(word_list, env_list);
+	// else
+	multiple_cmds_excute(word_list, env_list);
 	free(word_list);
 	word_list = NULL;
 	return (0);

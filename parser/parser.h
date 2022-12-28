@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:43:32 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/27 11:34:19 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/28 13:56:55 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ t_tlist_info	*tlist_init(void);
 t_tnode			*make_node(char *str);
 t_tnode			*lst_last(t_tlist_info *list_info);
 void			list_add(t_tlist_info *list, char *str);
-
 
 // token_list2.c
 t_tnode			*delete_paren(t_tnode *head);

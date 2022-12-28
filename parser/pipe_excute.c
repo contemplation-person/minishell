@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 12:42:25 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/26 14:24:17 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/27 19:27:01 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	op_pipe(t_tree_node *node, t_fds *fd_info, t_env_info_list *env_list)
 	{
 		close(fd[0]);
 		search_tree(node->left, &child_fds[0], env_list);
+		close(fd[1]);
 		exit(0);
 	}
 	pid[1] = fork();
@@ -35,9 +36,11 @@ int	op_pipe(t_tree_node *node, t_fds *fd_info, t_env_info_list *env_list)
 	{
 		close(fd[1]);
 		search_tree(node->right, &child_fds[1], env_list);
+		close(fd[0]);
 		exit(0);
 	}
 	close(fd[0]);
 	close(fd[1]);
+	wait(0);
 	return (0);
 }
