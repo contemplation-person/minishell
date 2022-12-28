@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 10:01:26 by juha              #+#    #+#             */
-/*   Updated: 2022/12/28 15:35:22 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/28 15:37:36 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,6 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 		}
 		free(sentence);
-		//system("leaks minishell");
 	}
 }
+//system("leaks minishell");
