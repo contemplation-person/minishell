@@ -1,6 +1,0 @@
-Makefile
-parser
-readline.h
-drwxr-xr-x  19 gyim  2022_seoul    646 Dec 28 13:39 builtin
-drwxr-xr-x   5 gyim  2022_seoul    170 Dec 28 13:39 builtin_list
-drwxr-xr-x  91 gyim  2022_seoul   3094 Dec 28 13:39 libft
