@@ -6,27 +6,11 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 10:01:26 by juha              #+#    #+#             */
-/*   Updated: 2022/12/28 15:44:54 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/28 17:07:27 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "prompt.h"
-
-int	is_white_space(char *check_charecter)
-{
-	int	len;
-	int	cmp_len;
-
-	len = ft_strlen(check_charecter);
-	cmp_len = 0;
-	while (check_charecter && !(8 < *check_charecter && *check_charecter < 14) \
-			&& *check_charecter != 32)
-	{
-		check_charecter++;
-		cmp_len++;
-	}
-	return (cmp_len != len);
-}
 
 static void	init_list(t_env_info_list *list, char **envp)
 {
@@ -91,6 +75,6 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 		}
 		free(sentence);
+		//system("leaks minishell");
 	}
 }
-//system("leaks minishell");
