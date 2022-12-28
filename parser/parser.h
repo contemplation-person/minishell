@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:43:32 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/27 11:34:19 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/28 13:39:26 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ t_tlist_info	*tlist_init(void);
 t_tnode			*make_node(char *str);
 t_tnode			*lst_last(t_tlist_info *list_info);
 void			list_add(t_tlist_info *list, char *str);
-
 
 // token_list2.c
 t_tnode			*delete_paren(t_tnode *head);
@@ -83,6 +82,10 @@ int				op_pipe(t_tree_node *node, t_fds *fd_info, t_env_info_list *env_list);
 int				multiple_cmds_check(t_tlist_info *word_list);
 void			one_cmd_excute(t_tlist_info *word_list, t_env_info_list *env_list);
 void			multiple_cmds_excute(t_tlist_info *word_list, t_env_info_list *env_list);
+// 	redirection_excute.c
+int				op_infile(t_tree_node *node, t_fds *fd_info, t_env_info_list *env_list);
+int				op_outfile(t_tree_node *node, t_fds *fd_info, t_env_info_list *env_list);
+int				op_append(t_tree_node *node, t_fds *fd_info, t_env_info_list *env_list);
 #endif
 
 // gcc -lreadline *.c libft.a -L../readline -I../readline 

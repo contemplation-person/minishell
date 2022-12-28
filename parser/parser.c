@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:21:32 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/27 18:38:19 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/28 11:08:18 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int	parsing_excute(char *user_input, t_env_info_list *env_list)
 	if (user_input[0] == '\0')
 		return (0);
 	word_list = split_input(user_input);
+	printf("111\n");
 	print_list(word_list->head);
 	if (valid_check(word_list->head) == -1)
 	{

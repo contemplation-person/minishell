@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:51:34 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/19 19:16:30 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/28 13:42:26 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ int	get_op_end(char *input, int start)
 	else if (input[start] == '|')
 		end = start + 1;
 	else if (input[start] == '>')
+		end = start + 1;
+	else if (input[start] == '<')
 		end = start + 1;
 	return (end);
 }
