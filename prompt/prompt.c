@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 10:01:26 by juha              #+#    #+#             */
-/*   Updated: 2022/12/27 18:38:10 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/28 14:31:27 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ void	signal_handler(int signal_int, struct __siginfo *signint, void *test)
 	if (signal_int == SIGQUIT)
 		return ;
 	else if (signal_int == SIGINT)
-		exit(1);
+	{
+		g_error_code = 1;
+		write(2, "\n", 1);
+	}
 	else
 		printf("test2 : %d\n",signal_int);
 	return ;
