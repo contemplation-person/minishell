@@ -6,11 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 10:01:26 by juha              #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/12/27 15:04:33 by juha             ###   ########seoul.kr  */
-=======
-/*   Updated: 2022/12/27 18:38:10 by gyim             ###   ########seoul.kr  */
->>>>>>> 8a500e446c1d86948b092176219bad682b47233a
+/*   Updated: 2022/12/28 15:35:22 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +41,15 @@ static void	init_list(t_env_info_list *list, char **envp)
 	}
 }
 
-void	signal_handler(int signal_int, struct __siginfo *signint, void *test)
+void	signal_handler(int signal_int)
 {
-	(void)signint;
-	(void)test;
-	if (signal_int == SIGQUIT)
-		return ;
-	else if (signal_int == SIGINT)
-		exit(1);
-	else
-		printf("test2 : %d\n",signal_int);
-	return ;
+	if (signal_int == SIGINT)
+	{
+		write(1, "\n", 1);
+		rl_replace_line("", 1);
+		rl_on_new_line();
+		rl_redisplay();
+	}
 }
 
 void	_set_signal(struct sigaction *sa)
@@ -64,7 +58,7 @@ void	_set_signal(struct sigaction *sa)
 	sigemptyset(&sa->sa_mask);
 	sigaddset(&sa->sa_mask, SIGQUIT);
 	sigaddset(&sa->sa_mask, SIGINT);
-	sa->__sigaction_u.__sa_sigaction = signal_handler;
+	sa->__sigaction_u.__sa_handler = signal_handler;
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -80,11 +74,9 @@ int	main(int argc, char **argv, char **envp)
 	init_list(&minishell_envp_list, envp);
 	while (1)
 	{
-		signal(SIGQUIT, SIG_IGN);
 		signal(SIGINT, signal_handler);
+		signal(SIGQUIT, SIG_IGN);
 		sentence = readline("MINISHELL : ");
-		sigaction(SIGINT, &sa, NULL);
-		sigaction(SIGQUIT, &sa, NULL);
 		if (sentence == NULL)
 		{
 			ft_putendl_fd("exit", STDOUT_FILENO);
@@ -100,5 +92,4 @@ int	main(int argc, char **argv, char **envp)
 		free(sentence);
 		//system("leaks minishell");
 	}
-	system("leaks minishell");
 }
