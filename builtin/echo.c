@@ -16,6 +16,21 @@
 	add arror code 
 */
 
+void	check_option(char **option, int *option_len, char **excute_str_form)
+{
+	(*option_len) = 0;
+	(*option) = excute_str_form[1];
+	if ('-' == **option)
+		(*option_len)++;
+	while ((*option)[(*option_len)] == 'n')
+		(*option_len)++;
+	if (((*option_len) == (int)ft_strlen((*option))) == FALSE)
+	{
+		ft_putstr_fd(excute_str_form[1], STDOUT_FILENO);
+		ft_putchar_fd(' ', STDOUT_FILENO);
+	}
+}
+
 t_bool	echo(char **excute_str_form)
 {
 	char	*option;
@@ -28,17 +43,7 @@ t_bool	echo(char **excute_str_form)
 		ft_putchar_fd('\n', 1);
 	if (argc < 2)
 		return (TRUE);
-	option_len = 0;
-	option = excute_str_form[1];
-	if ('-' == *option)
-		option_len++;
-	while (option[option_len] == 'n')
-		option_len++;
-	if ((option_len == (int)ft_strlen(option)) == FALSE)
-	{
-		ft_putstr_fd(excute_str_form[1], STDOUT_FILENO);
-		ft_putchar_fd(' ', STDOUT_FILENO);
-	}
+	check_option(&option, &option_len, excute_str_form);
 	i = 2;
 	while (i < argc)
 	{
