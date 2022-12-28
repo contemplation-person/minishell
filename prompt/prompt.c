@@ -6,11 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 10:01:26 by juha              #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/12/28 17:07:27 by juha             ###   ########seoul.kr  */
-=======
-/*   Updated: 2022/12/28 14:31:27 by gyim             ###   ########seoul.kr  */
->>>>>>> b658099e248d20e16d25eff82aa46c41059ed0e0
+/*   Updated: 2022/12/28 17:09:26 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +27,6 @@ static void	init_list(t_env_info_list *list, char **envp)
 
 void	signal_handler(int signal_int)
 {
-<<<<<<< HEAD
 	if (signal_int == SIGINT)
 	{
 		write(1, "\n", 1);
@@ -40,20 +35,6 @@ void	signal_handler(int signal_int)
 		rl_redisplay();
 		g_error_code = 130;
 	}
-=======
-	(void)signint;
-	(void)test;
-	if (signal_int == SIGQUIT)
-		return ;
-	else if (signal_int == SIGINT)
-	{
-		g_error_code = 1;
-		write(2, "\n", 1);
-	}
-	else
-		printf("test2 : %d\n",signal_int);
-	return ;
->>>>>>> b658099e248d20e16d25eff82aa46c41059ed0e0
 }
 
 void	_set_signal(struct sigaction *sa)
