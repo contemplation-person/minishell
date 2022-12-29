@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipe_excute.c                                      :+:      :+:    :+:   */
+/*   pipe_op.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 12:42:25 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/29 10:10:56 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/29 19:46:53 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "operator.h"
 
 int	op_pipe(t_tree_node *node, t_fds *fd_info, t_env_info_list *env_list)
 {

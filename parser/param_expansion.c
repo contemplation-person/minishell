@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:36:08 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/29 14:26:20 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/29 15:38:24 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ char	*find_variable(char *token, int start, int end,
 {
 	t_env_info	*curr;
 
+	if (ft_strncmp("$?", token + start, ft_strlen("$?") + 1) == 0)
+	{
+		printf("$? substitudion\n");
+		return (ft_itoa(WEXITSTATUS(g_error_code)));
+	}
 	end = 0;
 	curr = env_list->env_info;
 	while (curr)
