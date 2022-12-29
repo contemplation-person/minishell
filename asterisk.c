@@ -116,9 +116,8 @@ char	*asterisk(char *token)
 	if (!sub_token)
 		exit(1);
 	ret = *sub_token;
-	if (sub_token)
+	if (sub_token++)
 	{
-		free(sub_token++);
 		token = ret;
 		ret = ft_strjoin(token, " ");
 		free(token);
