@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/29 11:20:48 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/29 14:36:47 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	excute_leaf(t_tnode *cmd_list, t_fds *fd_info, t_env_info_list *env_list)
 {
 	char	**cmd;
 
-	expansion(cmd_list);
+	expansion(cmd_list, env_list);
 	cmd = get_cmd(cmd_list);
 	excute_cmd(cmd, fd_info, env_list);
 	free_cmd(cmd);
@@ -49,7 +49,8 @@ int	excute_cmd(char **cmd, t_fds *fd_info, t_env_info_list *env_list)
 		print_error(cmd[0], CMD_NOT_FOUND);
 		exit(127);
 	}
-	wait(0);
+	waitpid(0, &g_error_code, 0);
+	printf("error code : %d\n", WEXITSTATUS(g_error_code));
 	return (0);
 }
 
