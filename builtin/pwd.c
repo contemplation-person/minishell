@@ -30,6 +30,6 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	}
 	str = getcwd(str, 1);
-	ft_putstr_fd(str, STDIN_FILENO);
+	ft_putstr_fd(str, STDOUT_FILENO);
 	return (EXIT_SUCCESS);
 }
