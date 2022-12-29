@@ -6,13 +6,19 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:43:32 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/29 12:03:41 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/30 06:28:17 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
-# include "../minishell.h"
+// # include "../minishell.h"
+# include "../minishell_struct.h"
+# include "../builtin_list/builtin_list.h"
+# include "../excute/excute.h"
+# include "../operator/operator.h"
+# include <sys/types.h>
+# include <sys/wait.h>
 
 // token_list.c
 t_tlist_info	*tlist_init(void);
@@ -74,7 +80,7 @@ int				tree_valid_check(t_tree_node *node);
 int				search_tree(t_tree_node *node,
 					t_fds *fd_info, t_env_info_list *env_list);
 // param_expansion.c
-char			*find_variable(char *token, int start, int end,
+char			*find_variable(char *token, int start,
 					t_env_info_list *env_list);
 char			*dollar_expand(char *token, int start, int end,
 					t_env_info_list *env_list);

@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 16:52:21 by juha              #+#    #+#             */
-/*   Updated: 2022/12/29 19:27:52 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/30 05:58:16 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,13 @@
 # include <unistd.h>
 # include <sys/errno.h>
 # include <fcntl.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 # include "minishell_struct.h"
 # include "libft/libft.h"
 # include "excute/excute.h"
 # include "builtin/builtin.h"
 # include "parser/parser.h"
-# include "builtin/builtin.h"
 # include "operator/operator.h"
 # include "ft_printf/ft_printf.h"
 # include "get_next_line/get_next_line_bonus.h"

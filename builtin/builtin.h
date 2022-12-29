@@ -6,14 +6,15 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:04:03 by juha              #+#    #+#             */
-/*   Updated: 2022/12/29 08:51:08 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/30 06:22:24 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTIN_H
 # define BUILTIN_H
 
-# include "../minishell.h"
+// # include "../minishell.h"
+# include "../minishell_struct.h"
 # include "../builtin_list/builtin_list.h"
 
 void		builtin_error_message(char *name, char *error, \

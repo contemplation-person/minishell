@@ -6,14 +6,18 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:14:07 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/29 17:25:48 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/30 06:21:25 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXCUTE_H
 # define EXCUTE_H
+// # include "../minishell.h"
+# include "../minishell_struct.h"
+# include "../builtin/builtin.h"
 # include "../builtin_list/builtin_list.h"
-# include "../minishell.h"
+# include "../parser/parser.h"
+# include "../excute/excute.h"
 
 int		excute_leaf(t_tnode *cmd_list, t_fds *fd_info,
 			t_env_info_list *envp_list);

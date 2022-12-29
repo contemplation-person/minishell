@@ -6,13 +6,13 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:36:08 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/29 15:38:24 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/30 03:00:03 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-char	*find_variable(char *token, int start, int end,
+char	*find_variable(char *token, int start,
 					t_env_info_list *env_list)
 {
 	t_env_info	*curr;
@@ -22,7 +22,6 @@ char	*find_variable(char *token, int start, int end,
 		printf("$? substitudion\n");
 		return (ft_itoa(WEXITSTATUS(g_error_code)));
 	}
-	end = 0;
 	curr = env_list->env_info;
 	while (curr)
 	{
@@ -42,7 +41,7 @@ char	*dollar_expand(char *token, int start, int end,
 	if (token[start] != '$')
 		ret = ft_substr(token, start, end - start + 1);
 	else
-		ret = find_variable(token, start, end - start + 1, env_list);
+		ret = find_variable(token, start, env_list);
 	return (ret);
 }
 

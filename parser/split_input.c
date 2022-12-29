@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:51:34 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/29 08:59:37 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/30 02:56:34 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@ t_tlist_info	*split_input(char *input)
 {
 	t_tlist_info	*tinfo;
 	int				i;
-	int				start;
 
 	tinfo = tlist_init();
-	start = 0;
 	i = 0;
 	while (input + i)
 	{

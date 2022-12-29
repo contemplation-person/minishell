@@ -6,14 +6,18 @@
 #    By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2022/12/29 19:47:31 by gyim             ###   ########seoul.kr   #
+#    Updated: 2022/12/30 03:03:40 by gyim             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME			:=	minishell
-READLINE_LIB	:=	-lreadline -L$(shell brew --prefix readline)/lib
-READLINE_INC	:=	$(shell brew --prefix readline)/include
+# MAC_OS READLINE
+# READLINE_LIB	:=	-lreadline -L$(shell brew --prefix readline)/lib
+# READLINE_INC	:=	$(shell brew --prefix readline)/include
+# LINUX READLINE
+READLINE_LIB	:=	-lreadline -Lreadline
+READLINE_INC	:=	-I./readline
 CC 				:=	cc
 CFLAGS 			:=	-Wall -Werror -Wextra -I$(READLINE_INC)
 
@@ -30,10 +34,9 @@ SRC 			:=	parser/parser.c	\
 					parser/valid_check.c \
 					parser/param_expansion.c \
 					parser/cmds_check.c \
-					operator/pipe_excute.c \
+					operator/pipe_op.c \
 					operator/redirection_excute.c \
 					operator/here_doc.c \
-					operator/logical_op.c \
 					prompt/prompt.c	\
 					excute/excute.c \
 					excute/path.c \

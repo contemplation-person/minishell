@@ -6,11 +6,11 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 16:28:00 by juha              #+#    #+#             */
-/*   Updated: 2022/12/27 19:34:52 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/30 05:53:59 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "builtin.h"
 
 /*
 excute_str = exit 123d
