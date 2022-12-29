@@ -6,7 +6,7 @@
 #    By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2022/12/28 18:09:46 by gyim             ###   ########seoul.kr   #
+#    Updated: 2022/12/29 08:59:53 by gyim             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ CFLAGS 			:=	-Wall -Werror -Wextra -I$(READLINE_INC)
 SRC 			:=	parser/parser.c	\
 					parser/search_tree.c \
 					parser/split_input.c \
+					parser/split_input2.c \
 					parser/token_check.c \
 					parser/token_list.c	\
 					parser/token_list2.c \

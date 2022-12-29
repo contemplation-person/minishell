@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 19:58:17 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/28 19:35:17 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/29 11:41:20 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ int	op_here_doc(t_tree_node *node, t_fds *fd_info, t_env_info_list *env_list)
 
 	limiter = node->right->words->token;
 	pipe(fd);
-	read_lines(limiter, fd);
 	cmd_fds.in_fd = fd[0];
 	cmd_fds.out_fd = fd_info->out_fd;
+	read_lines(limiter, fd);
 	close(fd[1]);
 	excute_leaf(node->left->words, &cmd_fds, env_list);
 	close(fd[0]);

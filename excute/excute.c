@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/28 16:29:17 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/29 11:20:48 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,17 @@ int	excute_cmd(char **cmd, t_fds *fd_info, t_env_info_list *env_list)
 	char	**path;
 	pid_t	pid;
 
-	if (cmd_builtin_check(cmd, env_list) == 1)
+	if (cmd_builtin_check1(cmd, env_list) == 1)
 		return (0);
 	pid = fork();
 	if (pid == 0)
 	{
-		path = get_path(env_list);
 		dup2(fd_info->in_fd, STDIN_FILENO);
 		dup2(fd_info->out_fd, STDOUT_FILENO);
 		close(fd_info->in_fd);
+		if (cmd_builtin_check2(cmd, env_list) == 1)
+			exit(0);
+		path = get_path(env_list);
 		cmd_path_check(path, cmd);
 		print_error(cmd[0], CMD_NOT_FOUND);
 		exit(127);
@@ -51,21 +53,32 @@ int	excute_cmd(char **cmd, t_fds *fd_info, t_env_info_list *env_list)
 	return (0);
 }
 
-int	cmd_builtin_check(char **cmd, t_env_info_list *env_list)
+int	cmd_builtin_check1(char **cmd, t_env_info_list *env_list)
 {
-	if (ft_strncmp(cmd[0], "echo", 5) == 0)
-	{
-		echo(cmd);
-		return (1);
-	}
-	else if (ft_strncmp(cmd[0], "cd", 3) == 0)
+	if (ft_strncmp(cmd[0], "cd", 3) == 0)
 	{
 		builtin_cd(env_list, cmd);
 		return (1);
 	}
-	else if (ft_strncmp(cmd[0], "echo", 5) == 0)
+	else if (ft_strncmp(cmd[0], "unset", 6) == 0)
 	{
-		builtin_pwd(cmd);
+		builtin_unset(env_list, cmd);
+		return (1);
+	}
+	else if (ft_strncmp(cmd[0], "exit", 5) == 0)
+	{
+		builtin_exit(cmd);
+		return (1);
+	}
+	else
+		return (0);
+}
+
+int	cmd_builtin_check2(char **cmd, t_env_info_list *env_list)
+{
+	if (ft_strncmp(cmd[0], "echo", 5) == 0)
+	{
+		echo(cmd);
 		return (1);
 	}
 	else if (ft_strncmp(cmd[0], "pwd", 4) == 0)
@@ -78,19 +91,9 @@ int	cmd_builtin_check(char **cmd, t_env_info_list *env_list)
 		builtin_export(env_list, cmd);
 		return (1);
 	}
-	else if (ft_strncmp(cmd[0], "unset", 6) == 0)
-	{
-		builtin_unset(env_list, cmd);
-		return (1);
-	}
 	else if (ft_strncmp(cmd[0], "env", 4) == 0)
 	{
 		builtin_env(env_list, cmd);
-		return (1);
-	}
-	else if (ft_strncmp(cmd[0], "exit", 5) == 0)
-	{
-		builtin_exit(cmd);
 		return (1);
 	}
 	else
