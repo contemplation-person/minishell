@@ -1,126 +1,167 @@
 // echo Desktop Dowload
 #include "42/succes_mission/libft/libft.h"
 #include <dirent.h>
+#include <stdio.h>
 
-int	find_asterisk(char *token)
+int	find_asterisk(char *sub_token)
 {
-	while (*token)
+	while (*sub_token)
 	{
-		if (*token == '*')
+		if (*sub_token == '*')
 			return (1);
-		token++;
+		sub_token++;
 	}
 	return (0);
 }
 
 /*
-	echo *D D*
+	*d
+	dir_name;
 
-	1.	sub_token = split(token);
-		*D
-		D*
+	D*
 */
-int	match_token(char *token, char *d_name)
-{
-	int	i;
-	int j;
 
+int	is_same(char *sub_token, char *d_name)
+{
+	int		i;
+	char	**split_token;
+	//int		sub_token_len;
+
+	while (*sub_token && *sub_token != '*')
+	{
+		if (*sub_token++ != *d_name++)
+			return (0);
+	}
+	//sub_token_len = ft_strlen(sub_token);
+	//if (sub_token[sub_token_len] == '*')
+	//{
+	//	while (sub_token_len && sub_token[sub_token_len] != '*')
+	//	{
+	//		sub_token_len--;
+	//	}
+	//	if (ft_strncmp(&(sub_token[sub_token_len]), d_name))
+	//}
+	//asterisk = 0;
+	split_token = ft_split(sub_token, '*');
+	if (!split_token)
+		exit(1);
 	i = 0;
-	j = 0;
+	while (split_token[i])
+	{
+		if (ft_strncmp(split_token[i], d_name, ft_strlen(split_token[i])))
+			d_name += ft_strlen(split_token);
+		free(split_token[i]);
+		i++;
+	}
+	free(split_token);
+/*
+	끝에 *가 있으면 끝,
+	아니면, 끝에 문자열 확인,
+*/
+	return (1);
+	
+/*
+	*dddddddd*Ddd
+*/
 }
 
-char	*change_asterisk(char *token)
+char	*make_asterisk(char *sub_token)
 {
 	DIR				*dp;
 	struct dirent	*dirp;
 	char			*ret;
 	char			*temp;
 
-	ret = ft_strdup("");
-	if (!ret)
-		exit(1);
+	ret = NULL;
 	dp = opendir(".");
-	if (dp != NULL)
-	{
-		dirp = readdir(dp);
-		while (dirp)
-		{
-			temp = ret;
-			if (match_token(token, dirp->d_name))
-			{
-				ret = ft_strjoin(temp, dirp->d_name);
-				if (!ret)
-					exit(1);
-				free(temp);
-			}
-			printf("d_name : %s\n", dirp->d_name);		//
-			dirp = readdir(dp);
-			if (dirp)
-			{
-				temp = ret;
-				ret = ft_strjoin(temp, " ");
-				free(temp);
-			}
-		}
-		closedir(dp);
-	}
-	return (ret);
-/*
-	asterisk가 있으면 파일 확인,
-*/
-}
-
-/*
-	echo *D D*
-
-	1.	sub_token = split(token);
-		echo
-		*
-		D*
-*/
-char	*asterisk(char *token)
-{
-	char	**sub_token;
-	char	*ret;
-	char	*temp;
-	char	*change_word;
-	int		i;
-
-	i = 0;
-	sub_token = ft_split(token, " ");
-	ret = ft_strdup("");
-	if (!sub_token || !ret)
+	if (dp == NULL)
 		exit(1);
-	while (sub_token[i])
+	dirp = readdir(dp);
+	if (dirp == NULL)
+		exit(1);
+	while (dirp)
 	{
-		temp = ret;
-		if (i != 0 && find_asterisk(sub_token[i]))
-		{
-			change_word = change_asterisk(sub_token[i]);
-			ret = ft_strjoin(temp, change_word);
-			free(change_word);
-		}
-		else
-			ret = ft_strjoin(temp, sub_token[i]);
-		if (!ret)
-			exit(1);
-		free(temp);
-		free(sub_token[i++]);
-		if (sub_token[i])
+		if (is_same(sub_token, dirp->d_name))
 		{
 			temp = ret;
 			ret = ft_strjoin(temp, " ");
 			if (!ret)
 				exit(1);
+			free (temp);
+
+			temp = ret;
+			ret = ft_strjoin(temp, dirp->d_name);
+			if (!ret)
+				exit(1);
 			free(temp);
 		}
+		printf("d_name : %s\n", dirp->d_name);
+		//printf("number : %d\n", dirp->d_seekoff);
+		dirp = readdir(dp);
 	}
-	free(sub_token);
+	closedir(dp);
+	if (ret == NULL)
+	{
+		ret = ft_strdup(sub_token);
+		if (!ret)
+			exit(1);
+	}
+	return (ret);
+}
+
+char	*asterisk(char *token)
+{
+	char	*ret;
+	char	**sub_token;
+	char	*temp;
+	int		check;
+
+	check = 0;
+	sub_token = ft_split(token, ' ');
+	if (!sub_token)
+		exit(1);
+	ret = *sub_token;
+	if (++sub_token)
+	{
+		token = ret;
+		ret = ft_strjoin(token, ' ');
+		free(token);
+	}
+	else
+		return (ret);
+	while (sub_token)
+	{
+		token = ret;
+		if (find_asterisk(*sub_token))
+		{
+			ret = ft_strjoin(token, sub_token);
+			if (!ret)
+				exit(1);
+		}
+		else
+		{
+			temp = make_asterisk(*sub_token);
+			ret = ft_strjoin(token, temp);
+			if (!ret)
+				exit(1);
+			free(temp);
+		}
+		free(token);
+		free(sub_token);
+		sub_token++;
+		if (sub_token)
+		{
+			token = ret;
+			ret = ft_strjoin(token, " ");
+			free(token);
+		}
+	}
 	return (ret);
 }
 
 int main()
 {
 	char	*token = "echo * D";
-	printf("%s\n", asterisk(token));
+	printf("result : %s\n", asterisk(token));
+	system("leaks a.out");
 }
