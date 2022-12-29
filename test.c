@@ -64,3 +64,77 @@ int main()
 	//closedir(dp);
 
 }
+
+/*
+int match(char *pattern, char *name)
+{
+	int	px;
+	int	nx;
+	int	total_p_len;
+	int total_n_len;
+	char c;
+
+	px = 0;
+	pn = 0;
+	total_p_len = ft_strlen(pattern);
+	total_n_len = ft_strlen(name);
+	while (px < total_p_len || pn < total_n_len)
+	{
+		if (px < total_p_len)
+		{
+			c = patten[px];
+			if (c == '*')
+			{
+				if (nx < total_n_len)
+				{
+					px++;
+					nx++;
+					cntinue ;
+				}
+			}
+			else if (nx < total_n_len && name[nx] == c)
+			{
+				px++;
+				nx++;
+				continue ;
+			}
+			else
+				return (0);
+		}
+	}
+	return (1);
+}
+
+func match(pattern, name string) bool {
+	px := 0
+	nx := 0
+	for px < len(pattern) || nx < len(name) 
+	{
+		if px < len(pattern) 
+		{
+			c := pattern[px]
+			switch c 
+			{
+			default: // ordinary character
+				if nx < len(name) && name[nx] == c {
+					px++
+					nx++
+					continue
+				}
+			case '?': // single-character wildcard
+				if nx < len(name) {
+					px++
+					nx++
+					continue
+				}
+			case '*': // zero-or-more-character wildcard
+				...
+			}
+		}
+		// Mismatch.
+		return false
+	}
+	// Matched all of pattern to all of name. Success.
+	return true
+}
+*/
