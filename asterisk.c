@@ -36,19 +36,19 @@ int	is_same_patten(char *sub_token, char *d_name)
 
 	sub_idx = 0;
 	d_idx = 0;
-	ft_putstr_fd("\n", 2);
-	ft_putstr_fd("input : sub_token - ", 2);
-	ft_putstr_fd(sub_token, 2);
-	ft_putstr_fd(" | d_name - ", 2);
-	ft_putstr_fd(d_name, 2);
-	ft_putstr_fd("\n", 2);
+	//ft_putstr_fd("\n", 2);
+	//ft_putstr_fd("input : sub_token - ", 2);
+	//ft_putstr_fd(sub_token, 2);
+	//ft_putstr_fd(" | d_name - ", 2);
+	//ft_putstr_fd(d_name, 2);
+	//ft_putstr_fd("\n", 2);
 	while (sub_token[sub_idx] && d_name[d_idx])
 	{
-		ft_putstr_fd("result value : sub - ", 2);
-		ft_putchar_fd(sub_token[sub_idx], 2);
-		ft_putstr_fd(" d_name - ", 2);
-		ft_putchar_fd(d_name[d_idx], 2);
-		ft_putstr_fd("\n", 2);
+		//ft_putstr_fd("result value : sub - ", 2);
+		//ft_putchar_fd(sub_token[sub_idx], 2);
+		//ft_putstr_fd(" d_name - ", 2);
+		//ft_putchar_fd(d_name[d_idx], 2);
+		//ft_putstr_fd("\n", 2);
 		// ownloadd *d
 		if (sub_token[sub_idx] == d_name[d_idx])
 		{
@@ -72,7 +72,7 @@ int	is_same_patten(char *sub_token, char *d_name)
 				d_idx++;
 		}
 	}
-	printf("result = d : %c | s : %c\n", d_name[d_idx], sub_token[sub_idx]);
+	printf("result = s : %c | d : %c\n", sub_token[sub_idx] , d_name[d_idx] );
 	return (d_name[d_idx] == sub_token[sub_idx]);
 }
 
