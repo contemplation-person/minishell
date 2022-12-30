@@ -1,102 +1,201 @@
 #include "libft/libft.h"
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <sys/types.h>
 #include <dirent.h> 
+#include <stdio.h>
 
-void	print_asterisk(char *argv, struct dirent *file)
+// echo Desktop Dowload
+
+//succes!!
+static int	find_asterisk(char *sub_token)
 {
-	char	*str;
-	int	    asterisk_point = 0;
-	int	    asterisk_point2 = 0;
-	int	    flag;
-	int	    i;
-	int	    asterisk_cnt = 0;
-
-	while (argv[asterisk_point2])
+	if (!sub_token)
+		return (0);
+	while (*sub_token)
 	{
-        if (argv[asterisk_point2] == '*')
-        {
-            if (asterisk_cnt > 1 && argv[asterisk_point2] != '*')
-                return ;
-			asterisk_cnt++;
-		}
-        asterisk_point2++;
+		if (*sub_token == '*')
+			return (1);
+		sub_token++;
 	}
-	while (argv[asterisk_point])
-	{
-		if (argv[asterisk_point] == '*')
-			break ;
-		asterisk_point++;
-	}
-	if (asterisk_cnt > 1)
-	{
-		asterisk_point2 = asterisk_point;
-		while (argv[asterisk_point2])
-		{
-			if (argv[asterisk_point2] == '*')
-				break;
-			asterisk_point2++;
-		}
-	}
-
-	if (asterisk_point + asterisk_point2 == ft_strlen(argv))// 같을때
-		return ;
-	printf("-------------\n");
-	// printf("%c\n",argv[asterisk_point]);
-	str = file->d_name;
-	while (*str)
-	{
-		if(!ft_strncmp(str, argv, asterisk_point))
-		{
-			str+=asterisk_point;
-			argv+=asterisk_point;
-			printf("aster: %d, ft : %zu\n", asterisk_point + asterisk_point2, ft_strlen(argv));
-			// printf("target ; %s\n", str);
-			// printf("v: %s, name : %s\n",str, argv);
-			if (!ft_strncmp(str, argv, ft_strlen(argv) - asterisk_point - asterisk_point2))
-			{
-				printf("- printf : %s\n", file->d_name);
-				return ;
-			}
-		}
-		str++;
-	}
-
+	return (0);
 }
 
-int main(int argc, char **argv)
+//success!!!
+int	is_same_patten(char *sub_token, char *d_name)
 {
-	DIR		   *dir_ptr = NULL;
-	struct dirent *file	= NULL;
-	char		   home[1024];
-	char			*getenv_str;
-	char			*root= "/";
+	int	sub_idx;
+	int	d_idx;
 
-	getenv_str = getenv("PWD");
-	strncpy(home, getenv_str, sizeof(home));
-	// printf("getenv : %s\n", getenv_str);
-	/* 목록을 읽을 디렉토리명으로 DIR *를 return 받습니다. */
-	if((dir_ptr = opendir(root)) == NULL) 
+	sub_idx = 0;
+	d_idx = 0;
+	//printf("%s || %s\n",sub_token, d_name);
+	while (d_name[d_idx])
 	{
-		fprintf(stderr, "%s directory 정보를 읽을 수 없습니다.\n", home);
-		return -1;
+		//printf("while = s : %c\t| d : %c\n", sub_token[sub_idx] , d_name[d_idx] );
+		if (sub_token[sub_idx] == d_name[d_idx])
+		{
+			++sub_idx;
+			++d_idx;
+			continue ;
+		}
+		else if (sub_token[sub_idx] == '*')
+		{
+			if (sub_token[sub_idx])
+				++sub_idx;
+		}
+		else if (sub_token[sub_idx] != d_name[d_idx])
+		{
+			if (!sub_idx)
+				return (0);
+			else if (sub_token[sub_idx - 1] == '*')
+				d_idx++;
+			else
+			{
+				while (sub_idx && sub_token[sub_idx - 1] != '*')
+					--sub_idx;
+			}
+		}
+		else
+			++d_idx;
 	}
+	while (sub_token[sub_idx] == '*')
+		sub_idx++;
+	//printf("result = s : %c\t| d : %c\n", sub_token[sub_idx] , d_name[d_idx] );
+	return (d_name[d_idx] == sub_token[sub_idx]);
+}
 
-	/* 디렉토리의 처음부터 파일 또는 디렉토리명을 순서대로 한개씩 읽습니다. */
-	while((file = readdir(dir_ptr)) != NULL) 
+void	make_asterisk(char **sub_token)
+{
+	DIR				*dp;
+	struct dirent	*dirp;
+	char			*change_token;
+	char			*temp;
+
+	change_token = NULL;
+	dp = opendir(".");
+	if (dp == NULL)
+		exit(1);
+	dirp = readdir(dp);
+	while (dirp)
 	{
-		/*
-		*   struct dirent *의 구조체에서 d_name 이외에는 
-		*   시스템마다 항목이 없을 수 있으므로 무시하고 이름만 사용합니다.
-		*/
-		print_asterisk(argv[1], file);
+		if (is_same_patten(*sub_token, dirp->d_name))
+		{
+			if (change_token)
+			{
+				temp = change_token;
+				change_token = ft_strjoin(temp, " ");
+				if (!change_token)
+					exit(1);
+				if (temp)
+					free(temp);
+			}
+			temp = change_token;
+			//printf("t : %p, dir : %p\n", temp, dirp->d_name);
+			if (!temp)
+				change_token = ft_strdup(dirp->d_name);
+			else
+			{
+				change_token = ft_strjoin(temp, dirp->d_name);
+				if (!change_token)
+					exit(1);
+				if (temp)
+					free(temp);
+			}
+		}
+		dirp = readdir(dp);
 	}
+	closedir(dp);
+	// printf("make result : %s\n", change_token);
+	if (change_token)
+	{
+		free(*sub_token);
+		*sub_token = change_token;
+	}
+}
 
-	/* open된 directory 정보를 close 합니다. */
+char	*asterisk(char *token)
+{
+	char	**sub_token;
+	char	*ret;
+	int		i;
+	char	*temp;
 
-	closedir(dir_ptr);
-	
-	return 0;
+	i = 0;
+	sub_token = ft_split(token, ' ');
+	if (!sub_token)
+		exit(1);
+	ret = NULL;
+	while (sub_token[i])
+	{
+		// printf("asterisk : %s\n", sub_token[i]);
+		if (find_asterisk(sub_token[i]))
+		{
+			/*
+				original sub_token free and new_token ret;
+			*/
+			make_asterisk(&(sub_token[i]));
+		}
+		if (ret)
+		{
+			temp = ret;
+			ret = ft_strjoin(temp, " ");
+			if (!ret)
+				exit(1);
+			free(temp);
+			temp = ret;
+			ret = ft_strjoin(temp, sub_token[i]);
+			if (!ret)
+				exit(1);
+			free(temp);
+		}
+		else
+			ret = ft_strdup(sub_token[i]);
+		free(sub_token[i]);
+		// printf("mk : %s\n", sub_token[i]);
+		i++;
+	}
+	free(sub_token);
+	/*
+	//check function
+	printf("done : ");
+	i = 0;
+	while (sub_token[i])
+	{
+		printf("%s", sub_token[i++]);
+	}
+	i = 0;
+	while (sub_token[i])
+	{
+		free(sub_token[i++]);
+	}
+	free(sub_token);
+
+	*/
+		//ret join all sub_token
+	return (ret);
+}
+
+int main()
+{
+	char	*token = "0. echo\n1. d*d \n2. *d \n3. *d* \n4. d* \n";
+	char	*asterisk_str = asterisk(token);
+/*
+		downloadd
+
+		d*d
+
+		*d
+		*d*
+		d*
+
+		dcd
+		dd
+		cdd
+*/
+	//char *dir = "libft.a";
+	//char *token = ".*";
+	//printf("input - s : %s\t|d : %s\n\n", token, dir);
+	//printf("result : %s\n", (is_same_patten(token, dir) ? "true" : "false"));
+	printf("\nresult :\n\n%s\n\n", asterisk_str);
+	// printf("asterp : %p\n", asterisk_str);
+	free(asterisk_str);
+	system("leaks a.out");
 }
