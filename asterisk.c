@@ -18,13 +18,61 @@ int	find_asterisk(char *sub_token)
 
 int	is_same(char *sub_token, char *d_name)
 {
-	/*
-		download
+/*
+		downloadd
+
+		d*d
 
 		*d
 		*d*
 		d*
-	*/
+
+		dcd
+		dd
+		cdd
+*/
+	int	sub_idx;
+	int	d_idx;
+
+	sub_idx = 0;
+	d_idx = 0;
+	
+	//ft_putstr_fd("input : sub_token - ", 2);
+	//ft_putstr_fd(sub_token, 2);
+	//ft_putstr_fd("\nd_name - ", 2);
+	//ft_putstr_fd(d_name, 2);
+	//ft_putchar_fd('\n', 2);
+
+	while (sub_token[sub_idx] && d_name[d_idx])
+	{
+		//ft_putstr_fd("result value : sub - ", 2);
+		//ft_putchar_fd(sub_token[sub_idx], 2);
+		//ft_putstr_fd(" d_name - ", 2);
+		//ft_putchar_fd(d_name[d_idx], 2);
+		//ft_putchar_fd('\n', 2);
+		if (sub_token[sub_idx] == d_name[d_idx])
+		{
+			sub_idx++;
+			d_idx++;
+		}
+		else if (sub_token[sub_idx] == '*')
+			sub_idx++;
+		else
+		{
+			sub_idx = 0;
+		}
+		if (sub_token[sub_idx] == '\0')
+		{
+			while (d_name[d_idx] == sub_token[sub_idx - 1])
+				d_idx++;
+			return (d_name[d_idx] == sub_token[sub_idx]);
+		}
+		d_idx++;
+	}
+	return (0);
+
+
+/*
 	int	px;
 	int	nx;
 	int	total_p_len;
@@ -60,6 +108,7 @@ int	is_same(char *sub_token, char *d_name)
 		}
 	}
 	return (1);
+*/
 }
 
 char	*make_asterisk(char *sub_token)
@@ -85,14 +134,14 @@ char	*make_asterisk(char *sub_token)
 			if (!ret)
 				exit(1);
 			free (temp);
-
 			temp = ret;
 			ret = ft_strjoin(temp, dirp->d_name);
 			if (!ret)
 				exit(1);
 			free(temp);
 		}
-		printf("d_name : %s\n", dirp->d_name);
+		ft_putchar_fd('\n', 2);
+		//printf("d_name : %s\n", dirp->d_name);
 		//printf("number : %d\n", dirp->d_seekoff);
 		dirp = readdir(dp);
 	}
@@ -111,8 +160,10 @@ char	*asterisk(char *token)
 	char	*ret;
 	char	**sub_token;
 	char	*temp;
+	char	**test;
 
 	sub_token = ft_split(token, ' ');
+	test = sub_token;
 	if (!sub_token)
 		exit(1);
 	ret = *sub_token;
@@ -127,6 +178,7 @@ char	*asterisk(char *token)
 	while (*sub_token)
 	{
 		token = ret;
+		printf("sub : %s\n", sub_token);
 		if (find_asterisk(*sub_token))
 		{
 			ret = ft_strjoin(token, *sub_token);
@@ -151,15 +203,29 @@ char	*asterisk(char *token)
 			free(token);
 		}
 	}
+	free(test);
 	return (ret);
 }
 
 int main()
 {
-	char	*token = "echo * D";
+	char	*token = "0. echo\n1. d*d \n2. *d \n3. *d* \n4. d* \n";
 	char	*asterisk_str = asterisk(token);
 
-	printf("\nresult : %s\n\n", asterisk_str);
-	free(asterisk_str);
-	system("leaks a.out");
+/*
+		downloadd
+
+		d*d
+
+		*d
+		*d*
+		d*
+
+		dcd
+		dd
+		cdd
+*/
+	//printf("\nresult :\n\n%s\n\n", asterisk_str);
+	//free(asterisk_str);
+	//system("leaks a.out");
 }

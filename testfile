@@ -1,0 +1,260 @@
+input : sub_token - echo
+1.
+d_name - .
+
+input : sub_token - echo
+1.
+d_name - ..
+
+input : sub_token - echo
+1.
+d_name - .DS_Store
+
+input : sub_token - echo
+1.
+d_name - .git
+
+input : sub_token - echo
+1.
+d_name - .gitignore
+
+input : sub_token - echo
+1.
+d_name - 42
+
+input : sub_token - echo
+1.
+d_name - a.out
+
+input : sub_token - echo
+1.
+d_name - a.out.dSYM
+
+input : sub_token - echo
+1.
+d_name - asterisk.c
+
+input : sub_token - echo
+1.
+d_name - downloadd
+
+input : sub_token - echo
+1.
+d_name - libft.a
+
+input : sub_token - echo
+1.
+d_name - README.md
+
+input : sub_token - echo
+1.
+d_name - testfile
+
+input : sub_token - 
+2.
+d_name - .
+
+input : sub_token - 
+2.
+d_name - ..
+
+input : sub_token - 
+2.
+d_name - .DS_Store
+
+input : sub_token - 
+2.
+d_name - .git
+
+input : sub_token - 
+2.
+d_name - .gitignore
+
+input : sub_token - 
+2.
+d_name - 42
+
+input : sub_token - 
+2.
+d_name - a.out
+
+input : sub_token - 
+2.
+d_name - a.out.dSYM
+
+input : sub_token - 
+2.
+d_name - asterisk.c
+
+input : sub_token - 
+2.
+d_name - downloadd
+
+input : sub_token - 
+2.
+d_name - libft.a
+
+input : sub_token - 
+2.
+d_name - README.md
+
+input : sub_token - 
+2.
+d_name - testfile
+
+input : sub_token - 
+3.
+d_name - .
+
+input : sub_token - 
+3.
+d_name - ..
+
+input : sub_token - 
+3.
+d_name - .DS_Store
+
+input : sub_token - 
+3.
+d_name - .git
+
+input : sub_token - 
+3.
+d_name - .gitignore
+
+input : sub_token - 
+3.
+d_name - 42
+
+input : sub_token - 
+3.
+d_name - a.out
+
+input : sub_token - 
+3.
+d_name - a.out.dSYM
+
+input : sub_token - 
+3.
+d_name - asterisk.c
+
+input : sub_token - 
+3.
+d_name - downloadd
+
+input : sub_token - 
+3.
+d_name - libft.a
+
+input : sub_token - 
+3.
+d_name - README.md
+
+input : sub_token - 
+3.
+d_name - testfile
+
+input : sub_token - 
+4.
+d_name - .
+
+input : sub_token - 
+4.
+d_name - ..
+
+input : sub_token - 
+4.
+d_name - .DS_Store
+
+input : sub_token - 
+4.
+d_name - .git
+
+input : sub_token - 
+4.
+d_name - .gitignore
+
+input : sub_token - 
+4.
+d_name - 42
+
+input : sub_token - 
+4.
+d_name - a.out
+
+input : sub_token - 
+4.
+d_name - a.out.dSYM
+
+input : sub_token - 
+4.
+d_name - asterisk.c
+
+input : sub_token - 
+4.
+d_name - downloadd
+
+input : sub_token - 
+4.
+d_name - libft.a
+
+input : sub_token - 
+4.
+d_name - README.md
+
+input : sub_token - 
+4.
+d_name - testfile
+
+input : sub_token - 
+
+d_name - .
+
+input : sub_token - 
+
+d_name - ..
+
+input : sub_token - 
+
+d_name - .DS_Store
+
+input : sub_token - 
+
+d_name - .git
+
+input : sub_token - 
+
+d_name - .gitignore
+
+input : sub_token - 
+
+d_name - 42
+
+input : sub_token - 
+
+d_name - a.out
+
+input : sub_token - 
+
+d_name - a.out.dSYM
+
+input : sub_token - 
+
+d_name - asterisk.c
+
+input : sub_token - 
+
+d_name - downloadd
+
+input : sub_token - 
+
+d_name - libft.a
+
+input : sub_token - 
+
+d_name - README.md
+
+input : sub_token - 
+
+d_name - testfile
+
