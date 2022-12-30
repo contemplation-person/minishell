@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:36:08 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/28 17:29:47 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/30 17:40:13 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	expansion(t_tnode *head)
 }
 
 // echo Desktop Dowload
-char	*asterisk(char *token)
-{
+//char	*asterisk(char *token)
+//{
 	
-}
+//}
