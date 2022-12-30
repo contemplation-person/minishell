@@ -3,10 +3,10 @@
 #include <dirent.h>
 #include <stdio.h>
 
-int	find_asterisk(char *sub_token)
+static int	find_asterisk(char *sub_token)
 {
 	if (!sub_token)
-		return (1);
+		return (0);
 	while (*sub_token)
 	{
 		if (*sub_token == '*')
@@ -16,7 +16,7 @@ int	find_asterisk(char *sub_token)
 	return (0);
 }
 
-int	is_same(char *sub_token, char *d_name)
+int	is_same_patten(char *sub_token, char *d_name)
 {
 /*
 		downloadd
@@ -36,182 +36,124 @@ int	is_same(char *sub_token, char *d_name)
 
 	sub_idx = 0;
 	d_idx = 0;
-	
-	//ft_putstr_fd("input : sub_token - ", 2);
-	//ft_putstr_fd(sub_token, 2);
-	//ft_putstr_fd("\nd_name - ", 2);
-	//ft_putstr_fd(d_name, 2);
-	//ft_putchar_fd('\n', 2);
-
+	ft_putstr_fd("\n", 2);
+	ft_putstr_fd("input : sub_token - ", 2);
+	ft_putstr_fd(sub_token, 2);
+	ft_putstr_fd(" | d_name - ", 2);
+	ft_putstr_fd(d_name, 2);
+	ft_putstr_fd("\n", 2);
 	while (sub_token[sub_idx] && d_name[d_idx])
 	{
-		//ft_putstr_fd("result value : sub - ", 2);
-		//ft_putchar_fd(sub_token[sub_idx], 2);
-		//ft_putstr_fd(" d_name - ", 2);
-		//ft_putchar_fd(d_name[d_idx], 2);
-		//ft_putchar_fd('\n', 2);
+		ft_putstr_fd("result value : sub - ", 2);
+		ft_putchar_fd(sub_token[sub_idx], 2);
+		ft_putstr_fd(" d_name - ", 2);
+		ft_putchar_fd(d_name[d_idx], 2);
+		ft_putstr_fd("\n", 2);
+		// ownloadd *d
 		if (sub_token[sub_idx] == d_name[d_idx])
 		{
-			sub_idx++;
-			d_idx++;
+			sub_token++;
+			d_name++;
+			continue ;
 		}
 		else if (sub_token[sub_idx] == '*')
+		{
 			sub_idx++;
+			continue ;
+		}
 		else
 		{
 			sub_idx = 0;
 		}
-		if (sub_token[sub_idx] == '\0')
-		{
-			while (d_name[d_idx] == sub_token[sub_idx - 1])
-				d_idx++;
-			return (d_name[d_idx] == sub_token[sub_idx]);
-		}
 		d_idx++;
-	}
-	return (0);
-
-
-/*
-	int	px;
-	int	nx;
-	int	total_p_len;
-	int total_n_len;
-	char c;
-
-	px = 0;
-	nx = 0;
-	total_p_len = ft_strlen(sub_token);
-	total_n_len = ft_strlen(d_name);
-	while (px < total_p_len || nx < total_n_len)
-	{
-		if (px < total_p_len)
+		if (!(sub_token[sub_idx]))
 		{
-			c = sub_token[px];
-			if (nx < total_n_len && d_name[nx] == c)
-			{
-				px++;
-				nx++;
-				continue ;
-			}
-			else if (c == '*')
-			{
-				if (nx < total_n_len)
-				{
-					px++;
-					nx++;
-					continue ;
-				}
-			}
-			else
-				return (0);
+			while (d_name[d_idx] && (d_name[d_idx] == *(sub_token + sub_idx - 1)))
+				d_idx++;
 		}
 	}
-	return (1);
-*/
+	printf("result = d : %c | s : %c\n", d_name[d_idx], sub_token[sub_idx]);
+	return (d_name[d_idx] == sub_token[sub_idx]);
 }
 
-char	*make_asterisk(char *sub_token)
+void	make_asterisk(char **sub_token)
 {
 	DIR				*dp;
 	struct dirent	*dirp;
-	char			*ret;
+	char			*change_token;
 	char			*temp;
 
-	ret = NULL;
+	change_token = NULL;
 	dp = opendir(".");
 	if (dp == NULL)
 		exit(1);
 	dirp = readdir(dp);
-	if (dirp == NULL)
-		exit(1);
 	while (dirp)
 	{
-		if (is_same(sub_token, dirp->d_name))
+		if (is_same_patten(*sub_token, dirp->d_name))
 		{
-			temp = ret;
-			ret = ft_strjoin(temp, " ");
-			if (!ret)
-				exit(1);
-			free (temp);
-			temp = ret;
-			ret = ft_strjoin(temp, dirp->d_name);
-			if (!ret)
-				exit(1);
-			free(temp);
+			if (change_token)
+			{
+				temp = change_token;
+				change_token = ft_strjoin(temp, " ");
+				if (!change_token)
+					exit(1);
+				if (temp)
+					free(temp);
+			}
+			temp = change_token;
+			printf("t : %p, dir : %p\n", temp, dirp->d_name);
+			if (!temp)
+				change_token = ft_strdup(dirp->d_name);
+			else
+			{
+				change_token = ft_strjoin(temp, dirp->d_name);
+				if (!change_token)
+					exit(1);
+				if (temp)
+					free(temp);
+			}
 		}
-		ft_putchar_fd('\n', 2);
-		//printf("d_name : %s\n", dirp->d_name);
-		//printf("number : %d\n", dirp->d_seekoff);
 		dirp = readdir(dp);
 	}
 	closedir(dp);
-	if (ret == NULL)
+	if (!change_token)
 	{
-		ret = ft_strdup(sub_token);
-		if (!ret)
-			exit(1);
+		free(*sub_token);
+		sub_token = &change_token;
 	}
-	return (ret);
 }
 
 char	*asterisk(char *token)
 {
-	char	*ret;
 	char	**sub_token;
-	char	*temp;
-	char	**test;
+	char	*ret;
+	int		i;
 
+	i = 0;
 	sub_token = ft_split(token, ' ');
-	test = sub_token;
-	if (!sub_token)
-		exit(1);
-	ret = *sub_token;
-	if (sub_token++)
+	while (sub_token[i])
 	{
-		token = ret;
-		ret = ft_strjoin(token, " ");
-		free(token);
+		printf("asterisk : %s\n", sub_token[i]);
+		if (find_asterisk(sub_token[i]))
+		{
+			/*
+				original sub_token free and new_token ret;
+			*/
+			make_asterisk(&(sub_token[i]));
+		}
+		i++;
 	}
-	else
-		return (ret);
-	while (*sub_token)
-	{
-		token = ret;
-		printf("sub : %s\n", sub_token);
-		if (find_asterisk(*sub_token))
-		{
-			ret = ft_strjoin(token, *sub_token);
-			if (!ret)
-				exit(1);
-		}
-		else
-		{
-			temp = make_asterisk(*sub_token);
-			ret = ft_strjoin(token, temp);
-			if (!ret)
-				exit(1);
-			free(temp);
-		}
-		free(token);
-		free(*sub_token);
-		++sub_token;
-		if (sub_token)
-		{
-			token = ret;
-			ret = ft_strjoin(token, " ");
-			free(token);
-		}
-	}
-	free(test);
-	return (ret);
+	/*
+		ret join all sub_token
+	*/
+	return ("ok");
 }
 
 int main()
 {
 	char	*token = "0. echo\n1. d*d \n2. *d \n3. *d* \n4. d* \n";
 	char	*asterisk_str = asterisk(token);
-
 /*
 		downloadd
 
@@ -225,7 +167,7 @@ int main()
 		dd
 		cdd
 */
-	//printf("\nresult :\n\n%s\n\n", asterisk_str);
+	printf("\nresult :\n\n%s\n\n", asterisk_str);
 	//free(asterisk_str);
 	//system("leaks a.out");
 }
