@@ -145,8 +145,8 @@ char	*asterisk(char *token)
 	}
 	free(sub_token);
 
-		ret join all sub_token
 	*/
+		//ret join all sub_token
 	return (ft_strdup("ok"));
 }
 
