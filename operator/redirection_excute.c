@@ -6,11 +6,15 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 19:58:17 by gyim              #+#    #+#             */
+<<<<<<< HEAD:parser/redirection_excute.c
 /*   Updated: 2022/12/28 17:14:11 by juha             ###   ########seoul.kr  */
+=======
+/*   Updated: 2022/12/29 19:26:23 by gyim             ###   ########seoul.kr  */
+>>>>>>> 7ff6006ab6d06230e36ab5e1ab6bfc44c7bcfa44:operator/redirection_excute.c
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "operator.h"
 
 int	op_infile(t_tree_node *node, t_fds *fd_info, t_env_info_list *env_list)
 {
@@ -18,6 +22,13 @@ int	op_infile(t_tree_node *node, t_fds *fd_info, t_env_info_list *env_list)
 	t_fds	cmd_fds;
 
 	infile_fd = open(node->right->words->token, O_RDONLY);
+	if (infile_fd == -1)
+	{
+		write(2, "MINISHELL : ", 12);
+		perror(node->right->words->token);
+		g_error_code = 1 << 8;
+		return (0);
+	}
 	cmd_fds.in_fd = infile_fd;
 	cmd_fds.out_fd = fd_info->out_fd;
 	excute_leaf(node->left->words, &cmd_fds, env_list);
@@ -53,7 +64,19 @@ int	op_append(t_tree_node *node, t_fds *fd_info, t_env_info_list *env_list)
 	return (0);
 }
 
-// int	op_here_doc(t_tree_node *node, t_fds *fd_info, t_env_info_list *env_list)
-// {
+int	op_here_doc(t_tree_node *node, t_fds *fd_info, t_env_info_list *env_list)
+{
+	int		fd[2];
+	char	*limiter;
+	t_fds	cmd_fds;
 
-// }
+	limiter = node->right->words->token;
+	pipe(fd);
+	cmd_fds.in_fd = fd[0];
+	cmd_fds.out_fd = fd_info->out_fd;
+	read_lines(limiter, fd);
+	close(fd[1]);
+	excute_leaf(node->left->words, &cmd_fds, env_list);
+	close(fd[0]);
+	return (0);
+}

@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 16:52:21 by juha              #+#    #+#             */
-/*   Updated: 2022/12/28 14:27:18 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/30 17:59:44 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # include "builtin/builtin.h"
 # include "parser/parser.h"
 # include "builtin/builtin.h"
+# include "operator/operator.h"
 # include "ft_printf/ft_printf.h"
+# include "get_next_line/get_next_line_bonus.h"
 
 #endif

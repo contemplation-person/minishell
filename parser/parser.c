@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:21:32 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/28 14:26:59 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/30 17:58:58 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,11 @@ int	parsing_excute(char *user_input, t_env_info_list *env_list)
 	if (user_input[0] == '\0')
 		return (0);
 	word_list = split_input(user_input);
-	print_list(word_list->head);
 	if (valid_check(word_list->head) == -1)
 	{
 		del_list(word_list);
 		return (0);
 	}
-	// if (multiple_cmds_check(word_list) == 0)
-	// 	one_cmd_excute(word_list, env_list);
-	// else
 	multiple_cmds_excute(word_list, env_list);
 	free(word_list);
 	word_list = NULL;

@@ -53,3 +53,9 @@ dkms.conf
 
 .vscode/
 .DS_Store
+<<<<<<< HEAD
+=======
+
+# Excutable files
+minishell
+>>>>>>> 7ff6006ab6d06230e36ab5e1ab6bfc44c7bcfa44

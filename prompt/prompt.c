@@ -6,7 +6,11 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 10:01:26 by juha              #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/12/28 17:09:26 by juha             ###   ########seoul.kr  */
+=======
+/*   Updated: 2022/12/29 15:14:27 by gyim             ###   ########seoul.kr  */
+>>>>>>> 7ff6006ab6d06230e36ab5e1ab6bfc44c7bcfa44
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +51,18 @@ void	_set_signal(struct sigaction *sa)
 	signal(SIGQUIT, SIG_IGN);
 }
 
-int	main(int argc, char **argv, char **envp)
+int	minishell_excute(t_env_info_list *minishell_envp_list)
 {
 	char				*sentence;
-	t_env_info_list		minishell_envp_list;
-	struct sigaction	sa;
 
+<<<<<<< HEAD
 	if (argc != 1)
 		builtin_error_message("bash", "123", "command not found", 127);
 	(void) argv;
 	_set_signal(&sa);
 	init_list(&minishell_envp_list, envp);
+=======
+>>>>>>> 7ff6006ab6d06230e36ab5e1ab6bfc44c7bcfa44
 	while (1)
 	{
 		signal(SIGINT, signal_handler);
@@ -69,7 +74,7 @@ int	main(int argc, char **argv, char **envp)
 		}
 		if (sentence && ft_strlen(sentence))
 			add_history(sentence);
-		if (parsing_excute(sentence, &minishell_envp_list) == -1)
+		if (parsing_excute(sentence, minishell_envp_list) == -1)
 		{
 			free(sentence);
 			break ;
@@ -77,4 +82,23 @@ int	main(int argc, char **argv, char **envp)
 		free(sentence);
 		//system("leaks minishell");
 	}
+<<<<<<< HEAD
 }
+=======
+	return (0);
+}
+
+int	main(int argc, char **argv, char **envp)
+{
+	t_env_info_list		minishell_envp_list;
+	struct sigaction	sa;
+
+	if (argc != 1)
+		builtin_error_message("bash", "123", "command not found", 127);
+	(void) argv;
+	_set_signal(&sa);
+	init_list(&minishell_envp_list, envp);
+	g_error_code = minishell_excute(&minishell_envp_list);
+	return (g_error_code);
+}
+>>>>>>> 7ff6006ab6d06230e36ab5e1ab6bfc44c7bcfa44

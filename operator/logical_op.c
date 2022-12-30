@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.h                                           :+:      :+:    :+:   */
+/*   logical_op.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/05 10:42:56 by juha              #+#    #+#             */
-/*   Updated: 2022/12/30 17:59:26 by juha             ###   ########seoul.kr  */
+/*   Created: 2022/12/29 19:27:35 by gyim              #+#    #+#             */
+/*   Updated: 2022/12/29 19:47:06 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PROMPT_H
-# define PROMPT_H
+#include "operator.h"
 
-# include "../minishell.h"
-# include <sys/errno.h>
-# include <signal.h>
+int	op_double_and(t_tree_node *node, t_fds *fd_info, t_env_info_list *env_list)
+{
+	t_fds	cmd_fds;
 
-#endif
+	
+}
+
+int	op_double_or(t_tree_node *node, t_fds *fd_info, t_env_info_list *env_list)
+{
+
+}

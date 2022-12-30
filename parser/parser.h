@@ -6,7 +6,11 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:43:32 by gyim              #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/12/28 14:27:00 by juha             ###   ########seoul.kr  */
+=======
+/*   Updated: 2022/12/29 12:03:41 by gyim             ###   ########seoul.kr  */
+>>>>>>> 7ff6006ab6d06230e36ab5e1ab6bfc44c7bcfa44
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +34,11 @@ void			del_sublist(t_tnode	*head);
 // split_input.c
 t_tlist_info	*split_input(char *input);
 int				get_token(t_tlist_info *list, char *input, int start);
+void			add_substr(t_tlist_info *list, char *str, int start, int end);
+// split_input2.c
 int				get_op_end(char *input, int start);
 int				get_quoted_end(char *input, int start);
 int				get_word_end(char *input, int start);
-void			add_substr(t_tlist_info *list, char *str, int start, int end);
 // token_check.c
 int				is_space(char ch);
 int				is_quote(char *input, int index);
@@ -70,22 +75,35 @@ int				quote_check(t_tnode *head);
 int				paren_check(t_tnode *head);
 // search_tree.c
 int				tree_valid_check(t_tree_node *node);
-int				search_tree(t_tree_node *node, t_fds *fd_info, t_env_info_list *env_list);
+int				search_tree(t_tree_node *node,
+					t_fds *fd_info, t_env_info_list *env_list);
 // param_expansion.c
-char			*find_variable(char *token, int start, int end);
-char			*dollar_expand(char *token, int start, int end);
-char			*p_expansion(char *token);
-int				expansion(t_tnode *head);
+char			*find_variable(char *token, int start, int end,
+					t_env_info_list *env_list);
+char			*dollar_expand(char *token, int start, int end,
+					t_env_info_list *env_list);
+char			*p_expansion(char *token, t_env_info_list *env_list);
+int				expansion(t_tnode *head, t_env_info_list *env_list);
 // pipe_excute.c
-int				op_pipe(t_tree_node *node, t_fds *fd_info, t_env_info_list *env_list);
+int				op_pipe(t_tree_node *node, t_fds *fd_info,
+					t_env_info_list *env_list);
+int				op_pipe_left_excute(t_tree_node *node,
+					t_fds *fd_info, int fd[2], t_env_info_list *env_list);
+int				op_pipe_right_excute(t_tree_node *node,
+					t_fds *fd_info, int fd[2], t_env_info_list *env_list);
 // cmds_check.c
 int				multiple_cmds_check(t_tlist_info *word_list);
-void			one_cmd_excute(t_tlist_info *word_list, t_env_info_list *env_list);
-void			multiple_cmds_excute(t_tlist_info *word_list, t_env_info_list *env_list);
+void			one_cmd_excute(t_tlist_info *word_list,
+					t_env_info_list *env_list);
+void			multiple_cmds_excute(t_tlist_info *word_list,
+					t_env_info_list *env_list);
 // 	redirection_excute.c
-int				op_infile(t_tree_node *node, t_fds *fd_info, t_env_info_list *env_list);
-int				op_outfile(t_tree_node *node, t_fds *fd_info, t_env_info_list *env_list);
-int				op_append(t_tree_node *node, t_fds *fd_info, t_env_info_list *env_list);
+int				op_infile(t_tree_node *node, t_fds *fd_info,
+					t_env_info_list *env_list);
+int				op_outfile(t_tree_node *node, t_fds *fd_info,
+					t_env_info_list *env_list);
+int				op_append(t_tree_node *node, t_fds *fd_info,
+					t_env_info_list *env_list);
 #endif
 
 // gcc -lreadline *.c libft.a -L../readline -I../readline 
