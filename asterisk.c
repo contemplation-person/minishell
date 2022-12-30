@@ -102,7 +102,7 @@ void	make_asterisk(char **sub_token)
 		dirp = readdir(dp);
 	}
 	closedir(dp);
-	printf("make result : %s\n", change_token);
+	// printf("make result : %s\n", change_token);
 	if (change_token)
 	{
 		free(*sub_token);
@@ -115,12 +115,16 @@ char	*asterisk(char *token)
 	char	**sub_token;
 	char	*ret;
 	int		i;
+	char	*temp;
 
 	i = 0;
 	sub_token = ft_split(token, ' ');
+	if (!sub_token)
+		exit(1);
+	ret = NULL;
 	while (sub_token[i])
 	{
-		printf("asterisk : %s\n", sub_token[i]);
+		// printf("asterisk : %s\n", sub_token[i]);
 		if (find_asterisk(sub_token[i]))
 		{
 			/*
@@ -128,8 +132,26 @@ char	*asterisk(char *token)
 			*/
 			make_asterisk(&(sub_token[i]));
 		}
+		if (ret)
+		{
+			temp = ret;
+			ret = ft_strjoin(temp, " ");
+			if (!ret)
+				exit(1);
+			free(temp);
+			temp = ret;
+			ret = ft_strjoin(temp, sub_token[i]);
+			if (!ret)
+				exit(1);
+			free(temp);
+		}
+		else
+			ret = ft_strdup(sub_token[i]);
+		free(sub_token[i]);
+		// printf("mk : %s\n", sub_token[i]);
 		i++;
 	}
+	free(sub_token);
 	/*
 	//check function
 	printf("done : ");
@@ -147,7 +169,7 @@ char	*asterisk(char *token)
 
 	*/
 		//ret join all sub_token
-	return (ft_strdup("ok"));
+	return (ret);
 }
 
 int main()
@@ -172,7 +194,7 @@ int main()
 	//printf("input - s : %s\t|d : %s\n\n", token, dir);
 	//printf("result : %s\n", (is_same_patten(token, dir) ? "true" : "false"));
 	printf("\nresult :\n\n%s\n\n", asterisk_str);
-	printf("asterp : %p\n", asterisk_str);
+	// printf("asterp : %p\n", asterisk_str);
 	free(asterisk_str);
 	system("leaks a.out");
 }
