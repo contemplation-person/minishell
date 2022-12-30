@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:50:23 by juha              #+#    #+#             */
-/*   Updated: 2022/12/21 22:12:37 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/30 14:22:01 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static t_bool	find_same_key(t_env_info **node, t_env_info **new_node)
 	while (temp_node)
 	{
 		if (!ft_strncmp(temp_node->key, temp_new_node->key, \
-			ft_strlen(temp_node->key)))
+			ft_strlen(temp_node->key) + 1))
 		{
 			free(temp_new_node->key);
 			if (temp_node->value)
@@ -69,7 +69,7 @@ static t_bool	find_same_key(t_env_info **node, t_env_info **new_node)
 	return (FALSE);
 }
 
-void	add_env_list(t_env_info_list *list,\
+void	add_env_list(t_env_info_list *list, \
 					char *env, t_env_feature feature)
 {
 	t_env_info	*temp;
