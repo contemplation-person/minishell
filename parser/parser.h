@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:43:32 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/30 06:28:17 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/30 15:05:36 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int				op_pipe_right_excute(t_tree_node *node,
 int				multiple_cmds_check(t_tlist_info *word_list);
 void			one_cmd_excute(t_tlist_info *word_list,
 					t_env_info_list *env_list);
-void			multiple_cmds_excute(t_tlist_info *word_list,
+int				multiple_cmds_excute(t_tlist_info *word_list,
 					t_env_info_list *env_list);
 // 	redirection_excute.c
 int				op_infile(t_tree_node *node, t_fds *fd_info,
