@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 12:21:23 by juha              #+#    #+#             */
-/*   Updated: 2022/12/31 13:16:33 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/31 16:33:29 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 
 static t_bool	is_valid_arg(char *str)
 {
-	if (ft_isdigit(*str))
+	if (ft_isdigit(*str) || *str == '=')
 		return (FALSE);
 	while (*str)
 	{
@@ -72,8 +72,8 @@ t_bool	builtin_export(t_env_info_list *minishell_envp, char **excute_str_form)
 	{
 		print_flag = is_valid_arg(excute_str_form[size]);
 		if (!print_flag)
-			builtin_error_message("export: \'", \
-						excute_str_form[size], "\': not a valid identifier", 1);
+			builtin_error_message("export", excute_str_form[size], \
+									"not a valid identifier", 1);
 		else
 		{
 			//	여기가 문제인듯?
