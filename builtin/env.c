@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 12:28:24 by juha              #+#    #+#             */
-/*   Updated: 2022/12/27 14:33:29 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/27 16:45:12 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ t_bool	builtin_env(t_env_info_list *minishell_envp, char **excute_str_form)
 	int	i;
 
 	i = 0;
-	while (excute_str_form[i])
-		i++;
+	i = cnt_argc(excute_str_form);
 	if (i > 1)
 	{
 		builtin_error_message("42가", "구현하지말래요", "", 127);
@@ -26,5 +25,6 @@ t_bool	builtin_env(t_env_info_list *minishell_envp, char **excute_str_form)
 	}
 	else
 		print_envp(*minishell_envp, ENV);
+	g_error_code = 0;
 	return (TRUE);
 }

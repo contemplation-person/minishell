@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/29 17:27:47 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/31 12:08:44 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	excute_leaf(t_tnode *cmd_list, t_fds *fd_info, t_env_info_list *envp_list)
 
 void	print_error(char *cmd, char *msg)
 {
+	write(2, BASH, ft_strlen(BASH));
 	write(2, cmd, ft_strlen(cmd));
 	write(2, msg, ft_strlen(msg));
 }
@@ -60,6 +61,11 @@ int	cmd_builtin_check1(char **cmd, t_env_info_list *envp_list)
 		builtin_cd(envp_list, cmd);
 		return (1);
 	}
+	else if (ft_strncmp(cmd[0], "export", 7) == 0)
+	{
+		builtin_export(envp_list, cmd);
+		return (1);
+	}
 	else if (ft_strncmp(cmd[0], "unset", 6) == 0)
 	{
 		builtin_unset(envp_list, cmd);
@@ -86,11 +92,6 @@ int	cmd_builtin_check2(char **cmd, t_env_info_list *envp_list)
 		builtin_pwd(cmd);
 		return (1);
 	}
-	else if (ft_strncmp(cmd[0], "export", 7) == 0)
-	{
-		builtin_export(envp_list, cmd);
-		return (1);
-	}
 	else if (ft_strncmp(cmd[0], "env", 4) == 0)
 	{
 		builtin_env(envp_list, cmd);
@@ -99,8 +100,6 @@ int	cmd_builtin_check2(char **cmd, t_env_info_list *envp_list)
 	else
 		return (0);
 }
-
-
 
 void	cmd_path_check(char **path, char **cmd,
 				t_env_info_list *envp_list)

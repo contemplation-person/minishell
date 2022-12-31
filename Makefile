@@ -6,7 +6,7 @@
 #    By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2022/12/29 19:47:31 by gyim             ###   ########seoul.kr   #
+#    Updated: 2022/12/31 11:33:12 by gyim             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ SRC 			:=	parser/parser.c	\
 					parser/valid_check.c \
 					parser/param_expansion.c \
 					parser/cmds_check.c \
-					operator/pipe_excute.c \
+					operator/pipe_op.c \
 					operator/redirection_excute.c \
 					operator/here_doc.c \
 					operator/logical_op.c \

@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 10:01:26 by juha              #+#    #+#             */
-/*   Updated: 2022/12/29 15:14:27 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/31 12:15:24 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	minishell_excute(t_env_info_list *minishell_envp_list)
 			break ;
 		}
 		free(sentence);
-		//system("leaks minishell");
+		// system("leaks minishell");
 	}
 	return (0);
 }

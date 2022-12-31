@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 16:28:00 by juha              #+#    #+#             */
-/*   Updated: 2022/12/27 19:34:52 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/28 14:41:13 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,21 +48,18 @@ int	builtin_exit(char **excute_str_form)
 {
 	int	word_cnt;
 
-	word_cnt = 0;
-	while (excute_str_form[word_cnt])
-		word_cnt++;
+	word_cnt = cnt_argc(excute_str_form);
 	if (word_cnt == 2 && is_error_word(excute_str_form[1]))
 	{
-		builtin_error_message("exit", excute_str_form[1], "numeric argument required", 2);
+		builtin_error_message("exit", excute_str_form[1], \
+								"numeric argument required", 2);
 		exit (g_error_code);
-	}
-	else if (word_cnt > 2)
-	{
-		builtin_error_message("exit", "", "too many arguments", 1);
 	}
 	else if (word_cnt == 2)
 		exit(ft_atoi(excute_str_form[1]));
+	else if (word_cnt > 2)
+		builtin_error_message("exit", "", "too many arguments", 1);
 	else
-		exit(0);
-	return (0);
+		exit(EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
 }
