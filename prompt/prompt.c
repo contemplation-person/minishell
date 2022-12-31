@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 10:01:26 by juha              #+#    #+#             */
-/*   Updated: 2022/12/31 21:09:12 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/31 21:15:02 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	minishell_excute(t_env_info_list *minishell_envp_list, struct sigaction *sa)
 			break ;
 		}
 		free(sentence);
-		//system("leaks minishell");
+		// system("leaks minishell");
 	}
 	return (0);
 }

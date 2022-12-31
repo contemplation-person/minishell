@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_to_str.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 17:25:01 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/29 19:17:23 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/31 21:26:11 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	**envp_list_to_arr(t_env_info_list *envp_list)
 	t_env_info	*curr;
 	int			i;
 
-	envp_arr = malloc(sizeof(char *) * (envp_list->cnt + 1));
+	envp_arr = ft_calloc(envp_list->cnt + 1, sizeof(char *));
 	if (!envp_arr)
 		return (NULL);
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 12:21:23 by juha              #+#    #+#             */
-/*   Updated: 2022/12/31 16:35:20 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/31 21:14:15 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 	- first char is number
 	bash-5.2$ export 0test
 	bash: export: `0test': not a valid identifier
-
 	- whitespace after equire
 	bash-5.2$ export test =
 	bash: export: `=': not a valid identifier
@@ -23,13 +22,11 @@
 	- valid char ;
 	bash-5.2$ export test/
 	bash: export: `test/': not a valid identifier
-
 	bash-5.2$ export test!=
 	bash: export: `test!=': not a valid identifier
 	
 	갯수가 여러개면 여러번 출력.
 	ex) test1=test test2=test test -> export ->>> test1,  test2 // no space
-
 	같은 값이면, 덮어씀.
 	띄어어쓰기 문제.
 	test0=test 정상  
@@ -76,7 +73,6 @@ t_bool	builtin_export(t_env_info_list *minishell_envp, char **excute_str_form)
 									"not a valid identifier", 1);
 		else
 		{
-			//	여기가 문제인듯?
 			if (is_equal_sign(excute_str_form[size]))
 				add_env_list(minishell_envp, excute_str_form[size], ENV);
 			else

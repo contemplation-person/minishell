@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   excute.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/31 12:08:44 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/31 21:45:10 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	excute_cmd(char **cmd, t_fds *fd_info, t_env_info_list *envp_list)
 {
 	char	**path;
 	pid_t	pid;
+	int		status;
 
 	if (cmd_builtin_check1(cmd, envp_list) == 1)
 		return (0);
@@ -50,7 +51,8 @@ int	excute_cmd(char **cmd, t_fds *fd_info, t_env_info_list *envp_list)
 		print_error(cmd[0], CMD_NOT_FOUND);
 		exit(127);
 	}
-	waitpid(0, &g_error_code, 0);
+	waitpid(0, &status, 0);
+	g_error_code = WEXITSTATUS(status);
 	return (0);
 }
 
