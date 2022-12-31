@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:50:23 by juha              #+#    #+#             */
-/*   Updated: 2022/12/31 14:41:33 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/31 16:21:56 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,27 @@ t_env_info	*new_env_list(char *env)
 	return (ret);
 }
 
+static void	free_node(t_env_info_list *list, t_env_info *node, int *idx)
+{
+	list->cnt--;
+	if (node->prev)
+		node->prev->next = node->next;
+	if (node->next)
+		node->next->prev = node->prev;
+	*idx = node->index;
+	if (node->value)
+		free(node->value);
+	free(node->key);
+	free(node);
+	node = list->env_info;
+	while (node)
+	{
+		if (*idx < node->index)
+			node->index--;
+		node = node->next;
+	}
+}
+
 void	delete_one_list(t_env_info_list *list, char *key)
 {
 	t_env_info	*node;
@@ -73,23 +94,7 @@ void	delete_one_list(t_env_info_list *list, char *key)
 	{
 		if (!ft_strncmp(key, node->key, ft_strlen(key) + 1))
 		{
-			list->cnt--;
-			if (node->prev)
-				node->prev->next = node->next;
-			if (node->next)
-				node->next->prev = node->prev;
-			idx = node->index;
-			if (node->value)
-				free(node->value);
-			free(node->key);
-			free(node);
-			node = list->env_info;
-			while (node)
-			{
-				if (idx < node->index)
-					node->index--;
-				node = node->next;
-			}
+			free_node(list, node, &idx);
 			return ;
 		}
 		node = node->next;
