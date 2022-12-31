@@ -6,7 +6,7 @@
 #    By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2022/12/31 14:39:37 by juha             ###   ########seoul.kr   #
+#    Updated: 2022/12/31 21:07:15 by juha             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME			:=	minishell
 READLINE_LIB	:=	-lreadline -L$(shell brew --prefix readline)/lib
 READLINE_INC	:=	$(shell brew --prefix readline)/include
 CC 				:=	cc
-CFLAGS 			:=	-Wall -Werror -Wextra -I$(READLINE_INC)
+CFLAGS 			:=	-Wall -Werror -Wextra -I$(READLINE_INC) -fsanitize=address -g3
 
 SRC 			:=	parser/parser.c	\
 					parser/search_tree.c \
@@ -57,7 +57,7 @@ OBJ 			:= $(SRC:.c=.o)
 
 
 $(NAME) : $(OBJ) $(LIBFT) $(FT_PRINTF)
-	$(CC) -o $(NAME)  $(OBJ) $(LIBFT) $(FT_PRINTF) $(READLINE_LIB)
+	$(CC) -o $(NAME) -fsanitize=address $(OBJ) $(LIBFT) $(FT_PRINTF) $(READLINE_LIB)
 
 $(LIBFT) :
 	make -j 4 -C libft bonus

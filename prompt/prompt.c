@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 10:01:26 by juha              #+#    #+#             */
-/*   Updated: 2022/12/31 20:00:34 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/31 21:09:12 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	init_list(t_env_info_list *list, char **envp)
 	int	i;
 
 	i = 0;
-	ft_memset(list, 0, sizeof(list));
+	ft_memset(list, 0, sizeof(*list));
 	while (envp[i])
 	{
 		add_env_list(list, envp[i], ENV);
