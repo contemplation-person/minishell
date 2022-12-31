@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:50:23 by juha              #+#    #+#             */
-/*   Updated: 2022/12/31 13:55:57 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/31 14:16:24 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,21 +115,21 @@ void	print_envp(t_env_info_list minishell_envp, t_env_feature feature)
 		if (feature == EXPORT)
 			ft_putstr_fd("declare -x ", STDOUT_FILENO);
 		ft_putstr_fd(temp->key, STDOUT_FILENO);
-		ft_putstr_fd("=", STDOUT_FILENO);
-		if (feature == ENV)
-			ft_putendl_fd(temp->value, STDOUT_FILENO);
-		else
+		if (temp->feature == ENV)
 		{
-			ft_putstr_fd("\"", STDOUT_FILENO);
-			if (temp->feature == ENV)
+			ft_putstr_fd("=", STDOUT_FILENO);
+			ft_putstr_fd(temp->value, STDOUT_FILENO);
+			if (feature == EXPORT)
 			{
+				ft_putstr_fd("\"", STDOUT_FILENO);
 				if (temp->value)
 					ft_putstr_fd(temp->value, STDOUT_FILENO);
 				else
 					ft_putstr_fd("", STDOUT_FILENO);
+				ft_putstr_fd("\"", STDOUT_FILENO);
 			}
-			ft_putendl_fd("\"", STDOUT_FILENO);
 		}
+		ft_putchar_fd('\n', STDOUT_FILENO);
 		temp = temp->next;
 	}
 }
@@ -147,14 +147,9 @@ void	delete_one_list(t_env_info_list *list, char *key)
 		if (!ft_strncmp(key, node->key, ft_strlen(key) + 1))
 		{
 			list->cnt--;
-			if (node->prev && node->next)
-			{
+			if (node->prev)
 				node->prev->next = node->next;
-				node->next->prev = node->prev;
-			}
-			else if (node->prev)
-				node->prev->next = node->next;
-			else if (node->next)
+			if (node->next)
 				node->next->prev = node->prev;
 			idx = node->index;
 			if (node->value)
