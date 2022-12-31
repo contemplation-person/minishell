@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:50:23 by juha              #+#    #+#             */
-/*   Updated: 2022/12/31 21:14:48 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/01 07:28:29 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ void	print_envp(t_env_info_list minishell_envp, t_env_feature feature)
 		if (temp->feature == ENV)
 		{
 			ft_putstr_fd("=", STDOUT_FILENO);
-			ft_putstr_fd(temp->value, STDOUT_FILENO);
+			if (feature == ENV)
+				ft_putstr_fd(temp->value, STDOUT_FILENO);
 			if (feature == EXPORT)
 			{
 				ft_putstr_fd("\"", STDOUT_FILENO);
