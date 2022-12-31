@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 12:21:23 by juha              #+#    #+#             */
-/*   Updated: 2022/12/31 16:33:29 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/31 16:35:00 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,28 +88,3 @@ t_bool	builtin_export(t_env_info_list *minishell_envp, char **excute_str_form)
 		print_envp(*minishell_envp, EXPORT);
 	return (TRUE);
 }
-
-//int main()
-//{
-//	t_env_info info;
-//	t_env_info_list l;
-//	char **test;
-
-//	l.env_info = &info;
-//	ft_bzero(&l, sizeof(t_env_info_list));
-//	add_env_list(&l, "testa", EXPORT);
-//	test = calloc(sizeof(char **), 4);
-//	test[0] = ft_strdup("export");
-//	test[1] = ft_strdup("test1");
-//	test[2] = ft_strdup("testte===");
-//	test[3] = NULL;
-//	builtin_export(&l, (char **)test);
-//	print_envp(l, ENV);
-//	test[1] = "testa= 123";
-//	builtin_export(&l, (char **)test);
-
-//	builtin_unset(&l, test);
-//	print_envp(l, ENV);
-//	// print_envp(l, EXPORT);
-//	// system("leaks a.out");
-//}
