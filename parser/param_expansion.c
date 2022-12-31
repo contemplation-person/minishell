@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:36:08 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/31 15:28:39 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/31 17:30:58 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*find_variable(char *token, int start, int end,
 	if (ft_strncmp("$?", token + start, ft_strlen("$?")) == 0)
 	{
 		temp = ft_substr(token, start + 2, end - start - 3);
-		code = ft_itoa(WEXITSTATUS(g_error_code));
+		code = ft_itoa(g_error_code);
 		ret = ft_strjoin(code, temp);
 		free(code);
 		free(temp);

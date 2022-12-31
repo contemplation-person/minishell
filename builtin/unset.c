@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:41:07 by juha              #+#    #+#             */
-/*   Updated: 2022/12/31 13:54:12 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/31 17:30:07 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_bool	builtin_unset(t_env_info_list *l, char **excute_str_form)
 				delete_one_list(l, *excute_str_form);
 			node = node->next;
 		}
-		excute_str_form++;	
+		excute_str_form++;
 	}
 	g_error_code = 0;
 	return (TRUE);

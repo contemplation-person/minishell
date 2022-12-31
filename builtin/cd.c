@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 19:56:59 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/27 17:04:29 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/31 18:01:49 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ void	set_pwd(char **excute_str_form, char **pwd, char *home)
 	}
 	else
 		chdir(excute_str_form[1]);
+	//수정
 }
 
 t_bool	builtin_cd(t_env_info_list *minishell_envp, char **excute_str_form)
