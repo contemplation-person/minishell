@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   param_expansion.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:36:08 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/30 17:58:52 by juha             ###   ########seoul.kr  */
+/*   Updated: 2022/12/31 12:01:10 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,8 @@ char	*find_variable(char *token, int start, int end,
 {
 	t_env_info	*curr;
 
-	if (ft_strncmp("$?", token + start, ft_strlen("$?") + 1) == 0)
-	{
-		printf("$? substitudion\n");
+	if (ft_strncmp("$?", token + start, ft_strlen("$?")) == 0)
 		return (ft_itoa(WEXITSTATUS(g_error_code)));
-	}
 	end = 0;
 	curr = env_list->env_info;
 	while (curr)
@@ -92,9 +89,3 @@ int	expansion(t_tnode *head, t_env_info_list *env_list)
 	}
 	return (0);
 }
-
-// echo Desktop Dowload
-//char	*asterisk(char *token)
-//{
-	
-//}

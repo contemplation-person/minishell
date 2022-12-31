@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_excute.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 19:58:17 by gyim              #+#    #+#             */
-<<<<<<< HEAD:parser/redirection_excute.c
-/*   Updated: 2022/12/28 17:14:11 by juha             ###   ########seoul.kr  */
-=======
 /*   Updated: 2022/12/29 19:26:23 by gyim             ###   ########seoul.kr  */
->>>>>>> 7ff6006ab6d06230e36ab5e1ab6bfc44c7bcfa44:operator/redirection_excute.c
 /*                                                                            */
 /* ************************************************************************** */
 
