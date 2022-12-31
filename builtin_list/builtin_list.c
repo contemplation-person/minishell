@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:50:23 by juha              #+#    #+#             */
-/*   Updated: 2022/12/31 12:12:59 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/31 13:55:57 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_env_info	*new_env_list(char *env)
 	int			key_i;
 	int			value_i;
 
-	ret = ft_calloc(sizeof(t_env_info), 1);
+	ret = ft_calloc(1, sizeof(t_env_info));
 	if (!ret)
 		exit(errno);
 	key_i = 0;
@@ -29,13 +29,19 @@ t_env_info	*new_env_list(char *env)
 		key_i++;
 	}
 	ret->key = ft_substr(env, 0, key_i);
+	if (!ret->key)
+		exit(errno);
 	value_i = key_i;
 	while (env[value_i++])
 		;
 	if (value_i == key_i)
 		ret->value = NULL;
 	else
+	{
 		ret->value = ft_substr(env, key_i + 1, value_i);
+		if (!ret->value)
+			exit(errno);
+	}
 	ret->feature = EXPORT;
 	if (!ret->value)
 		ret->feature = ENV;
@@ -83,9 +89,10 @@ void	add_env_list(t_env_info_list *list,\
 	list->cnt++;
 	while (temp && temp->next)
 	{
-		if (0 > ft_strncmp(temp->key, n_temp->key, ft_strlen(temp->key)))
+		if (0 > ft_strncmp(temp->key, n_temp->key, ft_strlen(temp->key) + 1))
 			(n_temp->index)++;
-		else if (0 < ft_strncmp(temp->key, n_temp->key, ft_strlen(temp->key)))
+		else if (0 < ft_strncmp(temp->key, n_temp->key,\
+				ft_strlen(temp->key) + 1))
 			(temp->index)++;
 		temp = temp->next;
 	}
@@ -103,35 +110,27 @@ void	print_envp(t_env_info_list minishell_envp, t_env_feature feature)
 	t_env_info		*temp;
 
 	temp = minishell_envp.env_info;
-	if (feature == EXPORT)
+	while (temp)
 	{
-		while (temp)
-		{
+		if (feature == EXPORT)
 			ft_putstr_fd("declare -x ", STDOUT_FILENO);
-			ft_putstr_fd(temp->key, STDOUT_FILENO);
-			if (*(temp->value))
-			{
-				ft_putstr_fd("=\"", STDOUT_FILENO);
-				ft_putstr_fd(temp->value, STDOUT_FILENO);
-				ft_putstr_fd("\"",STDOUT_FILENO);
-			}
-			ft_putchar_fd('\n', STDOUT_FILENO);
-			temp = temp->next;
-		}
-	}
-	else
-	{
-		while (temp)
+		ft_putstr_fd(temp->key, STDOUT_FILENO);
+		ft_putstr_fd("=", STDOUT_FILENO);
+		if (feature == ENV)
+			ft_putendl_fd(temp->value, STDOUT_FILENO);
+		else
 		{
+			ft_putstr_fd("\"", STDOUT_FILENO);
 			if (temp->feature == ENV)
 			{
-				ft_putstr_fd(temp->key, STDOUT_FILENO);
-				ft_putstr_fd("=", STDOUT_FILENO);
-				ft_putstr_fd(temp->value, STDOUT_FILENO);
-				ft_putchar_fd('\n', STDOUT_FILENO);
+				if (temp->value)
+					ft_putstr_fd(temp->value, STDOUT_FILENO);
+				else
+					ft_putstr_fd("", STDOUT_FILENO);
 			}
-			temp = temp->next;
+			ft_putendl_fd("\"", STDOUT_FILENO);
 		}
+		temp = temp->next;
 	}
 }
 
@@ -145,7 +144,7 @@ void	delete_one_list(t_env_info_list *list, char *key)
 		return ;
 	while (node)
 	{
-		if (!ft_strncmp(key, node->key, ft_strlen(key) - 1))
+		if (!ft_strncmp(key, node->key, ft_strlen(key) + 1))
 		{
 			list->cnt--;
 			if (node->prev && node->next)
@@ -156,9 +155,10 @@ void	delete_one_list(t_env_info_list *list, char *key)
 			else if (node->prev)
 				node->prev->next = node->next;
 			else if (node->next)
-				list->env_info = node->next;
+				node->next->prev = node->prev;
 			idx = node->index;
-			free(node->value);
+			if (node->value)
+				free(node->value);
 			free(node->key);
 			free(node);
 			node = list->env_info;
