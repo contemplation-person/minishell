@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/31 17:29:27 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/01 21:01:48 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	excute_leaf(t_tnode *cmd_list, t_fds *fd_info, t_env_info_list *envp_list)
 
 void	print_error(char *cmd, char *msg)
 {
-	write(2, BASH, ft_strlen(BASH));
 	write(2, cmd, ft_strlen(cmd));
 	write(2, msg, ft_strlen(msg));
 }

@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 09:04:30 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/27 19:42:11 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/01 21:01:47 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ t_tree_node	*make_tree(t_tnode *head)
 	if (head == op_node || !op_node->next
 		|| make_child(new_node, head, op_node) == -1)
 	{
+		write(2, "syntax error\n", 13);
+		g_error_code = 2;
 		free(new_node);
 		return (NULL);
 	}
