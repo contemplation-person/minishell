@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 12:32:14 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/31 12:13:46 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/01 00:37:14 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define CMD_NOT_FOUND ": command not found\n"
 # define BASH		   "bash: "
 
-int	g_error_code;
+extern int	g_error_code;
 
 typedef enum e_check_list
 {

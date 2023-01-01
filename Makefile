@@ -6,7 +6,7 @@
 #    By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2022/12/31 11:33:12 by gyim             ###   ########seoul.kr   #
+#    Updated: 2023/01/01 16:41:41 by gyim             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,8 +87,6 @@ re :
 # READLINE_LIB	:=	-lreadline -L$(shell brew --prefix readline)/lib
 # READLINE_INC	:=	-I$(shell brew --prefix readline)/include
 
-#builtin/cd.c builtin/echo.c builtine/env.c \
-#builtin/exit.c builtin/export.c builtin/pwd.c\
 
 
 					
