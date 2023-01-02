@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:36:08 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/31 17:30:58 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/02 14:24:52 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,16 +85,18 @@ char	*p_expansion(char *token, t_env_info_list *env_list)
 int	expansion(t_tnode *head, t_env_info_list *env_list)
 {
 	t_tnode	*curr;
-	char	*expanded;
+	char	*p_expanded;
+	char	*a_expanded;
 
 	curr = head;
 	while (curr)
 	{
-		expanded = p_expansion(curr->token, env_list);
-		// * expansion
+		p_expanded = p_expansion(curr->token, env_list);
+		a_expanded = asterisk(p_expanded);
 		free(curr->token);
+		free(p_expanded);
 		curr->token = NULL;
-		curr->token = expanded;
+		curr->token = a_expanded;
 		curr = curr->next;
 	}
 	return (0);
