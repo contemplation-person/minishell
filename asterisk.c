@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   asterisk.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/02 23:52:57 by juha              #+#    #+#             */
+/*   Updated: 2023/01/02 23:53:00 by juha             ###   ########seoul.kr  */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft/libft.h"
 #include <dirent.h> 
 
@@ -13,7 +25,7 @@ static int	find_asterisk(char *sub_token)
 	}
 	return (0);
 }
-	
+
 int	is_same_patten(char *sub_token, char *d_name)
 {
 	int	sub_idx;
