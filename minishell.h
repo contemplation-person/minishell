@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 16:52:21 by juha              #+#    #+#             */
-/*   Updated: 2023/01/01 00:26:18 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/02 14:11:32 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <sys/types.h>
+# include <dirent.h>
 # include "minishell_struct.h"
 # include "libft/libft.h"
 # include "excute/excute.h"
