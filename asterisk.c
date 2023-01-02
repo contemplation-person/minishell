@@ -58,6 +58,8 @@ static void	smart_join(char	**first_str, char **second_str)
 {
 	char	*temp;
 
+	if (!*second_str)
+		return ;
 	temp = *first_str;
 	*first_str = ft_strjoin(temp, second_str);
 	if (!(*first_str))
@@ -76,9 +78,9 @@ void	make_asterisk(char **sub_token)
 	dp = opendir(".");
 	if (dp == NULL)
 		exit(1);
-	dirp = readdir(dp);
-	while (dirp)
+	while (change_token == NULL || dirp)
 	{
+		dirp = readdir(dp);
 		if (is_same_patten(*sub_token, dirp->d_name))
 		{
 			if (change_token)
@@ -88,14 +90,11 @@ void	make_asterisk(char **sub_token)
 			else
 				smart_join(change_token, dirp->d_name);
 		}
-		dirp = readdir(dp);
 	}
-	closedir(dp);
-	if (!change_token)
-	{
-		free(*sub_token);
-		*sub_token = change_token;
-	}
+	if (closedir(dp) == change_token)
+		return ;
+	free(*sub_token);
+	*sub_token = change_token;
 }
 
 char	*asterisk(char *token)
