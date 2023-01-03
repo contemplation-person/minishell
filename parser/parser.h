@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:43:32 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/03 14:04:18 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/03 14:08:50 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ int				op_append(t_tree_node *node, t_fds *fd_info,
 					t_env_info_list *env_list);
 // asterisk.c
 char			*asterisk(char *token);
+int				is_same_patten(char *sub_token, char *d_name);
+
 #endif
 
 // gcc -lreadline *.c libft.a -L../readline -I../readline 
