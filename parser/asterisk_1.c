@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:10:50 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/03 14:07:46 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/03 14:43:14 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,14 @@ static void	smart_join(char	**first_str, char *second_str)
 		exit(1);
 	if (temp)
 		free(temp);
+}
+
+void	ret_make_asterisk(char *change_token, char **sub_token)
+{
+	if (!change_token)
+		return ;
+	free(*sub_token);
+	*sub_token = change_token;
 }
 
 void	make_asterisk(char **sub_token)
@@ -49,10 +57,7 @@ void	make_asterisk(char **sub_token)
 		dirp = readdir(dp);
 	}
 	closedir(dp);
-	if (!change_token)
-		return ;
-	free(*sub_token);
-	*sub_token = change_token;
+	ret_make_asterisk(change_token, sub_token);
 }
 
 static int	find_asterisk(char *sub_token)
