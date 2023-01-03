@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/31 21:45:10 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/03 13:35:26 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	excute_leaf(t_tnode *cmd_list, t_fds *fd_info, t_env_info_list *envp_list)
 
 void	print_error(char *cmd, char *msg)
 {
-	write(2, BASH, ft_strlen(BASH));
 	write(2, cmd, ft_strlen(cmd));
 	write(2, msg, ft_strlen(msg));
 }
@@ -44,6 +43,7 @@ int	excute_cmd(char **cmd, t_fds *fd_info, t_env_info_list *envp_list)
 		dup2(fd_info->in_fd, STDIN_FILENO);
 		dup2(fd_info->out_fd, STDOUT_FILENO);
 		close(fd_info->in_fd);
+		close(fd_info->out_fd);
 		if (cmd_builtin_check2(cmd, envp_list) == 1)
 			exit(0);
 		path = get_path(envp_list);

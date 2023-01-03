@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 14:32:51 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/29 19:23:38 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/01 16:57:37 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	tree_valid_check(t_tree_node *node)
 		if (node->left == NULL || node->right == NULL)
 		{
 			write(2, "error near operator\n", 20);
+			g_error_code = 2;
 			return (-1);
 		}
 		if (tree_valid_check(node->left) == -1)

@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 09:04:30 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/31 12:32:03 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/03 13:35:39 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,14 @@ t_tree_node	*make_tree(t_tnode *head)
 	if (!op_node)
 	{
 		new_node->words = head;
+		print_list(new_node->words);
 		return (new_node);
 	}
 	if (head == op_node || !op_node->next
 		|| make_child(new_node, head, op_node) == -1)
 	{
+		write(2, "syntax error\n", 13);
+		g_error_code = 2;
 		free(new_node);
 		return (NULL);
 	}

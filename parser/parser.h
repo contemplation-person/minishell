@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:43:32 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/31 12:32:02 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/03 13:35:34 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ int				op_outfile(t_tree_node *node, t_fds *fd_info,
 					t_env_info_list *env_list);
 int				op_append(t_tree_node *node, t_fds *fd_info,
 					t_env_info_list *env_list);
+// asterisk.c
+char			*asterisk(char *token);
 #endif
 
 // gcc -lreadline *.c libft.a -L../readline -I../readline 

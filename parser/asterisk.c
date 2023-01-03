@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   asterisk.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/02 23:52:57 by juha              #+#    #+#             */
-/*   Updated: 2023/01/02 23:53:00 by juha             ###   ########seoul.kr  */
+/*   Created: 2023/01/02 14:10:50 by gyim              #+#    #+#             */
+/*   Updated: 2023/01/02 14:11:13 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
-#include <dirent.h> 
+#include "parser.h"
 
 static int	find_asterisk(char *sub_token)
 {
@@ -66,47 +65,51 @@ int	is_same_patten(char *sub_token, char *d_name)
 	return (d_name[d_idx] == sub_token[sub_idx]);
 }
 
-static void	smart_join(char	**first_str, char **second_str)
-{
-	char	*temp;
-
-	if (!*second_str)
-		return ;
-	temp = *first_str;
-	*first_str = ft_strjoin(temp, second_str);
-	if (!(*first_str))
-		exit(1);
-	if (temp)
-		free(temp);
-}
-
 void	make_asterisk(char **sub_token)
 {
 	DIR				*dp;
 	struct dirent	*dirp;
 	char			*change_token;
+	char			*temp;
 
 	change_token = NULL;
 	dp = opendir(".");
 	if (dp == NULL)
 		exit(1);
-	while (change_token == NULL || dirp)
+	dirp = readdir(dp);
+	while (dirp)
 	{
-		dirp = readdir(dp);
 		if (is_same_patten(*sub_token, dirp->d_name))
 		{
 			if (change_token)
-				smart_join(&change_token, &" ");
-			if (!change_token)
+			{
+				temp = change_token;
+				change_token = ft_strjoin(temp, " ");
+				if (!change_token)
+					exit(1);
+				if (temp)
+					free(temp);
+			}
+			temp = change_token;
+			if (!temp)
 				change_token = ft_strdup(dirp->d_name);
 			else
-				smart_join(change_token, dirp->d_name);
+			{
+				change_token = ft_strjoin(temp, dirp->d_name);
+				if (!change_token)
+					exit(1);
+				if (temp)
+					free(temp);
+			}
 		}
+		dirp = readdir(dp);
 	}
-	if (closedir(dp) == change_token)
-		return ;
-	free(*sub_token);
-	*sub_token = change_token;
+	closedir(dp);
+	if (change_token)
+	{
+		free(*sub_token);
+		*sub_token = change_token;
+	}
 }
 
 char	*asterisk(char *token)
@@ -114,6 +117,7 @@ char	*asterisk(char *token)
 	char	**sub_token;
 	char	*ret;
 	int		i;
+	char	*temp;
 
 	sub_token = ft_split(token, ' ');
 	if (!sub_token)
@@ -126,8 +130,16 @@ char	*asterisk(char *token)
 			make_asterisk(&(sub_token[i]));
 		if (ret)
 		{
-			smart_join(ret, &" ");
-			smart_join(ret, sub_token[i]);
+			temp = ret;
+			ret = ft_strjoin(temp, " ");
+			if (!ret)
+				exit(1);
+			free(temp);
+			temp = ret;
+			ret = ft_strjoin(temp, sub_token[i]);
+			if (!ret)
+				exit(1);
+			free(temp);
 		}
 		else
 			ret = ft_strdup(sub_token[i]);

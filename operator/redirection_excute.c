@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 19:58:17 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/31 17:46:42 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/01 21:29:10 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ int	op_infile(t_tree_node *node, t_fds *fd_info, t_env_info_list *env_list)
 	}
 	cmd_fds.in_fd = infile_fd;
 	cmd_fds.out_fd = fd_info->out_fd;
-	excute_leaf(node->left->words, &cmd_fds, env_list);
+	if (node->left->words)
+		excute_leaf(node->left->words, &cmd_fds, env_list);
+	else
+		search_tree(node->left, &cmd_fds, env_list);
 	close(infile_fd);
 	return (0);
 }
@@ -70,6 +73,11 @@ int	op_here_doc(t_tree_node *node, t_fds *fd_info, t_env_info_list *env_list)
 	pipe(fd);
 	cmd_fds.in_fd = fd[0];
 	cmd_fds.out_fd = fd_info->out_fd;
+	printf("limit : %s\n", limiter);
+	if (!node->left->words)
+	{
+		search_tree(node->left, &cmd_fds, env_list);
+	}
 	read_lines(limiter, fd);
 	close(fd[1]);
 	excute_leaf(node->left->words, &cmd_fds, env_list);
