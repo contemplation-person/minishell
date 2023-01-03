@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 12:32:14 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/01 20:50:47 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/03 13:28:55 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,12 @@ typedef struct s_fds
 	int	in_fd;
 	int	out_fd;
 }	t_fds;
+
+typedef struct s_rnode
+{
+	int				redirection;
+	char			*file;
+	struct s_rnode	*next;
+}	t_rnode;
 
 #endif

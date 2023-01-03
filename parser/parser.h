@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:43:32 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/02 14:23:54 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/03 18:19:35 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,9 @@ int				op_append(t_tree_node *node, t_fds *fd_info,
 					t_env_info_list *env_list);
 // asterisk.c
 char			*asterisk(char *token);
+// quote_remove.c
+void			quote_remove(t_tnode *cmd_list);
+char			*remove_token_quote(char *token);
+void			change_quote_char(char *token);
+char			*concat_str(char **splitted);
 #endif
-
-// gcc -lreadline *.c libft.a -L../readline -I../readline 

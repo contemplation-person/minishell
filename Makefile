@@ -6,7 +6,7 @@
 #    By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2023/01/02 14:25:25 by gyim             ###   ########seoul.kr   #
+#    Updated: 2023/01/03 18:05:26 by gyim             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRC 			:=	parser/parser.c	\
 					parser/param_expansion.c \
 					parser/cmds_check.c \
 					parser/asterisk.c \
+					parser/quote_remove.c \
 					operator/pipe_op.c \
 					operator/redirection_excute.c \
 					operator/here_doc.c \
@@ -40,6 +41,8 @@ SRC 			:=	parser/parser.c	\
 					excute/path.c \
 					excute/cmd.c \
 					excute/env_to_str.c \
+					excute/redirection.c \
+					excute/redirection2.c \
 					builtin_list/builtin_list.c \
 					builtin/builtin_utils.c \
 					builtin/cd.c \

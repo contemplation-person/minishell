@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 18:11:04 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/20 18:14:26 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/03 13:31:13 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,13 @@ char	**get_cmd(t_tnode *head)
 	i = 0;
 	while (curr)
 	{
-		cmd[i++] = ft_strdup(curr->token);
-		curr = curr->next;
+		if (curr->next && is_redirection(curr->token))
+			curr = curr->next->next;
+		else
+		{
+			cmd[i++] = ft_strdup(curr->token);
+			curr = curr->next;
+		}
 	}
 	cmd[i] = NULL;
 	return (cmd);
