@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/01 21:01:48 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/03 09:42:06 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	excute_cmd(char **cmd, t_fds *fd_info, t_env_info_list *envp_list)
 		dup2(fd_info->in_fd, STDIN_FILENO);
 		dup2(fd_info->out_fd, STDOUT_FILENO);
 		close(fd_info->in_fd);
+		close(fd_info->out_fd);
 		if (cmd_builtin_check2(cmd, envp_list) == 1)
 			exit(0);
 		path = get_path(envp_list);

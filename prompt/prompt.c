@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 10:01:26 by juha              #+#    #+#             */
-/*   Updated: 2023/01/02 14:26:22 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/03 09:17:35 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,27 +25,27 @@ static void	init_list(t_env_info_list *list, char **envp)
 	}
 }
 
-// void	signal_handler(int signal_int)
-// {
-// 	if (signal_int == SIGINT)
-// 	{
-// 		write(1, "\n", 1);
-// 		rl_replace_line("", 1);
-// 		rl_on_new_line();
-// 		rl_redisplay();
-// 		g_error_code = 130;
-// 	}
-// }
+void	signal_handler(int signal_int)
+{
+	if (signal_int == SIGINT)
+	{
+		write(1, "\n", 1);
+		rl_replace_line("", 1);
+		rl_on_new_line();
+		rl_redisplay();
+		g_error_code = 130;
+	}
+}
 
-// void	_set_signal(struct sigaction *sa)
-// {
-// 	sa->sa_flags = SIGINFO;
-// 	sigemptyset(&sa->sa_mask);
-// 	sigaddset(&sa->sa_mask, SIGQUIT);
-// 	sigaddset(&sa->sa_mask, SIGINT);
-// 	sa->__sigaction_u.__sa_handler = signal_handler;
-// 	signal(SIGQUIT, SIG_IGN);
-// }
+void	_set_signal(struct sigaction *sa)
+{
+	sa->sa_flags = SIGINFO;
+	sigemptyset(&sa->sa_mask);
+	sigaddset(&sa->sa_mask, SIGQUIT);
+	sigaddset(&sa->sa_mask, SIGINT);
+	sa->__sigaction_u.__sa_handler = signal_handler;
+	signal(SIGQUIT, SIG_IGN);
+}
 
 int	minishell_excute(t_env_info_list *minishell_envp_list)
 {
@@ -53,7 +53,7 @@ int	minishell_excute(t_env_info_list *minishell_envp_list)
 
 	while (1)
 	{
-		// signal(SIGINT, signal_handler);
+		signal(SIGINT, signal_handler);
 		sentence = readline("MINISHELL : ");
 		if (sentence == NULL)
 		{
@@ -76,12 +76,12 @@ int	minishell_excute(t_env_info_list *minishell_envp_list)
 int	main(int argc, char **argv, char **envp)
 {
 	t_env_info_list		minishell_envp_list;
-	// struct sigaction	sa;
+	struct sigaction	sa;
 
 	if (argc != 1)
 		builtin_error_message("bash", "123", "command not found", 127);
 	(void) argv;
-	// _set_signal(&sa);
+	_set_signal(&sa);
 	init_list(&minishell_envp_list, envp);
 	g_error_code = minishell_excute(&minishell_envp_list);
 	return (g_error_code);
