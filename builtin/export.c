@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 12:21:23 by juha              #+#    #+#             */
-/*   Updated: 2023/01/03 18:45:17 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/03 16:26:41 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,9 @@
 	test       정상 출력 (저장  안함.)
 */
 
-static t_bool	is_valid_arg(char *str)
+static t_bool	is_invalid_arg(char *str)
 {
-	if (ft_isdigit(*str) || *str == '=')
-		return (FALSE);
-	while (*str)
-	{
-		if (!ft_isalnum(*str) && *str != '=')
-			return (FALSE);
-		str++;
-	}
-	return (TRUE);
+	return (ft_isdigit(*str) || *str == '=');
 }
 
 t_bool	is_equal_sign(char *excute_str_form)
@@ -61,14 +53,12 @@ t_bool	is_equal_sign(char *excute_str_form)
 t_bool	builtin_export(t_env_info_list *minishell_envp, char **excute_str_form)
 {
 	int		size;
-	t_bool	print_flag;
 
 	size = 1;
 	g_error_code = 0;
 	while ((excute_str_form[size]))
 	{
-		print_flag = is_valid_arg(excute_str_form[size]);
-		if (!print_flag)
+		if (is_invalid_arg(excute_str_form[size]))
 			builtin_error_message("export", excute_str_form[size], \
 									"not a valid identifier", 1);
 		else
