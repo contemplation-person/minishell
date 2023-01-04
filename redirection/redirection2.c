@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 13:37:37 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/04 18:36:48 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/04 18:58:47 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int	set_infile(t_fds *fds, t_rnode *node)
 		return (-1);
 	}
 	infile = open(node->file, O_RDONLY);
-	printf("infile : %d\n", infile);
 	if (infile < 0)
 	{
 		write(2, "Permission denied\n", 18);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 19:56:59 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/31 21:15:16 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/04 19:16:29 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ t_env_info	*find_env(t_env_info_list *envp, char *key)
 
 char	*find_home(t_env_info_list *minishell_envp)
 {
-	char *home;
+	char	*home;
 
 	if (find_env(minishell_envp, "HOME"))
 		home = find_env(minishell_envp, "HOME")->value;
