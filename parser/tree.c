@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tree.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 09:04:30 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/03 13:35:39 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/03 16:29:32 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ t_tree_node	*make_tree(t_tnode *head)
 	if (!op_node)
 	{
 		new_node->words = head;
-		print_list(new_node->words);
 		return (new_node);
 	}
 	if (head == op_node || !op_node->next

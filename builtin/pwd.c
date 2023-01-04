@@ -28,21 +28,3 @@ void	builtin_pwd(char **excute_str_form)
 	ft_putendl_fd(str, STDOUT_FILENO);
 	g_error_code = 0;
 }
-
-//int	main()
-//{
-//	t_env_info		info;
-//	t_env_info_list	l;
-//	char			**test;
-
-//	l.env_info = &info;
-//	ft_bzero(&l, sizeof(t_env_info_list));
-//	test = calloc(sizeof(char **), 4);
-//	test[0] = ft_strdup("pwd");
-//	test[3] = ft_strdup("test1");
-//	test[2] = ft_strdup("testte===");
-//	test[1] = NULL;
-//	builtin_pwd(test);
-//	// print_envp(l, EXPORT);
-//	// system("leaks a.out");
-//}

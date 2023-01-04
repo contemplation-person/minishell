@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_list.c                                     :+:      :+:    :+:   */
+/*   builtin_list_1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:50:23 by juha              #+#    #+#             */
-/*   Updated: 2023/01/01 07:28:29 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/04 17:28:35 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static t_bool	find_same_key(t_env_info **node, t_env_info **new_node)
 	return (FALSE);
 }
 
-void	add_env_list(t_env_info_list *list,\
+void	add_env_list(t_env_info_list *list, \
 					char *env, t_env_feature feature)
 {
 	t_env_info	*temp;
@@ -96,5 +96,18 @@ void	print_envp(t_env_info_list minishell_envp, t_env_feature feature)
 		}
 		ft_putchar_fd('\n', STDOUT_FILENO);
 		temp = temp->next;
+	}
+}
+
+void	init_list(t_env_info_list *list, char **envp)
+{
+	int			i;
+
+	i = 0;
+	ft_memset(list, 0, sizeof(*list));
+	while (envp[i])
+	{
+		add_env_list(list, envp[i], ENV);
+		i++;
 	}
 }

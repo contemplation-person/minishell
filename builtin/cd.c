@@ -6,89 +6,13 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 19:56:59 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/31 21:15:16 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/04 16:31:03 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 #include <dirent.h>
-/*
-	새로 만들 것.
-	input : cd aklsdfj
-	return : cd: asdf: No such file or directory
-	return value : 1
 
-	input : cd             (공백)
-	cdpah = ~/ 
-	return :
-	return value : 0
-
-	input : cd     //
-	cdpah = root
-	return : 
-	return value : 0
-
-
-
-int main()
-{
-	DIR			*dp;
-	struct dirent *dirp;
-
-	dp = opendir(".");
-	if (dp == NULL)
-	{
-		printf("NULL");
-		return 0;
-	}
-	dirp = readdir(dp);
-	if (dirp == NULL)
-	{
-		printf("NULL");
-		return 0;
-	}
-	while (dirp)
-	{
-		printf("ino : %d\n", dirp->d_ino);
-		printf("d_name : %s\n", dirp->d_name);
-		printf("d_name_len : %d\n", dirp->d_namlen);
-		//printf("%d\n", dirp->d_reclen);
-		//printf("%d\n", dirp->d_seekoff);
-		dirp = readdir(dp);
-	}
-	closedir(dp);
-	if(chdir(".."))
-	{
-		printf("error\n");
-		return 0;
-	}
-	dp = opendir(".");
-	if (dp == NULL)
-	{
-		printf("NULL");
-		return 0;
-	}
-	dirp = readdir(dp);
-	if (dirp == NULL)
-	{
-		printf("NULL");
-		return 0;
-	}
-	while (dirp)
-	{
-		printf("ino : %d\n", dirp->d_ino);
-		printf("d_name : %s\n", dirp->d_name);
-		printf("d_name_len : %d\n", dirp->d_namlen);
-		//printf("%d\n", dirp->d_reclen);
-		//printf("%d\n", dirp->d_seekoff);
-		dirp = readdir(dp);
-	}
-	closedir(dp);
-
-}
-*/
-
-//check leaks plz
 t_env_info	*find_env(t_env_info_list *envp, char *key)
 {
 	t_env_info	*ret;
@@ -96,81 +20,91 @@ t_env_info	*find_env(t_env_info_list *envp, char *key)
 	ret = envp->env_info;
 	while (ret)
 	{
-		if (ft_strncmp(ret->key, key, ft_strlen(key)))
+		if (!ft_strncmp(ret->key, key, ft_strlen(key) + 1))
 			break ;
 		ret = ret->next;
 	}
 	return (ret);
 }
 
-char	*find_home(t_env_info_list *minishell_envp)
+static void	change_dir(t_env_info_list *envp, char **old_pwd, char *new_pwd)
 {
-	char *home;
+	t_env_info	*env;
 
-	if (find_env(minishell_envp, "HOME"))
-		home = find_env(minishell_envp, "HOME")->value;
-	else
-		home = getenv("HOME");
-	return (home);
-}
-
-	/*
-		절대 상대 경로만...
-		home 이 있으면 홈으로, 없으면 getenv로.
-	*/
-
-void	set_pwd_node(t_env_info_list *minishell_envp, char **old_pwd)
-{
-	if (find_env(minishell_envp, "OLDPWD"))
+	env = find_env(envp, "OLDPWD");
+	if (env)
 	{
-		free(find_env(minishell_envp, "OLDPWD")->value);
-		(find_env(minishell_envp, "OLDPWD")->value) = *old_pwd;
+		if (env->value)
+			free(env->value);
+		env->value = *old_pwd;
 	}
 	else
-		free(*old_pwd);
-	if (find_env(minishell_envp, "PWD"))
+		free(old_pwd);
+	env = find_env(envp, "PWD");
+	chdir(new_pwd);
+	if (env)
 	{
-		free(find_env(minishell_envp, "PWD")->value);
-		(find_env(minishell_envp, "PWD")->value) = getcwd(NULL, 1);
+		if (env->value)
+			free(env->value);
+		env->value = getcwd(NULL,1);
 	}
 }
 
-void	set_pwd(char **excute_str_form, char **pwd, char *home)
+char	*set_pwd(char *excute_str_form, char *home)
 {
-	if (excute_str_form[1][0] == '~')
+	char	*ret;
+	char	*temp;
+
+	ret = NULL;
+	if (excute_str_form[0] == '~')
 	{
-		*pwd = ft_strjoin(home, "/");
-		*pwd = ft_strjoin(*pwd, excute_str_form[1] + 1);
+		ret = ft_strjoin(home, "/");
+		temp = ret;
+		ret = ft_strjoin(temp, excute_str_form + 2);
+		if (!temp || !ret)
+			exit(1);
 	}
-	else
-		chdir(excute_str_form[1]);
-	//수정
+	return (ret);
+}
+
+t_bool	check_cd_error(t_env_info_list *minishell_envp, char **excute_str_form)
+{
+	if (cnt_argc(excute_str_form) > 2)
+	{
+		builtin_error_message("bash", "cd", "too many arguments", 1);
+		return (TRUE);
+	}
+	else if (cnt_argc(excute_str_form) == 1)
+	{
+		if (!find_env(minishell_envp, "HOME"))
+		{
+			builtin_error_message("bash", "cd", "home not set", 1);
+			return (TRUE);
+		}
+	}
+	return (FALSE);
 }
 
 t_bool	builtin_cd(t_env_info_list *minishell_envp, char **excute_str_form)
 {
-	char		*old_pwd;
-	int			excute_str_cnt;
-	char		*home;
-	char		*pwd;
+	char	*old_pwd;
+	char	*new_pwd;
 
-	excute_str_cnt = cnt_argc(excute_str_form);
-	home = find_home(minishell_envp);
-	old_pwd = getcwd(NULL, 1);
 	g_error_code = 0;
-	pwd = NULL;
-	if (excute_str_cnt == 1)
+	if (check_cd_error(minishell_envp, excute_str_form))
+		return (FALSE);
+	old_pwd = getcwd(NULL, 1);
+	if (cnt_argc(excute_str_form) == 1)
 	{
-		if (!find_env(minishell_envp, "HOME"))
-		{
-			free(old_pwd);
-			builtin_error_message("cd", "HOME NOT set", "", 1);
-			return (FALSE);
-		}
-		chdir(home);
+		new_pwd = getenv("HOME");
+		if (!new_pwd)
+			exit(1);
 	}
-	else if (excute_str_cnt == 2) // 2개 일때 상대, 절대.
-		set_pwd(excute_str_form, &pwd, home);
-	set_pwd_node(minishell_envp, &old_pwd);
+	else
+		new_pwd = excute_str_form[1];
+	if (cnt_argc(excute_str_form) > 1 && excute_str_form[1] \
+				&& excute_str_form[1][0] == '~')
+		new_pwd = set_pwd(excute_str_form[1], getenv("HOME"));
+	change_dir(minishell_envp, &old_pwd, new_pwd);
 	return (TRUE);
 }

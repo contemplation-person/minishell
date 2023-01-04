@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 17:52:44 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/23 19:35:27 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/03 16:28:01 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	paren_check(t_tnode *head)
 	}
 	if (in_paren != 0)
 	{
-		printf("parenthesis not equal\n");
+		write(2, "parenthesis not equal\n", 22);
 		return (-1);
 	}
 	return (0);

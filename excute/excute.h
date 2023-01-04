@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:14:07 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/29 17:25:48 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/04 09:59:19 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,7 @@ void	free_cmd(char **cmd);
 
 char	*envp_node_to_str(t_env_info *node);
 char	**envp_list_to_arr(t_env_info_list *envp_list);
+
+void	free_red(t_rnode *rd_head);
 
 #endif

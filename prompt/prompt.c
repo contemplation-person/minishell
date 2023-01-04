@@ -6,28 +6,12 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 10:01:26 by juha              #+#    #+#             */
-/*   Updated: 2023/01/03 16:16:27 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/04 18:13:50 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "prompt.h"
 
-static void	init_list(t_env_info_list *list, char **envp)
-{
-	int			i;
-
-	i = 0;
-	ft_memset(list, 0, sizeof(*list));
-	while (envp[i])
-	{
-		add_env_list(list, envp[i], ENV);
-		i++;
-	}
-}
-
-//todo : cat처럼 실행이 되는 경우 ^c를 넣으면, 문제가 생김
-//todo : 자식에서 시그널처리를 다시 해줄 필요가 있음.
-//todo : sinal2 에서는 sigquit 시 원래 signal로 돌림, rl_on_new_line 과 rl_replace
 void	signal_handler(int signal_int)
 {
 	if (signal_int == SIGINT)
@@ -96,7 +80,6 @@ int	minishell_excute(t_env_info_list *minishell_envp_list, struct sigaction *sa)
 			break ;
 		}
 		free(sentence);
-		// system("leaks minishell");
 	}
 	return (0);
 }
@@ -109,7 +92,6 @@ int	main(int argc, char **argv, char **envp)
 	if (argc != 1)
 		builtin_error_message("bash", "123", "command not found", 127);
 	(void) argv;
-	//_set_signal(&sa);
 	init_list(&minishell_envp_list, envp);
 	g_error_code = minishell_excute(&minishell_envp_list, &sa);
 	return (g_error_code);

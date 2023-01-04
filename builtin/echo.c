@@ -12,10 +12,6 @@
 
 #include "builtin.h"
 
-/*
-	add arror code 
-*/
-
 void	check_option(char **option, int *option_len, char **excute_str_form)
 {
 	(*option_len) = 0;

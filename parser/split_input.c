@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split_input_1.c                                    :+:      :+:    :+:   */
+/*   split_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:51:34 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/03 14:05:18 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/03 15:34:03 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,6 @@ int	get_token(t_tlist_info *list, char *input, int start)
 	{
 		add_substr(list, input, start, start);
 		return (1);
-	}
-	else if (is_quote(input, start))
-	{
-		end = get_quoted_end(input, start);
-		add_substr(list, input, start, end);
-		return (end - start + 1);
 	}
 	else
 	{

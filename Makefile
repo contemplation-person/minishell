@@ -6,7 +6,7 @@
 #    By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2023/01/03 14:36:12 by juha             ###   ########seoul.kr   #
+#    Updated: 2023/01/04 13:26:37 by juha             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,12 +15,12 @@ NAME			:=	minishell
 READLINE_LIB	:=	-lreadline -L$(shell brew --prefix readline)/lib
 READLINE_INC	:=	$(shell brew --prefix readline)/include
 CC 				:=	cc
-CFLAGS 			:=	-Wall -Werror -Wextra -I$(READLINE_INC) -fsanitize=address -g3
+CFLAGS 			:=	-Wall -Werror -Wextra -I$(READLINE_INC)
 
 SRC 			:=	parser/parser.c	\
 					parser/search_tree.c \
-					parser/split_input_1.c \
-					parser/split_input_2.c \
+					parser/split_input.c \
+					parser/split_input2.c \
 					parser/token_check.c \
 					parser/token_list.c	\
 					parser/token_list2.c \
@@ -32,17 +32,19 @@ SRC 			:=	parser/parser.c	\
 					parser/cmds_check.c \
 					parser/asterisk_1.c \
 					parser/asterisk_2.c \
+					parser/quote_remove.c \
 					operator/pipe_op.c \
-					operator/redirection_excute.c \
-					operator/here_doc.c \
 					operator/logical_op.c \
 					prompt/prompt.c	\
 					excute/excute.c \
 					excute/path.c \
 					excute/cmd.c \
 					excute/env_to_str.c \
-					builtin_list/builtin_list.c \
-					builtin_list/builtin_list2.c \
+					redirection/redirection.c \
+					redirection/redirection2.c \
+					redirection/here_doc.c \
+					builtin_list/builtin_list_1.c \
+					builtin_list/builtin_list_2.c \
 					builtin/builtin_utils.c \
 					builtin/cd.c \
 					builtin/echo.c \
@@ -59,7 +61,7 @@ OBJ 			:= $(SRC:.c=.o)
 
 
 $(NAME) : $(OBJ) $(LIBFT) $(FT_PRINTF)
-	$(CC) -o $(NAME) -fsanitize=address $(OBJ) $(LIBFT) $(FT_PRINTF) $(READLINE_LIB)
+	$(CC) -o $(NAME)  $(OBJ) $(LIBFT) $(FT_PRINTF) $(READLINE_LIB)
 
 $(LIBFT) :
 	make -j 4 -C libft bonus

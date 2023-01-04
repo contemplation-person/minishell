@@ -6,33 +6,12 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 16:28:00 by juha              #+#    #+#             */
-/*   Updated: 2022/12/28 14:41:13 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/04 16:30:23 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-/*
-excute_str = exit 123d
-return value = 2
-error_massage = exit\nbash: exit: 123d: numeric argument required
-
-undo_part
-
-excute_str = exit 123 123
-return value = 1
-error_massage = bash: exit: too many arguments
-
-excute_str = exit
-return value = 0
-massage = exit\n
-
-excute_str = exit number
-return value = number
-massage = exit
-
-1. check first
-*/
 t_bool	is_error_word(char *word)
 {
 	while (*word)

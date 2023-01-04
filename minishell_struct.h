@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_struct.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 12:32:14 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/01 20:50:47 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/04 16:34:44 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # define CMD_NOT_FOUND ": command not found\n"
 # define BASH		   "MINISHELL: "
+# define NO_FILE_DIR	"No such file or directory\n"
+# define HERE_DOC_NAME "/Users/gyim/here_doc.temp"
 
 extern int	g_error_code;
 
@@ -52,5 +54,12 @@ typedef struct s_fds
 	int	in_fd;
 	int	out_fd;
 }	t_fds;
+
+typedef struct s_rnode
+{
+	int				redirection;
+	char			*file;
+	struct s_rnode	*next;
+}	t_rnode;
 
 #endif
