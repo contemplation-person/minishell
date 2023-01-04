@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:36:08 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/04 19:52:30 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/04 20:06:40 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,14 @@ char	*dollar_expand(char *token, int start, int end,
 	return (ret);
 }
 
+void	skip_s_quote(char *token, int *index)
+{
+	(*index)++;
+	while (token[*index] && token[(*index)] != '\'')
+		(*index)++;
+	(*index)++;
+}
+
 char	*p_expansion(char *token, t_env_info_list *env_list)
 {
 	int		start;
@@ -69,12 +77,13 @@ char	*p_expansion(char *token, t_env_info_list *env_list)
 	while (token[i])
 	{
 		if (token[i] == '\'')
-		{
-			i++;
-			while (token[i] && token[i] != '\'')
-				i++;
-			i++;
-		}
+			skip_s_quote(token, &i);
+		// {
+		// 	i++;
+		// 	while (token[i] && token[i] != '\'')
+		// 		i++;
+		// 	i++;
+		// }
 		if (token[i + 1] == '$' || token[i + 1] == '\0'
 			|| token[i + 1] == '\"' || token[i + 1] == '\'')
 		{

@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:43:32 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/04 16:00:36 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/04 20:05:33 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ char			*find_variable(char *token, int start, int end,
 char			*dollar_expand(char *token, int start, int end,
 					t_env_info_list *env_list);
 char			*p_expansion(char *token, t_env_info_list *env_list);
+void			skip_s_quote(char *token, int *index);
 int				expansion(t_tnode *head, t_env_info_list *env_list);
 // pipe_excute.c
 int				op_pipe(t_tree_node *node, t_fds *fd_info,
