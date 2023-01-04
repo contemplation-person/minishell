@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/04 18:36:52 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/04 19:40:45 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	excute_leaf(t_tnode *cmd_list, t_fds *fd_info, t_env_info_list *envp_list)
 		free_cmd(cmd);
 		return (-1);
 	}
-	printf("%d %d\n", fd_info->in_fd, fd_info->out_fd);
 	if (cmd[0])
 		excute_cmd(cmd, fd_info, envp_list);
 	free_red(rd_head);
@@ -115,23 +114,4 @@ int	cmd_builtin_check2(char **cmd, t_env_info_list *envp_list)
 	}
 	else
 		return (0);
-}
-
-void	cmd_path_check(char **path, char **cmd,
-				t_env_info_list *envp_list)
-{
-	int		i;
-	char	*cmd_path;
-	char	**envp;
-
-	i = 0;
-	envp = envp_list_to_arr(envp_list);
-	while (path[i])
-	{
-		cmd_path = ft_strjoin(path[i], "/");
-		cmd_path = ft_strjoin(cmd_path, cmd[0]);
-		execve(cmd_path, cmd, envp);
-		i++;
-	}
-	execve(cmd[0], cmd, envp);
 }

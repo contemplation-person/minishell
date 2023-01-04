@@ -6,7 +6,7 @@
 #    By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2023/01/04 16:54:57 by gyim             ###   ########seoul.kr   #
+#    Updated: 2023/01/04 19:42:24 by gyim             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRC 			:=	parser/parser.c	\
 					parser/token_list.c	\
 					parser/token_list2.c \
 					parser/tree.c \
+					parser/tree2.c \
 			 		parser/utils.c \
 					parser/utils2.c	\
 					parser/valid_check.c \

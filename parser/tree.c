@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 09:04:30 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/04 16:00:29 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/04 19:42:12 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,20 +105,4 @@ void	del_sublist(t_tnode	*head)
 		free(curr);
 		curr = next;
 	}
-}
-
-void	del_tree(t_tree_node *node)
-{	
-	if (node->left != NULL)
-	{
-		del_tree(node->left);
-		free(node->left);
-	}
-	if (node->right != NULL)
-	{
-		del_tree(node->right);
-		free(node->right);
-	}
-	del_sublist(node->op);
-	del_sublist(node->words);
 }

@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 18:11:04 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/03 13:31:13 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/04 19:39:48 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,23 @@ void	free_cmd(char **cmd)
 	}
 	free(cmd);
 	cmd = NULL;
+}
+
+void	cmd_path_check(char **path, char **cmd,
+				t_env_info_list *envp_list)
+{
+	int		i;
+	char	*cmd_path;
+	char	**envp;
+
+	i = 0;
+	envp = envp_list_to_arr(envp_list);
+	while (path[i])
+	{
+		cmd_path = ft_strjoin(path[i], "/");
+		cmd_path = ft_strjoin(cmd_path, cmd[0]);
+		execve(cmd_path, cmd, envp);
+		i++;
+	}
+	execve(cmd[0], cmd, envp);
 }

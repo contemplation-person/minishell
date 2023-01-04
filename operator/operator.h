@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:36:28 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/04 11:21:01 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/04 19:53:13 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	op_append(t_tree_node *node, t_fds *fd_info, t_env_info_list *env_list);
 int	op_here_doc(t_tree_node *node, t_fds *fd_info, t_env_info_list *env_list);
 
 int	op_pipe(t_tree_node *node, t_fds *fd_info, t_env_info_list *env_list);
-int	op_pipe_left_excute(t_tree_node *node, 
+int	op_pipe_left_excute(t_tree_node *node,
 		t_fds *fd_info, int pipe_fd[2], t_env_info_list *env_list);
 int	op_pipe_right_excute(t_tree_node *node,
 		t_fds *fd_info, int pipe_fd[2], t_env_info_list *env_list);

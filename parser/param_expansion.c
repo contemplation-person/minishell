@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:36:08 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/04 15:11:18 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/04 19:52:30 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	expansion(t_tnode *head, t_env_info_list *env_list)
 		free(curr->token);
 		free(p_expanded);
 		curr->token = NULL;
-		curr->token =a_expanded;
+		curr->token = a_expanded;
 		curr = curr->next;
 	}
 	return (0);
