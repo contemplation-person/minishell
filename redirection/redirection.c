@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 12:40:15 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/04 16:52:56 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/04 18:27:41 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,9 +113,6 @@ int	set_fds(t_fds *fds, t_rnode *node)
 	if (temp.out_fd != -1)
 		fds->out_fd = temp.out_fd;
 	if (access(HERE_DOC_NAME, F_OK) == 0)
-	{
 		fds->in_fd = open(HERE_DOC_NAME, O_RDONLY);
-	}
 	return (0);
 }
-

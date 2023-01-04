@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/04 16:31:09 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/04 18:36:52 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,13 @@ int	excute_leaf(t_tnode *cmd_list, t_fds *fd_info, t_env_info_list *envp_list)
 		free_cmd(cmd);
 		return (-1);
 	}
+	printf("%d %d\n", fd_info->in_fd, fd_info->out_fd);
 	if (cmd[0])
 		excute_cmd(cmd, fd_info, envp_list);
 	free_red(rd_head);
 	free_cmd(cmd);
+	close(fd_info->in_fd);
+	close(fd_info->out_fd);
 	return (0);
 }
 
