@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 18:04:28 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/03 18:20:03 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/04 15:18:23 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ char	*remove_token_quote(char *token)
 	change_quote_char(token);
 	splitted = ft_split(token, '\"');
 	ret = concat_str(splitted);
+	free_splitted(splitted);
 	return (ret);
 }
 
@@ -68,4 +69,17 @@ char	*concat_str(char **splitted)
 		i++;
 	}
 	return (ret);
+}
+
+void	free_splitted(char **splitted)
+{
+	int	i;
+
+	i = 0;
+	while (splitted[i])
+	{
+		free(splitted[i]);
+		i++;
+	}
+	free(splitted);
 }

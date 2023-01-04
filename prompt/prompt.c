@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 10:01:26 by juha              #+#    #+#             */
-/*   Updated: 2023/01/03 16:16:27 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/04 14:57:37 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,9 @@ int	minishell_excute(t_env_info_list *minishell_envp_list, struct sigaction *sa)
 			free(sentence);
 			break ;
 		}
+		unlink(HERE_DOC_NAME);
 		free(sentence);
-		// system("leaks minishell");
+		system("leaks minishell");
 	}
 	return (0);
 }
@@ -109,7 +110,7 @@ int	main(int argc, char **argv, char **envp)
 	if (argc != 1)
 		builtin_error_message("bash", "123", "command not found", 127);
 	(void) argv;
-	//_set_signal(&sa);
+	// _set_signal(&sa);
 	init_list(&minishell_envp_list, envp);
 	g_error_code = minishell_excute(&minishell_envp_list, &sa);
 	return (g_error_code);

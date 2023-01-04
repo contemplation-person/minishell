@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/04 11:36:54 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/04 15:11:08 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	excute_leaf(t_tnode *cmd_list, t_fds *fd_info, t_env_info_list *envp_list)
 	if (set_fds(fd_info, rd_head) == -1)
 		return (-1);
 	excute_cmd(cmd, fd_info, envp_list);
-	unlink(HERE_DOC_NAME);
 	free_red(rd_head);
 	free_cmd(cmd);
 	return (0);
