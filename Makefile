@@ -6,7 +6,7 @@
 #    By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2023/01/04 16:40:42 by gyim             ###   ########seoul.kr   #
+#    Updated: 2023/01/04 16:54:57 by gyim             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRC 			:=	parser/parser.c	\
 					excute/env_to_str.c \
 					redirection/redirection.c \
 					redirection/redirection2.c \
+					redirection/redirection3.c \
 					redirection/here_doc.c \
 					builtin_list/builtin_list.c \
 					builtin_list/builtin_list2.c \

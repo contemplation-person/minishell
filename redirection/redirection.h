@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 09:25:16 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/04 16:40:35 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/04 16:56:08 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ int		set_addfile(t_fds *fds, t_rnode *node);
 int		set_infile(t_fds *fds, t_rnode *node);
 int		set_here_doc(t_rnode *node);
 void	free_red(t_rnode *rd_head);
+
+int		check_redirection(t_rnode *head);
+void	free_rlist(t_rnode *head);
 
 int		read_lines(int here_doc_fd, char *limiter);
 #endif
