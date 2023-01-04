@@ -6,11 +6,11 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 12:40:15 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/03 18:43:11 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/04 11:31:59 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "excute.h"
+#include "redirection.h"
 
 t_rnode	*get_redirection(t_tnode *cmd_list)
 {
@@ -80,24 +80,36 @@ t_rnode	*set_redirection(t_tnode *node)
 	return (new_node);
 }
 
-void	set_fds(t_fds *fds, t_rnode *node)
+int	set_fds(t_fds *fds, t_rnode *node)
 {
 	int		ret;
 	t_rnode	*curr;
+	t_fds	temp;
 
+	temp.in_fd = -1;
+	temp.out_fd = -1;
 	curr = node;
 	while (curr)
 	{
 		if (curr->redirection == 1)
-			ret = set_outfile(fds, curr);
+			ret = set_outfile(&temp, curr);
 		else if (curr->redirection == 2)
-			ret = set_addfile(fds, curr);
+			ret = set_addfile(&temp, curr);
 		else if (curr->redirection == 3)
-			ret = set_infile(fds, curr);
+			ret = set_infile(&temp, curr);
 		else if (curr->redirection == 4)
-			ret = set_here_doc(fds, curr);
+			ret = set_here_doc(curr);
 		if (ret == -1)
-			break ;
+			return (-1);
 		curr = curr->next;
 	}
+	if (temp.in_fd != -1)
+		fds->in_fd = temp.in_fd;
+	if (temp.out_fd != -1)
+		fds->out_fd = temp.out_fd;
+	if (access(HERE_DOC_NAME, F_OK) == 0)
+	{
+		fds->in_fd = open(HERE_DOC_NAME, O_RDONLY);
+	}
+	return (0);
 }

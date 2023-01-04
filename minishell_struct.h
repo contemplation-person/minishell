@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 12:32:14 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/03 13:28:55 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/04 11:13:06 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # define CMD_NOT_FOUND ": command not found\n"
 # define BASH		   "MINISHELL: "
+# define NO_FILE_DIR	"No such file or directory\n"
+# define HERE_DOC_NAME "here_doc.temp"
 
 extern int	g_error_code;
 

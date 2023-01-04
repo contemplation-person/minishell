@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/03 18:43:31 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/04 11:36:54 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ int	excute_leaf(t_tnode *cmd_list, t_fds *fd_info, t_env_info_list *envp_list)
 	quote_remove(cmd_list);
 	rd_head = get_redirection(cmd_list);
 	cmd = get_cmd(cmd_list);
-	set_fds(fd_info, rd_head);
+	if (set_fds(fd_info, rd_head) == -1)
+		return (-1);
 	excute_cmd(cmd, fd_info, envp_list);
+	unlink(HERE_DOC_NAME);
 	free_red(rd_head);
 	free_cmd(cmd);
 	return (0);
@@ -125,19 +127,4 @@ void	cmd_path_check(char **path, char **cmd,
 		i++;
 	}
 	execve(cmd[0], cmd, envp);
-}
-
-void	free_red(t_rnode *rd_head)
-{
-	t_rnode	*curr;
-	t_rnode	*next;
-
-	curr = rd_head;
-	while (curr)
-	{
-		next = curr->next;
-		free(curr->file);
-		free(curr);
-		curr = next;
-	}
 }

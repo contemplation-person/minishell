@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:14:07 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/03 14:33:09 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/04 09:59:19 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,6 @@ void	free_cmd(char **cmd);
 char	*envp_node_to_str(t_env_info *node);
 char	**envp_list_to_arr(t_env_info_list *envp_list);
 
-t_rnode	*get_redirection(t_tnode *cmd_list);
-int		is_redirection(char *token);
-void	add_redirection(t_rnode	**r_list, t_tnode *node);
-t_rnode	*set_redirection(t_tnode *node);
-void	set_fds(t_fds *fds, t_rnode *node);
 void	free_red(t_rnode *rd_head);
 
-int		set_outfile(t_fds *fds, t_rnode *node);
-int		set_addfile(t_fds *fds, t_rnode *node);
-int		set_infile(t_fds *fds, t_rnode *node);
-int		set_here_doc(t_fds *fds, t_rnode *node);
 #endif
