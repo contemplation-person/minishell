@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 09:04:30 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/03 16:29:32 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/04 16:00:29 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_tree_node	*make_tree(t_tnode *head)
 	{
 		write(2, "syntax error\n", 13);
 		g_error_code = 2;
+		free_tlist(head);
 		free(new_node);
 		return (NULL);
 	}
@@ -51,6 +52,21 @@ t_tree_node	*make_new_node(void)
 	new_node->left = NULL;
 	new_node->right = NULL;
 	return (new_node);
+}
+
+void	free_tlist(t_tnode *head)
+{
+	t_tnode	*curr;
+	t_tnode	*next;
+
+	curr = head;
+	while (curr)
+	{
+		next = curr->next;
+		free(curr->token);
+		free(curr);
+		curr = next;
+	}
 }
 
 int	make_child(t_tree_node *parent_node, t_tnode *head, t_tnode *op_node)

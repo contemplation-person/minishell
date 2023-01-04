@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:43:32 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/04 15:18:41 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/04 16:00:36 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int				parsing_excute(char *user_input, t_env_info_list *env_list);
 // tree.c
 t_tree_node		*make_tree(t_tnode *head);
 t_tree_node		*make_new_node(void);
+void			free_tlist(t_tnode *head);
 int				make_child(t_tree_node *parent_node,
 					t_tnode *head, t_tnode *op_node);
 void			del_tree(t_tree_node *node);
