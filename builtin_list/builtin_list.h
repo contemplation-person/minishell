@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:04:03 by juha              #+#    #+#             */
-/*   Updated: 2022/12/21 19:56:14 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/04 17:28:41 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,9 @@ typedef struct s_env_info_list
 }t_env_info_list;
 
 t_env_info	*new_env_list(char *env);
-void		add_env_list(t_env_info_list *list,\
-						char *env, t_env_feature feature);
+void		add_env_list(t_env_info_list *list, \
+					char *env, t_env_feature feature);
 void		print_envp(t_env_info_list minishell_envp, t_env_feature feature);
 void		delete_one_list(t_env_info_list *list, char *key);
+void		init_list(t_env_info_list *list, char **envp);
 #endif

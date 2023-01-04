@@ -6,33 +6,11 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 12:21:23 by juha              #+#    #+#             */
-/*   Updated: 2023/01/03 16:26:41 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/04 16:30:23 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
-/*
-	- first char is number
-	bash-5.2$ export 0test
-	bash: export: `0test': not a valid identifier
-	- whitespace after equire
-	bash-5.2$ export test =
-	bash: export: `=': not a valid identifier
-	
-	- valid char ;
-	bash-5.2$ export test/
-	bash: export: `test/': not a valid identifier
-	bash-5.2$ export test!=
-	bash: export: `test!=': not a valid identifier
-	
-	갯수가 여러개면 여러번 출력.
-	ex) test1=test test2=test test -> export ->>> test1,  test2 // no space
-	같은 값이면, 덮어씀.
-	띄어어쓰기 문제.
-	test0=test 정상  
-	test=====  정상 출력
-	test       정상 출력 (저장  안함.)
-*/
 
 static t_bool	is_invalid_arg(char *str)
 {

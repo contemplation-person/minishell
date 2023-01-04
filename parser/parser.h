@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:43:32 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/04 20:05:33 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/05 08:20:03 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ int				search_tree(t_tree_node *node,
 // param_expansion.c
 char			*find_variable(char *token, int start, int end,
 					t_env_info_list *env_list);
+void			dollar_token_change(char **ret, char *token,
+					t_env_info_list *env_list);
 char			*dollar_expand(char *token, int start, int end,
 					t_env_info_list *env_list);
 char			*p_expansion(char *token, t_env_info_list *env_list);
@@ -102,8 +104,15 @@ int				op_outfile(t_tree_node *node, t_fds *fd_info,
 					t_env_info_list *env_list);
 int				op_append(t_tree_node *node, t_fds *fd_info,
 					t_env_info_list *env_list);
-// asterisk.c
+// asterisk_1.c
+void			ret_make_asterisk(char *change_token,
+					char **sub_token);
+void			make_asterisk(char **sub_token);
 char			*asterisk(char *token);
+// asterisk_2.c
+int				analyze_patten(char *sub_token, char *d_name,
+					int *sub_idx, int *d_idx);
+int				is_same_patten(char *sub_token, char *d_name);
 // quote_remove.c
 void			quote_remove(t_tnode *cmd_list);
 char			*remove_token_quote(char *token);
