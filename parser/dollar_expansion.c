@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 08:13:54 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/05 13:20:19 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/05 18:27:37 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ void	dollar_token_change(char **ret, char *token, t_env_info_list *env_list)
 		if (token[i] == '\'')
 			skip_s_quote(token, &i);
 		if (token[i + 1] == '$' || token[i + 1] == '\0'
-			|| token[i + 1] == '\"' || token[i + 1] == '\'')
+			|| token[i + 1] == '\"' || token[i + 1] == '\''
+			|| token[i + 1] == ' ')
 		{
 			prev = *ret;
 			temp = dollar_expand(token, start, i, env_list);
@@ -92,7 +93,7 @@ char	*p_expansion(char *token, t_env_info_list *env_list)
 {
 	char	*ret;
 
-	ret = calloc(sizeof(char), 1);
+	ret = ft_calloc(sizeof(char), 1);
 	if (!ret)
 		return (NULL);
 	dollar_token_change(&ret, token, env_list);

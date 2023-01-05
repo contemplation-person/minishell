@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/05 13:23:04 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/05 18:20:56 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	cmd_builtin_check1(char **cmd, t_env_info_list *envp_list)
 	}
 	else if (ft_strncmp(cmd[0], "exit", 5) == 0)
 	{
-		builtin_exit(cmd);
+		g_error_code = builtin_exit(cmd);
 		return (1);
 	}
 	else
