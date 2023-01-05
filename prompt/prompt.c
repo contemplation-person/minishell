@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 10:01:26 by juha              #+#    #+#             */
-/*   Updated: 2023/01/05 10:28:34 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/05 16:31:07 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	main(int argc, char **argv, char **envp)
 	struct sigaction	sa;
 
 	if (argc != 1)
-		builtin_error_message("bash", "123", "command not found", 127);
+		builtin_error_message("MINISHELL : ", "123", "command not found", 127);
 	(void) argv;
 	init_list(&minishell_envp_list, envp);
 	g_error_code = minishell_excute(&minishell_envp_list, &sa);

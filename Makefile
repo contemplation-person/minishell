@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+         #
+#    By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2023/01/05 08:18:35 by gyim             ###   ########seoul.kr   #
+#    Updated: 2023/01/05 16:29:37 by juha             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,15 +86,3 @@ re :
 	make all
 
 .PHONY : all clean fclean re bonus
-
-
-
-# READLINE_LIB	:=	-lreadline -Lreadline
-# READLINE_INC	:=	-I./readline
-
-# READLINE_LIB	:=	-lreadline -L$(shell brew --prefix readline)/lib
-# READLINE_INC	:=	-I$(shell brew --prefix readline)/include
-
-
-
-					

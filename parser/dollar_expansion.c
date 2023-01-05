@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_expansion.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 08:13:54 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/05 13:20:19 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/05 16:30:32 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ char	*p_expansion(char *token, t_env_info_list *env_list)
 {
 	char	*ret;
 
-	ret = calloc(sizeof(char), 1);
+	ret = ft_calloc(sizeof(char), 1);
 	if (!ret)
 		return (NULL);
 	dollar_token_change(&ret, token, env_list);
