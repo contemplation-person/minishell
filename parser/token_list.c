@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 09:00:54 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/08 15:08:29 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2022/12/22 16:58:03 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,38 +52,4 @@ t_tnode	*lst_last(t_tlist_info *list_info)
 	while (curr_node->next)
 		curr_node = curr_node->next;
 	return (curr_node);
-}
-
-void	list_add(t_tlist_info *list, char *str)
-{
-	t_tnode	*new_node;
-	t_tnode	*last_node;
-
-	new_node = make_node(str);
-	if (!new_node)
-		return ;
-	last_node = lst_last(list);
-	if (!last_node)
-		list->head = new_node;
-	else
-		last_node->next = new_node;
-}
-
-void	del_list(t_tlist_info *list)
-{
-	t_tnode	*node;
-	t_tnode	*next;
-
-	node = list->head;
-	while (node)
-	{
-		next = node->next;
-		free(node->token);
-		node->token = NULL;
-		free(node);
-		node = NULL;
-		node = next;
-	}
-	free(list);
-	list = NULL;
 }

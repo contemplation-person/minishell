@@ -6,37 +6,39 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 16:28:00 by juha              #+#    #+#             */
-/*   Updated: 2022/12/19 19:32:25 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/04 16:30:23 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
+#include "../minishell.h"
 
-/*
-	Exit the shell, returning a status of n to the shell’s parent. 
-	If n is omitted, the exit status is that of the last command executed. 
-	Any trap on EXIT is executed before the shell terminates.
-	
-	exit number -> exit number
-	exit number(131) -> exit (131);
-	argc > 2 && first char == not digit -> too many argument(2) -> exit(2);
-	argc > 2 && first char == digit && second char == not digit -> too many argument(2) -> not exit and 127;
-
-	exit 
-
-*/
-int	builtin_exit(int argc, char **argv)
+t_bool	is_error_word(char *word)
 {
-	if (1 < argc)
+	while (*word)
 	{
-		ft_putstr_fd("exit : ", STDERR_FILENO);
-		ft_putstr_fd(argv[1], STDERR_FILENO);
-		ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
-		exit(2);
+		if (!ft_isdigit(*word))
+			return (TRUE);
+		word++;
 	}
+	return (FALSE);
+}
+
+int	builtin_exit(char **excute_str_form)
+{
+	int	word_cnt;
+
+	word_cnt = cnt_argc(excute_str_form);
+	if (word_cnt == 2 && is_error_word(excute_str_form[1]))
+	{
+		builtin_error_message("exit", excute_str_form[1], \
+								"numeric argument required", 2);
+		exit (g_error_code);
+	}
+	else if (word_cnt == 2)
+		exit(ft_atoi(excute_str_form[1]));
+	else if (word_cnt > 2)
+		builtin_error_message("exit", "", "too many arguments", 1);
 	else
-	{
-		ft_putstr_fd("exit", STDIN_FILENO);
 		exit(EXIT_SUCCESS);
-	}
+	return (EXIT_SUCCESS);
 }

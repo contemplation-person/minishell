@@ -3,37 +3,79 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+         #
+#    By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2022/12/15 16:02:19 by juha             ###   ########seoul.kr   #
+#    Updated: 2023/01/05 08:18:35 by gyim             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
 
-NAME			:= minishell
-CC 				:=	cc
-CFLAGES 		:=	-Wall -Werror -Wextra
+NAME			:=	minishell
 READLINE_LIB	:=	-lreadline -L$(shell brew --prefix readline)/lib
-READLINE_INC	:=	-I$(shell brew --prefix readline)/include
-SRC = builtin/builtin.h                builtin/pwd.c                    parser/parser/parse_tree.c       parser_list/parser.h             parser_list/tree.c               parser_temp/parse_tree_test.c    prompt_temp/prompt.c
-builtin/builtin_list.c           builtin/unset.c                  parser/parser/parse_tree2.c      parser_list/prompt.c             parser_list/utils.c              parser_temp/parser.h             prompt_temp/split_input.c
-builtin/cd.c                     excute/excute.c                  parser/parser/parse_tree_test.c  parser_list/search_tree.c        parser_list/utils2.c             parser_temp/token.c              prompt_temp/split_input.h
-builtin/echo.c                   excute/excute.h                  parser/parser/parser.h           parser_list/split_input.c        parser_list/valid_check.c        parser_temp/tree.c               prompt_temp/token_check.c
-builtin/env.c                    parser/parser/operator.c         parser/parser/token.c            parser_list/token_check.c        parser_temp/operator.c           prompt/prompt.c                  prompt_temp/token_list.c
-builtin/exit.c                   parser/parser/pair.c             parser/parser/tree.c             parser_list/token_list.c         parser_temp/pair.c               prompt/prompt.h                  prompt_temp/tree.c
-builtin/export.c                 parser/parser/parse_stack.c      parser_list/parser.c             parser_list/token_list2.c        parser_temp/parse_stack.c        prompt_temp/parser.c             prompt_temp/utils.c
+READLINE_INC	:=	$(shell brew --prefix readline)/include
+CC 				:=	cc
+CFLAGS 			:=	-Wall -Werror -Wextra -I$(READLINE_INC)
 
-OBJ = $(SRC:.c=.o);
+SRC 			:=	parser/parser.c	\
+					parser/search_tree.c \
+					parser/split_input.c \
+					parser/split_input2.c \
+					parser/token_check.c \
+					parser/token_list.c	\
+					parser/token_list2.c \
+					parser/tree.c \
+					parser/tree2.c \
+			 		parser/utils.c \
+					parser/utils2.c	\
+					parser/valid_check.c \
+					parser/param_expansion.c \
+					parser/dollar_expansion.c \
+					parser/cmds_check.c \
+					parser/asterisk_1.c \
+					parser/asterisk_2.c \
+					parser/quote_remove.c \
+					operator/pipe_op.c \
+					operator/logical_op.c \
+					prompt/prompt.c	\
+					excute/excute.c \
+					excute/path.c \
+					excute/cmd.c \
+					excute/env_to_str.c \
+					redirection/redirection.c \
+					redirection/redirection2.c \
+					redirection/redirection3.c \
+					redirection/here_doc.c \
+					builtin_list/builtin_list_1.c \
+					builtin_list/builtin_list_2.c \
+					builtin/builtin_utils.c \
+					builtin/cd.c \
+					builtin/echo.c \
+					builtin/env.c \
+					builtin/exit.c \
+					builtin/export.c \
+					builtin/pwd.c \
+					builtin/unset.c \
+					get_next_line/get_next_line_bonus.c \
+					get_next_line/get_next_line_utils_bonus.c 
+LIBFT			:= libft/libft.a 
+FT_PRINTF		:= ft_printf/libftprintf.a
+OBJ 			:= $(SRC:.c=.o)
 
-# %.c : %.o
-# $(CC) $(CFLAGS) -c $<
 
+$(NAME) : $(OBJ) $(LIBFT) $(FT_PRINTF)
+	$(CC) -o $(NAME)  $(OBJ) $(LIBFT) $(FT_PRINTF) $(READLINE_LIB)
 
-$(NAME) : $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+$(LIBFT) :
+	make -j 4 -C libft bonus
+$(FT_PRINTF) :
+	make -j 4 -C ft_printf all
+
+all : $(NAME)
 
 clean :
+	make -C libft fclean
+	make -C ft_printf fclean
 	rm -rf $(OBJ)
 
 fclean : clean
@@ -47,13 +89,12 @@ re :
 
 
 
+# READLINE_LIB	:=	-lreadline -Lreadline
+# READLINE_INC	:=	-I./readline
 
+# READLINE_LIB	:=	-lreadline -L$(shell brew --prefix readline)/lib
+# READLINE_INC	:=	-I$(shell brew --prefix readline)/include
 
-
-
-
-#builtin/cd.c builtin/echo.c builtine/env.c \
-#builtin/exit.c builtin/export.c builtin/pwd.c\
 
 
 					

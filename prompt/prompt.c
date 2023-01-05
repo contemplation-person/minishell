@@ -3,92 +3,97 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 10:01:26 by juha              #+#    #+#             */
-/*   Updated: 2022/12/19 08:15:30 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/05 10:28:34 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "prompt.h"
 
-int	error_code = 0;
-
-int	is_white_space(char *check_charecter)
+void	signal_handler(int signal_int)
 {
-	int	len;
-	int	cmp_len;
-
-	len = ft_strlen(check_charecter);
-	cmp_len = 0;
-	while (check_charecter \
-		&& !(8 < *check_charecter && *check_charecter < 14) \
-		&& *check_charecter != 32)
+	if (signal_int == SIGINT)
 	{
-		check_charecter++;
-		cmp_len++;
-	}
-	return (cmp_len != len);
-}
-
-static void	init_list(t_env_info_list *list, char **envp)
-{
-	int	i;
-
-	i = 0;
-	while (envp[i])
-	{
-		add_env_list(list, envp[i], ENV);
-		i++;
+		write(1, "\n", 1);
+		rl_replace_line("", 1);
+		rl_on_new_line();
+		rl_redisplay();
+		g_error_code = 130;
 	}
 }
 
-void	signal_handler(int signal_int, struct __siginfo *signint, void *test)
+void	signal_handler2(int signal_int)
 {
-	(void)signint;
-	(void)test;
-	if (signal_int == SIGQUIT)
-		return ;
-	else if (signal_int == SIGINT)
-		error_code = 1;
-	return ;
+	if (signal_int == SIGINT)
+	{
+		write(1, "\n", 1);
+		rl_redisplay();
+	}
+	else if (signal_int == SIGQUIT)
+	{
+		ft_putendl_fd("Quit: 3", STDERR_FILENO);
+		g_error_code = 131;
+	}
 }
 
-void	_set_signal(struct sigaction *sa)
+void	_set_signal(struct sigaction *sa, int flag)
 {
 	sa->sa_flags = SIGINFO;
 	sigemptyset(&sa->sa_mask);
 	sigaddset(&sa->sa_mask, SIGQUIT);
 	sigaddset(&sa->sa_mask, SIGINT);
-	sa->__sigaction_u.__sa_sigaction = signal_handler;
+	if (flag == 1)
+	{
+		sa->__sigaction_u.__sa_handler = signal_handler;
+		signal(SIGQUIT, SIG_IGN);
+		signal(SIGINT, signal_handler);
+	}
+	else
+	{
+		sa->__sigaction_u.__sa_handler = signal_handler2;
+		signal(SIGQUIT, signal_handler2);
+		signal(SIGINT, signal_handler2);
+	}
+}
+
+int	minishell_excute(t_env_info_list *minishell_envp_list, struct sigaction *sa)
+{
+	char				*sentence;
+
+	while (1)
+	{
+		unlink(HERE_DOC_NAME);
+		_set_signal(sa, 1);
+		sentence = readline("MINISHELL : ");
+		if (sentence == NULL)
+		{
+			ft_putendl_fd("exit", STDOUT_FILENO);
+			return (g_error_code);
+		}
+		if (sentence && ft_strlen(sentence))
+			add_history(sentence);
+		_set_signal(sa, 0);
+		if (parsing_excute(sentence, minishell_envp_list) == -1)
+		{
+			free(sentence);
+			break ;
+		}
+		free(sentence);
+	}
+	return (0);
 }
 
 int	main(int argc, char **argv, char **envp)
 {
-	char				*sentence;
 	t_env_info_list		minishell_envp_list;
 	struct sigaction	sa;
 
-	(void) sentence;
-	_set_signal(&sa);
 	if (argc != 1)
-		return (1);
+		builtin_error_message("bash", "123", "command not found", 127);
 	(void) argv;
-	ft_memset(&minishell_envp_list, 0, sizeof(t_env_info_list));
 	init_list(&minishell_envp_list, envp);
-	print_envp(minishell_envp_list, ENV);
-	//while (42)
-	//{
-	//	sentence = readline("no shell : ");
-	//	sigaction(SIGINT, &sa, NULL);
-	//	sigaction(SIGQUIT, &sa, NULL);
-	//	ft_putstr_fd(sentence, STDERR_FILENO);
-	//	if (sentence == NULL)
-	//		error_code = EXIT_SUCCESS;
-	//	else if (ft_strlen(sentence))
-	//		add_history(sentence);
-	//	free(sentence);
-	//}
-	// system("leaks a.out");
-	return (EXIT_SUCCESS);
+	g_error_code = minishell_excute(&minishell_envp_list, &sa);
+	return (g_error_code);
 }

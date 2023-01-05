@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   param_expansion.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/06 18:26:48 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/03 15:17:12 by gyim             ###   ########seoul.kr  */
+/*   Created: 2022/12/19 11:36:08 by gyim              #+#    #+#             */
+/*   Updated: 2023/01/05 13:26:07 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-t_tnode	*find_op(t_tnode *head)
+int	expansion(t_tnode *head, t_env_info_list *env_list)
 {
-	t_tnode	*target;
+	t_tnode	*curr;
+	char	*p_expanded;
+	char	*a_expanded;
 
-	target = check_double_op(head);
-	if (target)
-		return (target);
-	target = check_pipe_op(head);
-	if (target)
-		return (target);
-	return (target);
+	curr = head;
+	while (curr)
+	{
+		p_expanded = p_expansion(curr->token, env_list);
+		a_expanded = asterisk(p_expanded);
+		if (!a_expanded)
+			a_expanded = ft_strdup("");
+		free(curr->token);
+		free(p_expanded);
+		curr->token = NULL;
+		curr->token = a_expanded;
+		curr = curr->next;
+	}
+	return (0);
 }

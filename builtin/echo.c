@@ -10,43 +10,45 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
+#include "builtin.h"
 
-enum e_bool
+void	check_option(char **option, int *option_len, char **excute_str_form)
 {
-	FALSE,
-	TRUE,
-};
+	(*option_len) = 0;
+	(*option) = excute_str_form[1];
+	if ('-' == **option)
+		(*option_len)++;
+	while ((*option)[(*option_len)] == 'n')
+		(*option_len)++;
+	if (((*option_len) == (int)ft_strlen((*option))) == FALSE)
+	{
+		ft_putstr_fd(excute_str_form[1], STDOUT_FILENO);
+		ft_putchar_fd(' ', STDOUT_FILENO);
+	}
+}
 
-int	echo(int argc, char **argv)
+t_bool	echo(char **excute_str_form)
 {
 	char	*option;
 	int		option_len;
 	int		i;
+	int		argc;
 
+	argc = cnt_argc(excute_str_form);
 	if (argc == 1)
 		ft_putchar_fd('\n', 1);
 	if (argc < 2)
-		return (EXIT_SUCCESS);
-	option_len = 0;
-	option = argv[1];
-	if ('-' == *option)
-		option_len++;
-	while (option[option_len] == 'n')
-		option_len++;
-	if ((option_len == ft_strlen(option)) == FALSE)
-	{
-		ft_putstr_fd(argv[1], STDOUT_FILENO);
-		ft_putchar_fd(' ', STDOUT_FILENO);
-	}
+		return (TRUE);
+	check_option(&option, &option_len, excute_str_form);
 	i = 2;
 	while (i < argc)
 	{
-		ft_putstr_fd(argv[i++], STDOUT_FILENO);
+		ft_putstr_fd(excute_str_form[i++], STDOUT_FILENO);
 		if (i < argc)
 			ft_putchar_fd(' ', STDOUT_FILENO);
 	}
-	if ((option_len == ft_strlen(option)) == FALSE)
+	if ((option_len == (int)ft_strlen(option)) == FALSE)
 		ft_putstr_fd("\n", STDOUT_FILENO);
-	return (EXIT_SUCCESS);
+	g_error_code = 0;
+	return (TRUE);
 }

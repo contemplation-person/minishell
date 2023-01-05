@@ -6,48 +6,33 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:41:07 by juha              #+#    #+#             */
-/*   Updated: 2022/12/19 20:28:38 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/04 16:30:24 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../builtin/builtin.h"
 
-int	unset_len(char *unset_target)
-{
-	int	i;
-
-	i = 0;
-	while (*unset_target)
-	{
-		i++;
-		if (unset_target == '=')
-			break ;
-		unset_target++;
-	}
-	return (i);
-}
-
 t_bool	builtin_unset(t_env_info_list *l, char **excute_str_form)
 {
-	int		i;
-	int		exist;
+	t_env_info	*node;
 
-	i = 0;
-	exist = FALSE;
-	while (unset_name[i])
+	if (!l)
+		return (FALSE);
+	excute_str_form++;
+	while (*excute_str_form)
 	{
-		if (unset_name[i++] == '=')
-			exist = TRUE;
-	}
-	if (exist == FALSE)
-	{
-		while (l)
+		node = l->env_info;
+		while (node)
 		{
-			if ((!ft_strncmp(unset_name, l->key, ft_strlen(l->key))) \
-				&& (ft_strlen(unset_name) == ft_strlen(l->key)))
-				remove_env_list(&l);
-			l->next;
+			if (!ft_strncmp(node->key, *excute_str_form, \
+				ft_strlen(*excute_str_form) + 1))
+			{
+				delete_one_list(l, *excute_str_form);
+			}
+			node = node->next;
 		}
+		excute_str_form++;
 	}
-	return (0);
+	g_error_code = 0;
+	return (TRUE);
 }

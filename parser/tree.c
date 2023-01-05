@@ -5,39 +5,46 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/06 16:34:41 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/10 16:04:48 by gyim             ###   ########seoul.kr  */
+/*   Created: 2022/12/10 09:04:30 by gyim              #+#    #+#             */
+/*   Updated: 2023/01/04 19:42:12 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-t_node	*make_tree(char **cmds)
+t_tree_node	*make_tree(t_tnode *head)
 {
-	int		op_index;
-	t_node	*new_node;
+	t_tnode		*op_node;
+	t_tree_node	*new_node;
 
-	print_cmds(cmds);
-	op_index = find_op(cmds);
+	head = delete_paren(head);
+	op_node = find_op(head);
 	new_node = make_new_node();
-	if (new_node == NULL)
+	if (!new_node)
 		return (NULL);
-	if (op_index == -1)
+	if (!op_node)
 	{
-		new_node->words = cmds;
+		new_node->words = head;
 		return (new_node);
 	}
-	if (make_child(new_node, cmds, op_index) == -1)
+	if (head == op_node || !op_node->next
+		|| make_child(new_node, head, op_node) == -1)
+	{
+		write(2, "syntax error\n", 13);
+		g_error_code = 2;
+		free_tlist(head);
+		free(new_node);
 		return (NULL);
+	}
 	else
 		return (new_node);
 }
 
-t_node	*make_new_node(void)
+t_tree_node	*make_new_node(void)
 {
-	t_node	*new_node;
+	t_tree_node	*new_node;
 
-	new_node = malloc(sizeof(t_node));
+	new_node = malloc(sizeof(t_tree_node));
 	if (!new_node)
 		return (NULL);
 	new_node->op = NULL;
@@ -47,44 +54,55 @@ t_node	*make_new_node(void)
 	return (new_node);
 }
 
-int	make_child(t_node *parent_node, char **cmds, int op_index)
+void	free_tlist(t_tnode *head)
 {
-	char	**l_cmds;
-	char	**r_cmds;
-	int		len;
+	t_tnode	*curr;
+	t_tnode	*next;
 
-	len = cmds_len(cmds);
-	parent_node->op = ft_strdup(cmds[op_index]);
-	l_cmds = subcmds(cmds, 0, op_index - 1);
-	if (l_cmds == NULL)
-		return (-1);
-	r_cmds = subcmds(cmds, op_index + 1, len - 1);
-	if (r_cmds == NULL)
+	curr = head;
+	while (curr)
 	{
-		free_cmds(l_cmds);
-		return (-1);
+		next = curr->next;
+		free(curr->token);
+		free(curr);
+		curr = next;
 	}
-	free_cmds(cmds);
-	parent_node->left = make_tree(l_cmds);
-	parent_node->right = make_tree(r_cmds);
+}
+
+int	make_child(t_tree_node *parent_node, t_tnode *head, t_tnode *op_node)
+{
+	t_tnode	*l_cmds;
+	t_tnode	*r_cmds;
+	t_tnode	*op_node_prev;
+
+	l_cmds = head;
+	r_cmds = op_node->next;
+	parent_node->op = op_node;
+	op_node->next = NULL;
+	op_node_prev = find_prev(head, op_node);
+	op_node_prev->next = NULL;
+	if (l_cmds != op_node)
+		parent_node->left = make_tree(l_cmds);
+	else
+		parent_node->left = NULL;
+	if (r_cmds != NULL)
+		parent_node->right = make_tree(r_cmds);
+	else
+		parent_node->right = NULL;
 	return (0);
 }
 
-void	del_tree(t_node *node)
+void	del_sublist(t_tnode	*head)
 {
-	if (node->left == NULL)
+	t_tnode	*curr;
+	t_tnode	*next;
+
+	curr = head;
+	while (curr)
 	{
-		free_cmds(node->words);
-		node->words = NULL;
-		node = NULL;
-		return ;
+		next = curr->next;
+		free(curr->token);
+		free(curr);
+		curr = next;
 	}
-	del_tree(node->left);
-	free(node->left);
-	node->left = NULL;
-	del_tree(node->right);
-	free(node->right);
-	node->right = NULL;
-	free(node->op);
-	node->op = NULL;
 }

@@ -3,38 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@studet.42seoul.kr>             +#+  +:+       +#+         */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:21:32 by gyim              #+#    #+#             */
-/*   Updated: 2022/12/10 14:14:15 by gyim             ###   ########.fr       */
+/*   Updated: 2023/01/04 15:03:59 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-t_node	*parser(t_tlist_info *list)
+t_tree_node	*parser(t_tlist_info *list)
 {
-	int		len;
-	char	**init_cmds;
-	t_node	*root;
+	t_tree_node	*root;
 
-	init_cmds = get_cmds_from_list(list);
-	root = make_tree(init_cmds);
+	root = make_tree(list->head);
 	if (!root)
 		return (NULL);
 	return (root);
-}
-
-char	**get_cmds_from_list(t_tlist_info *list)
-{
-	int		len;
-	char	**cmds;
-
-	len = list_len(list);
-	cmds = malloc(sizeof(char *) * (len + 1));
-	cmds[len] = NULL;
-	copy_from_list(cmds, list);
-	return (cmds);
 }
 
 int	list_len(t_tlist_info *list)
@@ -65,4 +50,23 @@ void	copy_from_list(char **target, t_tlist_info *list)
 		target_index++;
 		curr = curr->next;
 	}
+}
+
+int	parsing_excute(char *user_input, t_env_info_list *env_list)
+{
+	t_tlist_info	*word_list;
+
+	if (user_input[0] == '\0')
+		return (0);
+	word_list = split_input(user_input);
+	if (valid_check(word_list->head) == -1)
+	{
+		del_list(word_list);
+		g_error_code = 2;
+		return (0);
+	}
+	multiple_cmds_excute(word_list, env_list);
+	free(word_list);
+	word_list = NULL;
+	return (0);
 }

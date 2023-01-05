@@ -12,11 +12,17 @@
 
 #include "builtin.h"
 
-int	pwd(char *str)
+void	builtin_pwd(char **excute_str_form)
 {
-	if (ft_strncmp(str, "pwd", ft_strlen(str)))
-		return (builtin_error_message("pwd", " : ", "too many arguments"));
+	int		i;
+	char	*str;
+
+	i = cnt_argc(excute_str_form);
+	if (i != 1)
+		return (builtin_error_message("bash",
+				"pwd", "too many arguments", 127));
+	str = NULL;
 	str = getcwd(str, 1);
-	ft_putstr_fd(str, STDIN_FILENO);
-	return (EXIT_SUCCESS);
+	ft_putendl_fd(str, STDOUT_FILENO);
+	g_error_code = 0;
 }
