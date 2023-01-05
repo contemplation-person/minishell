@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_list_1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:50:23 by juha              #+#    #+#             */
-/*   Updated: 2023/01/05 08:22:54 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/05 13:08:55 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,19 @@ void	add_env_list(t_env_info_list *list, \
 	}
 }
 
+void	form_export(t_env_info *temp, t_env_feature feature)
+{
+	if (feature == EXPORT)
+	{
+		ft_putstr_fd("\"", STDOUT_FILENO);
+		if (temp->value)
+			ft_putstr_fd(temp->value, STDOUT_FILENO);
+		else
+			ft_putstr_fd("", STDOUT_FILENO);
+		ft_putstr_fd("\"", STDOUT_FILENO);
+	}
+}
+
 void	print_envp(t_env_info_list minishell_envp, t_env_feature feature)
 {
 	t_env_info		*temp;
@@ -86,12 +99,7 @@ void	print_envp(t_env_info_list minishell_envp, t_env_feature feature)
 				ft_putstr_fd(temp->value, STDOUT_FILENO);
 			if (feature == EXPORT)
 			{
-				ft_putstr_fd("\"", STDOUT_FILENO);
-				if (temp->value)
-					ft_putstr_fd(temp->value, STDOUT_FILENO);
-				else
-					ft_putstr_fd("", STDOUT_FILENO);
-				ft_putstr_fd("\"", STDOUT_FILENO);
+				form_export(temp, feature);
 			}
 		}
 		ft_putchar_fd('\n', STDOUT_FILENO);
