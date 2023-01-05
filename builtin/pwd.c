@@ -12,8 +12,6 @@
 
 #include "builtin.h"
 
-// env PWD 경로 수정, env OLDPWD 경로 수정
-
 void	builtin_pwd(char **excute_str_form)
 {
 	int		i;
