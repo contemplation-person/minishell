@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 10:01:26 by juha              #+#    #+#             */
-/*   Updated: 2023/01/04 18:13:50 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/05 10:28:34 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	minishell_excute(t_env_info_list *minishell_envp_list, struct sigaction *sa)
 
 	while (1)
 	{
+		unlink(HERE_DOC_NAME);
 		_set_signal(sa, 1);
 		sentence = readline("MINISHELL : ");
 		if (sentence == NULL)

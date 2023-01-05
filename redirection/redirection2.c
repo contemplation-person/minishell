@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 13:37:37 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/04 18:58:47 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/05 09:32:44 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	set_infile(t_fds *fds, t_rnode *node)
 	return (0);
 }
 
-int	set_here_doc(t_rnode *node)
+int	set_here_doc(t_rnode *node, t_env_info_list *envp_list)
 {
 	int	here_doc_fd;
 
@@ -82,7 +82,7 @@ int	set_here_doc(t_rnode *node)
 		g_error_code = 1;
 		return (-1);
 	}
-	read_lines(here_doc_fd, node->file);
+	read_lines(here_doc_fd, node->file, envp_list);
 	close(here_doc_fd);
 	return (0);
 }

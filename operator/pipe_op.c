@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 12:42:25 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/04 19:53:25 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/05 10:22:10 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ int	op_pipe(t_tree_node *node, t_fds *fd_info, t_env_info_list *env_list)
 	child_fds[1].in_fd = fd[0];
 	child_fds[1].out_fd = fd_info->out_fd;
 	op_pipe_left_excute(node, &child_fds[0], fd, env_list);
-	close(fd[1]);
 	op_pipe_right_excute(node, &child_fds[1], fd, env_list);
-	close(fd[0]);
 	waitpid(0, &status, 0);
+	close(fd[1]);
+	close(fd[0]);
+	close(fd_info->in_fd);
+	close(fd_info->out_fd);
 	g_error_code = WEXITSTATUS(status);
 	return (0);
 }
@@ -49,6 +51,8 @@ int	op_pipe_left_excute(t_tree_node *node, t_fds *fd_info, int pipe_fd[2],
 		exit(g_error_code);
 	}
 	waitpid(0, &status, 0);
+	close(fd_info->in_fd);
+	close(fd_info->out_fd);
 	g_error_code = WEXITSTATUS(status);
 	return (0);
 }
@@ -70,6 +74,8 @@ int	op_pipe_right_excute(t_tree_node *node, t_fds *fd_info, int pipe_fd[2],
 		exit(g_error_code);
 	}
 	waitpid(0, &status, 0);
+	close(fd_info->in_fd);
+	close(fd_info->out_fd);
 	g_error_code = WEXITSTATUS(status);
 	return (0);
 }
