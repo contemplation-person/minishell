@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 13:37:37 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/05 20:03:27 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/05 20:27:17 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,11 @@ int	set_infile(t_fds *fds, t_rnode *node)
 int	set_here_doc(t_rnode *node, t_env_info_list *envp_list)
 {
 	int		here_doc_fd;
-	char	*path;
+	char	*here_doc;
 
-	path = ft_strjoin(getenv("HOME"), "/here_doc.temp");
-	here_doc_fd = open(path, O_TRUNC | O_WRONLY | O_CREAT, 0644);
+	here_doc = ft_strjoin(getenv("HOME"), HERE_DOC);
+	unlink(here_doc);
+	here_doc_fd = open(here_doc, O_TRUNC | O_WRONLY | O_CREAT, 0644);
 	if (here_doc_fd == -1)
 	{
 		write(2, "Permission denied\n", 18);
@@ -85,7 +86,7 @@ int	set_here_doc(t_rnode *node, t_env_info_list *envp_list)
 		return (-1);
 	}
 	read_lines(here_doc_fd, node->file, envp_list);
-	free(path);
+	free(here_doc);
 	close(here_doc_fd);
 	return (0);
 }
