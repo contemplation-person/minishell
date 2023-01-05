@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 10:34:58 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/04 18:53:34 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/05 11:28:56 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	multiple_cmds_excute(t_tlist_info *word_list, t_env_info_list *env_list)
 	root = parser(word_list);
 	fds.in_fd = dup(STDIN_FILENO);
 	fds.out_fd = dup(STDOUT_FILENO);
-	printf("%d %d\n", fds.in_fd, fds.out_fd);
 	if (root)
 	{
 		if (tree_valid_check(root) != -1)

@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/05 10:24:12 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/05 11:27:55 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,12 @@ int	excute_leaf(t_tnode *cmd_list, t_fds *fd_info, t_env_info_list *envp_list)
 	quote_remove(cmd_list);
 	rd_head = get_redirection(cmd_list);
 	cmd = get_cmd(cmd_list);
-	printf("before : %d %d\n", fd_info->in_fd, fd_info->out_fd);
 	if (set_fds(fd_info, rd_head, envp_list) == -1)
 	{
 		free_red(rd_head);
 		free_cmd(cmd);
 		return (-1);
 	}
-	printf("after : %d %d\n", fd_info->in_fd, fd_info->out_fd);
 	if (cmd[0])
 		excute_cmd(cmd, fd_info, envp_list);
 	free_red(rd_head);
