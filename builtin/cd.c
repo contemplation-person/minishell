@@ -62,6 +62,7 @@ char	*set_pwd(char *excute_str_form, char *home)
 		ret = ft_strjoin(temp, excute_str_form + 2);
 		if (!temp || !ret)
 			exit(1);
+		free(temp);
 	}
 	return (ret);
 }
@@ -105,5 +106,8 @@ t_bool	builtin_cd(t_env_info_list *minishell_envp, char **excute_str_form)
 				&& excute_str_form[1][0] == '~')
 		new_pwd = set_pwd(excute_str_form[1], getenv("HOME"));
 	change_dir(minishell_envp, &old_pwd, new_pwd);
+	if (cnt_argc(excute_str_form) > 1 && excute_str_form[1] \
+			&& excute_str_form[1][0] == '~')
+		free(new_pwd);
 	return (TRUE);
 }
