@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:41:20 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/06 10:44:03 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 15:14:08 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,5 @@ void	delete_here_doc(void)
 
 	here_doc = ft_strjoin(getenv("HOME"), HERE_DOC);
 	unlink(here_doc);
+	free(here_doc);
 }

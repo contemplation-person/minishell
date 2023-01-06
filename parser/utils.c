@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 18:26:48 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/06 13:19:13 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 13:28:08 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,11 @@ void	add_token_list(t_tnode **head, char *token)
 {
 	t_tnode	*new_node;
 	t_tnode	*last;
+	char	*trimmed_token;
 
-	new_node = make_node(token);
+	trimmed_token = ft_strtrim(token, " ");
+	new_node = make_node(trimmed_token);
+	free(trimmed_token);
 	last = find_last_node(*head);
 	if (!last)
 		*head = new_node;

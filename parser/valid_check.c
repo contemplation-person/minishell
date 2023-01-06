@@ -6,13 +6,14 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 17:52:44 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/04 16:44:38 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 15:24:39 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
 #define PAREN_ERROR	"unexpedted token ')' near grammer error\n"
+#define UNEXPECTED_TOKEN "unexpected token\n"
 
 int	valid_check(t_tnode *head)
 {
@@ -21,6 +22,11 @@ int	valid_check(t_tnode *head)
 	if (paren_check(head) == -1)
 	{
 		write(2, PAREN_ERROR, ft_strlen(PAREN_ERROR));
+		return (-1);
+	}
+	if (grammar_check(head) == -1)
+	{
+		write(2, UNEXPECTED_TOKEN, ft_strlen(UNEXPECTED_TOKEN));
 		return (-1);
 	}
 	return (0);
@@ -89,6 +95,24 @@ int	paren_check(t_tnode *head)
 	{
 		write(2, "parenthesis not equal\n", 22);
 		return (-1);
+	}
+	return (0);
+}
+
+int	grammar_check(t_tnode *head)
+{
+	t_tnode	*curr;
+	int		prev_op;
+
+	prev_op = 0;
+	curr = head;
+	while (curr)
+	{
+		if (prev_op == 1 && (is_op(curr->token, 0) || is_paren(curr->token, 0)))
+			return (-1);
+		if (is_op(curr->token, 0) || is_paren(curr->token, 0))
+			prev_op = 1;
+		curr = curr->next;
 	}
 	return (0);
 }

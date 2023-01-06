@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:36:08 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/06 13:19:38 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 15:11:50 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	retokenize(t_tnode	*head)
 			curr = replace_list(&head, prev, curr, tokened_list);
 		prev = curr;
 		curr = curr->next;
+		free_list(tokened_list);
 	}
 }
 
@@ -77,10 +78,11 @@ t_tnode	*split_token(char *token)
 			skip_s_quote(token, &i);
 		else if (token[i] == '\"')
 			skip_d_quote(token, &i);
-		else if (token[i + 1] == ' ' || token[i + 1] == '\0')
+		if (token[i + 1] == ' ' || token[i + 1] == '\0')
 		{
 			sub_token = ft_substr(token, start, i - start + 1);
 			add_token_list(&head, sub_token);
+			free(sub_token);
 			start = i + 1;
 		}
 		i++;
