@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 08:13:54 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/05 18:27:37 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 10:43:11 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	dollar_token_change(char **ret, char *token, t_env_info_list *env_list)
 	}
 }
 
-char	*p_expansion(char *token, t_env_info_list *env_list)
+char	*p_token_expansion(char *token, t_env_info_list *env_list)
 {
 	char	*ret;
 

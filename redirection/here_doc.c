@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:41:20 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/06 09:44:46 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 10:44:03 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	read_lines(int here_doc_fd, char *limiter, t_env_info_list *envp_list)
 		if (ft_strncmp(temp, line, ft_strlen(temp)) == 0
 			&& line[ft_strlen(temp)] == '\n')
 			break ;
-		p_expanded = p_expansion(line, envp_list);
+		p_expanded = p_token_expansion(line, envp_list);
 		write(here_doc_fd, p_expanded, ft_strlen(p_expanded));
 		free(line);
 		free(p_expanded);

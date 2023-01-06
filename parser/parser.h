@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:43:32 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/05 13:10:12 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 12:37:19 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,11 @@ int				make_child(t_tree_node *parent_node,
 void			del_tree(t_tree_node *node);
 void			free_list(t_tnode *head);
 t_tnode			*find_op(t_tnode *head);
+t_tnode			*find_last_node(t_tnode *head);
+void			add_token_list(t_tnode **head, char *token);
+t_tnode			*replace_list(t_tnode **head, t_tnode *prev,
+					t_tnode *target, t_tnode *new_list);
+
 char			**subcmds(char **cmds, int start, int end);
 int				cmds_len(char **cmds);
 void			free_cmds(char **cmds);
@@ -66,16 +71,20 @@ int				paren_check(t_tnode *head);
 int				tree_valid_check(t_tree_node *node);
 int				search_tree(t_tree_node *node,
 					t_fds *fd_info, t_env_info_list *env_list);
-// param_expansion.c
+// dollar_expannsion.c
 char			*find_variable(char *token, int start, int end,
 					t_env_info_list *env_list);
 void			dollar_token_change(char **ret, char *token,
 					t_env_info_list *env_list);
 char			*dollar_expand(char *token, int start, int end,
 					t_env_info_list *env_list);
-char			*p_expansion(char *token, t_env_info_list *env_list);
+char			*p_token_expansion(char *token, t_env_info_list *env_list);
 void			skip_s_quote(char *token, int *index);
+// param_expansion.c
 int				expansion(t_tnode *head, t_env_info_list *env_list);
+void			retokenize(t_tnode	*head);
+void			skip_d_quote(char *token, int *index);
+t_tnode			*split_token(char *token);
 // pipe_excute.c
 int				op_pipe(t_tree_node *node, t_fds *fd_info,
 					t_env_info_list *env_list);

@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 18:26:48 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/03 15:17:12 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 13:19:13 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,47 @@ t_tnode	*find_op(t_tnode *head)
 	if (target)
 		return (target);
 	return (target);
+}
+
+t_tnode	*find_last_node(t_tnode *head)
+{
+	t_tnode	*curr;
+
+	if (!head)
+		return (NULL);
+	curr = head;
+	while (curr->next)
+		curr = curr->next;
+	return (curr);
+}
+
+void	add_token_list(t_tnode **head, char *token)
+{
+	t_tnode	*new_node;
+	t_tnode	*last;
+
+	new_node = make_node(token);
+	last = find_last_node(*head);
+	if (!last)
+		*head = new_node;
+	else
+		last->next = new_node;
+}
+
+t_tnode	*replace_list(t_tnode **head, t_tnode *prev,
+				t_tnode *target, t_tnode *new_list)
+{
+	t_tnode	*next;
+	t_tnode	*last;
+
+	next = target->next;
+	if (!prev)
+		*head = new_list;
+	else
+		prev->next = new_list;
+	last = find_last_node(new_list);
+	last->next = next;
+	free(target->token);
+	free(target);
+	return (last);
 }
