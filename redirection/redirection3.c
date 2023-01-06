@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 16:53:14 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/05 10:25:16 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 09:43:38 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	set_fds(t_fds *fds, t_rnode *node, t_env_info_list *envp_list)
 	t_rnode	*curr;
 	t_fds	temp;
 
+	delete_here_doc();
 	temp.in_fd = -1;
 	temp.out_fd = -1;
 	curr = node;

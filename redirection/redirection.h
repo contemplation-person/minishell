@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 09:25:16 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/05 09:34:08 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 09:44:52 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,5 @@ int		renewal_fds(t_rnode *node, t_fds *fds, t_env_info_list *envp_list);
 int		set_fds(t_fds *fds, t_rnode *node, t_env_info_list *envp_list);
 
 int		read_lines(int here_doc_fd, char *limiter, t_env_info_list *envp_list);
+void	delete_here_doc(void);
 #endif
