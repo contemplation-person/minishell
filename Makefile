@@ -6,7 +6,7 @@
 #    By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2023/01/06 16:57:09 by gyim             ###   ########seoul.kr   #
+#    Updated: 2023/01/06 17:01:47 by gyim             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,6 +72,8 @@ $(FT_PRINTF) :
 	make -j 4 -C ft_printf all
 
 all : $(NAME)
+
+bonus : $(NAME)
 
 clean :
 	make -C libft fclean
