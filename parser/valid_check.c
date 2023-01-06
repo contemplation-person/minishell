@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 17:52:44 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/06 15:24:39 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 15:32:20 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ int	grammar_check(t_tnode *head)
 			return (-1);
 		if (is_op(curr->token, 0) || is_paren(curr->token, 0))
 			prev_op = 1;
+		else
+			prev_op = 0;
 		curr = curr->next;
 	}
 	return (0);
