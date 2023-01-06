@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 14:32:51 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/04 15:04:47 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 17:24:54 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ int	search_tree(t_tree_node *node, t_fds *fd_info, t_env_info_list *env_list)
 	if (node->op != NULL)
 	{
 		if (ft_strncmp(node->op->token, "|", 2) == 0)
-			op_pipe(node, fd_info, env_list);
+			return (op_pipe(node, fd_info, env_list));
 		else if (ft_strncmp(node->op->token, "&&", 3) == 0)
-			op_double_and(node, fd_info, env_list);
+			return (op_double_and(node, fd_info, env_list));
 		else if (ft_strncmp(node->op->token, "||", 3) == 0)
-			op_double_or(node, fd_info, env_list);
+			return (op_double_or(node, fd_info, env_list));
 		else
 			return (-1);
 	}

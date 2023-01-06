@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/06 16:36:12 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 17:41:27 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	excute_cmd(char **cmd, t_fds *fd_info, t_env_info_list *envp_list)
 		print_error(cmd[0], CMD_NOT_FOUND);
 		exit(127);
 	}
-	waitpid(0, &status, 0);
+	waitpid(-1, &status, 0);
 	close(fd_info->in_fd);
 	close(fd_info->out_fd);
 	g_error_code = WEXITSTATUS(status);

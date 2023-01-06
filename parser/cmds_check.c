@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 10:34:58 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/06 15:00:26 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 17:42:14 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	multiple_cmds_excute(t_tlist_info *word_list, t_env_info_list *env_list)
 {
 	t_fds		fds;
 	t_tree_node	*root;
+	int			status;
 
 	root = parser(word_list);
 	fds.in_fd = dup(STDIN_FILENO);
@@ -62,7 +63,8 @@ void	multiple_cmds_excute(t_tlist_info *word_list, t_env_info_list *env_list)
 		if (tree_valid_check(root) != -1)
 		{
 			search_tree(root, &fds, env_list);
-			wait(0);
+			waitpid(-1, &status, 0);
+			g_error_code = WEXITSTATUS(status);
 		}
 		del_tree(root);
 		free(root);
