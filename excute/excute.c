@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/07 15:53:40 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/07 16:36:42 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,7 @@ int	excute_cmd(char **cmd, t_fds *fd_info, t_env_info_list *envp_list)
 		path = get_path(envp_list);
 		cmd_path_check(path, cmd, envp_list);
 		print_error(cmd[0], CMD_NOT_FOUND);
-		g_error_code = 127;
-		exit(g_error_code);
+		exit(127);
 	}
 	waitpid(0, &status, 0);
 	close(fd_info->in_fd);
