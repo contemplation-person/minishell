@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:43:32 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/06 19:38:54 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/07 14:20:45 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,9 @@ void			dollar_token_change(char **ret, char *token,
 char			*dollar_expand(char *token, int start, int end,
 					t_env_info_list *env_list);
 char			*p_token_expansion(char *token, t_env_info_list *env_list);
+char			*error_code_expansion(char *token, int start, int end);
+char			*env_key_to_value(char *token, int start, int end,
+					t_env_info_list *env_list);
 void			skip_s_quote(char *token, int *index);
 int				expansion(t_tnode *head, t_env_info_list *env_list);
 void			retokenize(t_tnode	*head);

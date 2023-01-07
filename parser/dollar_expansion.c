@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 08:13:54 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/06 18:30:35 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/07 14:29:01 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,10 @@
 char	*find_variable(char *token, int start, int end,
 					t_env_info_list *env_list)
 {
-	t_env_info	*curr;
-	char		*temp;
-	char		*ret;
-	char		*code;
-
 	if (ft_strncmp("$?", token + start, ft_strlen("$?")) == 0)
-	{
-		temp = ft_substr(token, start + 2, end - start - 1);
-		code = ft_itoa(g_error_code);
-		ret = ft_strjoin(code, temp);
-		free(code);
-		free(temp);
-		return (ret);
-	}
-	curr = env_list->env_info;
-	while (curr)
-	{
-		if (ft_strncmp(curr->key, token + start + 1, ft_strlen(curr->key) + 1)
-			== 0)
-			return (ft_strdup(curr->value));
-		curr = curr->next;
-	}
-	if (ft_strncmp(token + start, "$", 2) == 0)
-		return (ft_strdup("$"));
-	return (ft_strdup(""));
+		return (error_code_expansion(token, start, end));
+	else
+		return (env_key_to_value(token, start, end, env_list));
 }
 
 char	*dollar_expand(char *token, int start, int end,
