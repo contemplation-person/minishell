@@ -19,7 +19,7 @@ void	builtin_pwd(char **excute_str_form)
 
 	i = cnt_argc(excute_str_form);
 	if (i != 1)
-		return (builtin_error_message("bash",
+		return (builtin_error_message("MINISHELL : ",
 				"pwd", "too many arguments", 127));
 	str = NULL;
 	str = getcwd(str, 1);

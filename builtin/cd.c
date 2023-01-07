@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 19:56:59 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/05 12:57:45 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 17:57:45 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ char	*set_pwd(char *excute_str_form, char *home)
 		ret = ft_strjoin(temp, excute_str_form + 2);
 		if (!temp || !ret)
 			exit(1);
+		free(temp);
 	}
 	return (ret);
 }
@@ -70,14 +71,14 @@ t_bool	check_cd_error(t_env_info_list *minishell_envp, char **excute_str_form)
 {
 	if (cnt_argc(excute_str_form) > 2)
 	{
-		builtin_error_message("bash", "cd", "too many arguments", 1);
+		builtin_error_message("MINISHELL : ", "cd", "too many arguments", 1);
 		return (TRUE);
 	}
 	else if (cnt_argc(excute_str_form) == 1)
 	{
 		if (!find_env(minishell_envp, "HOME"))
 		{
-			builtin_error_message("bash", "cd", "home not set", 1);
+			builtin_error_message("MINISHELL : ", "cd", "home not set", 1);
 			return (TRUE);
 		}
 	}
@@ -105,5 +106,8 @@ t_bool	builtin_cd(t_env_info_list *minishell_envp, char **excute_str_form)
 				&& excute_str_form[1][0] == '~')
 		new_pwd = set_pwd(excute_str_form[1], getenv("HOME"));
 	change_dir(minishell_envp, &old_pwd, new_pwd);
+	if (cnt_argc(excute_str_form) > 1 && excute_str_form[1] \
+				&& excute_str_form[1][0] == '~')
+		free(new_pwd);
 	return (TRUE);
 }

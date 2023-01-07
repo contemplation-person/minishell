@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 08:13:54 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/06 10:43:11 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 18:30:35 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,16 @@ char	*find_variable(char *token, int start, int end,
 		free(temp);
 		return (ret);
 	}
-	end = 0;
 	curr = env_list->env_info;
 	while (curr)
 	{
-		if (ft_strncmp(curr->key, token + start + 1, ft_strlen(curr->key))
+		if (ft_strncmp(curr->key, token + start + 1, ft_strlen(curr->key) + 1)
 			== 0)
 			return (ft_strdup(curr->value));
 		curr = curr->next;
 	}
+	if (ft_strncmp(token + start, "$", 2) == 0)
+		return (ft_strdup("$"));
 	return (ft_strdup(""));
 }
 
