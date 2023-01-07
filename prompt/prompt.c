@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 10:01:26 by juha              #+#    #+#             */
-/*   Updated: 2023/01/05 16:31:07 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/07 22:11:06 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	signal_handler2(int signal_int)
 	{
 		write(1, "\n", 1);
 		rl_redisplay();
+		g_error_code = 130;
 	}
 	else if (signal_int == SIGQUIT)
 	{
@@ -38,23 +39,29 @@ void	signal_handler2(int signal_int)
 	}
 }
 
-void	_set_signal(struct sigaction *sa, int flag)
+void	_set_signal(struct sigaction *sa, t_signal flag)
 {
-	sa->sa_flags = SIGINFO;
-	sigemptyset(&sa->sa_mask);
-	sigaddset(&sa->sa_mask, SIGQUIT);
-	sigaddset(&sa->sa_mask, SIGINT);
-	if (flag == 1)
+	if (flag == MAIN)
+	{
+		signal(SIGQUIT, SIG_IGN);
+		signal(SIGINT, SIG_IGN);
+	}
+	else if (flag == READLINE)
 	{
 		sa->__sigaction_u.__sa_handler = signal_handler;
 		signal(SIGQUIT, SIG_IGN);
 		signal(SIGINT, signal_handler);
 	}
-	else
+	else if (flag == CHILD)
 	{
 		sa->__sigaction_u.__sa_handler = signal_handler2;
 		signal(SIGQUIT, signal_handler2);
 		signal(SIGINT, signal_handler2);
+	}
+	else if (flag == HEREDOC)
+	{
+		signal(SIGQUIT, SIG_IGN);
+		signal(SIGINT, signal_handler);
 	}
 }
 
@@ -64,9 +71,11 @@ int	minishell_excute(t_env_info_list *minishell_envp_list, struct sigaction *sa)
 
 	while (1)
 	{
+		_set_signal(sa, MAIN);
+		_set_signal(sa, READLINE);
 		unlink(HERE_DOC_NAME);
-		_set_signal(sa, 1);
 		sentence = readline("MINISHELL : ");
+		_set_signal(sa, CHILD);
 		if (sentence == NULL)
 		{
 			ft_putendl_fd("exit", STDOUT_FILENO);
@@ -74,7 +83,6 @@ int	minishell_excute(t_env_info_list *minishell_envp_list, struct sigaction *sa)
 		}
 		if (sentence && ft_strlen(sentence))
 			add_history(sentence);
-		_set_signal(sa, 0);
 		if (parsing_excute(sentence, minishell_envp_list) == -1)
 		{
 			free(sentence);
