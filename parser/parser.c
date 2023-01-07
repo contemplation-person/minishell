@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:21:32 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/07 11:46:57 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/07 15:54:40 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	parsing_excute(char *user_input, t_env_info_list *env_list)
 	{
 		del_list(word_list);
 		g_error_code = 2;
-		return (0);
+		return (g_error_code);
 	}
 	multiple_cmds_excute(word_list, env_list);
 	free(word_list);

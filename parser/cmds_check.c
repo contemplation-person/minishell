@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 10:34:58 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/06 17:42:14 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/07 16:12:38 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,32 +28,10 @@ int	multiple_cmds_check(t_tlist_info *word_list)
 	return (ret);
 }
 
-void	one_cmd_excute(t_tlist_info *word_list, t_env_info_list *env_list)
-{
-	t_fds		fds;
-	t_tree_node	*root;
-
-	root = parser(word_list);
-	if (root)
-	{
-		fds.in_fd = dup(STDIN_FILENO);
-		fds.out_fd = dup(STDOUT_FILENO);
-		if (tree_valid_check(root) != -1)
-		{
-			search_tree(root, &fds, env_list);
-			while (waitpid(-1, NULL, WNOHANG) != -1)
-				;
-		}
-		del_tree(root);
-		free(root);
-	}
-}
-
 void	multiple_cmds_excute(t_tlist_info *word_list, t_env_info_list *env_list)
 {
 	t_fds		fds;
 	t_tree_node	*root;
-	int			status;
 
 	root = parser(word_list);
 	fds.in_fd = dup(STDIN_FILENO);
@@ -61,11 +39,7 @@ void	multiple_cmds_excute(t_tlist_info *word_list, t_env_info_list *env_list)
 	if (root)
 	{
 		if (tree_valid_check(root) != -1)
-		{
-			search_tree(root, &fds, env_list);
-			waitpid(-1, &status, 0);
-			g_error_code = WEXITSTATUS(status);
-		}
+			g_error_code = search_tree(root, &fds, env_list);
 		del_tree(root);
 		free(root);
 	}

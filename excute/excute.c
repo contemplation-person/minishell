@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/07 14:25:02 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/07 15:53:40 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ int	excute_leaf(t_tnode *cmd_list, t_fds *fd_info, t_env_info_list *envp_list)
 		return (-1);
 	}
 	if (cmd[0])
-		excute_cmd(cmd, fd_info, envp_list);
+		g_error_code = excute_cmd(cmd, fd_info, envp_list);
 	free_red(rd_head);
 	free_cmd(cmd);
 	close(fd_info->in_fd);
 	close(fd_info->out_fd);
-	return (0);
+	return (g_error_code);
 }
 
 void	print_error(char *cmd, char *msg)
@@ -63,13 +63,14 @@ int	excute_cmd(char **cmd, t_fds *fd_info, t_env_info_list *envp_list)
 		path = get_path(envp_list);
 		cmd_path_check(path, cmd, envp_list);
 		print_error(cmd[0], CMD_NOT_FOUND);
-		exit(127);
+		g_error_code = 127;
+		exit(g_error_code);
 	}
-	waitpid(-1, &status, 0);
+	waitpid(0, &status, 0);
 	close(fd_info->in_fd);
 	close(fd_info->out_fd);
 	g_error_code = WEXITSTATUS(status);
-	return (0);
+	return (g_error_code);
 }
 
 int	cmd_builtin_check1(char **cmd, t_env_info_list *envp_list)
