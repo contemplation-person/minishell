@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 18:11:04 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/07 13:16:38 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/07 18:04:05 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ void	cmd_path_check(char **path, char **cmd,
 				t_env_info_list *envp_list)
 {
 	int		i;
-	char	*cmd_path;
+	char	*cmd_file_path;
+	char	*cmd_folder_path;
 	char	**envp;
 
 	if (path != NULL)
@@ -80,9 +81,11 @@ void	cmd_path_check(char **path, char **cmd,
 		envp = envp_list_to_arr(envp_list);
 		while (path[i])
 		{
-			cmd_path = ft_strjoin(path[i], "/");
-			cmd_path = ft_strjoin(cmd_path, cmd[0]);
-			execve(cmd_path, cmd, envp);
+			cmd_folder_path = ft_strjoin(path[i], "/");
+			cmd_file_path = ft_strjoin(cmd_folder_path, cmd[0]);
+			execve(cmd_file_path, cmd, envp);
+			free(cmd_folder_path);
+			free(cmd_file_path);
 			i++;
 		}
 	}
