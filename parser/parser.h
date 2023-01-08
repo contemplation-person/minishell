@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:43:32 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/07 16:12:56 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/08 21:36:43 by gyim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ int				grammar_check(t_tnode *head);
 int				tree_valid_check(t_tree_node *node);
 int				search_tree(t_tree_node *node,
 					t_fds *fd_info, t_env_info_list *env_list);
+int				pipe_search_tree(t_tree_node *node, t_fds *fd_info,
+					t_env_info_list *env_list);
 char			*find_variable(char *token, int start, int end,
 					t_env_info_list *env_list);
 void			dollar_token_change(char **ret, char *token,

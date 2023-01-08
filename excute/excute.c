@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/07 16:36:42 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/08 22:59:35 by gyim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	excute_leaf(t_tnode *cmd_list, t_fds *fd_info, t_env_info_list *envp_list)
 {
 	char	**cmd;
 	t_rnode	*rd_head;
+	int		pid;
 
 	expansion(cmd_list, envp_list);
 	retokenize(cmd_list);
@@ -29,12 +30,12 @@ int	excute_leaf(t_tnode *cmd_list, t_fds *fd_info, t_env_info_list *envp_list)
 		return (-1);
 	}
 	if (cmd[0])
-		g_error_code = excute_cmd(cmd, fd_info, envp_list);
+		pid = excute_cmd(cmd, fd_info, envp_list);
 	free_red(rd_head);
 	free_cmd(cmd);
 	close(fd_info->in_fd);
 	close(fd_info->out_fd);
-	return (g_error_code);
+	return (pid);
 }
 
 void	print_error(char *cmd, char *msg)
@@ -50,7 +51,7 @@ int	excute_cmd(char **cmd, t_fds *fd_info, t_env_info_list *envp_list)
 	int		status;
 
 	if (cmd_builtin_check1(cmd, envp_list) == 1)
-		return (0);
+		return (-999);
 	pid = fork();
 	if (pid == 0)
 	{
@@ -65,11 +66,10 @@ int	excute_cmd(char **cmd, t_fds *fd_info, t_env_info_list *envp_list)
 		print_error(cmd[0], CMD_NOT_FOUND);
 		exit(127);
 	}
-	waitpid(0, &status, 0);
 	close(fd_info->in_fd);
 	close(fd_info->out_fd);
 	g_error_code = WEXITSTATUS(status);
-	return (g_error_code);
+	return (pid);
 }
 
 int	cmd_builtin_check1(char **cmd, t_env_info_list *envp_list)

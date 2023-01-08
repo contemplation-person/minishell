@@ -6,7 +6,7 @@
 #    By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2023/01/07 14:11:00 by gyim             ###   ########seoul.kr   #
+#    Updated: 2023/01/08 21:38:13 by gyim             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ SRC 			:=	parser/parser.c	\
 					operator/logical_op.c \
 					prompt/prompt.c	\
 					excute/excute.c \
+					excute/excute2.c \
 					excute/path.c \
 					excute/cmd.c \
 					excute/env_to_str.c \
