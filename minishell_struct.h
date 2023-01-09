@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 12:32:14 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/09 10:20:48 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/09 17:04:53 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,15 @@ typedef struct s_rnode
 	struct s_rnode	*next;
 }	t_rnode;
 
+typedef struct s_cmd_node
+{
+	char				**cmd;
+	struct s_cmd_node	*next;
+}	t_cmd_node;
+
+typedef struct s_cmd_pipe_lists
+{
+	t_cmd_node	*cmd_head;
+	t_rnode		*rd_head;		
+}	t_cplist;
 #endif

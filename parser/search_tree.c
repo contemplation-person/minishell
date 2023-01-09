@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 14:32:51 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/08 22:28:20 by gyim             ###   ########.fr       */
+/*   Updated: 2023/01/09 17:03:32 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,45 +28,4 @@ int	tree_valid_check(t_tree_node *node)
 			return (-1);
 	}
 	return (0);
-}
-
-int	search_tree(t_tree_node *node, t_fds *fd_info, t_env_info_list *env_list)
-{
-	int	pid;
-
-	if (node->op != NULL)
-	{
-		if (ft_strncmp(node->op->token, "|", 2) == 0)
-			return (op_pipe(node, fd_info, env_list));
-		else if (ft_strncmp(node->op->token, "&&", 3) == 0)
-			return (op_double_and(node, fd_info, env_list));
-		else if (ft_strncmp(node->op->token, "||", 3) == 0)
-			return (op_double_or(node, fd_info, env_list));
-		else
-			return (-1);
-	}
-	else
-		pid = excute_leaf(node->words, fd_info, env_list);
-	return (pid);
-}
-
-int	pipe_search_tree(t_tree_node *node, t_fds *fd_info,
-		t_env_info_list *env_list)
-{
-	int	pid;
-
-	if (node->op != NULL)
-	{
-		if (ft_strncmp(node->op->token, "|", 2) == 0)
-			return (op_pipe(node, fd_info, env_list));
-		else if (ft_strncmp(node->op->token, "&&", 3) == 0)
-			return (op_double_and(node, fd_info, env_list));
-		else if (ft_strncmp(node->op->token, "||", 3) == 0)
-			return (op_double_or(node, fd_info, env_list));
-		else
-			return (-1);
-	}
-	else
-		pid = pipe_excute_leaf(node->words, fd_info, env_list);
-	return (pid);
 }

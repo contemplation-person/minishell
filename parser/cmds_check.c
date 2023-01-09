@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 10:34:58 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/09 13:30:58 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/09 19:28:46 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,42 +30,18 @@ int	multiple_cmds_check(t_tlist_info *word_list)
 
 void	multiple_cmds_excute(t_tlist_info *word_list, t_env_info_list *env_list)
 {
-	t_fds		fds;
-	t_tree_node	*root;
-	int			pid;
-	int			status;
+	t_tree_node			*root;
+	t_cplist			*cmd_pipe_lists;
 
 	root = parser(word_list);
-	fd_init(&fds);
+	cmd_pipe_lists = init_cmd_pipe_lists();
 	if (root)
 	{
 		if (tree_valid_check(root) != -1)
-		{
-			pid = search_tree(root, &fds, env_list);
-			if (pid != -999)
-			{
-				waitpid(pid, &status, 0);
-				g_error_code = WEXITSTATUS(status);
-			}
-		}
+			search_tree(root, cmd_pipe_lists, env_list);
+		print_cmd_pipe_list(cmd_pipe_lists);
+		free_cmd_pipe_list(&cmd_pipe_lists);
 		del_tree(root);
 		free(root);
 	}
-	fd_close(&fds);
-}
-
-void	fd_init(t_fds *fds)
-{
-	fds->in_fd = dup(STDIN_FILENO);
-	fds->out_fd = dup(STDOUT_FILENO);
-	fds->stdin_fd = dup(STDIN_FILENO);
-	fds->stdout_fd = dup(STDOUT_FILENO);
-}
-
-void	fd_close(t_fds *fds)
-{
-	close(fds->in_fd);
-	close(fds->out_fd);
-	close(fds->stdin_fd);
-	close(fds->stdout_fd);
 }

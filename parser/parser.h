@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:43:32 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/09 13:30:16 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/09 17:56:45 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ t_tnode			*replace_list(t_tnode **head, t_tnode *prev,
 char			**subcmds(char **cmds, int start, int end);
 int				cmds_len(char **cmds);
 void			free_cmds(char **cmds);
-void			print_cmds(char **cmds);
 t_tnode			*find_prev(t_tnode *head, t_tnode *target);
 t_tnode			*check_double_op(t_tnode *head);
 t_tnode			*check_pipe_op(t_tnode *head);
@@ -67,10 +66,6 @@ int				quote_check(t_tnode *head);
 int				paren_check(t_tnode *head);
 int				grammar_check(t_tnode *head);
 int				tree_valid_check(t_tree_node *node);
-int				search_tree(t_tree_node *node,
-					t_fds *fd_info, t_env_info_list *env_list);
-int				pipe_search_tree(t_tree_node *node, t_fds *fd_info,
-					t_env_info_list *env_list);
 char			*find_variable(char *token, int start, int end,
 					t_env_info_list *env_list);
 void			dollar_token_change(char **ret, char *token,
@@ -95,8 +90,6 @@ int				op_pipe_right_excute(t_tree_node *node,
 int				multiple_cmds_check(t_tlist_info *word_list);
 void			multiple_cmds_excute(t_tlist_info *word_list,
 					t_env_info_list *env_list);
-void			fd_init(t_fds *fds);
-void			fd_close(t_fds *fds);
 int				op_infile(t_tree_node *node, t_fds *fd_info,
 					t_env_info_list *env_list);
 int				op_outfile(t_tree_node *node, t_fds *fd_info,

@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/09 09:12:51 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/09 15:15:55 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ int	excute_leaf(t_tnode *cmd_list, t_fds *fd_info, t_env_info_list *envp_list)
 	char	**cmd;
 	t_rnode	*rd_head;
 	int		pid;
+	t_tnode	*curr;
 
+	curr = cmd_list;
+	putchar('\n');
 	expansion(cmd_list, envp_list);
 	retokenize(cmd_list);
 	quote_remove(cmd_list);
