@@ -74,6 +74,7 @@ char	**get_envp(t_env_info_list	*envp_list)
 	return (ret);
 }
 
+// argv == 한줄로 명령어처럼 보내야함.            ex) "ls -l" "ls -l"
 void	excute_cmd(t_tnode *cmd_list, t_env_info_list *envp_list)
 {
 	int		argc;
@@ -82,6 +83,7 @@ void	excute_cmd(t_tnode *cmd_list, t_env_info_list *envp_list)
 
 	envp = get_envp(envp_list);
 	argc = get_cmd_num(cmd_list);
-	argv = get_argv_to_cmd_list(argc, cmd_list);
+	argv = get_argv_to_cmd_list(argc, cmd_list); // 수정 필요.
+// exit status를 받아야함.
 	pipex(argc, argv, envp);
 }
