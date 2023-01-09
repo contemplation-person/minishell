@@ -74,7 +74,11 @@ char	**get_envp(t_env_info_list	*envp_list)
 	return (ret);
 }
 
+// 방법 1
 // argv == 한줄로 명령어처럼 보내야함.            ex) "ls -l" "ls -l"
+// 방법 2
+// pipex 함수를 변형 후에 pipex_child의 execve함수에 cmd_list를 넣음      ex) pipex(argc, cmd_list, envp);
+
 void	excute_cmd(t_tnode *cmd_list, t_env_info_list *envp_list)
 {
 	int		argc;
