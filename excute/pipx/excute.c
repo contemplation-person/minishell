@@ -1,0 +1,87 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   excute.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
+/*   Updated: 2023/01/09 19:35:02 by juha             ###   ########seoul.kr  */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../builtin_list/builtin_list.h"
+#include "../excute.h"
+#include "pipex_bonus.h"
+
+int	get_cmd_num(t_tnode *cmd_list)
+{
+	int		i;
+	t_tnode	*temp;
+
+	i = 0;
+	temp = cmd_list;
+	while (temp)
+	{
+		temp = temp->next;
+		i++;
+	}
+	return (i);
+}
+
+char	**get_argv_to_cmd_list(int cnt_cmd, t_tnode *cmd_list)
+{
+	char	**ret;
+	t_tnode	*temp;
+	int		i;
+
+	i = 0;
+	temp = cmd_list;
+	ret = NULL;
+	ret = ft_calloc(cnt_cmd + 1, sizeof(char *));
+	if (!ret)
+		exit(1);
+	while (temp)
+	{
+		ret[i] = ft_strdup(temp->token[0]);
+		if (!(ret[i]))
+			exit(1);
+		temp = temp->next;
+		i++;
+	}
+	ret[i] = NULL;
+	return (ret);
+}
+
+char	**get_envp(t_env_info_list	*envp_list)
+{
+	int			i;
+	t_env_info	*temp;
+	char		**ret;
+
+	temp = envp_list->env_info;
+	ret = ft_calloc(envp_list->cnt + 1, sizeof(char *));
+	i = 0;
+	while (temp)
+	{
+		ret[i] = envp_node_to_str(envp_list);
+		if (!ret)
+			exit(1);
+		temp->next;
+		i++;
+	}
+	ret[i] = NULL;
+	return (ret);
+}
+
+void	excute_cmd(t_tnode *cmd_list, t_env_info_list *envp_list)
+{
+	int		argc;
+	char	**argv;
+	char	**envp;
+
+	envp = get_envp(envp_list);
+	argc = get_cmd_num(cmd_list);
+	argv = get_argv_to_cmd_list(argc, cmd_list);
+	pipex(argc, argv, envp);
+}
