@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 21:09:25 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/09 10:24:27 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/09 13:41:01 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ int	pipe_excute_leaf(t_tnode *cmd_list, t_fds *fd_info,
 		pid = -999;
 	free_red(rd_head);
 	free_cmd(cmd);
-	close(fd_info->in_fd);
-	close(fd_info->out_fd);
 	return (pid);
 }
 

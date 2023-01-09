@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 10:34:58 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/09 10:48:22 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/09 13:30:58 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,7 @@ void	multiple_cmds_excute(t_tlist_info *word_list, t_env_info_list *env_list)
 		del_tree(root);
 		free(root);
 	}
-	close(fds.stdin_fd);
-	close(fds.stdout_fd);
+	fd_close(&fds);
 }
 
 void	fd_init(t_fds *fds)
@@ -61,4 +60,12 @@ void	fd_init(t_fds *fds)
 	fds->out_fd = dup(STDOUT_FILENO);
 	fds->stdin_fd = dup(STDIN_FILENO);
 	fds->stdout_fd = dup(STDOUT_FILENO);
+}
+
+void	fd_close(t_fds *fds)
+{
+	close(fds->in_fd);
+	close(fds->out_fd);
+	close(fds->stdin_fd);
+	close(fds->stdout_fd);
 }
