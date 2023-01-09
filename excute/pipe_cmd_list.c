@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:06:38 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/09 19:22:01 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/09 22:46:55 by gyim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,19 @@
 void	search_tree(t_tree_node *node, t_cplist *cmd_list,
 	t_env_info_list *envp_list)
 {
+	if (node->op != NULL)
+	{
+		if (ft_strncmp(node->op->token, "&&", 3) == 0)
+			return (op_double_and(node, fd_info, env_list));
+		else if (ft_strncmp(node->op->token, "||", 3) == 0)
+			return (op_double_or(node, fd_info, env_list));
+		else
+			return (-1);
+	}
 	if (!node->left && !node->right)
+	{
 		excute_list_add(cmd_list, node->words);
+	
 	else
 	{
 		if (node->left)
@@ -25,7 +36,6 @@ void	search_tree(t_tree_node *node, t_cplist *cmd_list,
 			search_tree(node->right, cmd_list, envp_list);
 	}
 }
-
 
 void	rd_list_add(t_rnode **head, t_rnode *target)
 {
