@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 21:09:25 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/08 22:30:49 by gyim             ###   ########.fr       */
+/*   Updated: 2023/01/09 10:24:27 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	pipe_excute_leaf(t_tnode *cmd_list, t_fds *fd_info,
 	}
 	if (cmd[0])
 		pid = pipe_excute_cmd(cmd, fd_info, envp_list);
+	else
+		pid = -999;
 	free_red(rd_head);
 	free_cmd(cmd);
 	close(fd_info->in_fd);
@@ -48,9 +50,7 @@ int	pipe_excute_cmd(char **cmd, t_fds *fd_info, t_env_info_list *envp_list)
 	if (pid == 0)
 	{
 		dup2(fd_info->in_fd, STDIN_FILENO);
-		perror(cmd[0]);
 		dup2(fd_info->out_fd, STDOUT_FILENO);
-		perror(cmd[0]);
 		close(fd_info->in_fd);
 		close(fd_info->out_fd);
 		if (cmd_builtin_check1(cmd, envp_list) == 1)

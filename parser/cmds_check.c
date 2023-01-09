@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 10:34:58 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/08 22:57:47 by gyim             ###   ########.fr       */
+/*   Updated: 2023/01/09 10:22:59 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	multiple_cmds_excute(t_tlist_info *word_list, t_env_info_list *env_list)
 	root = parser(word_list);
 	fds.in_fd = dup(STDIN_FILENO);
 	fds.out_fd = dup(STDOUT_FILENO);
+	fds.stdin_fd = dup(STDIN_FILENO);
+	fds.stdout_fd = dup(STDOUT_FILENO);
 	if (root)
 	{
 		if (tree_valid_check(root) != -1)
@@ -48,10 +50,10 @@ void	multiple_cmds_excute(t_tlist_info *word_list, t_env_info_list *env_list)
 				waitpid(pid, &status, 0);
 				g_error_code = WEXITSTATUS(status);
 			}
-			else
-				g_error_code = 0;
 		}
 		del_tree(root);
 		free(root);
 	}
+	close(fds.stdin_fd);
+	close(fds.stdout_fd);
 }
