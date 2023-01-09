@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:21:32 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/08 22:35:23 by gyim             ###   ########.fr       */
+/*   Updated: 2023/01/09 10:44:34 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	copy_from_list(char **target, t_tlist_info *list)
 int	parsing_excute(char *user_input, t_env_info_list *env_list)
 {
 	t_tlist_info	*word_list;
-
 
 	if (user_input[0] == '\0')
 		return (0);

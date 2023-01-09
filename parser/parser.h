@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:43:32 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/08 21:36:43 by gyim             ###   ########.fr       */
+/*   Updated: 2023/01/09 11:02:18 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int				op_pipe_right_excute(t_tree_node *node,
 int				multiple_cmds_check(t_tlist_info *word_list);
 void			multiple_cmds_excute(t_tlist_info *word_list,
 					t_env_info_list *env_list);
+void			fd_init(t_fds *fds);
 int				op_infile(t_tree_node *node, t_fds *fd_info,
 					t_env_info_list *env_list);
 int				op_outfile(t_tree_node *node, t_fds *fd_info,

@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 17:52:44 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/06 16:59:21 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/09 11:02:43 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,10 @@ int	grammar_check(t_tnode *head)
 {
 	t_tnode	*curr;
 	int		prev_op;
+	int		prev_re;
 
 	prev_op = 0;
+	prev_re = 0;
 	curr = head;
 	while (curr)
 	{
