@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:43:32 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/05 13:10:12 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/10 14:42:59 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,4 +111,5 @@ char			*remove_token_quote(char *token);
 void			change_quote_char(char *token);
 char			*concat_str(char **splitted);
 void			free_splitted(char **splitted);
+void			smart_join(char	**first_str, char *second_str);
 #endif

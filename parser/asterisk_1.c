@@ -6,13 +6,13 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:10:50 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/04 13:26:55 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/10 14:42:37 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static void	smart_join(char	**first_str, char *second_str)
+void	smart_join(char	**first_str, char *second_str)
 {
 	char	*temp;
 
