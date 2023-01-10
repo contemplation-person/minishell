@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 20:10:52 by juha              #+#    #+#             */
-/*   Updated: 2023/01/09 19:35:47 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/10 14:46:16 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PIPEX_BONUS_H
 
 # include <sys/wait.h>
+# include "../excute/excute.h"
 # include "libft/libft.h"
 # include "libft/get_next_line.h"
 
@@ -49,7 +50,6 @@ typedef struct s_pipe
 	int		checking_family;
 	int		status;
 }t_pipe;
-
 
 int		pipx(int argc, char **argv, char **envp);
 void	excute_cmd(t_tnode *cmd_list, t_env_info_list *envp_list);
