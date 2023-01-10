@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:06:38 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/10 15:19:53 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/10 17:37:16 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,18 @@
 void	search_tree(t_tree_node *node, t_cplist *cmd_list,
 	t_env_info_list *envp_list)
 {
-	if (!node->left && !node->right)
-		excute_list_add(cmd_list, node->words, envp_list);
-	else
+
+	if (node->op && ft_strncmp(node->op->token, "&&", 3) == 0)
+		op_double_and(node, cmd_list, envp_list);
+	else if (node->op && ft_strncmp(node->op->token, "||", 3) == 0)
+		op_double_or(node, cmd_list, envp_list);
+	else if (node->op && ft_strncmp(node->op->token, "|", 2) == 0)
 	{
-		if (node->left)
-			search_tree(node->left, cmd_list, envp_list);
-		if (node->right)
-			search_tree(node->right, cmd_list, envp_list);
+		search_tree(node->left, cmd_list, envp_list);
+		search_tree(node->right, cmd_list, envp_list);
 	}
+	else
+		excute_list_add(cmd_list, node->words, envp_list);
 }
 
 void	rd_list_add(t_rnode **head, t_rnode *target)
@@ -51,6 +54,7 @@ void	cmd_list_add(t_tnode **head, t_tnode *node)
 		return ;
 	new_node->next = NULL;
 	new_node->token = merge_token(node);
+	printf("[%s]\n", new_node->token);
 	if (!*head)
 		*head = new_node;
 	else
@@ -68,6 +72,7 @@ void	excute_list_add(t_cplist *cmd_list, t_tnode *cmds,
 	t_rnode	*new_redirection;
 
 	env_list = NULL;
+
 	new_redirection = get_redirection(cmds);
 	rd_list_add(&cmd_list->rd_head, new_redirection);
 	cmd_list_add(&cmd_list->cmd_head, cmds);
