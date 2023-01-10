@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 19:27:17 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/10 14:12:13 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/10 17:52:07 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ char	*merge_token(t_tnode *head)
 	ret = ft_strdup("");
 	while (curr)
 	{
+		if (curr->next && is_redirection(curr->token))
+		{
+			curr = curr->next->next;
+			continue ;
+		}
 		temp1 = ft_strjoin(" ", curr->token);
 		temp2 = ft_strjoin(ret, temp1);
 		free(ret);

@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 20:09:00 by juha              #+#    #+#             */
-/*   Updated: 2023/01/10 17:10:19 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/10 17:43:03 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ int	pipex(int argc, char **argv, char **envp)
 	set_collabo(&p, envp);
 	while (p.operator_cmd < argc)
 	{
-		//printf("this : %d\n", p.operator_cmd); //
 		pipe_n_fork(&p, &channel);
 		if (p.pid_num == 0)
 			break ;

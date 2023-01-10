@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:14:07 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/10 15:17:56 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/10 19:26:55 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		print_error(char *cmd, char *msg);
 int			excute_cmd(char **cmd, t_fds *fd_info, t_env_info_list *envp_list);
 int			pipe_excute_cmd(char **cmd, t_fds *fd_info,
 				t_env_info_list *envp_list);
-int			excute_cmd_pipe_list(t_cplist *cmd_pipe_lists,
+int			excute_cmd_pipe_list(t_cplist **cmd_pipe_lists,
 				t_env_info_list *env_list);
 int			pipe_excute_leaf(t_tnode *cmd_list, t_fds *fd_info,
 				t_env_info_list *envp_list);
@@ -41,10 +41,10 @@ char		**envp_list_to_arr(t_env_info_list *envp_list);
 
 void		free_red(t_rnode *rd_head);
 
-void		search_tree(t_tree_node *node, t_cplist *cmd_list,
+void		search_tree(t_tree_node *node, t_cplist **cmd_list,
 				t_env_info_list *envp_list);
 void		rd_list_add(t_rnode **rd_list, t_rnode *target);
-void		excute_list_add(t_cplist *cmd_list, t_tnode *cmds,
+void		excute_list_add(t_cplist **cmd_list, t_tnode *cmds,
 				t_env_info_list *env_list);
 t_cplist	*init_cmd_pipe_lists(void);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   excute.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/10 17:05:32 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/10 19:02:58 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,6 @@ void	pipex_excute_cmd(t_tnode *cmd_list, t_env_info_list *envp_list)
 	argc = get_cmd_num(cmd_list);
 	argv = get_argv_to_cmd_list(argc, cmd_list); // 수정 필요.
 // exit status를 받아야함.
+	
 	pipex(argc, argv, envp);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operation_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 22:31:01 by juha              #+#    #+#             */
-/*   Updated: 2023/01/10 17:05:32 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/10 17:53:17 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	start_child(t_pipe *p, t_using_pipe *channel)
 	char	*file;
 
 	close(channel->fd[READ]);
-	//printf("start\tfd[write] : %d, stdout : %d\n", channel->fd[WRITE], STDOUT_FILENO);//
 	check_error(dup2(channel->fd[WRITE], STDOUT_FILENO), "operate.c - 44");
 	close(channel->fd[WRITE]);
 	file = access_file(p, channel, F_OK);

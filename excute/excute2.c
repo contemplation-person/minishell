@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 21:09:25 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/10 15:14:24 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/10 19:26:17 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ int	pipe_excute_cmd(char **cmd, t_fds *fd_info, t_env_info_list *envp_list)
 }
 
 
-int	excute_cmd_pipe_list(t_cplist *cmd_pipe_lists, t_env_info_list *env_list)
+int	excute_cmd_pipe_list(t_cplist **cmd_pipe_lists, t_env_info_list *env_list)
 {
-	pipex_excute_cmd(cmd_pipe_lists->cmd_head, env_list);
+	pipex_excute_cmd((*cmd_pipe_lists)->cmd_head, env_list);
 	return (0);
 }
