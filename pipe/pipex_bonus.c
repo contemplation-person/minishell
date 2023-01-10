@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 20:09:00 by juha              #+#    #+#             */
-/*   Updated: 2023/01/10 15:39:57 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/10 17:03:03 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	check_error(int error, char *str)
 
 static void	pipe_n_fork(t_pipe *p, t_using_pipe *channel)
 {
-	if (p->pid_num > 0 && p ->operator_cmd != p->argc - 2)
+	if (p->pid_num > 0 && p->operator_cmd != p->argc - 1)
 		check_error(pipe(channel->fd), "pipex.c - 34");
 	p->pid_num = fork();
 	if (p->pid_num > 0)
@@ -58,7 +58,7 @@ void	do_child(t_pipe *p, t_using_pipe *channel)
 	{
 		if (p->operator_cmd == 0)
 			start_child(p, channel);
-		else if (p->operator_cmd == p->argc - 2)
+		else if (p->operator_cmd == p->argc - 1)
 			bottom_child(p, channel);
 		else
 			other_child(p, channel);
@@ -72,8 +72,9 @@ int	pipex(int argc, char **argv, char **envp)
 
 	init(&p, &channel, argc, argv);
 	set_collabo(&p, envp);
-	while (p.operator_cmd < argc - 1)
+	while (p.operator_cmd < argc)
 	{
+		//printf("this : %d\n", p.operator_cmd); //
 		pipe_n_fork(&p, &channel);
 		if (p.pid_num == 0)
 			break ;

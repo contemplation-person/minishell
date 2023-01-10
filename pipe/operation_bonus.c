@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operation_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 22:31:01 by juha              #+#    #+#             */
-/*   Updated: 2023/01/10 15:23:07 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/10 17:03:47 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	start_child(t_pipe *p, t_using_pipe *channel)
 	char	*file;
 
 	close(channel->fd[READ]);
-	printf("%d %d\n", channel->fd[WRITE], STDOUT_FILENO);
+	//printf("start\tfd[write] : %d, stdout : %d\n", channel->fd[WRITE], STDOUT_FILENO);//
 	check_error(dup2(channel->fd[WRITE], STDOUT_FILENO), "operate.c - 44");
 	close(channel->fd[WRITE]);
 	file = access_file(p, channel, F_OK);
@@ -66,6 +66,7 @@ void	other_child(t_pipe *p, t_using_pipe *channel)
 {
 	char	*file;
 
+	//printf("other\tso what???\n");//
 	close(channel->fd[READ]);
 	check_error(dup2(channel->prev_fd, STDIN_FILENO), "operate.c - 67");
 	close(channel->prev_fd);
@@ -82,6 +83,7 @@ void	bottom_child(t_pipe *p, t_using_pipe *channel)
 {
 	char	*file;
 
+	//printf("bottom\tcheck bottom -  stdread : %d\n", channel->prev_fd);//
 	check_error(dup2(channel->prev_fd, STDIN_FILENO), "operate.c - 81");
 	close(channel->prev_fd);
 	file = access_file(p, channel, F_OK);
