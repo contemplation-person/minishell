@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:06:38 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/10 07:58:51 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/10 15:19:53 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	search_tree(t_tree_node *node, t_cplist *cmd_list,
 	t_env_info_list *envp_list)
 {
 	if (!node->left && !node->right)
-		excute_list_add(cmd_list, node->words);
+		excute_list_add(cmd_list, node->words, envp_list);
 	else
 	{
 		if (node->left)
@@ -41,16 +41,16 @@ void	rd_list_add(t_rnode **head, t_rnode *target)
 	}
 }
 
-void	cmd_list_add(t_cmd_node	**head, char **cmd)
+void	cmd_list_add(t_tnode **head, t_tnode *node)
 {
-	t_cmd_node	*new_node;
-	t_cmd_node	*curr;
+	t_tnode	*new_node;
+	t_tnode	*curr;
 
-	new_node = malloc(sizeof(t_cmd_node));
+	new_node = malloc(sizeof(t_tnode));
 	if (!new_node)
 		return ;
 	new_node->next = NULL;
-	new_node->cmd = cmd;
+	new_node->token = merge_token(node);
 	if (!*head)
 		*head = new_node;
 	else
@@ -62,16 +62,15 @@ void	cmd_list_add(t_cmd_node	**head, char **cmd)
 	}
 }
 
-
-void	excute_list_add(t_cplist *cmd_list, t_tnode *cmds)
+void	excute_list_add(t_cplist *cmd_list, t_tnode *cmds,
+			t_env_info_list *env_list)
 {
 	t_rnode	*new_redirection;
-	char	**new_cmd;
 
+	env_list = NULL;
 	new_redirection = get_redirection(cmds);
 	rd_list_add(&cmd_list->rd_head, new_redirection);
-	new_cmd = get_cmd(cmds);
-	cmd_list_add(&cmd_list->cmd_head, new_cmd);
+	cmd_list_add(&cmd_list->cmd_head, cmds);
 }
 
 t_cplist	*init_cmd_pipe_lists(void)
