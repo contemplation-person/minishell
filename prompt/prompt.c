@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 10:01:26 by juha              #+#    #+#             */
-/*   Updated: 2023/01/09 22:27:22 by gyim             ###   ########.fr       */
+/*   Updated: 2023/01/11 12:02:03 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,25 @@ void	signal_handler2(int signal_int)
 
 void	_set_signal(struct sigaction *sa, int flag)
 {
-	sa->sa_flags = SA_SIGINFO;
-	sigemptyset(&sa->sa_mask);
-	sigaddset(&sa->sa_mask, SIGQUIT);
-	sigaddset(&sa->sa_mask, SIGINT);
+	//sa->sa_flags = SA_SIGINFO;
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, SIG_IGN);
 	if (flag == 1)
+	{
+		signal(SIGQUIT, SIG_DFL);
+		signal(SIGINT, SIG_DFL);
+	}
+	else if (flag == 2)
 	{
 		sa->sa_handler = signal_handler;
 		signal(SIGQUIT, SIG_IGN);
 		signal(SIGINT, signal_handler);
 	}
-	else
+	else if (flag == 3)
 	{
 		sa->sa_handler = signal_handler2;
+		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, signal_handler2);
-		signal(SIGINT, signal_handler2);
 	}
 }
 
@@ -64,7 +68,7 @@ int	minishell_excute(t_env_info_list *minishell_envp_list, struct sigaction *sa)
 
 	while (1)
 	{
-		_set_signal(sa, 1);
+		_set_signal(sa, 0);
 		sentence = readline("MINISHELL : ");
 		if (sentence == NULL)
 		{
@@ -73,7 +77,6 @@ int	minishell_excute(t_env_info_list *minishell_envp_list, struct sigaction *sa)
 		}
 		if (sentence && ft_strlen(sentence))
 			add_history(sentence);
-		_set_signal(sa, 0);
 		if (parsing_excute(sentence, minishell_envp_list) == -1)
 		{
 			free(sentence);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operation_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 22:31:01 by juha              #+#    #+#             */
-/*   Updated: 2023/01/10 17:53:17 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 13:54:57 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	**parse_option(t_pipe p, t_using_pipe channel)
 	return (ret);
 }
 
-void	start_child(t_pipe *p, t_using_pipe *channel)
+void	start_child(t_pipe *p, t_using_pipe *channel, t_cplist *cmd)
 {
 	char	*file;
 
@@ -61,7 +61,7 @@ void	start_child(t_pipe *p, t_using_pipe *channel)
 	"operate.c - 48");
 }
 
-void	other_child(t_pipe *p, t_using_pipe *channel)
+void	other_child(t_pipe *p, t_using_pipe *channel, t_cplist *cmd)
 {
 	char	*file;
 
@@ -78,7 +78,7 @@ void	other_child(t_pipe *p, t_using_pipe *channel)
 	"operate.c - 39");
 }
 
-void	bottom_child(t_pipe *p, t_using_pipe *channel)
+void	bottom_child(t_pipe *p, t_using_pipe *channel, t_cplist *cmd)
 {
 	char	*file;
 

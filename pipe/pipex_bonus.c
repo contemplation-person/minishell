@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 20:09:00 by juha              #+#    #+#             */
-/*   Updated: 2023/01/10 17:43:03 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 13:53:08 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@ void	check_error(int error, char *str)
 	}
 }
 
-static void	pipe_n_fork(t_pipe *p, t_using_pipe *channel)
+static void	pipe_n_fork(t_pipe *p, t_using_pipe *channel, struct sigaction *sa)
 {
 	if (p->pid_num > 0 && p->operator_cmd != p->argc - 1)
 		check_error(pipe(channel->fd), "pipex.c - 34");
 	p->pid_num = fork();
+	_set_signal(sa, 2); // 시그널 처리 필요.
 	if (p->pid_num > 0)
 	{
 		if (channel->prev_fd != -1)
@@ -52,29 +53,32 @@ void	end_parent(t_pipe *p, t_using_pipe channel)
 	}
 }
 
-void	do_child(t_pipe *p, t_using_pipe *channel)
+void	do_child(t_pipe *p, t_using_pipe *channel, t_cplist *cmd)
 {
 	if (p->pid_num == 0)
 	{
 		if (p->operator_cmd == 0)
-			start_child(p, channel);
+			start_child(p, channel, cmd);
 		else if (p->operator_cmd == p->argc - 1)
-			bottom_child(p, channel);
+			bottom_child(p, channel, cmd);
 		else
-			other_child(p, channel);
+			other_child(p, channel, cmd);
 	}
 }
 
-int	pipex(int argc, char **argv, char **envp)
+//int	pipex(int argc, char **argv, char **envp)
+int	pipex(t_cplist *cmd_pipe_list,
+			t_env_info_list *envp_list)
 {
-	t_pipe			p;
-	t_using_pipe	channel;
+	t_pipe				p;
+	t_using_pipe		channel;
+	struct sigaction	sa;
 
-	init(&p, &channel, argc, argv);
-	set_collabo(&p, envp);
-	while (p.operator_cmd < argc)
+	init(&p, &channel, cmd_pipe_list, envp_list);
+	set_collabo(&p, p.envp);
+	while (p.operator_cmd < p.argc)
 	{
-		pipe_n_fork(&p, &channel);
+		pipe_n_fork(&p, &channel, &sa);
 		if (p.pid_num == 0)
 			break ;
 		p.operator_cmd++;
