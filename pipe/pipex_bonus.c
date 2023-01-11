@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 20:09:00 by juha              #+#    #+#             */
-/*   Updated: 2023/01/11 14:10:02 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 21:17:07 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ void	check_error(int error, char *str)
 	}
 }
 
-static void	pipe_n_fork(t_pipe *p, t_using_pipe *channel, struct sigaction *sa)
+static void	pipe_n_fork(t_pipe *p, t_using_pipe *channel)
 {
 	if (p->pid_num > 0 && p->operator_cmd != p->argc - 1)
 		check_error(pipe(channel->fd), "pipex.c - 34");
 	p->pid_num = fork();
-	_set_signal(sa, 2); // 시그널 처리 필요.
+	_set_signal(2); // 시그널 처리 필요.
 	if (p->pid_num > 0)
 	{
 		if (channel->prev_fd != -1)
@@ -71,13 +71,12 @@ int	pipex(t_cplist *cmd_pipe_list,
 {
 	t_pipe				p;
 	t_using_pipe		channel;
-	struct sigaction	sa;
 
 	init(&p, &channel, cmd_pipe_list, envp_list);
 	set_collabo(&p, p.envp);
 	while (p.operator_cmd < p.argc)
 	{
-		pipe_n_fork(&p, &channel, &sa);
+		pipe_n_fork(&p, &channel);
 		if (p.pid_num == 0)
 			break ;
 		p.operator_cmd++;

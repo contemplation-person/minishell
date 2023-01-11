@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 22:31:01 by juha              #+#    #+#             */
-/*   Updated: 2023/01/11 20:54:24 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 21:08:36 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	start_child(t_pipe *p, t_using_pipe *channel, t_cplist *cmd)
 	if (check_dup == -1)
 		exit(check_dup);
 	(void) cmd;
-	//excute_redirection(p, cmd);
+	excute_redirection(p, cmd);
 	/*
 		builtin check
 	*/
@@ -80,10 +80,10 @@ void	other_child(t_pipe *p, t_using_pipe *channel, t_cplist *cmd)
 		exit(check_dup);
 	close(channel->fd[WRITE]);
 	(void) cmd;
+	excute_redirection(p, cmd);
 	/*
 		builtin check
 	*/
-	//excute_redirection(p, cmd);
 	execve(file, parse_option(*p, *channel), p->envp);
 }
 
@@ -99,7 +99,7 @@ void	bottom_child(t_pipe *p, t_using_pipe *channel, t_cplist *cmd)
 		exit(check_dup);
 	close(channel->prev_fd);
 	(void) cmd;
-	//excute_redirection(p, cmd);
+	excute_redirection(p, cmd);
 	/*
 		builtin check
 	*/

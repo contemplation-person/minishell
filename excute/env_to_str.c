@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 17:25:01 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/10 15:43:06 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 15:20:25 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	**envp_list_to_arr(t_env_info_list *envp_list)
 	t_env_info	*curr;
 	int			i;
 
-	envp_arr = malloc(sizeof(char *) * (envp_list->cnt + 1));
+	envp_arr = ft_calloc(sizeof(char *), envp_list->cnt + 1);
 	if (!envp_arr)
 		return (NULL);
 	i = 0;

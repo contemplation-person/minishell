@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:32:35 by juha              #+#    #+#             */
-/*   Updated: 2023/01/11 20:47:38 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 21:17:08 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,8 @@ void	excute_redirection(t_pipe *p, t_cplist *cmd)
 	int			flag;
 
 	rd_node = get_rd_node(p, cmd);
+	if (!rd_node)
+		return ;
 	while (rd_node->redirection)
 	{
 		flag = _set_open_flag(rd_node);

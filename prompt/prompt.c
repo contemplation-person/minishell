@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 10:01:26 by juha              #+#    #+#             */
-/*   Updated: 2023/01/11 20:52:27 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 21:14:14 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,39 +38,35 @@ void	signal_handler2(int signal_int)
 	}
 }
 
-void	_set_signal(struct sigaction *sa, int flag)
+void	_set_signal(int flag)
 {
-	//sa->sa_flags = SA_SIGINFO;
+	struct sigaction	sa;
+
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, SIG_IGN);
 	if (flag == 1)
 	{
-		signal(SIGQUIT, SIG_DFL);
-		signal(SIGINT, SIG_DFL);
-	}
-	else if (flag == 2)
-	{
-		sa->sa_handler = signal_handler;
+		sa.sa_handler = signal_handler;
 		signal(SIGQUIT, SIG_IGN);
 		signal(SIGINT, signal_handler);
 	}
-	else if (flag == 3)
+	else if (flag == 2)
 	{
-		sa->sa_handler = signal_handler2;
+		sa.sa_handler = signal_handler2;
 		signal(SIGINT, signal_handler2);
 		signal(SIGQUIT, signal_handler2);
 	}
 }
 
-int	minishell_excute(t_env_info_list *minishell_envp_list, struct sigaction *sa)
+int	minishell_excute(t_env_info_list *minishell_envp_list)
 {
 	char				*sentence;
 
 	while (1)
 	{
-		_set_signal(sa, 0);
+		_set_signal(1);
 		sentence = readline("MINISHELL : ");
-		_set_signal(sa, 2);
+		_set_signal(0);
 		if (sentence == NULL)
 		{
 			ft_putendl_fd("exit", STDOUT_FILENO);
@@ -91,12 +87,11 @@ int	minishell_excute(t_env_info_list *minishell_envp_list, struct sigaction *sa)
 int	main(int argc, char **argv, char **envp)
 {
 	t_env_info_list		minishell_envp_list;
-	struct sigaction	sa;
 
 	if (argc != 1)
 		builtin_error_message("MINISHELL : ", "123", "command not found", 127);
 	(void) argv;
 	init_list(&minishell_envp_list, envp);
-	g_error_code = minishell_excute(&minishell_envp_list, &sa);
+	g_error_code = minishell_excute(&minishell_envp_list);
 	return (g_error_code);
 }
