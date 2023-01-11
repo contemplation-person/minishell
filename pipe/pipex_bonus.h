@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 20:10:52 by juha              #+#    #+#             */
-/*   Updated: 2023/01/11 14:25:27 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 16:46:49 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,14 @@ enum e_cmd
 	SECOND,
 	parent = 0,
 	child,
+};
+
+enum e_redirection_cmd
+{
+	MAKE_FILE,
+	ADD_FILE,
+	INPUT_FILE,
+	HEREDOC,
 };
 
 typedef struct s_using_pipe
