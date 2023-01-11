@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 20:09:00 by juha              #+#    #+#             */
-/*   Updated: 2023/01/11 13:53:08 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 14:10:02 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ void	do_child(t_pipe *p, t_using_pipe *channel, t_cplist *cmd)
 	}
 }
 
-//int	pipex(int argc, char **argv, char **envp)
 int	pipex(t_cplist *cmd_pipe_list,
 			t_env_info_list *envp_list)
 {
@@ -83,7 +82,7 @@ int	pipex(t_cplist *cmd_pipe_list,
 			break ;
 		p.operator_cmd++;
 	}
-	do_child(&p, &channel);
+	do_child(&p, &channel, cmd_pipe_list);
 	end_parent(&p, channel);
 	return (WEXITSTATUS(p.status));
 }

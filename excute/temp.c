@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:59:03 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/10 13:50:32 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 10:58:24 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,21 @@
 
 void	print_cmd_pipe_list(t_cplist *list)
 {
-	t_tnode		*cmd_curr;
+	t_cplist	*curr;
 	t_rnode		*rd_curr;
 
-	cmd_curr = list->cmd_head;
-	printf("cmds : \n");
-	while (cmd_curr)
+	curr = list;
+	while (curr)
 	{
-		printf("%s ", cmd_curr->token);
-		cmd_curr = cmd_curr->next;
-	}
-	printf("redirections : \n");
-	rd_curr = list->rd_head;
-	while (rd_curr)
-	{
-		printf("%d %s\n", rd_curr->redirection, rd_curr->file);
-		rd_curr = rd_curr->next;
-	}
+		printf("[%s]\n", curr->cmd);
+		rd_curr = curr->rd_head;
+		while (rd_curr)
+		{
+			printf("%d %s\n", rd_curr->redirection, rd_curr->file);
+			rd_curr = rd_curr->next;
+		}
+		curr = curr->next;
+	}	
 }
 
 void	print_cmds(char **cmd)

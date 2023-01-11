@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 19:27:17 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/10 17:52:07 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 10:01:19 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,17 @@
 
 void	free_cmd_pipe_list(t_cplist **cmd_pipe_lists)
 {
-	free_red((*cmd_pipe_lists)->rd_head);
-	free_list((*cmd_pipe_lists)->cmd_head);
-	free(*cmd_pipe_lists);
+	t_cplist	*curr;
+	t_cplist	*next;
+
+	curr = *cmd_pipe_lists;
+	while (curr)
+	{
+		next = curr->next;
+		free(curr->cmd);
+		free_red(curr->rd_head);
+		curr = next;
+	}
 }
 
 char	*merge_token(t_tnode *head)
@@ -26,8 +34,8 @@ char	*merge_token(t_tnode *head)
 	char	*temp1;
 	char	*temp2;
 
-	curr = head;
-	ret = ft_strdup("");
+	ret = ft_strdup(head->token);
+	curr = head->next;
 	while (curr)
 	{
 		if (curr->next && is_redirection(curr->token))

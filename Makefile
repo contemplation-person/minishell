@@ -6,7 +6,7 @@
 #    By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2023/01/10 17:05:24 by gyim             ###   ########seoul.kr   #
+#    Updated: 2023/01/11 10:33:42 by gyim             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME			:=	minishell
 READLINE_LIB	:=	-lreadline -L$(shell brew --prefix readline)/lib
 READLINE_INC	:=	$(shell brew --prefix readline)/include
 CC 				:=	cc
-CFLAGS 			:=	-Wall -Werror -Wextra -g -I$(READLINE_INC) -fsanitize=address
+CFLAGS 			:=	-Wall -Werror -Wextra -g -I$(READLINE_INC) #-fsanitize=address
 SANITIZE		:= -g -fsanitize=address
 
 SRC 			:=	parser/parser.c	\
@@ -43,7 +43,8 @@ SRC 			:=	parser/parser.c	\
 					excute/path.c \
 					excute/cmd.c \
 					excute/env_to_str.c \
-					excute/pipe_cmd_list.c \
+					excute/pipe_list.c \
+					excute/pipe_list2.c \
 					excute/utils.c \
 					operator/logical_op.c \
 					redirection/redirection.c \

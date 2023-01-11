@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 22:31:01 by juha              #+#    #+#             */
-/*   Updated: 2023/01/11 13:54:57 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 14:10:36 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	start_child(t_pipe *p, t_using_pipe *channel, t_cplist *cmd)
 	}
 	check_error(execve(file, parse_option(*p, *channel), p->envp), \
 	"operate.c - 48");
+	(void)cmd;//
 }
 
 void	other_child(t_pipe *p, t_using_pipe *channel, t_cplist *cmd)
@@ -76,6 +77,7 @@ void	other_child(t_pipe *p, t_using_pipe *channel, t_cplist *cmd)
 		check_error(-1, "faild access-2");
 	check_error(execve(file, parse_option(*p, *channel), p->envp), \
 	"operate.c - 39");
+	(void)cmd;//
 }
 
 void	bottom_child(t_pipe *p, t_using_pipe *channel, t_cplist *cmd)
@@ -93,4 +95,5 @@ void	bottom_child(t_pipe *p, t_using_pipe *channel, t_cplist *cmd)
 	}
 	check_error(execve(file, parse_option(*p, *channel), p->envp), \
 	"operate.c - 39");
+	(void)cmd;//
 }

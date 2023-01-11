@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 09:25:16 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/06 09:44:52 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 10:49:14 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define REDIRECTION_H
 # include "../minishell.h"
 
-t_rnode	*get_redirection(t_tnode *cmd_list);
+void	get_redirection(t_rnode **r_list, t_tnode *cmd_list);
 int		is_redirection(char *token);
 void	add_redirection(t_rnode	**r_list, t_tnode *node);
 t_rnode	*set_redirection(t_tnode *node);
