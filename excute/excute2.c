@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   excute2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 21:09:25 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/11 13:20:37 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 20:44:07 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@
 // 	free_cmd(cmd);
 // 	return (pid);
 // }
-
 
 int	excute_cmd_pipe_list(t_cplist *cmd_pipe_lists, t_env_info_list *env_list)
 {

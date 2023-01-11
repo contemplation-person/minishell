@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 20:10:52 by juha              #+#    #+#             */
-/*   Updated: 2023/01/11 16:46:49 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 20:18:58 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ char	**get_envp(t_env_info_list	*envp_list);
 char	**get_argv_to_cmd_list(int cnt_cmd, t_cplist *cmd_list);
 
 void	check_error(int error, char *str);
+
+void	excute_redirection(t_pipe *p, t_cplist *cmd);
 
 char	**parse_option(t_pipe p, t_using_pipe channel);
 char	*access_file(t_pipe *p, t_using_pipe *channel, int ok);

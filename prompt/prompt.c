@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 10:01:26 by juha              #+#    #+#             */
-/*   Updated: 2023/01/11 12:02:03 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 20:52:27 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	_set_signal(struct sigaction *sa, int flag)
 	else if (flag == 3)
 	{
 		sa->sa_handler = signal_handler2;
-		signal(SIGINT, SIG_IGN);
+		signal(SIGINT, signal_handler2);
 		signal(SIGQUIT, signal_handler2);
 	}
 }
@@ -70,6 +70,7 @@ int	minishell_excute(t_env_info_list *minishell_envp_list, struct sigaction *sa)
 	{
 		_set_signal(sa, 0);
 		sentence = readline("MINISHELL : ");
+		_set_signal(sa, 2);
 		if (sentence == NULL)
 		{
 			ft_putendl_fd("exit", STDOUT_FILENO);

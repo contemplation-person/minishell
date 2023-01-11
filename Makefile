@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+         #
+#    By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2023/01/11 10:33:42 by gyim             ###   ########seoul.kr   #
+#    Updated: 2023/01/11 19:52:02 by juha             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,8 @@ SRC 			:=	parser/parser.c	\
 					pipe/excute.c \
 					pipe/operation_bonus.c \
 					pipe/pipex_bonus.c \
-					pipe/utils_bonus.c 
+					pipe/utils_bonus.c \
+					pipe/excute_redirection.c 
 LIBFT			:= libft/libft.a 
 FT_PRINTF		:= ft_printf/libftprintf.a
 OBJ 			:= $(SRC:.c=.o)
