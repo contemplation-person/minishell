@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 13:37:37 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/11 19:41:42 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 22:11:34 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	set_outfile(t_fds *fds, t_rnode *node)
 		g_error_code = 1;
 		return (-1);
 	}
-	dup2(outfile, fds->out_fd);
+	fds->out_fd = dup(outfile);
 	close(outfile);
 	return (0);
 }
@@ -41,7 +41,7 @@ int	set_addfile(t_fds *fds, t_rnode *node)
 		g_error_code = 1;
 		return (-1);
 	}
-	dup2(addfile, fds->out_fd);
+	fds->out_fd = dup(addfile);
 	close(addfile);
 	return (0);
 }
@@ -66,7 +66,7 @@ int	set_infile(t_fds *fds, t_rnode *node)
 		g_error_code = 1;
 		return (-1);
 	}
-	dup2(infile, fds->in_fd);
+	fds->in_fd = dup(infile);
 	close(infile);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 22:31:01 by juha              #+#    #+#             */
-/*   Updated: 2023/01/11 16:01:25 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 22:03:00 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*access_file(t_pipe *p, t_using_pipe *channel, int ok)
 	char	**path;
 	char	**file;
 
-	channel = NULL;
+	channel->fd[0] = 0;
 	file = ft_split(p->argv[p->operator_cmd], ' ');
 	file[0] = ft_strjoin("/", file[0]);
 	path = p->path;

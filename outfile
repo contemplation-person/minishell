@@ -1,0 +1,16 @@
+builtin
+builtin_list
+excute
+ft_printf
+get_next_line
+libft
+Makefile
+minishell
+minishell.h
+minishell_struct.h
+operator
+outfile
+parser
+pipe
+prompt
+redirection
