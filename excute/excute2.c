@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 21:09:25 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/11 10:49:31 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 13:20:37 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,30 +38,6 @@
 // 	free_cmd(cmd);
 // 	return (pid);
 // }
-
-int	pipe_excute_cmd(char **cmd, t_fds *fd_info, t_env_info_list *envp_list)
-{
-	char	**path;
-	pid_t	pid;
-
-	pid = fork();
-	if (pid == 0)
-	{
-		dup2(fd_info->in_fd, STDIN_FILENO);
-		dup2(fd_info->out_fd, STDOUT_FILENO);
-		close(fd_info->in_fd);
-		close(fd_info->out_fd);
-		if (cmd_builtin_check1(cmd, envp_list) == 1)
-			exit(0);
-		if (cmd_builtin_check2(cmd, envp_list) == 1)
-			exit(0);
-		path = get_path(envp_list);
-		cmd_path_check(path, cmd, envp_list);
-		print_error(cmd[0], CMD_NOT_FOUND);
-		exit(127);
-	}
-	return (pid);
-}
 
 
 int	excute_cmd_pipe_list(t_cplist *cmd_pipe_lists, t_env_info_list *env_list)

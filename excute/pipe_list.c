@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:06:38 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/11 10:54:41 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 13:28:06 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,9 @@ void	excute_list_add(t_cplist **cmd_list, t_tnode *cmds,
 	t_cplist	*new_node;
 	t_cplist	*curr;
 
-	env_list = NULL;
 	new_node = new_cplist();
 	get_redirection(&new_node->rd_head, cmds);
-	new_node->cmd = get_cplist_cmd(cmds);
+	new_node->cmd = get_cplist_cmd(cmds, env_list);
 	if (!*cmd_list)
 		*cmd_list = new_node;
 	else
