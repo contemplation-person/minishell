@@ -6,35 +6,32 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 12:40:15 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/10 17:50:48 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 10:47:41 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redirection.h"
 
-t_rnode	*get_redirection(t_tnode *cmd_list)
+void	get_redirection(t_rnode **r_list, t_tnode *cmd_list)
 {
 	t_tnode	*curr;
-	t_rnode	*rd_head;
 
-	rd_head = NULL;
 	curr = cmd_list;
 	while (curr)
 	{
 		if (curr->next && is_redirection(curr->token))
 		{
-			add_redirection(&rd_head, curr);
+			add_redirection(r_list, curr);
 			curr = curr->next->next;
 		}
 		else
 			curr = curr->next;
 	}
-	if (check_redirection(rd_head) == -1)
+	if (check_redirection(*r_list) == -1)
 	{
-		free_rlist(rd_head);
-		rd_head = NULL;
+		free_rlist(*r_list);
+		*r_list = NULL;
 	}
-	return (rd_head);
 }
 
 int	is_redirection(char *token)

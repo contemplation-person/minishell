@@ -1,44 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   temp.c                                             :+:      :+:    :+:   */
+/*   pipe_list2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/09 16:59:03 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/11 10:58:24 by gyim             ###   ########seoul.kr  */
+/*   Created: 2023/01/11 08:16:04 by gyim              #+#    #+#             */
+/*   Updated: 2023/01/11 10:25:25 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "excute.h"
 
-void	print_cmd_pipe_list(t_cplist *list)
+t_cplist	*new_cplist(void)
 {
-	t_cplist	*curr;
-	t_rnode		*rd_curr;
+	t_cplist	*ret;
 
-	curr = list;
-	while (curr)
-	{
-		printf("[%s]\n", curr->cmd);
-		rd_curr = curr->rd_head;
-		while (rd_curr)
-		{
-			printf("%d %s\n", rd_curr->redirection, rd_curr->file);
-			rd_curr = rd_curr->next;
-		}
-		curr = curr->next;
-	}	
+	ret = malloc(sizeof(t_cplist));
+	if (!ret)
+		return (NULL);
+	ret->cmd = NULL;
+	ret->rd_head = NULL;
+	ret->next = NULL;
+	return (ret);
 }
 
-void	print_cmds(char **cmd)
+char	*get_cplist_cmd(t_tnode *cmds)
 {
-	int	i;
+	char	*ret;
 
-	i = 0;
-	while (cmd[i])
+	ret = merge_token(cmds);
+	return (ret);
+}
+
+int	cplist_len(t_cplist *cmd_pipe_list)
+{
+	int			len;
+	t_cplist	*curr;
+
+	len = 0;
+	curr = cmd_pipe_list;
+	while (curr)
 	{
-		printf("%d %s\n",i, cmd[i]);
-		i++;
+		len++;
+		curr = curr->next;
 	}
+	return (len);
 }
