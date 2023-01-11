@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:14:07 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/11 13:24:46 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 15:15:59 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,9 @@
 int			excute_leaf(t_tnode *cmd_list, t_fds *fd_info,
 				t_env_info_list *envp_list);
 void		print_error(char *cmd, char *msg);
-int			excute_cmd(char **cmd, t_fds *fd_info, t_env_info_list *envp_list);
+int			excute_cmd(t_cplist *cmd_node, t_env_info_list *envp_list);
 int			excute_cmd_pipe_list(t_cplist *cmd_pipe_lists,
 				t_env_info_list *env_list);
-int			pipe_excute_leaf(t_tnode *cmd_list, t_fds *fd_info,
-				t_env_info_list *envp_list);
 int			cmd_builtin_check1(char **cmd, t_env_info_list *envp_list);
 int			cmd_builtin_check2(char **cmd, t_env_info_list *envp_list);
 char		**get_path(t_env_info_list *envp_list);

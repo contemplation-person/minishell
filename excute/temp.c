@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:59:03 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/11 10:58:24 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 14:09:19 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,5 @@ void	print_cmds(char **cmd)
 		printf("%d %s\n",i, cmd[i]);
 		i++;
 	}
+	printf("%d %s\n", i, cmd[i]);
 }

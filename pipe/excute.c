@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/11 13:31:19 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 19:43:56 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,25 @@ void	pipex_excute_cmd(t_cplist *cmd_pipe_list, t_env_info_list *envp_list)
 {
 	int		argc;
 	char	**envp;
+	t_fds	fds;
 
 	envp = get_envp(envp_list);
 	argc = cplist_len(cmd_pipe_list);
-	print_cmd_pipe_list(cmd_pipe_list);
-	// pipex(argc, argv, envp);
+	fds.stdin_fd = dup(STDIN_FILENO);
+	fds.stdout_fd = dup(STDOUT_FILENO);
+	fds.in_fd = dup(STDIN_FILENO);
+	fds.out_fd = dup(STDOUT_FILENO);
+	printf("%d %d\n", fds.in_fd, fds.out_fd);
+	if (argc <= 1)
+	{
+		redirection(&fds, cmd_pipe_list->rd_head, envp_list);
+		printf("%d %d\n", fds.in_fd, fds.out_fd);
+		dup2(fds.in_fd, STDIN_FILENO);
+		dup2(fds.out_fd, STDOUT_FILENO);
+		excute_cmd(cmd_pipe_list, envp_list);
+		close(fds.in_fd);
+		close(fds.out_fd);
+	}
+	// else
+		// pipex(argc, cmd_pipe_list, envp);
 }

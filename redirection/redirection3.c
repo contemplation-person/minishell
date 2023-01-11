@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 16:53:14 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/06 09:43:38 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 19:31:47 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	free_rlist(t_rnode *head)
 	while (curr)
 	{
 		next = curr->next;
-		free(curr->file);
+		if (curr->file)
+			free(curr->file);
 		free(curr);
 		curr = next;
 	}
@@ -63,18 +64,28 @@ int	renewal_fds(t_rnode *node, t_fds *fds, t_env_info_list *envp_list)
 int	set_fds(t_fds *fds, t_rnode *node, t_env_info_list *envp_list)
 {
 	t_rnode	*curr;
-	t_fds	temp;
 
 	delete_here_doc();
-	temp.in_fd = -1;
-	temp.out_fd = -1;
 	curr = node;
 	while (curr)
 	{
-		if (renewal_fds(curr, &temp, envp_list) == -1)
+		if (renewal_fds(curr, fds, envp_list) == -1)
 			return (-1);
 		curr = curr->next;
 	}
-	change_fds(fds, &temp);
+	return (0);
+}
+
+
+int	redirection(t_fds *fds, t_rnode *rd_head, t_env_info_list *envp_list)
+{
+	t_rnode	*curr;
+
+	curr = rd_head;
+	while (curr)
+	{
+		set_fds(fds, rd_head, envp_list);
+		curr = curr->next;
+	}
 	return (0);
 }

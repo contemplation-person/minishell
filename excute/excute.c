@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/09 22:35:04 by gyim             ###   ########.fr       */
+/*   Updated: 2023/01/11 15:26:58 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,19 @@ void	print_error(char *cmd, char *msg)
 	write(2, msg, ft_strlen(msg));
 }
 
-int	excute_cmd(char **cmd, t_fds *fd_info, t_env_info_list *envp_list)
+int	excute_cmd(t_cplist *cmd_node, t_env_info_list *envp_list)
 {
 	char	**path;
 	pid_t	pid;
 	int		status;
+	char	**cmd;
 
+	cmd = ft_split(cmd_node->cmd, ' ');
 	if (cmd_builtin_check1(cmd, envp_list) == 1)
 		return (-999);
 	pid = fork();
 	if (pid == 0)
 	{
-		dup2(fd_info->in_fd, STDIN_FILENO);
-		dup2(fd_info->out_fd, STDOUT_FILENO);
-		close(fd_info->in_fd);
-		close(fd_info->out_fd);
 		if (cmd_builtin_check2(cmd, envp_list) == 1)
 			exit(0);
 		path = get_path(envp_list);
@@ -40,8 +38,8 @@ int	excute_cmd(char **cmd, t_fds *fd_info, t_env_info_list *envp_list)
 		print_error(cmd[0], CMD_NOT_FOUND);
 		exit(127);
 	}
-	close(fd_info->in_fd);
-	close(fd_info->out_fd);
+	free_cmd(cmd);
+	waitpid(-1, &status, 0);
 	g_error_code = WEXITSTATUS(status);
 	return (pid);
 }

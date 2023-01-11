@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 13:37:37 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/05 20:27:17 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 19:41:42 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ int	set_outfile(t_fds *fds, t_rnode *node)
 {
 	int	outfile;
 
-	if (fds->out_fd != -1)
-		close(fds->out_fd);
+	close(fds->out_fd);
 	outfile = open(node->file, O_TRUNC | O_WRONLY | O_CREAT, 0644);
 	if (outfile < 0)
 	{
@@ -25,7 +24,8 @@ int	set_outfile(t_fds *fds, t_rnode *node)
 		g_error_code = 1;
 		return (-1);
 	}
-	fds->out_fd = outfile;
+	dup2(outfile, fds->out_fd);
+	close(outfile);
 	return (0);
 }
 
@@ -33,8 +33,7 @@ int	set_addfile(t_fds *fds, t_rnode *node)
 {
 	int	addfile;
 
-	if (fds->out_fd != -1)
-		close(fds->out_fd);
+	close(fds->out_fd);
 	addfile = open(node->file, O_CREAT | O_WRONLY | O_APPEND, 0644);
 	if (addfile < 0)
 	{
@@ -42,7 +41,8 @@ int	set_addfile(t_fds *fds, t_rnode *node)
 		g_error_code = 1;
 		return (-1);
 	}
-	fds->out_fd = addfile;
+	dup2(addfile, fds->out_fd);
+	close(addfile);
 	return (0);
 }
 
@@ -51,8 +51,7 @@ int	set_infile(t_fds *fds, t_rnode *node)
 	int	infile;
 	int	code;
 
-	if (fds->in_fd != -1)
-		close(fds->in_fd);
+	close(fds->in_fd);
 	code = access(node->file, F_OK);
 	if (code == -1)
 	{
@@ -67,7 +66,8 @@ int	set_infile(t_fds *fds, t_rnode *node)
 		g_error_code = 1;
 		return (-1);
 	}
-	fds->in_fd = infile;
+	dup2(infile, fds->in_fd);
+	close(infile);
 	return (0);
 }
 
