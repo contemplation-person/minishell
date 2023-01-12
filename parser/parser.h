@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:43:32 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/09 17:56:45 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 09:11:44 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ t_tree_node		*parser(t_tlist_info *list);
 char			**get_cmds_from_list(t_tlist_info *list);
 int				list_len(t_tlist_info *list);
 void			copy_from_list(char **target, t_tlist_info *list);
-int				parsing_excute(char *user_input, t_env_info_list *env_list);
+int				parsing_excute(char *user_input, t_fds *fds,
+					t_env_info_list *env_list);
 t_tree_node		*make_tree(t_tnode *head);
 t_tree_node		*make_new_node(void);
 void			free_tlist(t_tnode *head);
@@ -89,7 +90,7 @@ int				op_pipe_right_excute(t_tree_node *node,
 					t_fds *fd_info, int fd[2], t_env_info_list *env_list);
 int				multiple_cmds_check(t_tlist_info *word_list);
 void			multiple_cmds_excute(t_tlist_info *word_list,
-					t_env_info_list *env_list);
+					t_fds *fds, t_env_info_list *env_list);
 int				op_infile(t_tree_node *node, t_fds *fd_info,
 					t_env_info_list *env_list);
 int				op_outfile(t_tree_node *node, t_fds *fd_info,

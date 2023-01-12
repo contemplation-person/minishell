@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 19:27:17 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/11 10:01:19 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 10:28:53 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ void	free_cmd_pipe_list(t_cplist **cmd_pipe_lists)
 		next = curr->next;
 		free(curr->cmd);
 		free_red(curr->rd_head);
+		free(curr);
 		curr = next;
 	}
+	*cmd_pipe_lists = NULL;
 }
 
 char	*merge_token(t_tnode *head)

@@ -1,16 +1,17 @@
-builtin
-builtin_list
-excute
-ft_printf
-get_next_line
-libft
-Makefile
-minishell
-minishell.h
-minishell_struct.h
-operator
-outfile
-parser
-pipe
-prompt
-redirection
+total 248
+-rw-r--r--   1 gyim  2022_seoul    2990  1 12 09:30 Makefile
+drwxr-xr-x  19 gyim  2022_seoul     646  1 12 10:15 builtin
+drwxr-xr-x   7 gyim  2022_seoul     238  1 12 10:15 builtin_list
+drwxr-xr-x  19 gyim  2022_seoul     646  1 12 10:15 excute
+drwxr-xr-x  43 gyim  2022_seoul    1462  1 12 10:15 ft_printf
+drwxr-xr-x  10 gyim  2022_seoul     340  1 12 10:15 get_next_line
+drwxr-xr-x  91 gyim  2022_seoul    3094  1 12 10:15 libft
+-rwxr-xr-x   1 gyim  2022_seoul  112968  1 12 10:15 minishell
+-rw-r--r--   1 gyim  2022_seoul    1533  1 12 08:26 minishell.h
+-rw-r--r--   1 gyim  2022_seoul    1919  1 12 08:26 minishell_struct.h
+drwxr-xr-x   5 gyim  2022_seoul     170  1 12 10:15 operator
+-rw-r--r--   1 gyim  2022_seoul       0  1 12 10:15 outfile
+drwxr-xr-x  41 gyim  2022_seoul    1394  1 12 10:15 parser
+drwxr-xr-x  11 gyim  2022_seoul     374  1 12 10:15 pipe
+drwxr-xr-x   5 gyim  2022_seoul     170  1 12 10:15 prompt
+drwxr-xr-x  11 gyim  2022_seoul     374  1 12 10:15 redirection

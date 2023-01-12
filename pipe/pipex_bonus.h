@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 20:10:52 by juha              #+#    #+#             */
-/*   Updated: 2023/01/11 09:41:59 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 09:13:00 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_pipe
 
 int		pipex(int argc, char **argv, char **envp);
 void	pipex_excute_cmd(t_cplist *cmd_pipe_list,
-			t_env_info_list *envp_list);
+			t_fds *fds, t_env_info_list *envp_list);
 
 void	init(t_pipe *p, t_using_pipe *channel, int argc, char **argv);
 int		set_collabo(t_pipe *p, char **envp);

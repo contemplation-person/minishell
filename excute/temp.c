@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:59:03 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/11 14:09:19 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 10:25:34 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,21 @@ void	print_cmd_pipe_list(t_cplist *list)
 {
 	t_cplist	*curr;
 	t_rnode		*rd_curr;
+	int			i;
 
+	i = 0;
 	curr = list;
 	while (curr)
 	{
-		printf("[%s]\n", curr->cmd);
+		printf("%d [%s]\n",i, curr->cmd);
 		rd_curr = curr->rd_head;
 		while (rd_curr)
 		{
-			printf("%d %s\n", rd_curr->redirection, rd_curr->file);
+			// printf("%d %s\n", rd_curr->redirection, rd_curr->file);
 			rd_curr = rd_curr->next;
 		}
 		curr = curr->next;
+		i++;
 	}	
 }
 

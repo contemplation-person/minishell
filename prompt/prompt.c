@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 10:01:26 by juha              #+#    #+#             */
-/*   Updated: 2023/01/09 22:27:22 by gyim             ###   ########.fr       */
+/*   Updated: 2023/01/12 09:45:34 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,10 @@ void	_set_signal(struct sigaction *sa, int flag)
 int	minishell_excute(t_env_info_list *minishell_envp_list, struct sigaction *sa)
 {
 	char				*sentence;
+	t_fds				fds;
 
+	fds.stdin_fd = dup(STDIN_FILENO);
+	fds.stdout_fd = dup(STDOUT_FILENO);
 	while (1)
 	{
 		_set_signal(sa, 1);
@@ -74,7 +77,7 @@ int	minishell_excute(t_env_info_list *minishell_envp_list, struct sigaction *sa)
 		if (sentence && ft_strlen(sentence))
 			add_history(sentence);
 		_set_signal(sa, 0);
-		if (parsing_excute(sentence, minishell_envp_list) == -1)
+		if (parsing_excute(sentence, &fds, minishell_envp_list) == -1)
 		{
 			free(sentence);
 			break ;

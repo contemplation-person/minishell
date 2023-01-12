@@ -6,23 +6,23 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:06:38 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/11 13:28:06 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 09:32:47 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "excute.h"
 
 void	search_tree(t_tree_node *node, t_cplist **cmd_list,
-	t_env_info_list *envp_list)
+	t_fds *fds, t_env_info_list *envp_list)
 {
 	if (node->op && ft_strncmp(node->op->token, "&&", 3) == 0)
-		op_double_and(node, cmd_list, envp_list);
+		op_double_and(node, cmd_list, fds, envp_list);
 	else if (node->op && ft_strncmp(node->op->token, "||", 3) == 0)
-		op_double_or(node, cmd_list, envp_list);
+		op_double_or(node, cmd_list, fds, envp_list);
 	else if (node->op && ft_strncmp(node->op->token, "|", 2) == 0)
 	{
-		search_tree(node->left, cmd_list, envp_list);
-		search_tree(node->right, cmd_list, envp_list);
+		search_tree(node->left, cmd_list, fds, envp_list);
+		search_tree(node->right, cmd_list, fds, envp_list);
 	}
 	else
 		excute_list_add(cmd_list, node->words, envp_list);

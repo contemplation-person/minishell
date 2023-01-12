@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:21:32 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/09 10:44:34 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 09:10:12 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	copy_from_list(char **target, t_tlist_info *list)
 	}
 }
 
-int	parsing_excute(char *user_input, t_env_info_list *env_list)
+int	parsing_excute(char *user_input, t_fds *fds, t_env_info_list *env_list)
 {
 	t_tlist_info	*word_list;
 
@@ -67,7 +67,7 @@ int	parsing_excute(char *user_input, t_env_info_list *env_list)
 		g_error_code = 2;
 		return (g_error_code);
 	}
-	multiple_cmds_excute(word_list, env_list);
+	multiple_cmds_excute(word_list, fds, env_list);
 	free(word_list);
 	word_list = NULL;
 	return (0);

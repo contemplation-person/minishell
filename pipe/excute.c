@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/11 22:18:37 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 10:24:09 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,30 +77,29 @@ char	**get_envp(t_env_info_list	*envp_list)
 // 방법 2
 // pipex 함수를 변형 후에 pipex_child의 execve함수에 cmd_list를 넣음      ex) pipex(argc, cmd_list, envp);
 
-void	pipex_excute_cmd(t_cplist *cmd_pipe_list, t_env_info_list *envp_list)
+void	pipex_excute_cmd(t_cplist *cmd_pipe_list, t_fds *fds,
+				t_env_info_list *envp_list)
 {
 	int		argc;
 	// char	**envp;
-	t_fds	fds;
 
 	// envp = get_envp(envp_list);
 	argc = cplist_len(cmd_pipe_list);
-	fds.stdin_fd = dup(STDIN_FILENO);
-	fds.stdout_fd = dup(STDOUT_FILENO);
-	fds.in_fd = dup(STDIN_FILENO);
-	fds.out_fd = dup(STDOUT_FILENO);
+	fds->in_fd = dup(fds->stdin_fd);
+	fds->out_fd = dup(fds->stdout_fd);
 	if (argc <= 1)
 	{
-		redirection(&fds, cmd_pipe_list->rd_head, envp_list);
-		dup2(fds.in_fd, STDIN_FILENO);
-		dup2(fds.out_fd, STDOUT_FILENO);
-		close(fds.in_fd);
-		close(fds.out_fd);
-		perror("");
+		redirection(fds, cmd_pipe_list->rd_head, envp_list);
+		dup2(fds->in_fd, STDIN_FILENO);
+		dup2(fds->out_fd, STDOUT_FILENO);
+		close(fds->in_fd);
+		close(fds->out_fd);
 		excute_cmd(cmd_pipe_list, envp_list);
 	}
 	// else
 		// pipex(argc, cmd_pipe_list, envp);
-	dup2(fds.stdin_fd, STDIN_FILENO);
-	dup2(fds.stdout_fd, STDOUT_FILENO);
+	close(STDIN_FILENO);
+	close(STDOUT_FILENO);
+	dup2(fds->stdin_fd, STDIN_FILENO);
+	dup2(fds->stdout_fd, STDOUT_FILENO);
 }
