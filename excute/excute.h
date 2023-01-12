@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:14:07 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/12 13:23:57 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 15:18:33 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ char		*get_cplist_cmd(t_tnode *cmds,
 int			cplist_len(t_cplist *cmd_pipe_list);
 
 void		free_cmd_pipe_list(t_cplist **cmd_pipe_lists);
-void		free_cmd_list(t_cmd_node *head);
 char		*merge_token(t_tnode *head);
 
 void		reset_fds(t_fds *fds);

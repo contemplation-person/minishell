@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 12:32:14 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/11 15:17:32 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 15:18:38 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,6 @@ typedef struct s_rnode
 	char			*file;
 	struct s_rnode	*next;
 }	t_rnode;
-
-typedef struct s_cmd_node
-{
-	char				**cmd;
-	struct s_cmd_node	*next;
-}	t_cmd_node;
 
 typedef struct s_cplist
 {

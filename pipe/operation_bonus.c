@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 22:31:01 by juha              #+#    #+#             */
-/*   Updated: 2023/01/12 13:58:22 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 16:20:01 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	start_child(t_pipe *p, t_using_pipe *channel, t_cplist *cmd, t_env_info_lis
 	|| cmd_builtin_check2(&(cmd->cmd), envp_list))
 		exit(0);
 	exit(execve(file, parse_option(*p, *channel), p->envp));
+	perror("");
 }
 
 void	other_child(t_pipe *p, t_using_pipe *channel, t_cplist *cmd, t_env_info_list *envp_list)
@@ -67,7 +68,7 @@ void	other_child(t_pipe *p, t_using_pipe *channel, t_cplist *cmd, t_env_info_lis
 	char	*file;
 	int		check_dup;
 
-	//printf("other\tso what???\n");//
+	printf("other\tso what???\n");//
 	check_dup = -1;
 	close(channel->fd[READ]);
 	check_dup = dup2(channel->prev_fd, STDIN_FILENO);
@@ -81,8 +82,9 @@ void	other_child(t_pipe *p, t_using_pipe *channel, t_cplist *cmd, t_env_info_lis
 	excute_redirection(p, cmd);
 	if (cmd_builtin_check1(&(cmd->cmd), envp_list)
 	|| cmd_builtin_check2(&(cmd->cmd), envp_list))
-		exit(0);
+		exit(0);햣
 	exit(execve(file, parse_option(*p, *channel), p->envp));
+	write(2, "start\n", 6);
 }
 
 void	bottom_child(t_pipe *p, t_using_pipe *channel, t_cplist *cmd, t_env_info_list *envp_list)
@@ -91,7 +93,7 @@ void	bottom_child(t_pipe *p, t_using_pipe *channel, t_cplist *cmd, t_env_info_li
 	int		check_dup;
 
 	check_dup = -1;
-	//printf("bottom\tcheck bottom -  stdread : %d\n", channel->prev_fd);//
+	// printf("bottom\tcheck bottom -  stdread : %d\n", channel->prev_fd);//
 	check_dup = dup2(channel->prev_fd, STDIN_FILENO);
 	if (check_dup == -1)
 		exit(check_dup);
