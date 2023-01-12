@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 20:10:52 by juha              #+#    #+#             */
-/*   Updated: 2023/01/12 13:18:05 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 15:30:18 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,7 @@ void	check_error(int error, char *str);
 
 void	excute_redirection(t_pipe *p, t_cplist *cmd);
 
-char	**parse_option(t_pipe p, t_using_pipe channel);
-char	*access_file(t_pipe *p, t_using_pipe *channel, int ok);
+char	**parse_option(t_pipe p);
 void	start_child(t_pipe *p, t_using_pipe *channel, t_cplist *cmd, t_env_info_list *envp_list);
 void	other_child(t_pipe *p, t_using_pipe *channel, t_cplist *cmd, t_env_info_list *envp_list);
 void	bottom_child(t_pipe *p, t_using_pipe *channel, t_cplist *cmd, t_env_info_list *envp_list);

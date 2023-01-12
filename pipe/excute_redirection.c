@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:32:35 by juha              #+#    #+#             */
-/*   Updated: 2023/01/12 13:08:49 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 16:24:44 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*make_here_doc_file(char *exit_code)
 		if (!change_name)
 			exit(1);
 	}
-	fd = open(change_name, O_RDWR | O_CREAT | O_TRUNC, 777);
+	fd = open(change_name, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	while (42)
 	{
 		write(1, "> ", 2);
@@ -73,11 +73,11 @@ int	_set_open_flag(t_rnode *target_cmd)
 
 	flag = 0;
 	if (target_cmd->redirection == MAKE_FILE)
-		flag = O_WRONLY | O_CREAT | O_TRUNC;
+		flag = O_RDWR | O_CREAT | O_TRUNC;
 	else if (target_cmd->redirection == ADD_FILE)
-		flag = O_WRONLY | O_CREAT | O_APPEND;
+		flag = O_RDWR | O_CREAT | O_APPEND;
 	else if (target_cmd->redirection == INPUT_FILE)
-		flag = O_RDONLY;
+		flag = O_RDWR;
 	else if (target_cmd->redirection == HEREDOC)
 	{
 		heredoc_exit_code = target_cmd->file;
@@ -118,10 +118,7 @@ void	excute_redirection(t_pipe *p, t_cplist *cmd)
 	while (rd_node->redirection)
 	{
 		flag = _set_open_flag(rd_node);
-		if (rd_node->redirection == MAKE_FILE)
-			fd = open(rd_node->file, flag, 644);
-		else
-			fd = open(rd_node->file, flag);
+		fd = open(rd_node->file, flag, 0644);
 		is_redirection_dup2(fd, rd_node->redirection);
 		if (rd_node->redirection == HEREDOC)
 			unlink(rd_node->file);
