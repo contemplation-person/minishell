@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   excute_redirection.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:32:35 by juha              #+#    #+#             */
-/*   Updated: 2023/01/12 18:34:24 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 19:31:37 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*make_here_doc_file(char *exit_code)
 	while (42)
 	{
 		write(2, "> ", 2);
-		str = get_next_line(STDIN_FILENO);
+		str = get_next_line(fd);
 		if (ft_strncmp(exit_code, str, ft_strlen(exit_code) + 1))
 		{
 			free(str);
@@ -84,7 +84,7 @@ int	_set_open_flag(t_rnode *target_cmd)
 		target_cmd->file = NULL;
 		target_cmd->file = make_here_doc_file(heredoc_exit_code);
 		free(heredoc_exit_code);
-		flag = O_RDONLY | O_CREAT | O_EXCL;
+		flag = O_RDONLY;
 	}
 	return (flag);
 }
@@ -111,11 +111,11 @@ void	excute_redirection(t_pipe *p, t_cplist *cmd)
 	t_rnode		*rd_node;
 	int			fd;
 	int			flag;
- 
+
 	rd_node = get_rd_node(p, cmd);
 	if (!rd_node)
 		return ;
-	while (rd_node) // todo: replace here with rdnode* next
+	while (rd_node)
 	{
 		flag = _set_open_flag(rd_node);
 		fd = open(rd_node->file, flag, 0644);
