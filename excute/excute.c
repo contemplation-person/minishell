@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/12 09:39:47 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 13:46:08 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,27 @@ int	cmd_builtin_check2(char **cmd, t_env_info_list *envp_list)
 	}
 	else
 		return (0);
+}
+
+void	excute_all(t_cplist *cmd_pipe_list, t_fds *fds,
+				t_env_info_list *envp_list)
+{
+	int		argc;
+	char	**envp;
+
+	envp = get_envp(envp_list);
+	argc = cplist_len(cmd_pipe_list);
+	reset_fds(fds);
+	if (argc <= 1)
+	{
+		redirection(fds, cmd_pipe_list->rd_head, envp_list);
+		init_fds(fds);
+		excute_cmd(cmd_pipe_list, envp_list);
+	}
+	else
+		pipex(cmd_pipe_list, envp_list);
+	close(STDIN_FILENO);
+	close(STDOUT_FILENO);
+	dup2(fds->stdin_fd, STDIN_FILENO);
+	dup2(fds->stdout_fd, STDOUT_FILENO);
 }

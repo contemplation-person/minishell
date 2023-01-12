@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:14:07 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/12 11:06:53 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 13:23:57 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void		print_error(char *cmd, char *msg);
 int			excute_cmd(t_cplist *cmd_node, t_env_info_list *envp_list);
 int			cmd_builtin_check1(char **cmd, t_env_info_list *envp_list);
 int			cmd_builtin_check2(char **cmd, t_env_info_list *envp_list);
+void		excute_all(t_cplist *cmd_pipe_list,
+				t_fds *fds, t_env_info_list *envp_list);
 char		**get_path(t_env_info_list *envp_list);
 void		free_path(char **path);
 

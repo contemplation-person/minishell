@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   excute.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/12 11:11:28 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 21:20:28 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,20 @@ int	get_cmd_num(t_tnode *cmd_list)
 	return (i);
 }
 
-char	**get_argv_to_cmd_list(int cnt_cmd, t_tnode *cmd_list)
+char	**get_argv_to_cmd_list(int cnt_cmd, t_cplist *cmd_list)
 {
-	char	**ret;
-	t_tnode	*temp;
-	int		i;
+	char		**ret;
+	int			i;
+	t_cplist	*temp;
 
-	i = 0;
 	temp = cmd_list;
-	ret = NULL;
+	i = 0;
 	ret = ft_calloc(cnt_cmd + 1, sizeof(char *));
 	if (!ret)
 		exit(1);
-	while (temp)
+	while (i < cnt_cmd)
 	{
-		ret[i] = ft_strdup(temp->token);
+		ret[i] = ft_strdup(temp->cmd);
 		if (!(ret[i]))
 			exit(1);
 		temp = temp->next;
@@ -70,32 +69,4 @@ char	**get_envp(t_env_info_list	*envp_list)
 	}
 	ret[i] = NULL;
 	return (ret);
-}
-
-// 방법 1
-// argv == 한줄로 명령어처럼 보내야함.            ex) "ls -l" "ls -l"
-// 방법 2
-// pipex 함수를 변형 후에 pipex_child의 execve함수에 cmd_list를 넣음      ex) pipex(argc, cmd_list, envp);
-
-void	pipex_excute_cmd(t_cplist *cmd_pipe_list, t_fds *fds,
-				t_env_info_list *envp_list)
-{
-	int		argc;
-	// char	**envp;
-
-	// envp = get_envp(envp_list);
-	argc = cplist_len(cmd_pipe_list);
-	reset_fds(fds);
-	if (argc <= 1)
-	{
-		redirection(fds, cmd_pipe_list->rd_head, envp_list);
-		init_fds(fds);
-		excute_cmd(cmd_pipe_list, envp_list);
-	}
-	// else
-		// pipex(argc, cmd_pipe_list, envp);
-	close(STDIN_FILENO);
-	close(STDOUT_FILENO);
-	dup2(fds->stdin_fd, STDIN_FILENO);
-	dup2(fds->stdout_fd, STDOUT_FILENO);
 }

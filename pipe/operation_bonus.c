@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 22:31:01 by juha              #+#    #+#             */
-/*   Updated: 2023/01/12 08:30:38 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 13:58:22 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*access_file(t_pipe *p, t_using_pipe *channel, int ok)
 	char	**path;
 	char	**file;
 
-	channel->fd[0] = 0;
+	channel = NULL;
 	file = ft_split(p->argv[p->operator_cmd], ' ');
 	file[0] = ft_strjoin("/", file[0]);
 	path = p->path;
@@ -44,53 +44,61 @@ char	**parse_option(t_pipe p, t_using_pipe channel)
 	return (ret);
 }
 
-void	start_child(t_pipe *p, t_using_pipe *channel)
+void	start_child(t_pipe *p, t_using_pipe *channel, t_cplist *cmd, t_env_info_list *envp_list)
 {
 	char	*file;
+	int		check_dup;
 
+	check_dup = -1;
 	close(channel->fd[READ]);
-	check_error(dup2(channel->fd[WRITE], STDOUT_FILENO), "operate.c - 44");
+	check_dup = dup2(channel->fd[WRITE], STDOUT_FILENO);
 	close(channel->fd[WRITE]);
-	file = access_file(p, channel, F_OK);
-	if (!file)
-	{
-		perror("command not found");
-		exit(p->status);
-	}
-	check_error(execve(file, parse_option(*p, *channel), p->envp), \
-	"operate.c - 48");
+	if (check_dup == -1)
+		exit(check_dup);
+	excute_redirection(p, cmd);
+	if (cmd_builtin_check1(&(cmd->cmd), envp_list)
+	|| cmd_builtin_check2(&(cmd->cmd), envp_list))
+		exit(0);
+	exit(execve(file, parse_option(*p, *channel), p->envp));
 }
 
-void	other_child(t_pipe *p, t_using_pipe *channel)
+void	other_child(t_pipe *p, t_using_pipe *channel, t_cplist *cmd, t_env_info_list *envp_list)
 {
 	char	*file;
+	int		check_dup;
 
 	//printf("other\tso what???\n");//
+	check_dup = -1;
 	close(channel->fd[READ]);
-	check_error(dup2(channel->prev_fd, STDIN_FILENO), "operate.c - 67");
+	check_dup = dup2(channel->prev_fd, STDIN_FILENO);
+	if (check_dup == -1)
+		exit(check_dup);
 	close(channel->prev_fd);
-	check_error(dup2(channel->fd[WRITE], STDOUT_FILENO), "operate.c - 69");
+	check_dup = dup2(channel->fd[WRITE], STDOUT_FILENO);
+	if (check_dup == -1)
+		exit(check_dup);
 	close(channel->fd[WRITE]);
-	file = access_file(p, channel, F_OK);
-	if (!file)
-		check_error(-1, "faild access-2");
-	check_error(execve(file, parse_option(*p, *channel), p->envp), \
-	"operate.c - 39");
+	excute_redirection(p, cmd);
+	if (cmd_builtin_check1(&(cmd->cmd), envp_list)
+	|| cmd_builtin_check2(&(cmd->cmd), envp_list))
+		exit(0);
+	exit(execve(file, parse_option(*p, *channel), p->envp));
 }
 
-void	bottom_child(t_pipe *p, t_using_pipe *channel)
+void	bottom_child(t_pipe *p, t_using_pipe *channel, t_cplist *cmd, t_env_info_list *envp_list)
 {
 	char	*file;
+	int		check_dup;
 
+	check_dup = -1;
 	//printf("bottom\tcheck bottom -  stdread : %d\n", channel->prev_fd);//
-	check_error(dup2(channel->prev_fd, STDIN_FILENO), "operate.c - 81");
+	check_dup = dup2(channel->prev_fd, STDIN_FILENO);
+	if (check_dup == -1)
+		exit(check_dup);
 	close(channel->prev_fd);
-	file = access_file(p, channel, F_OK);
-	if (!file)
-	{
-		perror("command not found");
-		exit(p->status);
-	}
-	check_error(execve(file, parse_option(*p, *channel), p->envp), \
-	"operate.c - 39");
+	excute_redirection(p, cmd);
+	if (cmd_builtin_check1(&(cmd->cmd), envp_list)
+	|| cmd_builtin_check2(&(cmd->cmd), envp_list))
+		exit(0);
+	exit(execve(file, parse_option(*p, *channel), p->envp));
 }
