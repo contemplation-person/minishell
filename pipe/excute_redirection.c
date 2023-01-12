@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:32:35 by juha              #+#    #+#             */
-/*   Updated: 2023/01/12 17:30:14 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 18:03:04 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*make_here_doc_file(char *exit_code)
 		if (!change_name)
 			exit(1);
 	}
-	fd = open(change_name, O_RDWR | O_CREAT | O_TRUNC, 0644);
+	fd = open(change_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	while (42)
 	{
 		write(1, "> ", 2);
@@ -73,18 +73,18 @@ int	_set_open_flag(t_rnode *target_cmd)
 
 	flag = 0;
 	if (target_cmd->redirection == MAKE_FILE)
-		flag = O_RDWR | O_CREAT | O_TRUNC; // O_WRONLY
+		flag = O_WRONLY| O_CREAT | O_TRUNC; // O_WRONLY
 	else if (target_cmd->redirection == ADD_FILE)
-		flag = O_RDWR | O_CREAT | O_APPEND;
+		flag = O_WRONLY | O_CREAT | O_APPEND;
 	else if (target_cmd->redirection == INPUT_FILE)
-		flag = O_RDWR;
+		flag = O_RDONLY;
 	else if (target_cmd->redirection == HEREDOC)
 	{
 		heredoc_exit_code = target_cmd->file;
 		target_cmd->file = NULL;
 		target_cmd->file = make_here_doc_file(heredoc_exit_code);
 		free(heredoc_exit_code);
-		flag = O_RDWR | O_CREAT | O_EXCL;
+		flag = O_RDONLY | O_CREAT | O_EXCL;
 	}
 	return (flag);
 }

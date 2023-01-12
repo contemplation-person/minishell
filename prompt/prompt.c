@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 10:01:26 by juha              #+#    #+#             */
-/*   Updated: 2023/01/12 14:11:37 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 18:15:08 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	_set_signal(int flag)
 	{
 		sa.sa_handler = signal_handler;
 		signal(SIGINT, signal_handler);
+		signal(SIGQUIT, SIG_IGN);
 	}
 	else if (flag == 2)
 	{
@@ -71,9 +72,9 @@ int	minishell_excute(t_env_info_list *minishell_envp_list)
 	fds.stdout_fd = dup(STDOUT_FILENO);
 	while (1)
 	{
-		_set_signal(1);
-		sentence = readline("MINISHELL : ");
 		_set_signal(0);
+		sentence = readline("MINISHELL : ");
+		_set_signal(3);
 		if (sentence == NULL)
 		{
 			ft_putendl_fd("exit", STDOUT_FILENO);
