@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/12 10:24:09 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 11:11:28 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,15 +85,11 @@ void	pipex_excute_cmd(t_cplist *cmd_pipe_list, t_fds *fds,
 
 	// envp = get_envp(envp_list);
 	argc = cplist_len(cmd_pipe_list);
-	fds->in_fd = dup(fds->stdin_fd);
-	fds->out_fd = dup(fds->stdout_fd);
+	reset_fds(fds);
 	if (argc <= 1)
 	{
 		redirection(fds, cmd_pipe_list->rd_head, envp_list);
-		dup2(fds->in_fd, STDIN_FILENO);
-		dup2(fds->out_fd, STDOUT_FILENO);
-		close(fds->in_fd);
-		close(fds->out_fd);
+		init_fds(fds);
 		excute_cmd(cmd_pipe_list, envp_list);
 	}
 	// else

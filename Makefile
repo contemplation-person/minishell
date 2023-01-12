@@ -6,7 +6,7 @@
 #    By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2023/01/12 10:35:23 by gyim             ###   ########seoul.kr   #
+#    Updated: 2023/01/12 11:08:56 by gyim             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME			:=	minishell
 READLINE_LIB	:=	-lreadline -L$(shell brew --prefix readline)/lib
 READLINE_INC	:=	$(shell brew --prefix readline)/include
 CC 				:=	cc
-CFLAGS 			:=	-Wall -Werror -Wextra -g -I$(READLINE_INC)
+CFLAGS 			:=	-Wall -Werror -Wextra -I$(READLINE_INC)
 SANITIZE		:= -g -fsanitize=address
 
 SRC 			:=	parser/parser.c	\
@@ -45,6 +45,7 @@ SRC 			:=	parser/parser.c	\
 					excute/pipe_list.c \
 					excute/pipe_list2.c \
 					excute/utils.c \
+					excute/fd.c \
 					operator/logical_op.c \
 					redirection/redirection.c \
 					redirection/redirection2.c \
@@ -83,9 +84,6 @@ $(FT_PRINTF) :
 all : $(NAME)
 
 bonus : $(NAME)
-
-debug : $(NAME)
-	bonus $(SANITIZE)
 
 clean :
 	make -C libft fclean
