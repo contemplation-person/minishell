@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:32:35 by juha              #+#    #+#             */
-/*   Updated: 2023/01/12 22:59:01 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 23:21:54 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,29 +80,23 @@ int	_set_open_flag(t_rnode *target_cmd, t_fds *fds)
 	else if (target_cmd->redirection == INPUT_FILE)
 		flag = O_RDONLY;
 	else if (target_cmd->redirection == HEREDOC)
-	{
-		heredoc_exit_code = target_cmd->file;
-		target_cmd->file = NULL;
-		target_cmd->file = make_here_doc_file(heredoc_exit_code, fds);
-		free(heredoc_exit_code);
 		flag = O_RDONLY;
-	}
 	return (flag);
 }
 
 void	is_redirection_dup2(int fd, int redirection)
 {
-	int	check;
+	int	check_error_code;
 
 	if (redirection == MAKE_FILE \
 	|| redirection == ADD_FILE)
-		check = dup2(fd, STDOUT_FILENO);
+		check_error_code = dup2(fd, STDOUT_FILENO);
 	else
-		check = dup2(fd, STDIN_FILENO);
-	if (check == -1)
+		check_error_code = dup2(fd, STDIN_FILENO);
+	if (check_error_code == -1)
 	{
 		close(fd);
-		exit (check);
+		exit (check_error_code);
 	}
 	close(fd);
 }
@@ -120,9 +114,9 @@ void	excute_redirection(t_pipe *p, t_cplist *cmd)
 	{
 		flag = _set_open_flag(rd_node, p->fds);
 		fd = open(rd_node->file, flag, 0644);
-		is_redirection_dup2(fd, rd_node->redirection);
 		if (rd_node->redirection == HEREDOC)
 			unlink(rd_node->file);
+		is_redirection_dup2(fd, rd_node->redirection);
 		rd_node = rd_node->next;
 	}
 }

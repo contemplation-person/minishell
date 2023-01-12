@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:43:32 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/12 09:11:44 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 00:19:33 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void			ret_make_asterisk(char *change_token,
 					char **sub_token);
 void			make_asterisk(char **sub_token);
 char			*asterisk(char *token);
+void			smart_join(char	**first_str, char *second_str);
 int				analyze_patten(char *sub_token, char *d_name,
 					int *sub_idx, int *d_idx);
 int				is_same_patten(char *sub_token, char *d_name);

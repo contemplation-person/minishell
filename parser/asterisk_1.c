@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   asterisk_1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:10:50 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/06 14:53:50 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 00:18:53 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static void	smart_join(char	**first_str, char *second_str)
+void	smart_join(char	**first_str, char *second_str)
 {
 	char	*temp;
 

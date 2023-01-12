@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 12:32:14 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/12 17:44:10 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 23:27:20 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,14 @@ typedef enum e_check_list
 	DOUBLE_QUOTE,
 	BACKTICK,
 }	t_check_list;
+
+enum e_redirection_cmd
+{
+	MAKE_FILE = 1,
+	ADD_FILE,
+	INPUT_FILE,
+	HEREDOC,
+};
 
 typedef struct s_tnode
 {

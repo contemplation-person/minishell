@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/12 23:10:37 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 00:23:30 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,7 @@ void	excute_all(t_cplist *cmd_pipe_list, t_fds *fds,
 	envp = get_envp(envp_list);
 	argc = cplist_len(cmd_pipe_list);
 	reset_fds(fds);
-	create_heredoc_file(cmd_pipe_list);
-/*
-	여기서 히어독을 받고 파일이름을 넘겨준다.
-*/
+	create_heredoc(cmd_pipe_list);
 	if (argc <= 1)
 	{
 		redirection(fds, cmd_pipe_list->rd_head, envp_list);
