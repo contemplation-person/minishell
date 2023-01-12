@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 20:10:52 by juha              #+#    #+#             */
-/*   Updated: 2023/01/13 03:26:22 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 03:54:33 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ typedef struct s_pipe
 }t_pipe;
 
 int		pipex(t_cplist *cmd_pipe_list, t_fds *fds,
+			t_env_info_list *envp_list);
+int		pipex2(t_cplist *cmd_pipe_list, t_fds *fds,
 			t_env_info_list *envp_list);
 
 void	init(t_pipe *p, t_using_pipe *channel, \

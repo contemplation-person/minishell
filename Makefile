@@ -6,7 +6,7 @@
 #    By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2023/01/13 01:05:30 by juha             ###   ########seoul.kr   #
+#    Updated: 2023/01/13 03:54:10 by juha             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,8 @@ SRC 			:=	parser/parser.c	\
 					pipe/operation_bonus.c \
 					pipe/pipex_bonus.c \
 					pipe/excute_redirection.c \
-					pipe/utils_bonus.c 
+					pipe/utils_bonus.c \
+					pipe/pipex_solo.c 
 LIBFT			:= libft/libft.a 
 FT_PRINTF		:= ft_printf/libftprintf.a
 OBJ 			:= $(SRC:.c=.o)

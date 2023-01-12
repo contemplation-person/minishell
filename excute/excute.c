@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/13 03:41:25 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 04:14:58 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,9 +111,10 @@ void	excute_all(t_cplist *cmd_pipe_list, t_fds *fds,
 	create_heredoc(cmd_pipe_list);
 	if (argc <= 1)
 	{
-		redirection(fds, cmd_pipe_list->rd_head, envp_list);
-		init_fds(fds);
-		excute_cmd(cmd_pipe_list, envp_list);
+		pipex2(cmd_pipe_list, fds, envp_list);
+		//redirection(fds, cmd_pipe_list->rd_head, envp_list);
+		//init_fds(fds);
+		//excute_cmd(cmd_pipe_list, envp_list);
 	}
 	else
 		pipex(cmd_pipe_list, fds, envp_list);
