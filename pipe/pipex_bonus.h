@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 20:10:52 by juha              #+#    #+#             */
-/*   Updated: 2023/01/12 20:57:18 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 03:26:22 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,6 @@ enum e_cmd
 	SECOND,
 	parent = 0,
 	child,
-};
-
-enum e_redirection_cmd
-{
-	MAKE_FILE = 1,
-	ADD_FILE,
-	INPUT_FILE,
-	HEREDOC,
 };
 
 typedef struct s_using_pipe
@@ -73,6 +65,7 @@ char	**get_argv_to_cmd_list(int cnt_cmd, t_cplist *cmd_list);
 void	check_error(int error, char *str);
 
 void	excute_redirection(t_pipe *p, t_cplist *cmd);
+int		check_redirection_builtin(char **cmd);
 
 char	**parse_option(t_pipe p);
 void	start_child(t_pipe *p, t_using_pipe *channel, t_cplist *cmd, t_env_info_list *envp_list);
