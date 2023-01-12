@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 20:09:00 by juha              #+#    #+#             */
-/*   Updated: 2023/01/12 16:22:06 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 17:43:46 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,12 @@ static void	pipe_n_fork(t_pipe *p, t_using_pipe *channel)
 	p->pid_num = fork();
 	if (p->pid_num > 0)
 	{
-		_set_signal(3); // 시그널 처리 필요.
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
+		//_set_signal(3); // 시그널 처리 필요.
 		if (channel->prev_fd != -1)
 		{
-			_set_signal(2); // 시그널 처리 필요.
+			//_set_signal(2); // 시그널 처리 필요. // todo: remove here
 			close(channel->prev_fd);
 		}
 		channel->prev_fd = channel->fd[READ];
@@ -58,8 +60,11 @@ void	end_parent(t_pipe *p, t_using_pipe channel)
 
 void	do_child(t_pipe *p, t_using_pipe *channel, t_cplist *cmd, t_env_info_list *envp_list)
 {
+	// todo: add signal handler
 	if (p->pid_num == 0)
 	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 		if (p->operator_cmd == 0)
 			start_child(p, channel, cmd, envp_list);
 		else if (p->operator_cmd == p->argc - 1)
@@ -86,7 +91,16 @@ int	pipex(t_cplist *cmd_pipe_list,
 	}
 	do_child(&p, &channel, cmd_pipe_list, envp_list);
 	end_parent(&p, channel);
+	/*
 	g_error_code = WEXITSTATUS(p.status);
+	*/
+	if (WIFEXITED(p.status))
+		g_error_code = WEXITSTATUS(p.status);
+	else if (WIFSIGNALED(p.status)) {
+		g_error_code = WTERMSIG(p.status);
+		ft_putstr_fd("\n", STDERR_FILENO);
+	}
+	
 	if (p.operator_cmd == 0)
 		exit(1);
 	return (0);

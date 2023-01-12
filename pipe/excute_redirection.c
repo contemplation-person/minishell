@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   excute_redirection.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:32:35 by juha              #+#    #+#             */
-/*   Updated: 2023/01/12 16:24:44 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 17:30:14 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	_set_open_flag(t_rnode *target_cmd)
 
 	flag = 0;
 	if (target_cmd->redirection == MAKE_FILE)
-		flag = O_RDWR | O_CREAT | O_TRUNC;
+		flag = O_RDWR | O_CREAT | O_TRUNC; // O_WRONLY
 	else if (target_cmd->redirection == ADD_FILE)
 		flag = O_RDWR | O_CREAT | O_APPEND;
 	else if (target_cmd->redirection == INPUT_FILE)
@@ -115,7 +115,7 @@ void	excute_redirection(t_pipe *p, t_cplist *cmd)
 	rd_node = get_rd_node(p, cmd);
 	if (!rd_node)
 		return ;
-	while (rd_node->redirection)
+	while (rd_node) // todo: replace here with rdnode* next
 	{
 		flag = _set_open_flag(rd_node);
 		fd = open(rd_node->file, flag, 0644);

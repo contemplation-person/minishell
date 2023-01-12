@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 20:10:52 by juha              #+#    #+#             */
-/*   Updated: 2023/01/12 15:30:18 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 17:30:08 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ enum e_cmd
 
 enum e_redirection_cmd
 {
-	MAKE_FILE,
+	MAKE_FILE = 1,
 	ADD_FILE,
 	INPUT_FILE,
 	HEREDOC,
