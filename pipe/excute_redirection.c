@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:32:35 by juha              #+#    #+#             */
-/*   Updated: 2023/01/12 22:40:11 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 22:59:01 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ char	*make_here_doc_file(char *exit_code, t_fds *fds)
 	{
 		write(2, "test1\n\n", 7);
 		ft_putstr_fd("> ", fds->stdout_fd);
+		write(2, "test1\n\n", 7);
 		str = get_next_line(fds->stdin_fd);
 		if (!ft_strncmp(exit_code, str, ft_strlen(exit_code)) \
 		&& ft_strlen(exit_code) == ft_strlen(str))
