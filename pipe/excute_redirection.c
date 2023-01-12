@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:32:35 by juha              #+#    #+#             */
-/*   Updated: 2023/01/12 18:34:24 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 19:38:39 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ char	*make_here_doc_file(char *exit_code)
 			exit(1);
 	}
 	fd = open(change_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	_set_signal()
 	while (42)
 	{
 		write(2, "> ", 2);
@@ -62,6 +63,7 @@ char	*make_here_doc_file(char *exit_code)
 		write(fd, str, ft_strlen(str));
 		free(str);
 	}
+	_set_signal();
 	close(fd);
 	return (change_name);
 }

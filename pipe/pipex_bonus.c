@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 20:09:00 by juha              #+#    #+#             */
-/*   Updated: 2023/01/12 18:18:27 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 19:50:05 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	do_child(t_pipe *p, t_using_pipe *channel, \
 	}
 }
 
-int	pipex(t_cplist *cmd_pipe_list,
+int	pipex(t_cplist *cmd_pipe_list, t_fds *fds,
 			t_env_info_list *envp_list)
 {
 	t_pipe				p;
