@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:32:35 by juha              #+#    #+#             */
-/*   Updated: 2023/01/12 21:42:36 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 21:49:50 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,14 @@ char	*make_here_doc_file(char *exit_code, t_fds *fds)
 	char	*str;
 
 	change_name = access_heredoc_name();
+	//ft_putstr_fd(change_name, 2);
+	fprintf(stderr, "%s\n", change_name);
 	fd = open(change_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (fd < 0)
+	{
+		fprintf(stderr, "here_doc temp file open failed\n");
+		exit(EXIT_FAILURE);
+	}
 	//_set_signal()
 	while (42)
 	{

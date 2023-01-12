@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 22:10:47 by juha              #+#    #+#             */
-/*   Updated: 2023/01/12 21:14:06 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 21:51:29 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ char	*access_heredoc_name(void)
 	char	*temp;
 
 	heredoc_name = 0;
-	check = -1;
+	check = 0;
 	ret = NULL;
 	while (!check)
 	{
