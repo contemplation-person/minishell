@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 16:53:14 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/11 19:31:47 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 18:57:58 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	renewal_fds(t_rnode *node, t_fds *fds, t_env_info_list *envp_list)
 	else if (node->redirection == 3)
 		return (set_infile(fds, node));
 	else if (node->redirection == 4)
-		return (set_here_doc(node, envp_list));
+		return (set_here_doc(node, fds, envp_list));
 	return (-1);
 }
 

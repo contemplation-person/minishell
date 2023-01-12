@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 20:10:52 by juha              #+#    #+#             */
-/*   Updated: 2023/01/12 17:30:08 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 20:57:18 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,18 +51,21 @@ typedef struct s_pipe
 	int			argc;
 	char		**argv;
 	char		**envp;
+	t_fds		*fds;
+	int			stdin_out[2];
 	pid_t		pid_num;
 	int			operator_cmd;
 	int			status;
 }t_pipe;
 
-int		pipex(t_cplist *cmd_pipe_list,
+int		pipex(t_cplist *cmd_pipe_list, t_fds *fds,
 			t_env_info_list *envp_list);
 
 void	init(t_pipe *p, t_using_pipe *channel, \
 			t_cplist *cmd_pipe_list, t_env_info_list *envp_list);
 int		set_collabo(t_pipe *p, char **envp);
 char	*parse_file(t_pipe p, char **argv);
+char	*access_heredoc_name(void);
 
 char	**get_envp(t_env_info_list	*envp_list);
 char	**get_argv_to_cmd_list(int cnt_cmd, t_cplist *cmd_list);

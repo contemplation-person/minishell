@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 09:25:16 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/11 22:08:11 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 18:59:52 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		set_fds(t_fds *fds, t_rnode *node, t_env_info_list *envp_list);
 int		set_outfile(t_fds *fds, t_rnode *node);
 int		set_addfile(t_fds *fds, t_rnode *node);
 int		set_infile(t_fds *fds, t_rnode *node);
-int		set_here_doc(t_rnode *node, t_env_info_list *envp_list);
+int		set_here_doc(t_rnode *node, t_fds *fds, t_env_info_list *envp_list);
 void	free_red(t_rnode *rd_head);
 
 int		check_redirection(t_rnode *head);
@@ -33,6 +33,7 @@ int		renewal_fds(t_rnode *node, t_fds *fds, t_env_info_list *envp_list);
 int		set_fds(t_fds *fds, t_rnode *node, t_env_info_list *envp_list);
 int		redirection(t_fds *fds, t_rnode *rd_head, t_env_info_list *envp_list);
 
-int		read_lines(int here_doc_fd, char *limiter, t_env_info_list *envp_list);
+int		read_lines(int here_doc_fd, t_fds *fds, char *limiter,
+			t_env_info_list *envp_list);
 void	delete_here_doc(void);
 #endif

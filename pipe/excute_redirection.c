@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:32:35 by juha              #+#    #+#             */
-/*   Updated: 2023/01/12 19:31:37 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 21:30:16 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,43 +30,35 @@ t_rnode	*get_rd_node(t_pipe *p, t_cplist *cmd)
 	return (ret);
 }
 
-char	*make_here_doc_file(char *exit_code)
+char	*make_here_doc_file(char *exit_code, t_fds *fds)
 {
-	int		heredoc_name;
 	char	*change_name;
 	int		fd;
 	char	*str;
 
-	change_name = NULL;
-	heredoc_name = 0;
-	change_name = ft_itoa(heredoc_name);
-	while (access(change_name, F_OK))
-	{
-		if (change_name)
-			free(change_name);
-		++heredoc_name;
-		change_name = ft_itoa(heredoc_name);
-		if (!change_name)
-			exit(1);
-	}
+	change_name = access_heredoc_name();
 	fd = open(change_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	//_set_signal()
 	while (42)
 	{
-		write(2, "> ", 2);
-		str = get_next_line(fd);
-		if (ft_strncmp(exit_code, str, ft_strlen(exit_code) + 1))
+		write(2, "test1\n\n", 7);
+		write(fds->stdout_fd, "> ", 2);
+		str = get_next_line(fds->stdin_fd);
+		if (!ft_strncmp(exit_code, str, ft_strlen(exit_code) + 1))
 		{
 			free(str);
 			break ;
 		}
 		write(fd, str, ft_strlen(str));
 		free(str);
+		write(1, "\n", 1);
 	}
+	//_set_signal();
 	close(fd);
 	return (change_name);
 }
 
-int	_set_open_flag(t_rnode *target_cmd)
+int	_set_open_flag(t_rnode *target_cmd, t_fds *fds)
 {
 	int		flag;
 	char	*heredoc_exit_code;
@@ -82,7 +74,7 @@ int	_set_open_flag(t_rnode *target_cmd)
 	{
 		heredoc_exit_code = target_cmd->file;
 		target_cmd->file = NULL;
-		target_cmd->file = make_here_doc_file(heredoc_exit_code);
+		target_cmd->file = make_here_doc_file(heredoc_exit_code, fds);
 		free(heredoc_exit_code);
 		flag = O_RDONLY;
 	}
@@ -117,7 +109,7 @@ void	excute_redirection(t_pipe *p, t_cplist *cmd)
 		return ;
 	while (rd_node)
 	{
-		flag = _set_open_flag(rd_node);
+		flag = _set_open_flag(rd_node, p->fds);
 		fd = open(rd_node->file, flag, 0644);
 		is_redirection_dup2(fd, rd_node->redirection);
 		if (rd_node->redirection == HEREDOC)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 22:10:47 by juha              #+#    #+#             */
-/*   Updated: 2023/01/12 16:19:56 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 21:14:06 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,31 @@ char	*parse_file(t_pipe p, char **argv)
 		i++;
 	}
 	return (ft_substr(ft_strjoin(str, argv[p.operator_cmd ]), 0, i));
+}
+
+char	*access_heredoc_name(void)
+{
+	int		heredoc_name;
+	int		check;
+	char	*ret;
+	char	*temp;
+
+	heredoc_name = 0;
+	check = -1;
+	ret = NULL;
+	while (!check)
+	{
+		if (ret != NULL)
+			free(ret);
+		ret = ft_itoa(heredoc_name);
+		if (!ret)
+			exit(1);
+		temp = ft_strjoin("./", ret);
+		if (!temp)
+			exit(1);
+		check = access(temp, F_OK);
+		free(temp);
+		++heredoc_name;
+	}
+	return (ret);
 }
