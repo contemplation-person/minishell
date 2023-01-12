@@ -6,7 +6,7 @@
 #    By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2023/01/12 14:11:27 by juha             ###   ########seoul.kr   #
+#    Updated: 2023/01/12 23:11:24 by juha             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRC 			:=	parser/parser.c	\
 					excute/pipe_list2.c \
 					excute/utils.c \
 					excute/fd.c \
+					excute/heredoc.c \
 					operator/logical_op.c \
 					redirection/redirection.c \
 					redirection/redirection2.c \
