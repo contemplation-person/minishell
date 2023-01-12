@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   excute_redirection.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:32:35 by juha              #+#    #+#             */
-/*   Updated: 2023/01/12 18:03:04 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 18:34:24 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*make_here_doc_file(char *exit_code)
 	fd = open(change_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	while (42)
 	{
-		write(1, "> ", 2);
+		write(2, "> ", 2);
 		str = get_next_line(STDIN_FILENO);
 		if (ft_strncmp(exit_code, str, ft_strlen(exit_code) + 1))
 		{
@@ -73,7 +73,7 @@ int	_set_open_flag(t_rnode *target_cmd)
 
 	flag = 0;
 	if (target_cmd->redirection == MAKE_FILE)
-		flag = O_WRONLY| O_CREAT | O_TRUNC; // O_WRONLY
+		flag = O_WRONLY | O_CREAT | O_TRUNC;
 	else if (target_cmd->redirection == ADD_FILE)
 		flag = O_WRONLY | O_CREAT | O_APPEND;
 	else if (target_cmd->redirection == INPUT_FILE)
@@ -111,7 +111,7 @@ void	excute_redirection(t_pipe *p, t_cplist *cmd)
 	t_rnode		*rd_node;
 	int			fd;
 	int			flag;
-
+ 
 	rd_node = get_rd_node(p, cmd);
 	if (!rd_node)
 		return ;

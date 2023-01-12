@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operation_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 22:31:01 by juha              #+#    #+#             */
-/*   Updated: 2023/01/12 18:07:49 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 18:37:11 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	other_child(t_pipe *p, t_using_pipe *channel, \
 {
 	int		check_dup;
 	char	**option_file;
-	
+
 	check_dup = -1;
 	close(channel->fd[READ]);
 	check_dup = dup2(channel->prev_fd, STDIN_FILENO);

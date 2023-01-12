@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 10:01:26 by juha              #+#    #+#             */
-/*   Updated: 2023/01/12 18:15:08 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 18:33:16 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,8 @@ int	minishell_excute(t_env_info_list *minishell_envp_list)
 	fds.stdout_fd = dup(STDOUT_FILENO);
 	while (1)
 	{
-		_set_signal(0);
+		_set_signal(1);
 		sentence = readline("MINISHELL : ");
-		_set_signal(3);
 		if (sentence == NULL)
 		{
 			ft_putendl_fd("exit", STDOUT_FILENO);

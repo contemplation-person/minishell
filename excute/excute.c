@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   excute.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/12 18:16:40 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 18:43:31 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@ int	excute_cmd(t_cplist *cmd_node, t_env_info_list *envp_list)
 	cmd = ft_split(cmd_node->cmd, ' ');
 	if (cmd_builtin_check1(cmd, envp_list) == 1)
 		return (-999);
+	_set_signal(0);
 	pid = fork();
 	if (pid == 0)
 	{
+		_set_signal(3);
 		if (cmd_builtin_check2(cmd, envp_list) == 1)
 			exit(0);
 		path = get_path(envp_list);
@@ -38,9 +40,15 @@ int	excute_cmd(t_cplist *cmd_node, t_env_info_list *envp_list)
 		print_error(cmd[0], CMD_NOT_FOUND);
 		exit(127);
 	}
-	free_cmd(cmd);
 	waitpid(-1, &status, 0);
-	g_error_code = WEXITSTATUS(status);
+	free_cmd(cmd);
+	if (WIFEXITED(status))
+		g_error_code = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
+	{
+		g_error_code = WTERMSIG(status);
+		ft_putstr_fd("\n", STDERR_FILENO);
+	}
 	return (pid);
 }
 

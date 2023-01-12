@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 20:09:00 by juha              #+#    #+#             */
-/*   Updated: 2023/01/12 18:13:44 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 18:18:27 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ static void	pipe_n_fork(t_pipe *p, t_using_pipe *channel)
 	if (p->pid_num > 0)
 	{
 		_set_signal(0);
-		//signal(SIGINT, SIG_IGN);
-		//signal(SIGQUIT, SIG_IGN);
 		if (channel->prev_fd != -1)
 			close(channel->prev_fd);
 		channel->prev_fd = channel->fd[READ];

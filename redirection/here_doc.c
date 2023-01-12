@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:41:20 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/06 15:14:08 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 18:45:57 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	read_lines(int here_doc_fd, char *limiter, t_env_info_list *envp_list)
 		free(line);
 		free(p_expanded);
 	}
+	close(here_doc_fd);
 	free(temp);
 	free(line);
 	return (0);
