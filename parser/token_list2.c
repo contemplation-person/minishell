@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:27:53 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/06 19:38:47 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 18:33:22 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_tnode	*last_prev_node(t_tnode *head)
 	return (prev);
 }
 
-void	free_list(t_tnode *head)
+void	free_tlist(t_tnode *head)
 {
 	t_tnode	*curr;
 	t_tnode	*next;

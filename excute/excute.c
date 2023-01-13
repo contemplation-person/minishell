@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/13 16:28:52 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 18:40:11 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,9 +119,7 @@ void	excute_all(t_cplist *cmd_pipe_list, t_fds *fds,
 	reset_fds(fds);
 	create_heredoc(cmd_pipe_list);
 	if (argc <= 1)
-	{
 		pipex2(cmd_pipe_list, fds, envp_list);
-	}
 	else
 		pipex(cmd_pipe_list, fds, envp_list);
 	close(STDIN_FILENO);

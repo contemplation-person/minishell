@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:36:08 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/13 11:35:57 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 18:32:30 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	retokenize(t_tnode	*head)
 				ft_strlen(tokened_list->token) + 1) != 0)
 			curr = replace_list(&head, prev, curr, tokened_list);
 		else
-			free_list(tokened_list);
+			free_tlist(tokened_list);
 		prev = curr;
 		curr = curr->next;
 	}

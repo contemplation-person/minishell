@@ -6,27 +6,11 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 10:34:58 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/13 18:03:56 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 18:26:37 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
-int	multiple_cmds_check(t_tlist_info *word_list)
-{
-	t_tnode	*curr;
-	int		ret;
-
-	ret = 0;
-	curr = word_list->head;
-	while (curr)
-	{
-		if (curr->token[0] == '|')
-			ret = 1;
-		curr = curr->next;
-	}
-	return (ret);
-}
 
 void	multiple_cmds_excute(t_tlist_info *word_list, t_fds *fds, t_env_info_list *env_list)
 {

@@ -6,7 +6,7 @@
 #    By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2023/01/13 15:02:06 by gyim             ###   ########seoul.kr   #
+#    Updated: 2023/01/13 18:23:12 by gyim             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRC 			:=	parser/parser.c	\
 					parser/token_check.c \
 					parser/token_list.c	\
 					parser/token_list2.c \
+					parser/token_list3.c \
 					parser/tree.c \
 					parser/tree2.c \
 			 		parser/utils.c \
@@ -38,6 +39,7 @@ SRC 			:=	parser/parser.c	\
 					parser/asterisk_2.c \
 					parser/quote_remove.c \
 					prompt/prompt.c	\
+					prompt/signal.c \
 					excute/excute.c \
 					excute/path.c \
 					excute/cmd.c \

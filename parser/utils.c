@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 18:26:48 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/09 18:09:00 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 18:24:40 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,48 +25,106 @@ t_tnode	*find_op(t_tnode *head)
 	return (target);
 }
 
-t_tnode	*find_last_node(t_tnode *head)
+t_tnode	*check_double_op(t_tnode *head)
 {
+	int		p_flag;
 	t_tnode	*curr;
+	t_tnode	*ret;
 
-	if (!head)
-		return (NULL);
 	curr = head;
-	while (curr->next)
+	ret = NULL;
+	p_flag = 0;
+	while (curr)
+	{
+		if (curr->token[0] == '(')
+			p_flag++;
+		else if (curr->token[0] == ')')
+			p_flag--;
+		if (p_flag == 0 && (ft_strncmp(curr->token, "||", 3) == 0
+				|| ft_strncmp(curr->token, "&&", 3) == 0))
+			ret = curr;
 		curr = curr->next;
-	return (curr);
+	}
+	if (p_flag != 0)
+		return (NULL);
+	return (ret);
 }
 
-void	add_token_list(t_tnode **head, char *token)
+t_tnode	*check_pipe_op(t_tnode *head)
 {
-	t_tnode	*new_node;
-	t_tnode	*last;
-	char	*trimmed_token;
+	int		p_flag;
+	t_tnode	*curr;
+	t_tnode	*ret;
 
-	trimmed_token = ft_strtrim(token, " ");
-	new_node = make_node(trimmed_token);
-	free(trimmed_token);
-	last = find_last_node(*head);
-	if (!last)
-		*head = new_node;
-	else
-		last->next = new_node;
+	curr = head;
+	p_flag = 0;
+	ret = NULL;
+	while (curr)
+	{
+		if (curr->token[0] == '(')
+			p_flag++;
+		else if (curr->token[0] == ')')
+			p_flag--;
+		if (p_flag == 0 && curr->token[0] == '|')
+			ret = curr;
+		curr = curr->next;
+	}
+	if (p_flag != 0)
+		return (NULL);
+	return (ret);
 }
 
-t_tnode	*replace_list(t_tnode **head, t_tnode *prev,
-				t_tnode *target, t_tnode *new_list)
+t_tnode	*check_redirect(t_tnode	*head)
 {
-	t_tnode	*next;
-	t_tnode	*last;
+	int		p_flag;
+	t_tnode	*curr;
+	t_tnode	*ret;
 
-	next = target->next;
-	if (!prev)
-		*head = new_list;
-	else
-		prev->next = new_list;
-	last = find_last_node(new_list);
-	last->next = next;
-	free(target->token);
-	free(target);
-	return (last);
+	curr = head;
+	p_flag = 0;
+	ret = NULL;
+	while (curr)
+	{
+		if (curr->token[0] == '(')
+			p_flag++;
+		else if (curr->token[0] == ')')
+			p_flag--;
+		if (p_flag == 0 && (ft_strncmp(curr->token, "<<", 3) == 0
+				|| ft_strncmp(curr->token, "<", 2) == 0
+				|| ft_strncmp(curr->token, ">>", 3) == 0
+				|| ft_strncmp(curr->token, ">", 2) == 0))
+			ret = curr;
+		curr = curr->next;
+	}
+	if (p_flag != 0)
+		return (NULL);
+	return (ret);
+}
+
+t_tnode	*delete_paren(t_tnode *head)
+{
+	t_tnode	*start;
+	t_tnode	*start_prev;
+	t_tnode	*last_prev;
+
+	start = head;
+	while (1)
+	{
+		last_prev = last_prev_node(start);
+		if (ft_strncmp(start->token, "(", 2) == 0
+			&& ft_strncmp(last_prev->next->token, ")", 2) == 0)
+		{
+			start_prev = start;
+			start = start->next;
+			free(start_prev->token);
+			start_prev->next = NULL;
+			free(start_prev);
+			free(last_prev->next->token);
+			free(last_prev->next);
+			last_prev->next = NULL;
+		}
+		else
+			break ;
+	}
+	return (start);
 }

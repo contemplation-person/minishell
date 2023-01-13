@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:14:07 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/13 11:12:59 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 18:51:25 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,9 @@ void		free_red(t_rnode *rd_head);
 
 void		search_tree(t_tree_node *node, t_cplist **cmd_list,
 				t_fds *fds, t_env_info_list *envp_list);
-void		rd_list_add(t_rnode **rd_list, t_rnode *target);
 void		excute_list_add(t_cplist **cmd_list, t_tnode *cmds,
 				t_env_info_list *env_list);
-t_cplist	*init_cmd_pipe_lists(void);
+// t_cplist	*init_cmd_pipe_lists(void);
 
 t_cplist	*new_cplist(void);
 char		*get_cplist_cmd(t_tnode *cmds,
@@ -53,9 +52,6 @@ char		*merge_token(t_tnode *head);
 
 void		reset_fds(t_fds *fds);
 void		init_fds(t_fds *fds);
-void		print_cmd_pipe_list(t_cplist *list);
-void		print_cmds(char **cmd);
-void		print_cmd_pipe_list(t_cplist *list);
 
 void		create_heredoc(t_cplist *cplist);
 int			get_heredoc_fd(t_rnode *rd);

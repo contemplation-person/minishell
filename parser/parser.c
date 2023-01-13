@@ -6,51 +6,11 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:21:32 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/12 09:10:12 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 18:20:29 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
-t_tree_node	*parser(t_tlist_info *list)
-{
-	t_tree_node	*root;
-
-	root = make_tree(list->head);
-	if (!root)
-		return (NULL);
-	return (root);
-}
-
-int	list_len(t_tlist_info *list)
-{
-	int		len;
-	t_tnode	*node;
-
-	len = 0;
-	node = list->head;
-	while (node)
-	{
-		node = node->next;
-		len++;
-	}
-	return (len);
-}
-
-void	copy_from_list(char **target, t_tlist_info *list)
-{
-	t_tnode	*curr;
-	int		target_index;
-
-	target_index = 0;
-	curr = list->head;
-	while (curr)
-	{
-		target[target_index] = ft_strdup(curr->token);
-		target_index++;
-		curr = curr->next;
-	}
-}
 
 int	parsing_excute(char *user_input, t_fds *fds, t_env_info_list *env_list)
 {
@@ -72,3 +32,14 @@ int	parsing_excute(char *user_input, t_fds *fds, t_env_info_list *env_list)
 	word_list = NULL;
 	return (0);
 }
+
+t_tree_node	*parser(t_tlist_info *list)
+{
+	t_tree_node	*root;
+
+	root = make_tree(list->head);
+	if (!root)
+		return (NULL);
+	return (root);
+}
+
