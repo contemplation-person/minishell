@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+         #
+#    By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2023/01/13 03:54:10 by juha             ###   ########seoul.kr   #
+#    Updated: 2023/01/13 11:41:58 by gyim             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ SRC 			:=	parser/parser.c	\
 					excute/utils.c \
 					excute/fd.c \
 					excute/heredoc.c \
+					excute/split_cmd.c \
 					operator/logical_op.c \
 					redirection/redirection.c \
 					redirection/redirection2.c \
@@ -77,7 +78,7 @@ OBJ 			:= $(SRC:.c=.o)
 
 
 $(NAME) : $(OBJ) $(LIBFT) $(FT_PRINTF)
-	$(CC) -o $(NAME)  $(OBJ) $(LIBFT) $(FT_PRINTF) $(READLINE_LIB) $(SANITIZE)
+	$(CC) -o $(NAME)  $(OBJ) $(LIBFT) $(FT_PRINTF) $(READLINE_LIB) 
 
 $(LIBFT) :
 	make -j 4 -C libft bonus

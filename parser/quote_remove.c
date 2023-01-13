@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 18:04:28 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/06 16:25:34 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 11:18:32 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ char	*remove_token_quote(char *token)
 	char	**splitted;
 	char	*ret;
 
+	printf("asdf : %s\n", token);
 	change_quote_char(token);
 	splitted = ft_split(token, '\"');
 	ret = concat_str(splitted);
