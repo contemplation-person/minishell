@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_solo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 20:09:00 by juha              #+#    #+#             */
-/*   Updated: 2023/01/13 04:14:54 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 13:02:57 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ int	pipex2(t_cplist *cmd_pipe_list, t_fds *fds, \
 	set_collabo(&p, p.envp);
 	excute_redirection(&p, cmd_pipe_list);
 	excute_cmd(cmd_pipe_list, envp_list);
+	free_t_pipe(&p);
 	return (0);
 }

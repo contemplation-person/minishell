@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 20:10:52 by juha              #+#    #+#             */
-/*   Updated: 2023/01/13 03:54:33 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 13:02:30 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	init(t_pipe *p, t_using_pipe *channel, \
 			t_cplist *cmd_pipe_list, t_env_info_list *envp_list);
 int		set_collabo(t_pipe *p, char **envp);
 char	*parse_file(t_pipe p, char **argv);
+void	free_t_pipe(t_pipe *p);
 char	*access_heredoc_name(void);
 
 char	**get_envp(t_env_info_list	*envp_list);

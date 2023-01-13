@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 22:10:47 by juha              #+#    #+#             */
-/*   Updated: 2023/01/12 23:32:33 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 13:04:00 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,12 @@ char	*parse_file(t_pipe p, char **argv)
 		i++;
 	}
 	return (ft_substr(ft_strjoin(str, argv[p.operator_cmd ]), 0, i));
+}
+
+void	free_t_pipe(t_pipe *p)
+{
+	free_cmd(p->path);
+	free(p->pwd);
+	free_cmd(p->argv);
+	free_cmd(p->envp);
 }

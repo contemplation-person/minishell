@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/13 11:31:18 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 13:08:07 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,18 +103,13 @@ void	excute_all(t_cplist *cmd_pipe_list, t_fds *fds,
 				t_env_info_list *envp_list)
 {
 	int		argc;
-	char	**envp;
 
-	envp = get_envp(envp_list);
 	argc = cplist_len(cmd_pipe_list);
 	reset_fds(fds);
 	create_heredoc(cmd_pipe_list);
 	if (argc <= 1)
 	{
 		pipex2(cmd_pipe_list, fds, envp_list);
-		//redirection(fds, cmd_pipe_list->rd_head, envp_list);
-		//init_fds(fds);
-		//excute_cmd(cmd_pipe_list, envp_list);
 	}
 	else
 		pipex(cmd_pipe_list, fds, envp_list);
