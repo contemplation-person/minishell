@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:06:38 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/13 18:38:24 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 19:53:45 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,3 @@ void	excute_list_add(t_cplist **cmd_list, t_tnode *cmds,
 	}
 
 }
-
