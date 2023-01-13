@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:06:56 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/11 13:27:32 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 14:47:45 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,13 @@ char	*env_key_to_value(char *token, int start, int end,
 	{
 		if (ft_strncmp(curr->key, target, ft_strlen(curr->key) + 1)
 			== 0)
+		{
+			free(target);
 			return (ft_strdup(curr->value));
+		}
 		curr = curr->next;
 	}
+	free(target);
 	if (ft_strncmp(token + start, "$", 2) == 0)
 		return (ft_strdup("$"));
 	return (ft_strdup(""));

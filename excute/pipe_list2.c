@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 08:16:04 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/13 09:51:18 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 14:27:23 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*get_cplist_cmd(t_tnode *cmds, t_env_info_list *env_list)
 
 	expansion(cmds, env_list);
  	retokenize(cmds);
- 	// quote_remove(cmds);
+ 	quote_remove(cmds);
 
 	ret = merge_token(cmds);
 	return (ret);

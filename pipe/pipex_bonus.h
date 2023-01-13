@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 20:10:52 by juha              #+#    #+#             */
-/*   Updated: 2023/01/13 13:02:30 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 15:29:51 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	**get_argv_to_cmd_list(int cnt_cmd, t_cplist *cmd_list);
 
 void	check_error(int error, char *str);
 
-void	excute_redirection(t_pipe *p, t_cplist *cmd);
+int		excute_redirection(t_pipe *p, t_cplist *cmd);
 int		check_redirection_builtin(char **cmd);
 
 char	**parse_option(t_pipe p);

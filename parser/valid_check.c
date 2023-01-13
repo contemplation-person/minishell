@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 17:52:44 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/09 22:33:50 by gyim             ###   ########.fr       */
+/*   Updated: 2023/01/13 15:00:46 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	quote_check(t_tnode *head)
 		}
 		if (in_quote != 0)
 		{
-			printf("quote not paired\n");
+			ft_printf("quote not paired\n");
 			return (-1);
 		}
 		curr = curr->next;

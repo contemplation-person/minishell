@@ -6,7 +6,7 @@
 #    By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2023/01/13 11:41:58 by gyim             ###   ########seoul.kr   #
+#    Updated: 2023/01/13 15:02:06 by gyim             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,6 @@ SRC 			:=	parser/parser.c	\
 					builtin/unset.c \
 					get_next_line/get_next_line_bonus.c \
 					get_next_line/get_next_line_utils_bonus.c \
-					excute/temp.c \
 					pipe/excute.c \
 					pipe/operation_bonus.c \
 					pipe/pipex_bonus.c \
@@ -78,7 +77,7 @@ OBJ 			:= $(SRC:.c=.o)
 
 
 $(NAME) : $(OBJ) $(LIBFT) $(FT_PRINTF)
-	$(CC) -o $(NAME)  $(OBJ) $(LIBFT) $(FT_PRINTF) $(READLINE_LIB) 
+	$(CC) -o $(NAME) $(OBJ) $(LIBFT) $(FT_PRINTF) $(READLINE_LIB)
 
 $(LIBFT) :
 	make -j 4 -C libft bonus
