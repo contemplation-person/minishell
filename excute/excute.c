@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   excute.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/13 14:24:46 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 16:13:28 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,26 @@ int	excute_cmd(t_cplist *cmd_node, t_env_info_list *envp_list)
 	char	**cmd;
 
 	cmd = split_cmd(cmd_node->cmd);
-	if (cmd_builtin_check1(cmd, envp_list) == 1)
+	if (cmd[0] == NULL)
+	{
+		g_error_code = 0;
 		return (0);
+	}
+	if (cmd_builtin_check1(cmd, envp_list) == 1)
+	{
+		free_cmd(cmd);
+		return (0);
+	}
 	_set_signal(0);
 	pid = fork();
 	if (pid == 0)
 	{
 		_set_signal(3);
 		if (cmd_builtin_check2(cmd, envp_list) == 1)
+		{
+			free(cmd);
 			exit(0);
+		}
 		path = get_path(envp_list);
 		cmd_path_check(path, cmd, envp_list);
 		print_error(cmd[0], CMD_NOT_FOUND);

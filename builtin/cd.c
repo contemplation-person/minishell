@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 19:56:59 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/13 16:06:54 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 16:13:22 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ t_bool	check_cd_error(t_env_info_list *minishell_envp, char **excute_str_form)
 	if (excute_str_form[1] == '~')
 		find_path = ft_strjoin(getenv("HOME"), excute_str_form[1] + 1);
 	else
-		find_path = excute_str_form[1];
+		find_path = ft_strdup(excute_str_form[1]);
 	if (access(find_path, F_OK) == -1)
 	{
 		builtin_error_message("MINISHELL ", \
@@ -100,7 +100,7 @@ t_bool	check_cd_error(t_env_info_list *minishell_envp, char **excute_str_form)
 	}
 	free(find_path);
 	return (FALSE);
-}
+}///
 
 t_bool	builtin_cd(t_env_info_list *minishell_envp, char **excute_str_form)
 {

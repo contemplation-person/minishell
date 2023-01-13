@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   excute_redirection.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:32:35 by juha              #+#    #+#             */
-/*   Updated: 2023/01/13 03:28:32 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 15:44:51 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,14 @@ int	_set_open_flag(t_rnode *target_cmd)
 	else if (target_cmd->redirection == ADD_FILE)
 		flag = O_WRONLY | O_CREAT | O_APPEND;
 	else if (target_cmd->redirection == INPUT_FILE)
+	{
 		flag = O_RDONLY;
+		access(target_cmd->file, F_OK | R_OK);
+		perror(target_cmd->file);
+		g_error_code = 1;
+		return (-1);
+
+	}
 	return (flag);
 }
 
@@ -90,7 +97,7 @@ void	is_redirection_dup2(int fd, int redirection, t_pipe *p, t_cplist *cp)
 	close(fd);
 }
 
-void	excute_redirection(t_pipe *p, t_cplist *cmd)
+int	excute_redirection(t_pipe *p, t_cplist *cmd)
 {
 	t_rnode		*rd_node;
 	int			fd;
@@ -98,10 +105,15 @@ void	excute_redirection(t_pipe *p, t_cplist *cmd)
 
 	rd_node = get_rd_node(p, cmd);
 	if (!rd_node)
-		return ;
+		return (TRUE);
 	while (rd_node)
 	{
 		flag = _set_open_flag(rd_node);
+		if (flag == -1)
+		{
+			rd_node = rd_node->next;
+			return (FALSE);
+		}
 		if (rd_node->redirection != HEREDOC)
 			fd = open(rd_node->file, flag, 0644);
 		else
@@ -109,4 +121,5 @@ void	excute_redirection(t_pipe *p, t_cplist *cmd)
 		is_redirection_dup2(fd, rd_node->redirection, p, cmd);
 		rd_node = rd_node->next;
 	}
+	return (TRUE);
 }

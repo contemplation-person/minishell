@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 22:31:01 by juha              #+#    #+#             */
-/*   Updated: 2023/01/13 15:51:03 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 16:13:40 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ void	start_child(t_pipe *p, t_using_pipe *channel, \
 	close(channel->fd[WRITE]);
 	if (check_dup == -1)
 		exit(check_dup);
-	excute_redirection(p, cmd);
+	if (excute_redirection(p, cmd) == FALSE)
+		exit(1);
 	if (cmd_builtin_check1(&(cmd->cmd), envp_list) \
 		|| cmd_builtin_check2(&(cmd->cmd), envp_list))
 		exit(0);
@@ -79,7 +80,8 @@ void	other_child(t_pipe *p, t_using_pipe *channel, \
 	close(channel->fd[WRITE]);
 	if (check_dup == -1)
 		exit(check_dup);
-	excute_redirection(p, cmd);
+	if (excute_redirection(p, cmd) == FALSE)
+		exit(1);
 	if (cmd_builtin_check1(&(cmd->cmd), envp_list) \
 		|| cmd_builtin_check2(&(cmd->cmd), envp_list))
 		exit(0);
@@ -98,7 +100,8 @@ void	bottom_child(t_pipe *p, t_using_pipe *channel, \
 	if (check_dup == -1)
 		exit(check_dup);
 	close(channel->prev_fd);
-	excute_redirection(p, cmd);
+	if (excute_redirection(p, cmd) == FALSE)
+		exit(1);
 	if (cmd_builtin_check1(&(cmd->cmd), envp_list) \
 		|| cmd_builtin_check2(&(cmd->cmd), envp_list))
 		exit(0);
