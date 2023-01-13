@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/13 13:08:07 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 14:24:46 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,11 +102,20 @@ int	cmd_builtin_check2(char **cmd, t_env_info_list *envp_list)
 void	excute_all(t_cplist *cmd_pipe_list, t_fds *fds,
 				t_env_info_list *envp_list)
 {
-	int		argc;
+	int			argc;
+	t_cplist	*curr;
 
 	argc = cplist_len(cmd_pipe_list);
 	reset_fds(fds);
 	create_heredoc(cmd_pipe_list);
+	curr = cmd_pipe_list;
+	while (curr)
+	{
+		expansion(curr->cmd_head, envp_list);
+		free(curr->cmd);
+		curr->cmd = merge_token(curr->cmd_head);
+		curr = curr->next;
+	}
 	if (argc <= 1)
 	{
 		pipex2(cmd_pipe_list, fds, envp_list);

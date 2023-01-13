@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:43:32 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/13 00:19:33 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 13:33:59 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ t_tnode			*find_last_node(t_tnode *head);
 void			add_token_list(t_tnode **head, char *token);
 t_tnode			*replace_list(t_tnode **head, t_tnode *prev,
 					t_tnode *target, t_tnode *new_list);
+void			t_tnode_add_list(t_tnode **head, t_tnode *new_tokens);
 
 char			**subcmds(char **cmds, int start, int end);
 int				cmds_len(char **cmds);

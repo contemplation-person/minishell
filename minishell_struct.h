@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_struct.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 12:32:14 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/12 23:27:20 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 13:22:11 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct s_rnode
 typedef struct s_cplist
 {
 	char			*cmd;
+	t_tnode			*cmd_head;
 	t_rnode			*rd_head;
 	struct s_cplist	*next;
 }	t_cplist;

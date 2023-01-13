@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 18:26:48 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/09 18:09:00 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 13:40:46 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,19 @@ t_tnode	*replace_list(t_tnode **head, t_tnode *prev,
 	free(target->token);
 	free(target);
 	return (last);
+}
+
+void	t_tnode_add_list(t_tnode **head, t_tnode *new_tokens)
+{
+	t_tnode	*curr;
+
+	if (!(*head))
+		*head = new_tokens;
+	else
+	{
+		curr = *head;
+		while (curr->next)
+			curr = curr->next;
+		curr->next = new_tokens;
+	}
 }

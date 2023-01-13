@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 22:10:47 by juha              #+#    #+#             */
-/*   Updated: 2023/01/13 13:04:00 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 13:52:34 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	init(t_pipe *p, t_using_pipe *channel, \
 	p->argc = get_cpl_num(cmd_pipe_list);
 	p->argv = get_argv_to_cmd_list(p->argc, cmd_pipe_list);
 	p->envp = get_envp(envp_list);
+	p->cmd_head = cmd_pipe_list->cmd_head;
 	channel->prev_fd = -1;
 	p->pid_num = 1;
 }

@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 20:10:52 by juha              #+#    #+#             */
-/*   Updated: 2023/01/13 13:02:30 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 13:52:03 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_pipe
 	pid_t		pid_num;
 	int			operator_cmd;
 	int			status;
+	t_tnode		*cmd_head;
 }t_pipe;
 
 int		pipex(t_cplist *cmd_pipe_list, t_fds *fds,
