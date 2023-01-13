@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 10:21:26 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/13 11:41:19 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 18:02:21 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@ char	**split_cmd(char *cmd)
 	char			**cmds;
 	t_tlist_info	*token_list;
 
+	printf("cmd : %s\n", cmd);
 	token_list = split_input(cmd);
 	remove_all_token_quote(&token_list->head);
 	cmds = all_token_to_cmds(&token_list->head);
+	printf("[%s] [%s]\n", cmds[0], cmds[1]);
 	free_tlist(token_list->head);
 	free(token_list);
 	return (cmds);
