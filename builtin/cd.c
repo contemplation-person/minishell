@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 19:56:59 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/13 15:42:54 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 16:06:54 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,10 @@ char	*set_pwd(char *excute_str_form, char *home)
 
 t_bool	check_cd_error(t_env_info_list *minishell_envp, char **excute_str_form)
 {
+	char	*find_path;
+
+	if (cnt_argc(excute_str_form) == 0)
+		return (FALSE);
 	if (cnt_argc(excute_str_form) > 2)
 	{
 		builtin_error_message("MINISHELL ", "cd", "too many arguments", 1);
@@ -83,12 +87,18 @@ t_bool	check_cd_error(t_env_info_list *minishell_envp, char **excute_str_form)
 			return (TRUE);
 		}
 	}
-	else if (access(excute_str_form[1], F_OK) == -1)
+	if (excute_str_form[1] == '~')
+		find_path = ft_strjoin(getenv("HOME"), excute_str_form[1] + 1);
+	else
+		find_path = excute_str_form[1];
+	if (access(find_path, F_OK) == -1)
 	{
 		builtin_error_message("MINISHELL ", \
 			"cd", "No such file or directory", 1);
+		free(find_path);
 		return (TRUE);
 	}
+	free(find_path);
 	return (FALSE);
 }
 
