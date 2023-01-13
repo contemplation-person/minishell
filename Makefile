@@ -3,14 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+         #
+#    By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2023/01/13 14:20:37 by gyim             ###   ########seoul.kr   #
-=======
-#    Updated: 2023/01/13 15:02:06 by gyim             ###   ########seoul.kr   #
->>>>>>> edd224139a453498481562aedd657bc754342a1e
+#    Updated: 2023/01/13 16:14:41 by juha             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,11 +77,7 @@ OBJ 			:= $(SRC:.c=.o)
 
 
 $(NAME) : $(OBJ) $(LIBFT) $(FT_PRINTF)
-<<<<<<< HEAD
-	$(CC) -o $(NAME)  $(OBJ) $(LIBFT) $(FT_PRINTF) $(READLINE_LIB)
-=======
 	$(CC) -o $(NAME) $(OBJ) $(LIBFT) $(FT_PRINTF) $(READLINE_LIB)
->>>>>>> edd224139a453498481562aedd657bc754342a1e
 
 $(LIBFT) :
 	make -j 4 -C libft bonus
