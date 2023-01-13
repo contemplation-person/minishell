@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 12:21:23 by juha              #+#    #+#             */
-/*   Updated: 2023/01/13 16:28:58 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 18:46:48 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ t_bool	builtin_export(t_env_info_list *minishell_envp, char **excute_str_form)
 
 	size = 1;
 	g_error_code = 0;
-
 	while ((excute_str_form[size]))
 	{
 		if (is_invalid_arg(excute_str_form[size]))

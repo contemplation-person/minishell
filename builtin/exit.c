@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 16:28:00 by juha              #+#    #+#             */
-/*   Updated: 2023/01/07 01:55:52 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 18:45:53 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,11 @@ int	builtin_exit(char **excute_str_form)
 	else if (word_cnt == 2)
 	{
 		error = ft_atoi(excute_str_form[1]);
-		if ((ft_strlen(excute_str_form[1]) > 20 && error == -1)
-		|| (ft_strlen(excute_str_form[1]) > 19 && error == 0))
+		if ((ft_strlen(excute_str_form[1]) > 20 && error == -1)	\
+		|| (ft_strlen(excute_str_form[1]) > 19 && error == 0))	
 			builtin_error_message("exit", excute_str_form[1], \
 			"numeric argument required", 2);
-		else
-			g_error_code = error % 256;
-		exit(g_error_code);
+		exit(g_error_code = error % 256);
 	}
 	else if (word_cnt > 2)
 		builtin_error_message("exit", "", "too many arguments", 1);

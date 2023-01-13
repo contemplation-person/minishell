@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_to_str.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 17:25:01 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/11 15:20:25 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 18:41:24 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,19 @@ char	*envp_node_to_str(t_env_info *node)
 	int		len;
 	char	*key_value;
 
-	len = ft_strlen(node->key) + ft_strlen(node->value) + 1;
+	len = 0;
+	if (node->key)
+		len += ft_strlen(node->key);
+	if (node->value)
+		len += ft_strlen(node->value);
 	key_value = ft_calloc(len + 1, sizeof(char));
 	if (!key_value)
 		return (NULL);
-	ft_strlcat(key_value, node->key, len + 1);
+	if (node->key)
+		ft_strlcat(key_value, node->key, len + 1);
 	ft_strlcat(key_value, "=", len + 1);
-	ft_strlcat(key_value, node->value, len + 1);
+	if (node->value)
+		ft_strlcat(key_value, node->value, len + 1);
 	return (key_value);
 }
 
