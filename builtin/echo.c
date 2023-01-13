@@ -29,7 +29,7 @@ void	check_option(int *option, char **excute_str_form, int *i, int argc)
 			(option_len)++;
 		if ((option_len) == (int)ft_strlen((option_str)) == FALSE)
 		{
-			break;
+			break ;
 			ft_putstr_fd(excute_str_form[*i], STDOUT_FILENO);
 			ft_putchar_fd(' ', STDOUT_FILENO);
 		}

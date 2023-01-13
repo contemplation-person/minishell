@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:50:23 by juha              #+#    #+#             */
-/*   Updated: 2023/01/05 13:08:55 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 15:10:14 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,18 +91,22 @@ void	print_envp(t_env_info_list minishell_envp, t_env_feature feature)
 	{
 		if (feature == EXPORT)
 			ft_putstr_fd("declare -x ", STDOUT_FILENO);
-		ft_putstr_fd(temp->key, STDOUT_FILENO);
-		if (temp->feature == ENV)
-		{
-			ft_putstr_fd("=", STDOUT_FILENO);
-			if (feature == ENV)
-				ft_putstr_fd(temp->value, STDOUT_FILENO);
-			if (feature == EXPORT)
-			{
-				form_export(temp, feature);
-			}
-		}
-		ft_putchar_fd('\n', STDOUT_FILENO);
+		if ((feature == ENV && temp->feature != EXPORT) \
+			|| feature == EXPORT)
+			ft_putstr_fd(temp->key, STDOUT_FILENO);
+		if (temp->value && temp->feature == ENV)
+			ft_putchar_fd('=', STDOUT_FILENO);
+		if (temp->feature == ENV && feature == EXPORT)
+			ft_putstr_fd("\"", STDOUT_FILENO);
+		if (temp->value && temp->feature == ENV)
+			ft_putstr_fd(temp->value, STDOUT_FILENO);
+		else
+			ft_putstr_fd("", STDOUT_FILENO);
+		if (temp->feature == ENV && feature == EXPORT)
+			ft_putstr_fd("\"", STDOUT_FILENO);
+		if (feature == EXPORT \
+			|| (feature == ENV && temp->feature == ENV))
+			ft_putchar_fd('\n', STDOUT_FILENO);
 		temp = temp->next;
 	}
 }

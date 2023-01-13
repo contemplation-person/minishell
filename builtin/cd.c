@@ -6,11 +6,12 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 19:56:59 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/05 12:57:45 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 15:42:54 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
+#include <unistd.h>
 
 t_env_info	*find_env(t_env_info_list *envp, char *key)
 {
@@ -71,16 +72,22 @@ t_bool	check_cd_error(t_env_info_list *minishell_envp, char **excute_str_form)
 {
 	if (cnt_argc(excute_str_form) > 2)
 	{
-		builtin_error_message("bash", "cd", "too many arguments", 1);
+		builtin_error_message("MINISHELL ", "cd", "too many arguments", 1);
 		return (TRUE);
 	}
 	else if (cnt_argc(excute_str_form) == 1)
 	{
 		if (!find_env(minishell_envp, "HOME"))
 		{
-			builtin_error_message("bash", "cd", "home not set", 1);
+			builtin_error_message("MINISHELL ", "cd", "home not set", 1);
 			return (TRUE);
 		}
+	}
+	else if (access(excute_str_form[1], F_OK) == -1)
+	{
+		builtin_error_message("MINISHELL ", \
+			"cd", "No such file or directory", 1);
+		return (TRUE);
 	}
 	return (FALSE);
 }
