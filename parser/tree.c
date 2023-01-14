@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 09:04:30 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/13 18:33:39 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/14 10:57:37 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,3 +77,20 @@ int	make_child(t_tree_node *parent_node, t_tnode *head, t_tnode *op_node)
 	return (0);
 }
 
+int	tree_valid_check(t_tree_node *node)
+{
+	if (node->op != NULL)
+	{
+		if (node->left == NULL || node->right == NULL)
+		{
+			write(2, "error near operator\n", 20);
+			g_error_code = 2;
+			return (-1);
+		}
+		if (tree_valid_check(node->left) == -1)
+			return (-1);
+		if (tree_valid_check(node->right) == -1)
+			return (-1);
+	}
+	return (0);
+}

@@ -6,7 +6,7 @@
 #    By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2023/01/13 18:23:12 by gyim             ###   ########seoul.kr   #
+#    Updated: 2023/01/14 10:57:57 by gyim             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,6 @@ CFLAGS 			:=	-Wall -Werror -Wextra -I$(READLINE_INC)
 SANITIZE		:= 	-g -fsanitize=address
 
 SRC 			:=	parser/parser.c	\
-					parser/search_tree.c \
 					parser/split_input.c \
 					parser/split_input2.c \
 					parser/token_check.c \
