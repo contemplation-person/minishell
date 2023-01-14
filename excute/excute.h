@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:14:07 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/13 18:51:25 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/14 11:06:55 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,10 @@ void		search_tree(t_tree_node *node, t_cplist **cmd_list,
 				t_fds *fds, t_env_info_list *envp_list);
 void		excute_list_add(t_cplist **cmd_list, t_tnode *cmds,
 				t_env_info_list *env_list);
-// t_cplist	*init_cmd_pipe_lists(void);
+int			op_double_and(t_tree_node *node, t_cplist **cmd_list,
+				t_fds *fds, t_env_info_list *env_list);
+int			op_double_or(t_tree_node *node, t_cplist **cmd_list,
+				t_fds *fds, t_env_info_list *env_list);
 
 t_cplist	*new_cplist(void);
 char		*get_cplist_cmd(t_tnode *cmds,

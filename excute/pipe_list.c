@@ -1,50 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipe_list.c                                        :+:      :+:    :+:   */
+/*   pipe_list2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/09 15:06:38 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/13 19:53:45 by gyim             ###   ########seoul.kr  */
+/*   Created: 2023/01/11 08:16:04 by gyim              #+#    #+#             */
+/*   Updated: 2023/01/13 18:15:18 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "excute.h"
 
-void	search_tree(t_tree_node *node, t_cplist **cmd_list,
-	t_fds *fds, t_env_info_list *envp_list)
+t_cplist	*new_cplist(void)
 {
-	if (node->op && ft_strncmp(node->op->token, "&&", 3) == 0)
-		op_double_and(node, cmd_list, fds, envp_list);
-	else if (node->op && ft_strncmp(node->op->token, "||", 3) == 0)
-		op_double_or(node, cmd_list, fds, envp_list);
-	else if (node->op && ft_strncmp(node->op->token, "|", 2) == 0)
-	{
-		search_tree(node->left, cmd_list, fds, envp_list);
-		search_tree(node->right, cmd_list, fds, envp_list);
-	}
-	else
-		excute_list_add(cmd_list, node->words, envp_list);
+	t_cplist	*ret;
+
+	ret = malloc(sizeof(t_cplist));
+	if (!ret)
+		return (NULL);
+	ret->cmd = NULL;
+	ret->rd_head = NULL;
+	ret->next = NULL;
+	return (ret);
 }
 
-void	excute_list_add(t_cplist **cmd_list, t_tnode *cmds,
-			t_env_info_list *env_list)
+char	*get_cplist_cmd(t_tnode *cmds, t_env_info_list *env_list)
 {
-	t_cplist	*new_node;
+	char	*ret;
+
+	expansion(cmds, env_list);
+ 	retokenize(cmds);
+	ret = merge_token(cmds);
+	return (ret);
+}
+
+int	cplist_len(t_cplist *cmd_pipe_list)
+{
+	int			len;
 	t_cplist	*curr;
 
-	new_node = new_cplist();
-	get_redirection(&new_node->rd_head, cmds);
-	new_node->cmd = get_cplist_cmd(cmds, env_list);
-	if (!*cmd_list)
-		*cmd_list = new_node;
-	else
+	len = 0;
+	curr = cmd_pipe_list;
+	while (curr)
 	{
-		curr = *cmd_list;
-		while (curr->next)
-			curr = curr->next;
-		curr->next = new_node;
+		len++;
+		curr = curr->next;
 	}
-
+	return (len);
 }
