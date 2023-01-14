@@ -21,6 +21,7 @@ int	pipex2(t_cplist *cmd_pipe_list, t_fds *fds, \
 	p.fds = fds;
 	init(&p, &channel, cmd_pipe_list, envp_list);
 	set_collabo(&p, p.envp);
+	// excute redirection은 builtin에서 실행하지 않음. 현재는 정상동작 하나 확인 필요.
 	if (excute_redirection(&p, cmd_pipe_list) == FALSE)
 	{
 		free_t_pipe(&p);
