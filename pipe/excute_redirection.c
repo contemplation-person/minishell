@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:32:35 by juha              #+#    #+#             */
-/*   Updated: 2023/01/13 15:44:51 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/14 15:11:24 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,12 @@ int	_set_open_flag(t_rnode *target_cmd)
 	else if (target_cmd->redirection == INPUT_FILE)
 	{
 		flag = O_RDONLY;
-		access(target_cmd->file, F_OK | R_OK);
-		perror(target_cmd->file);
-		g_error_code = 1;
-		return (-1);
-
+		if (access(target_cmd->file, F_OK | R_OK) == -1)
+		{
+			perror(target_cmd->file);
+			g_error_code = 1;
+			return (-1);
+		}
 	}
 	return (flag);
 }
