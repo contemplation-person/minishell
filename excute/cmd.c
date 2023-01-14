@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 18:11:04 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/09 19:33:22 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 11:10:16 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,23 @@ void	cmd_path_check(char **path, char **cmd,
 				t_env_info_list *envp_list)
 {
 	int		i;
-	char	*cmd_path;
+	char	*cmd_file_path;
+	char	*cmd_folder_path;
 	char	**envp;
 
-	i = 0;
-	envp = envp_list_to_arr(envp_list);
-	while (path[i])
+	if (path != NULL)
 	{
-		cmd_path = ft_strjoin(path[i], "/");
-		cmd_path = ft_strjoin(cmd_path, cmd[0]);
-		execve(cmd_path, cmd, envp);
-		i++;
+		i = 0;
+		envp = envp_list_to_arr(envp_list);
+		while (path[i])
+		{
+			cmd_folder_path = ft_strjoin(path[i], "/");
+			cmd_file_path = ft_strjoin(cmd_folder_path, cmd[0]);
+			execve(cmd_file_path, cmd, envp);
+			free(cmd_folder_path);
+			free(cmd_file_path);
+			i++;
+		}
 	}
 	execve(cmd[0], cmd, envp);
 }

@@ -6,11 +6,32 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:21:32 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/04 15:03:59 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/14 11:02:15 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+
+int	parsing_excute(char *user_input, t_fds *fds, t_env_info_list *env_list)
+{
+	t_tlist_info	*word_list;
+
+	if (user_input[0] == '\0')
+		return (0);
+	word_list = split_input(user_input);
+	if (!word_list->head)
+		return (0);
+	if (valid_check(word_list->head) == -1)
+	{
+		del_list(word_list);
+		g_error_code = 2;
+		return (g_error_code);
+	}
+	multiple_cmds_excute(word_list, fds, env_list);
+	free(word_list);
+	word_list = NULL;
+	return (0);
+}
 
 t_tree_node	*parser(t_tlist_info *list)
 {
@@ -22,51 +43,22 @@ t_tree_node	*parser(t_tlist_info *list)
 	return (root);
 }
 
-int	list_len(t_tlist_info *list)
+void	multiple_cmds_excute(t_tlist_info *word_list, t_fds *fds,
+			t_env_info_list *env_list)
 {
-	int		len;
-	t_tnode	*node;
+	t_tree_node			*root;
+	t_cplist			*cmd_pipe_lists;
 
-	len = 0;
-	node = list->head;
-	while (node)
+	root = parser(word_list);
+	cmd_pipe_lists = NULL;
+	if (root)
 	{
-		node = node->next;
-		len++;
+		if (tree_valid_check(root) != -1)
+			search_tree(root, &cmd_pipe_lists, fds, env_list);
+		if (cmd_pipe_lists != NULL)
+			excute_all(cmd_pipe_lists, fds, env_list);
+		free_cmd_pipe_list(&cmd_pipe_lists);
+		del_tree(root);
+		free(root);
 	}
-	return (len);
-}
-
-void	copy_from_list(char **target, t_tlist_info *list)
-{
-	t_tnode	*curr;
-	int		target_index;
-
-	target_index = 0;
-	curr = list->head;
-	while (curr)
-	{
-		target[target_index] = ft_strdup(curr->token);
-		target_index++;
-		curr = curr->next;
-	}
-}
-
-int	parsing_excute(char *user_input, t_env_info_list *env_list)
-{
-	t_tlist_info	*word_list;
-
-	if (user_input[0] == '\0')
-		return (0);
-	word_list = split_input(user_input);
-	if (valid_check(word_list->head) == -1)
-	{
-		del_list(word_list);
-		g_error_code = 2;
-		return (0);
-	}
-	multiple_cmds_excute(word_list, env_list);
-	free(word_list);
-	word_list = NULL;
-	return (0);
 }

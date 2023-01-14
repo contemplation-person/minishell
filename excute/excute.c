@@ -3,117 +3,74 @@
 /*                                                        :::      ::::::::   */
 /*   excute.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/09 19:33:15 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/14 11:48:09 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "excute.h"
 
-int	excute_leaf(t_tnode *cmd_list, t_fds *fd_info, t_env_info_list *envp_list)
-{
-	char	**cmd;
-	t_rnode	*rd_head;
-
-	expansion(cmd_list, envp_list);
-	quote_remove(cmd_list);
-	rd_head = get_redirection(cmd_list);
-	cmd = get_cmd(cmd_list);
-	if (set_fds(fd_info, rd_head, envp_list) == -1)
-	{
-		free_red(rd_head);
-		free_cmd(cmd);
-		return (-1);
-	}
-	if (cmd[0])
-		excute_cmd(cmd, fd_info, envp_list);
-	free_red(rd_head);
-	free_cmd(cmd);
-	close(fd_info->in_fd);
-	close(fd_info->out_fd);
-	return (0);
-}
-
-void	print_error(char *cmd, char *msg)
-{
-	write(2, cmd, ft_strlen(cmd));
-	write(2, msg, ft_strlen(msg));
-}
-
-int	excute_cmd(char **cmd, t_fds *fd_info, t_env_info_list *envp_list)
+int	excute_cmd(t_cplist *cmd_node, t_env_info_list *envp_list)
 {
 	char	**path;
 	pid_t	pid;
 	int		status;
+	char	**cmd;
 
-	if (cmd_builtin_check1(cmd, envp_list) == 1)
+	cmd = split_cmd(cmd_node->cmd);
+	if (cmd[0] == NULL)
+	{
+		g_error_code = 0;
 		return (0);
+	}
+	if (cmd_builtin_check1(cmd, envp_list) == 1)
+	{
+		free_cmd(cmd);
+		return (0);
+	}
+	_set_signal(0);
 	pid = fork();
 	if (pid == 0)
 	{
-		dup2(fd_info->in_fd, STDIN_FILENO);
-		dup2(fd_info->out_fd, STDOUT_FILENO);
-		close(fd_info->in_fd);
-		close(fd_info->out_fd);
+		_set_signal(3);
 		if (cmd_builtin_check2(cmd, envp_list) == 1)
+		{
+			free(cmd);
 			exit(0);
+		}
 		path = get_path(envp_list);
 		cmd_path_check(path, cmd, envp_list);
 		print_error(cmd[0], CMD_NOT_FOUND);
 		exit(127);
 	}
-	waitpid(0, &status, 0);
-	close(fd_info->in_fd);
-	close(fd_info->out_fd);
-	g_error_code = WEXITSTATUS(status);
-	return (0);
+	waitpid(-1, &status, 0);
+	free_cmd(cmd);
+	if (WIFEXITED(status))
+		g_error_code = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
+	{
+		g_error_code = WTERMSIG(status);
+		ft_putstr_fd("\n", STDERR_FILENO);
+	}
+	return (pid);
 }
 
-int	cmd_builtin_check1(char **cmd, t_env_info_list *envp_list)
+void	excute_all(t_cplist *cmd_pipe_list, t_fds *fds,
+				t_env_info_list *envp_list)
 {
-	if (ft_strncmp(cmd[0], "cd", 3) == 0)
-	{
-		builtin_cd(envp_list, cmd);
-		return (1);
-	}
-	else if (ft_strncmp(cmd[0], "export", 7) == 0)
-	{
-		builtin_export(envp_list, cmd);
-		return (1);
-	}
-	else if (ft_strncmp(cmd[0], "unset", 6) == 0)
-	{
-		builtin_unset(envp_list, cmd);
-		return (1);
-	}
-	else if (ft_strncmp(cmd[0], "exit", 5) == 0)
-	{
-		builtin_exit(cmd);
-		return (1);
-	}
-	else
-		return (0);
-}
+	int		argc;
 
-int	cmd_builtin_check2(char **cmd, t_env_info_list *envp_list)
-{
-	if (ft_strncmp(cmd[0], "echo", 5) == 0)
-	{
-		echo(cmd);
-		return (1);
-	}
-	else if (ft_strncmp(cmd[0], "pwd", 4) == 0)
-	{
-		builtin_pwd(cmd);
-		return (1);
-	}
-	else if (ft_strncmp(cmd[0], "env", 4) == 0)
-	{
-		builtin_env(envp_list, cmd);
-		return (1);
-	}
+	argc = cplist_len(cmd_pipe_list);
+	reset_fds(fds);
+	create_heredoc(cmd_pipe_list);
+	if (argc <= 1)
+		pipex2(cmd_pipe_list, fds, envp_list);
 	else
-		return (0);
+		pipex(cmd_pipe_list, fds, envp_list);
+	close(STDIN_FILENO);
+	close(STDOUT_FILENO);
+	dup2(fds->stdin_fd, STDIN_FILENO);
+	dup2(fds->stdout_fd, STDOUT_FILENO);
 }

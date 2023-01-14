@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 09:04:30 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/04 19:42:12 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/14 12:32:47 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,21 +54,6 @@ t_tree_node	*make_new_node(void)
 	return (new_node);
 }
 
-void	free_tlist(t_tnode *head)
-{
-	t_tnode	*curr;
-	t_tnode	*next;
-
-	curr = head;
-	while (curr)
-	{
-		next = curr->next;
-		free(curr->token);
-		free(curr);
-		curr = next;
-	}
-}
-
 int	make_child(t_tree_node *parent_node, t_tnode *head, t_tnode *op_node)
 {
 	t_tnode	*l_cmds;
@@ -92,17 +77,20 @@ int	make_child(t_tree_node *parent_node, t_tnode *head, t_tnode *op_node)
 	return (0);
 }
 
-void	del_sublist(t_tnode	*head)
+int	tree_valid_check(t_tree_node *node)
 {
-	t_tnode	*curr;
-	t_tnode	*next;
-
-	curr = head;
-	while (curr)
+	if (node->op != NULL)
 	{
-		next = curr->next;
-		free(curr->token);
-		free(curr);
-		curr = next;
+		if (node->left == NULL || node->right == NULL)
+		{
+			write(2, "error near operator\n", 20);
+			g_error_code = 2;
+			return (-1);
+		}
+		if (tree_valid_check(node->left) == -1)
+			return (-1);
+		if (tree_valid_check(node->right) == -1)
+			return (-1);
 	}
+	return (0);
 }
