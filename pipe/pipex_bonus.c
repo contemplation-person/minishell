@@ -98,5 +98,5 @@ int	pipex(t_cplist *cmd_pipe_list, t_fds *fds,
 	}
 	if (p.operator_cmd == 0)
 		exit(1);
-	return (0);
+	return (g_error_code);
 }

@@ -101,7 +101,7 @@ t_bool	builtin_cd(t_env_info_list *minishell_envp, char **excute_str_form)
 			exit(1);
 	}
 	else
-		new_pwd = excute_str_form[1];
+		new_pwd = excute_str_form[1];// 새로운 pwd가 갱신될 때 터짐.
 	if (cnt_argc(excute_str_form) > 1 && excute_str_form[1] \
 				&& excute_str_form[1][0] == '~')
 		new_pwd = set_pwd(excute_str_form[1], getenv("HOME"));

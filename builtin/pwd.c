@@ -18,10 +18,6 @@ void	builtin_pwd(char **excute_str_form)
 	char	*str;
 
 	i = cnt_argc(excute_str_form);
-	if (i != 1)
-		return (builtin_error_message("MINISHELL : ",
-				"pwd", "too many arguments", 127));
-	str = NULL;
 	str = getcwd(str, 1);
 	ft_putendl_fd(str, STDOUT_FILENO);
 	g_error_code = 0;
