@@ -20,8 +20,8 @@ void	signal_handler(int signal_int)
 		rl_replace_line("", 1);
 		rl_on_new_line();
 		rl_redisplay();
-		g_error_code = 130;
 	}
+	g_error_code = 128 + signal_int;
 }
 
 void	signal_handler2(int signal_int)
@@ -32,10 +32,8 @@ void	signal_handler2(int signal_int)
 		rl_redisplay();
 	}
 	else if (signal_int == SIGQUIT)
-	{
 		ft_putendl_fd("Quit: 3", STDERR_FILENO);
-		g_error_code = 131;
-	}
+	g_error_code = 128 + signal_int;
 }
 
 void	_set_signal(int flag)
