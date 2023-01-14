@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 20:09:00 by juha              #+#    #+#             */
-/*   Updated: 2023/01/14 16:33:42 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/14 17:32:46 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	check_error(int error, char *str)
 
 static void	pipe_n_fork(t_pipe *p, t_using_pipe *channel)
 {
-	if (p->pid_num > 0 && p->operator_cmd != p->argc - 1)
+	if (p->pid_num > 0 && p->operator_cmd != p->argc)
 		check_error(pipe(channel->fd), "pipex.c - 34");
 	p->pid_num = fork();
 	if (p->pid_num > 0)
@@ -69,7 +69,7 @@ void	do_child(t_pipe *p, t_using_pipe *channel, \
 }
 
 int	pipex(t_cplist *cmd_pipe_list, t_fds *fds,
-			t_env_info_list *envp_list)
+		t_env_info_list *envp_list)
 {
 	t_pipe				p;
 	t_using_pipe		channel;
