@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:21:32 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/13 18:20:29 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/14 11:01:23 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,3 +43,21 @@ t_tree_node	*parser(t_tlist_info *list)
 	return (root);
 }
 
+void	multiple_cmds_excute(t_tlist_info *word_list, t_fds *fds, t_env_info_list *env_list)
+{
+	t_tree_node			*root;
+	t_cplist			*cmd_pipe_lists;
+
+	root = parser(word_list);
+	cmd_pipe_lists = NULL;
+	if (root)
+	{
+		if (tree_valid_check(root) != -1)
+			search_tree(root, &cmd_pipe_lists, fds, env_list);
+		if (cmd_pipe_lists != NULL)
+			excute_all(cmd_pipe_lists, fds, env_list);
+		free_cmd_pipe_list(&cmd_pipe_lists);
+		del_tree(root);
+		free(root);
+	}
+}

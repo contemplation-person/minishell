@@ -6,7 +6,7 @@
 #    By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2023/01/14 10:57:57 by gyim             ###   ########seoul.kr   #
+#    Updated: 2023/01/14 11:01:34 by gyim             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,6 @@ SRC 			:=	parser/parser.c	\
 					parser/param_expansion.c \
 					parser/dollar_expansion.c \
 					parser/dollar_expansion2.c \
-					parser/cmds_check.c \
 					parser/asterisk_1.c \
 					parser/asterisk_2.c \
 					parser/quote_remove.c \
