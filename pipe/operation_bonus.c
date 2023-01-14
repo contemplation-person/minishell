@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 22:31:01 by juha              #+#    #+#             */
-/*   Updated: 2023/01/14 16:48:07 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/14 17:20:53 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	start_child(t_pipe *p, t_using_pipe *channel, \
 		exit(0);
 	option_file = parse_option(*p);
 	exit(execve(option_file[0], parse_option(*p), p->envp));
+	free_cmd(builtin_cmd);
 }
 
 void	other_child(t_pipe *p, t_using_pipe *channel, \
@@ -86,11 +87,12 @@ void	other_child(t_pipe *p, t_using_pipe *channel, \
 	builtin_cmd = ft_split(p->argv[p->operator_cmd], ' ');
 	if (excute_redirection(p, cmd) == FALSE)
 		exit(1);
-	if (cmd_builtin_check1(&(cmd->cmd), envp_list) \
-		|| cmd_builtin_check2(&(cmd->cmd), envp_list))
+	if (cmd_builtin_check1(builtin_cmd, envp_list) \
+		|| cmd_builtin_check2(builtin_cmd, envp_list))
 		exit(0);
 	option_file = parse_option(*p);
 	exit(execve(option_file[0], parse_option(*p), p->envp));
+	free_cmd(builtin_cmd);
 }
 
 void	bottom_child(t_pipe *p, t_using_pipe *channel, \
@@ -108,9 +110,10 @@ void	bottom_child(t_pipe *p, t_using_pipe *channel, \
 	if (excute_redirection(p, cmd) == FALSE)
 		exit(1);
 	builtin_cmd = ft_split(p->argv[p->operator_cmd], ' ');
-	if (cmd_builtin_check1(&(cmd->cmd), envp_list) \
-		|| cmd_builtin_check2(&(cmd->cmd), envp_list))
+	if (cmd_builtin_check1(builtin_cmd, envp_list) \
+		|| cmd_builtin_check2(builtin_cmd, envp_list))
 		exit(0);
 	option_file = parse_option(*p);
 	exit(execve(option_file[0], parse_option(*p), p->envp));
+	free_cmd(builtin_cmd);
 }
