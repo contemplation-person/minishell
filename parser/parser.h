@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:43:32 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/13 18:49:02 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/14 12:24:11 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,9 @@ char			*remove_token_quote(char *token);
 void			change_quote_char(char *token);
 char			*concat_str(char **splitted);
 void			free_splitted(char **splitted);
+int				is_word(char *target);
+int				is_pipe(char *target);
+int				is_double_op(char *target);
+int				is_parenthesis(char *target);
+void			print_tnode(t_tnode *head);
 #endif

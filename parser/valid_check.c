@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 17:52:44 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/13 15:00:46 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/14 12:18:48 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,21 +99,46 @@ int	paren_check(t_tnode *head)
 	return (0);
 }
 
+// int	grammar_check(t_tnode *head)
+// {
+// 	t_tnode	*curr;
+// 	int		prev_op;
+
+// 	prev_op = 0;
+// 	curr = head;
+// 	while (curr)
+// 	{
+// 		if (prev_op == 1 && (is_op(curr->token, 0) || is_paren(curr->token, 0)))
+// 			return (-1);
+// 		if (is_op(curr->token, 0) || is_paren(curr->token, 0))
+// 			prev_op = 1;
+// 		else
+// 			prev_op = 0;
+// 		curr = curr->next;
+// 	}
+// 	return (0);
+// }
+
+
 int	grammar_check(t_tnode *head)
 {
 	t_tnode	*curr;
-	int		prev_op;
+	t_tnode	*prev;
 
-	prev_op = 0;
-	curr = head;
+	if (!head)
+		return (0);
+	prev = head;
+	curr = head->next;
+	if (is_double_op(head->token))
+		return (-1);
 	while (curr)
 	{
-		if (prev_op == 1 && (is_op(curr->token, 0) || is_paren(curr->token, 0)))
+		if (is_redirection(prev->token) && !is_word(curr->token))
 			return (-1);
-		if (is_op(curr->token, 0) || is_paren(curr->token, 0))
-			prev_op = 1;
-		else
-			prev_op = 0;
+		if (is_pipe(prev->token) && is_double_op(curr->token))
+			return (-1);
+		if (is_double_op(prev->token) && is_double_op(curr->token))
+			return (-1);
 		curr = curr->next;
 	}
 	return (0);

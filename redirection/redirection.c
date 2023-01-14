@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 12:40:15 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/13 03:57:38 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/14 14:30:58 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ int	is_redirection(char *token)
 	if (!ft_strncmp(token, ">", 2))
 		return (1);
 	else if (!ft_strncmp(token, ">>", 3))
-		return (1);
+		return (2);
 	else if (!ft_strncmp(token, "<", 2))
-		return (1);
+		return (3);
 	else if (!ft_strncmp(token, "<<", 3))
-		return (1);
+		return (4);
 	return (0);
 }
 
