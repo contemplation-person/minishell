@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 22:31:01 by juha              #+#    #+#             */
-/*   Updated: 2023/01/14 17:20:53 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/14 17:30:31 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ void	start_child(t_pipe *p, t_using_pipe *channel, \
 		|| cmd_builtin_check2(builtin_cmd, envp_list))
 		exit(0);
 	option_file = parse_option(*p);
-	exit(execve(option_file[0], parse_option(*p), p->envp));
-	free_cmd(builtin_cmd);
+	execve(option_file[0], parse_option(*p), p->envp);
+	exit(127);
 }
 
 void	other_child(t_pipe *p, t_using_pipe *channel, \
@@ -91,8 +91,8 @@ void	other_child(t_pipe *p, t_using_pipe *channel, \
 		|| cmd_builtin_check2(builtin_cmd, envp_list))
 		exit(0);
 	option_file = parse_option(*p);
-	exit(execve(option_file[0], parse_option(*p), p->envp));
-	free_cmd(builtin_cmd);
+	execve(option_file[0], parse_option(*p), p->envp);
+	exit(127);
 }
 
 void	bottom_child(t_pipe *p, t_using_pipe *channel, \
@@ -114,6 +114,6 @@ void	bottom_child(t_pipe *p, t_using_pipe *channel, \
 		|| cmd_builtin_check2(builtin_cmd, envp_list))
 		exit(0);
 	option_file = parse_option(*p);
-	exit(execve(option_file[0], parse_option(*p), p->envp));
-	free_cmd(builtin_cmd);
+	execve(option_file[0], parse_option(*p), p->envp);
+	exit(127);
 }
