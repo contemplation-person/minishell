@@ -12,6 +12,13 @@
 
 #include "../minishell.h"
 
+//void	read_child_proccess()
+
+//void	read_heredoc(t_rnode *rtemp, char *exit_code,)
+//{
+
+//}
+
 void	create_heredoc(t_cplist *cplist)
 {
 	t_cplist	*temp;
@@ -47,16 +54,19 @@ void	create_heredoc(t_cplist *cplist)
 						free(str);
 						str = ft_strdup("");
 						smart_join(&(rtemp->file), str);
+						free(str);
 						break ;
 					}
 					smart_join(&(rtemp->file), str);
 					free(str);
 				}
+				free(exit_code);
 			}
 			rtemp = rtemp->next;
 		}
 		temp = temp->next;
 	}
+	system("leaks minishell");
 }
 
 int	get_heredoc_fd(t_rnode *rd)
