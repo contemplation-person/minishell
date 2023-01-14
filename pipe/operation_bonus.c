@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 22:31:01 by juha              #+#    #+#             */
-/*   Updated: 2023/01/13 15:31:57 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/14 16:48:07 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	start_child(t_pipe *p, t_using_pipe *channel, \
 {
 	int		check_dup;
 	char	**option_file;
+	char	**builtin_cmd;
 
 	check_dup = -1;
 	close(channel->fd[READ]);
@@ -57,8 +58,9 @@ void	start_child(t_pipe *p, t_using_pipe *channel, \
 		exit(check_dup);
 	if (excute_redirection(p, cmd) == FALSE)
 		exit(1);
-	if (cmd_builtin_check1(&(cmd->cmd), envp_list) \
-		|| cmd_builtin_check2(&(cmd->cmd), envp_list))
+	builtin_cmd = ft_split(p->argv[p->operator_cmd], ' ');
+	if (cmd_builtin_check1(builtin_cmd, envp_list) \
+		|| cmd_builtin_check2(builtin_cmd, envp_list))
 		exit(0);
 	option_file = parse_option(*p);
 	exit(execve(option_file[0], parse_option(*p), p->envp));
@@ -69,6 +71,7 @@ void	other_child(t_pipe *p, t_using_pipe *channel, \
 {
 	int		check_dup;
 	char	**option_file;
+	char	**builtin_cmd;
 
 	check_dup = -1;
 	close(channel->fd[READ]);
@@ -80,6 +83,7 @@ void	other_child(t_pipe *p, t_using_pipe *channel, \
 	close(channel->fd[WRITE]);
 	if (check_dup == -1)
 		exit(check_dup);
+	builtin_cmd = ft_split(p->argv[p->operator_cmd], ' ');
 	if (excute_redirection(p, cmd) == FALSE)
 		exit(1);
 	if (cmd_builtin_check1(&(cmd->cmd), envp_list) \
@@ -94,6 +98,7 @@ void	bottom_child(t_pipe *p, t_using_pipe *channel, \
 {
 	int		check_dup;
 	char	**option_file;
+	char	**builtin_cmd;
 
 	check_dup = -1;
 	check_dup = dup2(channel->prev_fd, STDIN_FILENO);
@@ -102,6 +107,7 @@ void	bottom_child(t_pipe *p, t_using_pipe *channel, \
 	close(channel->prev_fd);
 	if (excute_redirection(p, cmd) == FALSE)
 		exit(1);
+	builtin_cmd = ft_split(p->argv[p->operator_cmd], ' ');
 	if (cmd_builtin_check1(&(cmd->cmd), envp_list) \
 		|| cmd_builtin_check2(&(cmd->cmd), envp_list))
 		exit(0);

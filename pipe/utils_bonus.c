@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 22:10:47 by juha              #+#    #+#             */
-/*   Updated: 2023/01/13 13:04:00 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/14 16:16:13 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,6 @@ int	set_collabo(t_pipe *p, char **envp)
 			p->path = ft_split(&((envp[i])[5]), ':');
 		i++;
 	}
-	//if (p->path == NULL)
-	//{
-	//	perror("parsing.c - set pipe");
-	//	exit(1);
-	//}
 	return (1);
 }
 
