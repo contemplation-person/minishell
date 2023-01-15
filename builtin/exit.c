@@ -37,7 +37,7 @@ int	builtin_exit(char **excute_str_form)
 	else if (word_cnt == 2)
 		exit(ft_atoi(excute_str_form[1]));
 	else if (word_cnt > 2) // 동작확인 필요
-		builtin_error_message("exit", "", "too many arguments", 1);
+		builtin_error_message("exit", "", "too many arguments", g_error_code);
 	else
 		exit(g_error_code);
 	return (g_error_code);

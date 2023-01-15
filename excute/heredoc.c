@@ -25,9 +25,8 @@ void	write_child(int pipe[2], char *exit_code)
 		if (!ft_strncmp(exit_code, str, ft_strlen(exit_code))
 			&& ft_strlen(exit_code) == ft_strlen(str) - 1)
 		{
-			free(str);
-			str = ft_strdup("");
 			write(pipe[WRITE], str, ft_strlen(str));
+			free(str);
 			break ;
 		}
 		free(str);
@@ -46,7 +45,7 @@ void	read_parent(int pid, int pipe[2], t_rnode *rnode, char *exit_code)
 	while (42)
 	{
 		str = get_next_line(pipe[READ]);
-		if (!ft_strncmp(exit_code, str, ft_strlen(exit_code))
+		if (!ft_strncmp(exit_code, str, ft_strlen(str))
 			&& ft_strlen(exit_code) == ft_strlen(str) - 1)
 		{
 			free(str);
@@ -56,6 +55,7 @@ void	read_parent(int pid, int pipe[2], t_rnode *rnode, char *exit_code)
 		smart_join(&(rnode->file), str);
 		free(str);
 	}
+	free(str);
 	close(pipe[READ]);
 	//system("leaks minishell");
 }
@@ -66,8 +66,8 @@ void	fork_heredoc(t_rnode *rnode, char *exit_code)
 	int			pipe_fd[2];
 
 	_set_signal(0); // <- 부모 시그널 - 부모 동작 : 부모에서만 heredoc을 gnl로 받음
-	pid = fork();
 	pipe(pipe_fd);
+	pid = fork();
 	if (pid == 0)
 		write_child(pipe_fd, exit_code);
 	else

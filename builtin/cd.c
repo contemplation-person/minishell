@@ -94,6 +94,11 @@ t_bool	builtin_cd(t_env_info_list *minishell_envp, char **excute_str_form)
 	if (check_cd_error(minishell_envp, excute_str_form))
 		return (FALSE);
 	old_pwd = getcwd(NULL, 1);
+	if (!old_pwd)
+	{
+		chdir("/");
+		return (FALSE);
+	}
 	if (cnt_argc(excute_str_form) == 1)
 	{
 		new_pwd = getenv("HOME");
