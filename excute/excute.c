@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/16 05:23:43 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 05:40:29 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	excute_cmd(t_cplist *cmd_node, t_env_info_list *envp_list)
 	pid = fork();
 	if (pid == 0)
 	{
-		_set_signal(3);
+		_set_signal(2);
 		if (cmd_builtin_check2(cmd, envp_list) == 1)
 		{
 			free_cmd(cmd);
@@ -48,10 +48,10 @@ int	excute_cmd(t_cplist *cmd_node, t_env_info_list *envp_list)
 	waitpid(-1, &status, 0);
 	free_cmd(cmd);
 	if (WIFEXITED(status))
-		g_error_code = WEXITSTATUS(status);
+		g_error_code = 128 + WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))
 	{
-		g_error_code = WTERMSIG(status);
+		g_error_code = 128 + WTERMSIG(status);
 		ft_putstr_fd("\n", STDERR_FILENO);
 	}
 	return (pid);

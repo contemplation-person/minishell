@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 20:09:00 by juha              #+#    #+#             */
-/*   Updated: 2023/01/16 05:00:53 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 05:32:25 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	do_child(t_pipe *p, t_using_pipe *channel, \
 {
 	if (p->pid_num == 0)
 	{
-		_set_signal(3);
+		_set_signal(2);
 		if (p->operator_cmd == 0)
 			start_child(p, channel, cmd, envp_list);
 		else if (p->operator_cmd == p->argc - 1)
