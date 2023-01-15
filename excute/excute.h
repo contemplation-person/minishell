@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:14:07 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/16 02:07:21 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 04:57:41 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char		*merge_token(t_tnode *head);
 void		reset_fds(t_fds *fds);
 void		init_fds(t_fds *fds);
 
-void		create_heredoc(t_cplist *cplist);
+t_bool		create_heredoc(t_cplist *cplist);
 //int			get_heredoc_fd(t_rnode *rd);
 
 char		**split_cmd(char *cmd);

@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 23:12:15 by juha              #+#    #+#             */
-/*   Updated: 2023/01/16 03:36:01 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 04:57:29 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static char	*access_file()
 	return (ret);
 }
 
-void	fork_heredoc(t_rnode *rnode, char *exit_code)
+t_bool	fork_heredoc(t_rnode *rnode, char *exit_code)
 {
 	int			pid;
 	int			status;
@@ -64,29 +64,23 @@ void	fork_heredoc(t_rnode *rnode, char *exit_code)
 	if (pid == 0)
 		write_child(rnode, exit_code);
 	waitpid(pid, &status, 0);
-	if(WIFSIGNALED(status) ) {
+	if (WIFSIGNALED(status))
+	{
 		if (status == SIGINT) // signal
 		{
-			write(STDOUT_FILENO, "adsfg\n", 6);
-		}
-	} else {
-		if (WEXITSTATUS(status) == EXIT_FAILURE ) // exit code
-		{
-			// fail code.
+			return (FALSE);
 		}
 	}
+	return (TRUE);
 }
 
-void	create_heredoc(t_cplist *cplist)
+t_bool	create_heredoc(t_cplist *cplist)
 {
 	t_cplist	*temp;
 	t_rnode		*rtemp;
 	char		*exit_code;
 
 	temp = cplist;
-//  시그널 확인해~!!!~@!~#@!@#$%##!@~#$%^&*&%#$@!$@%^&$#@!$%^&
-	//_set_signal(0);
-	_set_signal(0);
 	while (temp)
 	{
 		rtemp = temp->rd_head;
@@ -96,13 +90,14 @@ void	create_heredoc(t_cplist *cplist)
 			{
 				exit_code = rtemp->file;
 				rtemp->file = ft_strdup("");
-				fork_heredoc(rtemp, exit_code);
+				return (fork_heredoc(rtemp, exit_code));
 				free(exit_code);
 			}
 			rtemp = rtemp->next;
 		}
 		temp = temp->next;
 	}
+	return (TRUE); // 성공하면 실행, 실패하면 모든 노드 프리 후... 프롬프트 시작.
 }
 
 //int	get_heredoc_fd(t_rnode *rd)
