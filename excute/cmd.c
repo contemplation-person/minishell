@@ -85,6 +85,7 @@ void	cmd_path_check(char **path, char **cmd,
 		{
 			cmd_folder_path = ft_strjoin(path[i], "/");
 			cmd_file_path = ft_strjoin(cmd_folder_path, cmd[0]);
+			printf("%s\n", cmd_file_path);
 			execve(cmd_file_path, cmd, envp);
 			free(cmd_folder_path);
 			free(cmd_file_path);
