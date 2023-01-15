@@ -28,12 +28,12 @@ void	write_child(int pipe[2], char *exit_code)
 			free(str);
 			str = ft_strdup("");
 			write(pipe[WRITE], str, ft_strlen(str));
-			close(pipe[WRITE]);
 			break ;
 		}
-		write(pipe[WRITE], str, ft_strlen(str));
 		free(str);
 	}
+	//perror("");
+	close(pipe[WRITE]);
 	exit(g_error_code);
 }
 
@@ -41,8 +41,8 @@ void	read_parent(int pid, int pipe[2], t_rnode *rnode, char *exit_code)
 {
 	char	*str;
 
-	wait(&pid);/// 자식 기다려야 함...
 	close(pipe[WRITE]);
+	wait(&pid);/// 자식 기다려야 함...
 	while (42)
 	{
 		str = get_next_line(pipe[READ]);
@@ -57,7 +57,7 @@ void	read_parent(int pid, int pipe[2], t_rnode *rnode, char *exit_code)
 		free(str);
 	}
 	close(pipe[READ]);
-	system("leaks minishell");
+	//system("leaks minishell");
 }
 
 void	fork_heredoc(t_rnode *rnode, char *exit_code)
@@ -65,30 +65,13 @@ void	fork_heredoc(t_rnode *rnode, char *exit_code)
 	int			pid;
 	int			pipe_fd[2];
 
-	pid = 0;
 	_set_signal(0); // <- 부모 시그널 - 부모 동작 : 부모에서만 heredoc을 gnl로 받음
+	pid = fork();
+	pipe(pipe_fd);
 	if (pid == 0)
 		write_child(pipe_fd, exit_code);
 	else
-	{
 		read_parent(pid, pipe_fd, rnode, exit_code);
-	}
-	// while (42)
-	// {
-	// 	ft_putstr_fd("> ", STDOUT_FILENO);
-	// 	str = get_next_line(STDIN_FILENO);
-	// 	if (!ft_strncmp(exit_code, str, ft_strlen(exit_code))
-	// 		&& ft_strlen(exit_code) == ft_strlen(str) - 1)
-	// 	{
-	// 		free(str);
-	// 		str = ft_strdup("");
-	// 		smart_join(&(rnode->file), str);
-	// 		free(str);
-	// 		break ;
-	// 	}
-	// 	smart_join(&(rnode->file), str);
-	// 	free(str);
-	// }
 }
 
 void	create_heredoc(t_cplist *cplist)
