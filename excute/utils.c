@@ -96,7 +96,7 @@ int	cmd_builtin_check2(char **cmd, t_env_info_list *envp_list)
 	}
 	else if (ft_strncmp(cmd[0], "pwd", 4) == 0)
 	{
-		builtin_pwd(cmd);
+		builtin_pwd();
 		return (1);
 	}
 	else if (ft_strncmp(cmd[0], "env", 4) == 0)

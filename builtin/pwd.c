@@ -12,13 +12,11 @@
 
 #include "builtin.h"
 
-void	builtin_pwd(char **excute_str_form)
+void	builtin_pwd(void)
 {
-	int		i;
 	char	*str;
 
-	i = cnt_argc(excute_str_form);
-	str = getcwd(str, 1);
+	str = getcwd(NULL, 1);
 	ft_putendl_fd(str, STDOUT_FILENO);
 	g_error_code = 0;
 }

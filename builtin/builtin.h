@@ -29,7 +29,7 @@ int			builtin_exit(
 
 t_bool		builtin_export(
 				t_env_info_list *minishell_envp, char **export_str);
-void		builtin_pwd(char **excute_str_form);
+void		builtin_pwd(void);
 t_bool		builtin_unset(t_env_info_list *l, char **unset_name);
 
 #endif
