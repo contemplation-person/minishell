@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+         #
+#    By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2023/01/16 07:56:23 by gyim             ###   ########seoul.kr   #
+#    Updated: 2023/01/16 08:13:03 by juha             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME			:=	minishell
 READLINE_LIB	:=	-lreadline -L$(shell brew --prefix readline)/lib
 READLINE_INC	:=	$(shell brew --prefix readline)/include
 CC 				:=	cc
-SANITIZE		:= 	-g -fsanitize=address
+SANITIZE		:= 	#-g -fsanitize=address
 CFLAGS 			:=	$(SANITIZE) -Wall -Werror -Wextra -I$(READLINE_INC) -fcommon
 
 SRC 			:=	parser/parser.c	\

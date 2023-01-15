@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/16 05:40:29 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 08:18:04 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	excute_cmd(t_cplist *cmd_node, t_env_info_list *envp_list)
 	waitpid(-1, &status, 0);
 	free_cmd(cmd);
 	if (WIFEXITED(status))
-		g_error_code = 128 + WEXITSTATUS(status);
+		g_error_code = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))
 	{
 		g_error_code = 128 + WTERMSIG(status);
