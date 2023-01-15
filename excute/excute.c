@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   excute.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/15 22:58:32 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 05:23:43 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	excute_all(t_cplist *cmd_pipe_list, t_fds *fds,
 	argc = cplist_len(cmd_pipe_list);
 	reset_fds(fds);
 	create_heredoc(cmd_pipe_list);
+	_set_signal(2);
 	if (argc <= 1)
 		pipex2(cmd_pipe_list, fds, envp_list);
 	else
