@@ -28,7 +28,7 @@ int	builtin_exit(char **excute_str_form)
 	int	word_cnt;
 
 	word_cnt = cnt_argc(excute_str_form);
-	if (word_cnt == 2 && is_error_word(excute_str_form[1]))
+	if (word_cnt > 1 && is_error_word(excute_str_form[1]))
 	{
 		builtin_error_message("exit", excute_str_form[1], \
 								"numeric argument required", 2);
