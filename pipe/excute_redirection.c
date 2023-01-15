@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   excute_redirection.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:32:35 by juha              #+#    #+#             */
-/*   Updated: 2023/01/14 15:11:24 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/15 11:55:19 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,8 @@ void	is_redirection_dup2(int fd, int redirection, t_pipe *p, t_cplist *cp)
 	int			check_error_code;
 	int			i;
 	char		*cmd;
-	t_cplist	*temp;
 
 	i = 0;
-	temp = cp;
 	while (i++ < p->operator_cmd)
 		cp = cp->next;
 	cmd = cp->cmd;
