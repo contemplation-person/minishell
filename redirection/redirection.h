@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 09:25:16 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/13 00:30:11 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 05:02:11 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	add_redirection(t_rnode	**r_list, t_tnode *node);
 t_rnode	*set_redirection(t_tnode *node);
 void	change_fds(t_fds *fds, t_fds *temp);
 int		set_fds(t_fds *fds, t_rnode *node, t_env_info_list *envp_list);
-void	create_heredoc(t_cplist *cplist);
+t_bool	create_heredoc(t_cplist *cplist);
 
 int		set_outfile(t_fds *fds, t_rnode *node);
 int		set_addfile(t_fds *fds, t_rnode *node);

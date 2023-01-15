@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 18:11:04 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/15 19:02:41 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 05:01:49 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,9 @@ void	cmd_path_check(char **path, char **cmd,
 		{
 			cmd_folder_path = ft_strjoin(path[i], "/");
 			cmd_file_path = ft_strjoin(cmd_folder_path, cmd[0]);
-			printf("%s\n", cmd_file_path);
+
+			printf("this : %s\n", cmd_file_path);
+			
 			execve(cmd_file_path, cmd, envp);
 			free(cmd_folder_path);
 			free(cmd_file_path);

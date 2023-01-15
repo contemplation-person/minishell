@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 20:09:00 by juha              #+#    #+#             */
-/*   Updated: 2023/01/14 17:32:46 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 05:00:53 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,6 @@ int	pipex(t_cplist *cmd_pipe_list, t_fds *fds,
 	}
 	do_child(&p, &channel, cmd_pipe_list, envp_list);
 	end_parent(&p, channel);
-/*
-	g_error_code = WEXITSTATUS(p.status);
-*/
 	if (WIFEXITED(p.status))
 		g_error_code = WEXITSTATUS(p.status);
 	else if (WIFSIGNALED(p.status))
