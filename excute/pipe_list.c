@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 08:16:04 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/14 14:44:25 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 08:23:07 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_cplist	*new_cplist(void)
 char	*get_cplist_cmd(t_tnode *cmds, t_env_info_list *env_list)
 {
 	char	*ret;
+	t_tnode	*cmd_token;
 
 	expansion(cmds, env_list);
  	retokenize(cmds);

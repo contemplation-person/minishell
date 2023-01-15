@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:41:20 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/13 01:57:37 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 08:23:18 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redirection.h"
 #include "../get_next_line/get_next_line_bonus.h"
 
-int	read_lines(int here_doc_fd, t_fds *fds, char *limiter, t_env_info_list *envp_list)
+int	read_lines(int here_doc_fd, t_fds *fds, char *limiter,	
+		t_env_info_list *envp_list)
 {
 	char	*line;
 	char	*p_expanded;
