@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 18:11:04 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/16 05:01:49 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 05:09:40 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void	cmd_path_check(char **path, char **cmd,
 	{
 		i = 0;
 		envp = envp_list_to_arr(envp_list);
+		execve(cmd[0], cmd, envp);
 		while (path[i])
 		{
 			cmd_folder_path = ft_strjoin(path[i], "/");
