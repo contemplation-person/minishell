@@ -61,6 +61,19 @@ t_env_info	*new_env_list(char *env)
 	return (ret);
 }
 
+void	env_node_free(t_env_info **node)
+{
+	if ((*node)->value)
+	{
+		free((*node)->value);
+		(*node)->value = NULL;
+	}
+	free((*node)->key);
+	(*node)->key = NULL;
+	free(*node);
+	*node = NULL;
+}
+
 static void	free_node(t_env_info_list *list, t_env_info *node, int *idx)
 {
 	list->cnt--;
@@ -69,10 +82,7 @@ static void	free_node(t_env_info_list *list, t_env_info *node, int *idx)
 	if (node->next)
 		node->next->prev = node->prev;
 	*idx = node->index;
-	if (node->value)
-		free(node->value);
-	free(node->key);
-	free(node);
+	env_node_free(&node);
 	node = list->env_info;
 	while (node)
 	{
@@ -90,13 +100,18 @@ void	delete_one_list(t_env_info_list *list, char *key)
 	node = list->env_info;
 	if (list->cnt == 0)
 		return ;
+	if (list->cnt == 1)
+		env_node_free(&(list->env_info));
+	if (node->key == key)
+	{
+		list->env_info = node->next;
+		env_node_free(&(list->env_info));
+		return ;
+	}
 	while (node)
 	{
 		if (!ft_strncmp(key, node->key, ft_strlen(key) + 1))
-		{
-			free_node(list, node, &idx);
-			return ;
-		}
+			return (free_node(list, node, &idx));
 		node = node->next;
 	}
 }
