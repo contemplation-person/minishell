@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   excute.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:14:07 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/14 11:06:55 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 02:07:21 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void		reset_fds(t_fds *fds);
 void		init_fds(t_fds *fds);
 
 void		create_heredoc(t_cplist *cplist);
-int			get_heredoc_fd(t_rnode *rd);
+//int			get_heredoc_fd(t_rnode *rd);
 
 char		**split_cmd(char *cmd);
 void		remove_all_token_quote(t_tnode **head);

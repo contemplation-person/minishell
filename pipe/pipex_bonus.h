@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 20:10:52 by juha              #+#    #+#             */
-/*   Updated: 2023/01/13 15:29:51 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 02:45:06 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	init(t_pipe *p, t_using_pipe *channel, \
 int		set_collabo(t_pipe *p, char **envp);
 char	*parse_file(t_pipe p, char **argv);
 void	free_t_pipe(t_pipe *p);
-char	*access_heredoc_name(void);
+//char	*access_heredoc_name(void);
 
 char	**get_envp(t_env_info_list	*envp_list);
 char	**get_argv_to_cmd_list(int cnt_cmd, t_cplist *cmd_list);
@@ -75,3 +75,6 @@ void	start_child(t_pipe *p, t_using_pipe *channel, t_cplist *cmd, t_env_info_lis
 void	other_child(t_pipe *p, t_using_pipe *channel, t_cplist *cmd, t_env_info_list *envp_list);
 void	bottom_child(t_pipe *p, t_using_pipe *channel, t_cplist *cmd, t_env_info_list *envp_list);
 #endif
+// bash << ^c 배배쉬  다다시  시시작작
+// ^d 메시지 : bash: warning: here-document at line 12 delimited by end-of-file (wanted `a')
+// sig_quit 무시

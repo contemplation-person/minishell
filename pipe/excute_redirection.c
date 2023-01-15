@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:32:35 by juha              #+#    #+#             */
-/*   Updated: 2023/01/15 11:55:19 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 02:25:21 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int	_set_open_flag(t_rnode *target_cmd)
 			return (-1);
 		}
 	}
+	else if (target_cmd->redirection == HEREDOC)
+		flag = O_RDONLY;
 	return (flag);
 }
 
@@ -113,10 +115,9 @@ int	excute_redirection(t_pipe *p, t_cplist *cmd)
 			rd_node = rd_node->next;
 			return (FALSE);
 		}
-		if (rd_node->redirection != HEREDOC)
-			fd = open(rd_node->file, flag, 0644);
-		else
-			fd = get_heredoc_fd(rd_node);
+		fd = open(rd_node->file, flag, 0644);
+		if (rd_node->redirection == HEREDOC)
+			unlink(rd_node->file);
 		is_redirection_dup2(fd, rd_node->redirection, p, cmd);
 		rd_node = rd_node->next;
 	}

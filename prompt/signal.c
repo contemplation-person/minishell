@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 18:15:47 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/15 18:55:28 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 03:21:59 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	signal_handler2(int signal_int)
 void	_set_signal(int flag)
 {
 	// struct sigaction	sa;
-
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, SIG_IGN);
 	if (flag == 1)
@@ -56,7 +55,6 @@ void	_set_signal(int flag)
 	}
 	else if (flag == 3)
 	{
-		signal(SIGQUIT, SIG_DFL);
 		signal(SIGINT, SIG_DFL);
 	}
 }

@@ -115,9 +115,7 @@ t_bool	builtin_cd(t_env_info_list *minishell_envp, char **excute_str_form)
 				&& excute_str_form[1][0] == '~')
 		free(new_pwd);
 	else if (excute_str_form[1] && access(excute_str_form[1], F_OK))
-	{
 		builtin_error_message("MINISHELL ", excute_str_form[1], \
 								"No such file or directory", 1);
-	}
 	return (TRUE);
 }
