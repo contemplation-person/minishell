@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 19:54:06 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/14 12:27:42 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 07:59:31 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,4 @@ int	is_parenthesis(char *target)
 	else if (ft_strncmp(target, ")", 2) == 0)
 		return (TRUE);
 	return (FALSE);
-}
-
-void	print_tnode(t_tnode *head)
-{
-	t_tnode	*curr;
-
-	curr = head;
-	while (curr)
-	{
-		printf("token :[%s]", curr->token);
-		curr = curr->next;
-	}
-	ft_putchar_fd('\n', 2);
 }
