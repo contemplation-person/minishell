@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:50:23 by juha              #+#    #+#             */
-/*   Updated: 2023/01/15 21:49:30 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/15 22:52:38 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ static void	free_node(t_env_info_list *list, t_env_info *node, int *idx)
 void	delete_one_list(t_env_info_list *list, char *key)
 {
 	t_env_info	*node;
+	t_env_info	*temp;
 	int			idx;
 
 	node = list->env_info;
@@ -104,8 +105,9 @@ void	delete_one_list(t_env_info_list *list, char *key)
 		env_node_free(&(list->env_info));
 	if (!ft_strncmp(node->key, key, ft_strlen(node->key) + 1))
 	{
+		temp = list->env_info;
 		list->env_info = node->next;
-		env_node_free(&(list->env_info));
+		env_node_free(&(temp));
 		return ;
 	}
 	while (node)
