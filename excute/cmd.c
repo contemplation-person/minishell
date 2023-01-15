@@ -56,6 +56,8 @@ void	free_cmd(char **cmd)
 {
 	int	i;
 
+	if (!cmd)
+		return ;
 	i = 0;
 	while (cmd[i])
 	{
