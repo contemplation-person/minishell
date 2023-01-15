@@ -75,7 +75,11 @@ char	*parse_file(t_pipe p, char **argv)
 
 void	free_t_pipe(t_pipe *p)
 {
-	free_cmd(p->path);
+	if (p->path)
+	{
+		free_cmd(p->path);
+		p->path = NULL;
+	}
 	free(p->pwd);
 	free_cmd(p->argv);
 	free_cmd(p->envp);
