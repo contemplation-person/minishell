@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 18:15:47 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/13 18:16:18 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/15 18:55:28 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,19 @@ void	signal_handler2(int signal_int)
 
 void	_set_signal(int flag)
 {
-	struct sigaction	sa;
+	// struct sigaction	sa;
 
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, SIG_IGN);
 	if (flag == 1)
 	{
-		sa.sa_handler = signal_handler;
+		// sa.sa_handler = signal_handler;
 		signal(SIGINT, signal_handler);
 		signal(SIGQUIT, SIG_IGN);
 	}
 	else if (flag == 2)
 	{
-		sa.sa_handler = signal_handler2;
+		// sa.sa_handler = signal_handler2;
 		signal(SIGINT, signal_handler2);
 		signal(SIGQUIT, signal_handler2);
 	}

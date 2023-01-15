@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 16:28:00 by juha              #+#    #+#             */
-/*   Updated: 2023/01/14 16:26:38 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/15 18:58:00 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,6 @@ int	builtin_exit(char **excute_str_form)
 	else if (word_cnt > 2) // 동작확인 필요
 		builtin_error_message("exit", "", "too many arguments", g_error_code);
 	else
-		exit(g_error_code);
+		exit(0);
 	return (g_error_code);
 }
