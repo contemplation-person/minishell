@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:50:23 by juha              #+#    #+#             */
-/*   Updated: 2023/01/05 08:22:10 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/15 21:49:30 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	delete_one_list(t_env_info_list *list, char *key)
 		return ;
 	if (list->cnt == 1)
 		env_node_free(&(list->env_info));
-	if (node->key == key)
+	if (!ft_strncmp(node->key, key, ft_strlen(node->key) + 1))
 	{
 		list->env_info = node->next;
 		env_node_free(&(list->env_info));

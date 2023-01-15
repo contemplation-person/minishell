@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/15 19:07:04 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/15 21:25:23 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	excute_cmd(t_cplist *cmd_node, t_env_info_list *envp_list)
 	if (pid == 0)
 	{
 		_set_signal(3);
+		write(2, cmd[0], ft_strlen(cmd[0]));
 		if (cmd_builtin_check2(cmd, envp_list) == 1)
 		{
 			free(cmd);
