@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 20:10:52 by juha              #+#    #+#             */
-/*   Updated: 2023/01/16 02:45:06 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 13:56:30 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,12 @@ int		excute_redirection(t_pipe *p, t_cplist *cmd);
 int		check_redirection_builtin(char **cmd);
 
 char	**parse_option(t_pipe p);
-void	start_child(t_pipe *p, t_using_pipe *channel, t_cplist *cmd, t_env_info_list *envp_list);
-void	other_child(t_pipe *p, t_using_pipe *channel, t_cplist *cmd, t_env_info_list *envp_list);
-void	bottom_child(t_pipe *p, t_using_pipe *channel, t_cplist *cmd, t_env_info_list *envp_list);
+void	start_child(t_pipe *p, t_using_pipe *channel,
+			t_cplist *cmd, t_env_info_list *envp_list);
+void	other_child(t_pipe *p, t_using_pipe *channel,
+			t_cplist *cmd, t_env_info_list *envp_list);
+void	bottom_child(t_pipe *p, t_using_pipe *channel,
+			t_cplist *cmd, t_env_info_list *envp_list);
 #endif
 // bash << ^c 배배쉬  다다시  시시작작
 // ^d 메시지 : bash: warning: here-document at line 12 delimited by end-of-file (wanted `a')

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 23:12:15 by juha              #+#    #+#             */
-/*   Updated: 2023/01/16 04:59:37 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 13:59:03 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	write_child(t_rnode *rnode, char *exit_code)
 {
 	char	*str;
 	int		fd;
+	char	*ret;
 
 	_set_signal(3); // <- 자식시그널 - 자식 동작 : read 루프를 돌아 부모에게 heredoc 전달
 	fd = open(rnode->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
@@ -29,8 +30,10 @@ void	write_child(t_rnode *rnode, char *exit_code)
 		{
 			break ;
 		}
-		write(fd, str, ft_strlen(str));
+		ret = ft_strjoin(str, "\n");
+		write(fd, ret, ft_strlen(ret));
 		free(str);
+		free(ret);
 	}
 	exit(g_error_code);
 }
