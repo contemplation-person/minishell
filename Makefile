@@ -6,7 +6,7 @@
 #    By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2023/01/16 09:07:42 by gyim             ###   ########seoul.kr   #
+#    Updated: 2023/01/16 11:13:57 by gyim             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ READLINE_LIB	:=	-lreadline -L$(shell brew --prefix readline)/lib
 READLINE_INC	:=	$(shell brew --prefix readline)/include
 CC 				:=	cc
 SANITIZE		:= 	-g -fsanitize=address
-CFLAGS 			:=	$(SANITIZE) -Wall -Werror -Wextra -I$(READLINE_INC) -fcommon
+CFLAGS 			:=	-Wall -Werror -Wextra -I$(READLINE_INC)
 
 SRC 			:=	parser/parser.c	\
 					parser/split_input.c \
@@ -77,7 +77,7 @@ OBJ 			:= $(SRC:.c=.o)
 
 
 $(NAME) : $(OBJ) $(LIBFT) $(FT_PRINTF)
-	$(CC) -o $(NAME) $(OBJ) $(LIBFT) $(FT_PRINTF) $(READLINE_LIB) $(SANITIZE)
+	$(CC) -o $(NAME) $(OBJ) $(LIBFT) $(FT_PRINTF) $(READLINE_LIB)
 
 $(LIBFT) :
 	make -j 4 -C libft bonus
