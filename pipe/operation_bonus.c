@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operation_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 22:31:01 by juha              #+#    #+#             */
-/*   Updated: 2023/01/16 05:40:30 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 13:22:58 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	start_child(t_pipe *p, t_using_pipe *channel, \
 	option_file = parse_option(*p);
 	execve(builtin_cmd[0], parse_option(*p), p->envp);
 	execve(option_file[0], parse_option(*p), p->envp);
-	// command not found
+	print_error(builtin_cmd[0], CMD_NOT_FOUND);
 	exit(127);
 }
 
@@ -95,7 +95,7 @@ void	other_child(t_pipe *p, t_using_pipe *channel, \
 	option_file = parse_option(*p);
 	execve(builtin_cmd[0], parse_option(*p), p->envp);
 	execve(option_file[0], parse_option(*p), p->envp);
-	// command not found
+	print_error(builtin_cmd[0], CMD_NOT_FOUND);
 	exit(127);
 }
 
@@ -120,6 +120,6 @@ void	bottom_child(t_pipe *p, t_using_pipe *channel, \
 	option_file = parse_option(*p);
 	execve(builtin_cmd[0], parse_option(*p), p->envp);
 	execve(option_file[0], parse_option(*p), p->envp);
-	// command not found
+	print_error(builtin_cmd[0], CMD_NOT_FOUND);
 	exit(127);
 }
