@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 23:12:15 by juha              #+#    #+#             */
-/*   Updated: 2023/01/16 14:25:53 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 16:11:47 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@ void	write_child(t_rnode *rnode, char *exit_code)
 			break ;
 		if (!ft_strncmp(exit_code, str, ft_strlen(exit_code))
 			&& ft_strlen(exit_code) == ft_strlen(str))
-		{
 			break ;
-		}
 		ret = ft_strjoin(str, "\n");
 		write(fd, ret, ft_strlen(ret));
 		free(str);
@@ -54,6 +52,7 @@ static char	*access_file(void)
 			break ;
 		free(ret);
 	}
+	printf("%s\n", ret);
 	return (ret);
 }
 
@@ -93,7 +92,7 @@ t_bool	create_heredoc(t_cplist *cplist)
 			{
 				exit_code = rtemp->file;
 				rtemp->file = ft_strdup("");
-				return (fork_heredoc(rtemp, exit_code));
+				fork_heredoc(rtemp, exit_code);
 				free(exit_code);
 			}
 			rtemp = rtemp->next;
