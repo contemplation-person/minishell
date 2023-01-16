@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_list.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:04:03 by juha              #+#    #+#             */
-/*   Updated: 2023/01/04 17:28:41 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 15:42:59 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,6 @@ void		add_env_list(t_env_info_list *list, \
 void		print_envp(t_env_info_list minishell_envp, t_env_feature feature);
 void		delete_one_list(t_env_info_list *list, char *key);
 void		init_list(t_env_info_list *list, char **envp);
+
+void		env_node_free(t_env_info **node);
 #endif

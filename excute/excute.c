@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   excute.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/16 08:18:04 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 15:51:48 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	excute_cmd(t_cplist *cmd_node, t_env_info_list *envp_list)
 {
-	char	**path;
 	pid_t	pid;
 	int		status;
 	char	**cmd;
@@ -32,6 +31,17 @@ int	excute_cmd(t_cplist *cmd_node, t_env_info_list *envp_list)
 	}
 	_set_signal(0);
 	pid = fork();
+	excute_child(pid, cmd, envp_list);
+	waitpid(-1, &status, 0);
+	free_cmd(cmd);
+	g_error_code = get_error_code(&status);
+	return (g_error_code);
+}
+
+void	excute_child(int pid, char **cmd, t_env_info_list *envp_list)
+{
+	char	**path;
+
 	if (pid == 0)
 	{
 		_set_signal(2);
@@ -45,17 +55,21 @@ int	excute_cmd(t_cplist *cmd_node, t_env_info_list *envp_list)
 		print_error(cmd[0], CMD_NOT_FOUND);
 		exit(127);
 	}
-	waitpid(-1, &status, 0);
-	free_cmd(cmd);
-	if (WIFEXITED(status))
-		g_error_code = WEXITSTATUS(status);
-	else if (WIFSIGNALED(status))
+}
+
+int	get_error_code(int *status)
+{
+	if (WIFEXITED(*status))
+		g_error_code = WEXITSTATUS(*status);
+	else if (WIFSIGNALED(*status))
 	{
-		g_error_code = 128 + WTERMSIG(status);
+		g_error_code = 128 + WTERMSIG(*status);
 		ft_putstr_fd("\n", STDERR_FILENO);
 	}
-	return (pid);
+	return (g_error_code);
 }
+
+
 
 void	excute_all(t_cplist *cmd_pipe_list, t_fds *fds,
 				t_env_info_list *envp_list)

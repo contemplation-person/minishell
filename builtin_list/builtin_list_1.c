@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 17:44:36 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/14 17:44:38 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 15:52:08 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	add_env_list(t_env_info_list *list, \
 	{
 		if (0 > ft_strncmp(temp->key, n_temp->key, ft_strlen(temp->key) + 1))
 			(n_temp->index)++;
-		else if (0 < ft_strncmp(temp->key, n_temp->key,\
+		else if (0 < ft_strncmp(temp->key, n_temp->key,
 				ft_strlen(temp->key) + 1))
 			(temp->index)++;
 		temp = temp->next;

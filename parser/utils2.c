@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 19:54:06 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/16 07:59:31 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 14:36:21 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	is_word(char *target)
 	if (is_redirection(target) || is_pipe(target)
 		|| is_double_op(target) || is_parenthesis(target))
 		return (FALSE);
-
 	return (TRUE);
 }
 

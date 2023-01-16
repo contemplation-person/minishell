@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:50:23 by juha              #+#    #+#             */
-/*   Updated: 2023/01/15 22:52:38 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 15:43:10 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,24 @@ static void	_set_value(int value_i, int key_i, t_env_info *ret, char *env)
 	}
 }
 
+static void	free_node(t_env_info_list *list, t_env_info *node, int *idx)
+{
+	list->cnt--;
+	if (node->prev)
+		node->prev->next = node->next;
+	if (node->next)
+		node->next->prev = node->prev;
+	*idx = node->index;
+	env_node_free(&node);
+	node = list->env_info;
+	while (node)
+	{
+		if (*idx < node->index)
+			node->index--;
+		node = node->next;
+	}
+}
+
 t_env_info	*new_env_list(char *env)
 {
 	t_env_info	*ret;
@@ -59,37 +77,6 @@ t_env_info	*new_env_list(char *env)
 	if (!ret->value)
 		ret->feature = ENV;
 	return (ret);
-}
-
-void	env_node_free(t_env_info **node)
-{
-	if ((*node)->value)
-	{
-		free((*node)->value);
-		(*node)->value = NULL;
-	}
-	free((*node)->key);
-	(*node)->key = NULL;
-	free(*node);
-	*node = NULL;
-}
-
-static void	free_node(t_env_info_list *list, t_env_info *node, int *idx)
-{
-	list->cnt--;
-	if (node->prev)
-		node->prev->next = node->next;
-	if (node->next)
-		node->next->prev = node->prev;
-	*idx = node->index;
-	env_node_free(&node);
-	node = list->env_info;
-	while (node)
-	{
-		if (*idx < node->index)
-			node->index--;
-		node = node->next;
-	}
 }
 
 void	delete_one_list(t_env_info_list *list, char *key)

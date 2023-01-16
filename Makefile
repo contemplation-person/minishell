@@ -6,7 +6,7 @@
 #    By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2023/01/16 14:34:35 by gyim             ###   ########seoul.kr   #
+#    Updated: 2023/01/16 14:38:46 by gyim             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ SRC 			:=	parser/parser.c	\
 					redirection/here_doc.c \
 					builtin_list/builtin_list_1.c \
 					builtin_list/builtin_list_2.c \
+					builtin_list/builtin_list_3.c \
 					builtin/builtin_utils.c \
 					builtin/cd.c \
 					builtin/echo.c \
