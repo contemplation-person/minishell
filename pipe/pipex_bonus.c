@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 20:09:00 by juha              #+#    #+#             */
-/*   Updated: 2023/01/16 05:32:25 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 11:22:47 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	do_child(t_pipe *p, t_using_pipe *channel, \
 }
 
 int	pipex(t_cplist *cmd_pipe_list, t_fds *fds,
-		t_env_info_list *envp_list)
+			t_env_info_list *envp_list)
 {
 	t_pipe				p;
 	t_using_pipe		channel;
@@ -93,6 +93,7 @@ int	pipex(t_cplist *cmd_pipe_list, t_fds *fds,
 		g_error_code = WTERMSIG(p.status);
 		ft_putstr_fd("\n", STDERR_FILENO);
 	}
+	free_t_pipe(&p);
 	if (p.operator_cmd == 0)
 		exit(1);
 	return (g_error_code);
