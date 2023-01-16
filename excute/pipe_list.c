@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 08:16:04 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/16 08:23:07 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 09:19:33 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,11 @@ char	*get_cplist_cmd(t_tnode *cmds, t_env_info_list *env_list)
 	char	*ret;
 	t_tnode	*cmd_token;
 
-	expansion(cmds, env_list);
- 	retokenize(cmds);
-	ret = merge_token(cmds);
+	cmd_token = get_cmd_tnode(cmds);
+	expansion(cmd_token, env_list);
+	retokenize(cmd_token);
+	ret = merge_token(cmd_token);
+	free_tlist(cmd_token);
 	return (ret);
 }
 
@@ -49,4 +51,37 @@ int	cplist_len(t_cplist *cmd_pipe_list)
 		curr = curr->next;
 	}
 	return (len);
+}
+
+t_tnode	*get_cmd_tnode(t_tnode *head)
+{
+	t_tnode	*ret;
+	t_tnode	*curr;
+
+	curr = head;
+	ret = NULL;
+	while (curr)
+	{
+		if (is_redirection(curr->token))
+			curr = curr->next->next;
+		else
+		{
+			add_tlist(&ret, curr->token);
+			curr = curr->next;
+		}
+	}
+	return (ret);
+}
+
+void	add_tlist(t_tnode **head, char *token)
+{
+	t_tnode	*last;
+	t_tnode	*new_node;
+
+	last = find_last_node(*head);
+	new_node = make_node(token);
+	if (!last)
+		*head = new_node;
+	else
+		last->next = new_node;
 }

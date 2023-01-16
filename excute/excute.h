@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   excute.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:14:07 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/16 04:57:41 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 09:15:46 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ t_cplist	*new_cplist(void);
 char		*get_cplist_cmd(t_tnode *cmds,
 				t_env_info_list *env_list);
 int			cplist_len(t_cplist *cmd_pipe_list);
+t_tnode		*get_cmd_tnode(t_tnode *head);
+void		add_tlist(t_tnode **head, char *token);
 
 void		free_cmd_pipe_list(t_cplist **cmd_pipe_lists);
 char		*merge_token(t_tnode *head);

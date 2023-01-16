@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 18:22:43 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/13 18:24:18 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 09:19:31 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ t_tnode	*find_last_node(t_tnode *head)
 	if (!head)
 		return (NULL);
 	curr = head;
+	printf("%p\n", curr->next);
 	while (curr->next)
 		curr = curr->next;
 	return (curr);
