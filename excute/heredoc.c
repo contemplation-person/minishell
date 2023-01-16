@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 23:12:15 by juha              #+#    #+#             */
-/*   Updated: 2023/01/16 13:59:03 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 14:25:53 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	write_child(t_rnode *rnode, char *exit_code)
 	exit(g_error_code);
 }
 
-static char	*access_file()
+static char	*access_file(void)
 {
 	int		i;
 	int		flag;

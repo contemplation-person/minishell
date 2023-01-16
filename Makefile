@@ -6,7 +6,7 @@
 #    By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2023/01/16 13:10:51 by gyim             ###   ########seoul.kr   #
+#    Updated: 2023/01/16 14:34:35 by gyim             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,7 @@ SRC 			:=	parser/parser.c	\
 					pipe/pipex_bonus.c \
 					pipe/excute_redirection.c \
 					pipe/utils_bonus.c \
+					pipe/utils2_bonus.c \
 					pipe/pipex_solo.c 
 LIBFT			:= libft/libft.a 
 FT_PRINTF		:= ft_printf/libftprintf.a

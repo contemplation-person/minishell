@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 22:10:47 by juha              #+#    #+#             */
-/*   Updated: 2023/01/14 16:16:13 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 14:28:12 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	*parse_file(t_pipe p, char **argv)
 	i = 0;
 	str[0] = '/';
 	str[1] = '\0';
-	while (argv[p.operator_cmd ][i])
+	while (argv[p.operator_cmd][i])
 	{
 		if ((8 < argv[p.operator_cmd][i] \
 			&& argv[p.operator_cmd][i] < 14) \
@@ -70,7 +70,7 @@ char	*parse_file(t_pipe p, char **argv)
 			break ;
 		i++;
 	}
-	return (ft_substr(ft_strjoin(str, argv[p.operator_cmd ]), 0, i));
+	return (ft_substr(ft_strjoin(str, argv[p.operator_cmd]), 0, i));
 }
 
 void	free_t_pipe(t_pipe *p)

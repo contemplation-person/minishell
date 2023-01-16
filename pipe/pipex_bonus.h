@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 20:10:52 by juha              #+#    #+#             */
-/*   Updated: 2023/01/16 13:56:30 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 14:34:06 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ void	other_child(t_pipe *p, t_using_pipe *channel,
 			t_cplist *cmd, t_env_info_list *envp_list);
 void	bottom_child(t_pipe *p, t_using_pipe *channel,
 			t_cplist *cmd, t_env_info_list *envp_list);
+
+int		pipex_error_code(t_pipe *p);
 #endif
 // bash << ^c 배배쉬  다다시  시시작작
 // ^d 메시지 : bash: warning: here-document at line 12 delimited by end-of-file (wanted `a')

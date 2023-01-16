@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 20:09:00 by juha              #+#    #+#             */
-/*   Updated: 2023/01/16 11:22:47 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 14:33:44 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,14 +86,7 @@ int	pipex(t_cplist *cmd_pipe_list, t_fds *fds,
 	}
 	do_child(&p, &channel, cmd_pipe_list, envp_list);
 	end_parent(&p, channel);
-	if (WIFEXITED(p.status))
-		g_error_code = WEXITSTATUS(p.status);
-	else if (WIFSIGNALED(p.status))
-	{
-		g_error_code = WTERMSIG(p.status);
-		ft_putstr_fd("\n", STDERR_FILENO);
-	}
-	free_t_pipe(&p);
+	g_error_code = pipex_error_code(&p);
 	if (p.operator_cmd == 0)
 		exit(1);
 	return (g_error_code);
