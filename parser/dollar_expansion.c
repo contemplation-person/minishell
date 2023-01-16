@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 08:13:54 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/07 15:19:07 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 10:40:32 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	skip_s_quote(char *token, int *index)
 	(*index)++;
 	while (token[*index] && token[(*index)] != '\'')
 		(*index)++;
-	(*index)++;
 }
 
 void	dollar_token_change(char **ret, char *token, t_env_info_list *env_list)

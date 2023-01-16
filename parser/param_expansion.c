@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:36:08 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/13 18:32:30 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 10:40:30 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	skip_d_quote(char *token, int *index)
 	(*index)++;
 	while (token[*index] && token[(*index)] != '\"')
 		(*index)++;
-	(*index)++;
 }
 
 t_tnode	*split_token(char *token)
