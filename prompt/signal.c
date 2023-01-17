@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 18:15:47 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/17 18:59:44 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/17 19:39:16 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	signal_handler3(int signal_int)
 	{
 		write(1, "\n", 1);
 		rl_redisplay();
+		rl_replace_line("\n", 1);
 	}
 	g_error_code = 128 + signal_int;
 }
