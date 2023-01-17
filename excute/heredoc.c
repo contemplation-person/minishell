@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 23:12:15 by juha              #+#    #+#             */
-/*   Updated: 2023/01/17 18:43:25 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/17 19:06:17 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,12 @@ t_bool	fork_heredoc(t_rnode *rnode, char *exit_code)
 	pid = fork();
 	if (pid == 0)
 		write_child(rnode, exit_code);
+	free(exit_code);
+	exit_code = NULL;
 	waitpid(pid, &status, 0);
 	if (WIFSIGNALED(status))
 	{
-		if (status == SIGINT) // signal
+		if (status == SIGINT)
 		{
 			unlink(rnode->file);
 			free(rnode->file);
@@ -101,16 +103,11 @@ t_bool	create_heredoc(t_cplist *cplist)
 				exit_code = rtemp->file;
 				rtemp->file = ft_strdup("");
 				if (fork_heredoc(rtemp, exit_code) == FALSE)
-				{
-					free(exit_code);
 					return (FALSE);
-				}
-				free(exit_code);
 			}
 			rtemp = rtemp->next;
 		}
 		temp = temp->next;
 	}
-	return (TRUE); // 성공하면 실행, 실패하면 모든 노드 프리 후... 프롬프트 시작.
+	return (TRUE);
 }
-
