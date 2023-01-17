@@ -43,7 +43,7 @@ void	write_child(t_rnode *rnode, char *exit_code)
 			break ;
 		}
 		ret = ft_strjoin(str, "\n");
-		free_all(str, ret);
+		free_all_n_write(fd, &str, &ret);
 	}
 	exit(g_error_code);
 }
