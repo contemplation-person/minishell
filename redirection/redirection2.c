@@ -21,7 +21,7 @@ int	set_outfile(t_rnode *node)
 	{
 		write(2, "Permission denied\n", 18);
 		g_error_code = 1;
-		return (-1);
+		return (1);
 	}
 	close(STDOUT_FILENO);
 	dup2(outfile, STDOUT_FILENO);
@@ -38,7 +38,7 @@ int	set_addfile(t_rnode *node)
 	{
 		write(2, "Permission denied\n", 18);
 		g_error_code = 1;
-		return (-1);
+		return (1);
 	}
 	close(STDOUT_FILENO);
 	dup2(addfile, STDOUT_FILENO);
@@ -56,14 +56,14 @@ int	set_infile(t_rnode *node)
 	{
 		write(2, NO_FILE_DIR, ft_strlen(NO_FILE_DIR));
 		g_error_code = 1;
-		return (-1);
+		return (1);
 	}
 	infile = open(node->file, O_RDONLY);
 	if (infile < 0)
 	{
 		write(2, "Permission denied\n", 18);
 		g_error_code = 1;
-		return (-1);
+		return (1);
 	}
 	close(STDIN_FILENO);
 	dup2(infile, STDIN_FILENO);
@@ -79,7 +79,7 @@ int	set_here_doc(t_rnode *node)
 	if (here_doc_fd == -1)
 	{
 		g_error_code = 1;
-		return (-1);
+		return (1);
 	}
 	unlink(node->file);
 	close(STDIN_FILENO);

@@ -92,13 +92,13 @@ int	get_fds(t_rnode *head)
 	while (curr)
 	{
 		if (curr->redirection == 1)
-			set_outfile(curr);
+			check |= set_outfile(curr);
 		else if (curr->redirection == 2)
-			set_addfile(curr);
+			check |= set_addfile(curr);
 		else if (curr->redirection == 3)
-			set_infile(curr);
+			check |= set_infile(curr);
 		else if (curr->redirection == 4)
-			check = set_here_doc(curr);
+			check |= set_here_doc(curr);
 		curr = curr->next;
 	}
 	return (!check);
