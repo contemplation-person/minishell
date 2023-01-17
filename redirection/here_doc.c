@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:41:20 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/16 13:53:34 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/17 16:16:32 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,4 @@ int	read_lines(int here_doc_fd, t_fds *fds, char *limiter,
 	free(temp);
 	free(line);
 	return (0);
-}
-
-void	delete_here_doc(void)
-{
-	char	*here_doc;
-
-	here_doc = ft_strjoin(getenv("HOME"), HERE_DOC);
-	unlink(here_doc);
-	free(here_doc);
 }

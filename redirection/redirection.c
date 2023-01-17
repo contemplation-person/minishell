@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 12:40:15 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/16 09:02:37 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/17 16:14:40 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,23 @@ t_rnode	*set_redirection(t_tnode *node)
 		new_node->redirection = 4;
 	new_node->file = ft_strdup(node->next->token);
 	return (new_node);
+}
+
+void	get_fds(t_rnode *head)
+{
+	t_rnode	*curr;
+
+	curr = head;
+	while (curr)
+	{
+		if (curr->redirection == 1)
+			set_outfile(curr);
+		else if (curr->redirection == 2)
+			set_addfile(curr);
+		else if (curr->redirection == 3)
+			set_infile(curr);
+		else if (curr->redirection == 4)
+			set_here_doc(curr);
+		curr = curr->next;
+	}
 }

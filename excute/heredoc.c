@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 23:12:15 by juha              #+#    #+#             */
-/*   Updated: 2023/01/16 16:11:47 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/17 14:45:23 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	write_child(t_rnode *rnode, char *exit_code)
 
 	_set_signal(3); // <- 자식시그널 - 자식 동작 : read 루프를 돌아 부모에게 heredoc 전달
 	fd = open(rnode->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	while (42)
+	while (1)
 	{
 		str = readline("> ");
 		if (!str)

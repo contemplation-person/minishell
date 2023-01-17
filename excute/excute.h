@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:14:07 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/16 15:50:43 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/17 16:09:54 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void		free_cmd_pipe_list(t_cplist **cmd_pipe_lists);
 char		*merge_token(t_tnode *head);
 
 void		reset_fds(t_fds *fds);
-void		init_fds(t_fds *fds);
 
 t_bool		create_heredoc(t_cplist *cplist);
 //int			get_heredoc_fd(t_rnode *rd);
