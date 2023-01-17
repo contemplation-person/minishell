@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 19:56:59 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/16 15:52:36 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/17 14:34:23 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,25 @@ t_bool	check_cd_error(t_env_info_list *minishell_envp, char **excute_str_form)
 	return (FALSE);
 }
 
+t_bool	update_env_pwd(char **excute_str_form, char **old_pwd, char **new_pwd)
+{
+	*old_pwd = getcwd(NULL, 1);
+	if (!(*old_pwd))
+	{
+		chdir(getenv("HOME"));
+		return (FALSE);
+	}
+	if (cnt_argc(excute_str_form) == 1)
+	{
+		*new_pwd = getenv("HOME");
+		if (!(*new_pwd))
+			exit(1);
+	}
+	else
+		*new_pwd = excute_str_form[1];
+	return (TRUE);
+}
+
 t_bool	builtin_cd(t_env_info_list *minishell_envp, char **excute_str_form)
 {
 	char	*old_pwd;
@@ -93,28 +112,22 @@ t_bool	builtin_cd(t_env_info_list *minishell_envp, char **excute_str_form)
 	g_error_code = 0;
 	if (check_cd_error(minishell_envp, excute_str_form))
 		return (FALSE);
-	old_pwd = getcwd(NULL, 1);
-	if (!old_pwd)
-	{
-		chdir("/");
+	if (!update_env_pwd(excute_str_form, &old_pwd, &new_pwd))
 		return (FALSE);
-	}
-	if (cnt_argc(excute_str_form) == 1)
-	{
-		new_pwd = getenv("HOME");
-		if (!new_pwd)
-			exit(1);
-	}
-	else
-		new_pwd = excute_str_form[1];// 새로운 pwd가 갱신될 때 터짐.
 	if (cnt_argc(excute_str_form) > 1 && excute_str_form[1] \
 				&& excute_str_form[1][0] == '~')
 		new_pwd = set_pwd(excute_str_form[1], getenv("HOME"));
 	change_dir(minishell_envp, &old_pwd, new_pwd);
+
+	for (int i = 0; i < cnt_argc(excute_str_form); i++)
+	{
+		printf("this %s\n", excute_str_form[i]);
+	}
+
 	if (cnt_argc(excute_str_form) > 1 && excute_str_form[1] \
 				&& excute_str_form[1][0] == '~')
 		free(new_pwd);
-	else if (excute_str_form[1] && access(excute_str_form[1], F_OK))
+	else if (access(excute_str_form[1], F_OK) == -1)
 		builtin_error_message("MINISHELL ", excute_str_form[1], \
 								"No such file or directory", 1);
 	return (TRUE);

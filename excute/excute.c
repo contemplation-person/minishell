@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   excute.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/16 15:51:48 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/17 14:13:15 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ int	get_error_code(int *status)
 	}
 	return (g_error_code);
 }
-
-
 
 void	excute_all(t_cplist *cmd_pipe_list, t_fds *fds,
 				t_env_info_list *envp_list)
