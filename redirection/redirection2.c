@@ -81,6 +81,7 @@ int	set_here_doc(t_rnode *node)
 		g_error_code = 1;
 		return (-1);
 	}
+	unlink(node->file);
 	close(STDIN_FILENO);
 	dup2(here_doc_fd, STDIN_FILENO);
 	close(here_doc_fd);

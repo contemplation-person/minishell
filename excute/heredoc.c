@@ -52,19 +52,23 @@ static char	*access_file(void)
 {
 	int		i;
 	int		flag;
-	char	*ret;
+	char	*_itoa;
+	char	*path;
 
 	i = 0;
 	flag = 0;
 	while (!flag)
 	{
-		ret = ft_itoa(i++);
-		flag = access(ret, F_OK);
+		path = ft_strdup("/tmp/");
+		_itoa = ft_itoa(i++);
+		smart_join(&path, _itoa);
+		free(_itoa);
+		flag = access(path, F_OK);
 		if (flag)
 			break ;
-		free(ret);
+		free(path);
 	}
-	return (ret);
+	return (path);
 }
 
 t_bool	fork_heredoc(t_rnode *rnode, char *exit_code)
