@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 07:56:29 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/16 14:35:59 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/17 16:21:30 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,4 @@ int	op_valid_check(t_tnode *prev, t_tnode *curr)
 	if (is_double_op(prev->token) && is_double_op(curr->token))
 		return (-1);
 	return (0);
-}
-
-void	print_tnode(t_tnode *head)
-{
-	t_tnode	*curr;
-
-	curr = head;
-	while (curr)
-	{
-		printf("token :[%s]", curr->token);
-		curr = curr->next;
-	}
-	ft_putchar_fd('\n', 2);
 }
