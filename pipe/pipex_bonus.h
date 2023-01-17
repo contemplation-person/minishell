@@ -80,6 +80,3 @@ void	bottom_child(t_pipe *p, t_using_pipe *channel,
 
 int		pipex_error_code(t_pipe *p);
 #endif
-// bash << ^c 배배쉬  다다시  시시작작
-// ^d 메시지 : bash: warning: here-document at line 12 delimited by end-of-file (wanted `a')
-// sig_quit 무시

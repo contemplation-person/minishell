@@ -12,6 +12,13 @@
 
 #include "../minishell.h"
 
+static void	free_all_n_write(int fd, char **str, char **ret)
+{
+	write(fd, *ret, ft_strlen(*ret));
+	free(*str);
+	free(*ret);
+}
+
 void	write_child(t_rnode *rnode, char *exit_code)
 {
 	char	*str;
@@ -36,9 +43,7 @@ void	write_child(t_rnode *rnode, char *exit_code)
 			break ;
 		}
 		ret = ft_strjoin(str, "\n");
-		write(fd, ret, ft_strlen(ret));
-		free(str);
-		free(ret);
+		free_all(str, ret);
 	}
 	exit(g_error_code);
 }
@@ -79,7 +84,7 @@ t_bool	fork_heredoc(t_rnode *rnode, char *exit_code)
 	waitpid(pid, &status, 0);
 	if (WIFSIGNALED(status))
 	{
-		if (status == SIGINT) // signal
+		if (status == SIGINT)
 		{
 			write(1, "\n", 1);
 			unlink(rnode->file);
@@ -108,10 +113,7 @@ t_bool	create_heredoc(t_cplist *cplist)
 				exit_code = rtemp->file;
 				rtemp->file = ft_strdup("");
 				if (fork_heredoc(rtemp, exit_code) == FALSE)
-				{
-					free(exit_code);
-					return (FALSE);
-				}
+					return (free(exit_code), FALSE);
 				free(exit_code);
 			}
 			rtemp = rtemp->next;
