@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+         #
+#    By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2023/01/16 14:38:46 by gyim             ###   ########seoul.kr   #
+#    Updated: 2023/01/17 15:01:28 by juha             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,6 +58,7 @@ SRC 			:=	parser/parser.c	\
 					builtin_list/builtin_list_3.c \
 					builtin/builtin_utils.c \
 					builtin/cd.c \
+					builtin/cd_utils.c \
 					builtin/echo.c \
 					builtin/env.c \
 					builtin/exit.c \
