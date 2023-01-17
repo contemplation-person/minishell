@@ -18,13 +18,17 @@ void	write_child(t_rnode *rnode, char *exit_code)
 	int		fd;
 	char	*ret;
 
-	 _set_signal(3); // <- 자식시그널 - 자식 동작 : read 루프를 돌아 부모에게 heredoc 전달
+	_set_signal(3); // <- 자식시그널 - 자식 동작 : read 루프를 돌아 부모에게 heredoc 전달
 	fd = open(rnode->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	while (1)
 	{
 		str = readline("> ");
 		if (!str)
+		{
+			unlink(rnode->file);//
+			rnode->file = NULL;//
 			break ;
+		}
 		if (!ft_strncmp(exit_code, str, ft_strlen(exit_code))
 			&& ft_strlen(exit_code) == ft_strlen(str))
 		{
@@ -69,12 +73,15 @@ t_bool	fork_heredoc(t_rnode *rnode, char *exit_code)
 	rnode->file = heredoc_name;
 	pid = fork();
 	if (pid == 0)
+	{
 		write_child(rnode, exit_code);
+	}
 	waitpid(pid, &status, 0);
 	if (WIFSIGNALED(status))
 	{
 		if (status == SIGINT) // signal
 		{
+			write(1, "\n", 1);
 			unlink(rnode->file);
 			free(rnode->file);
 			rnode->file = NULL;

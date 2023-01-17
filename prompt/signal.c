@@ -36,16 +36,6 @@ void	signal_handler2(int signal_int)
 	g_error_code = 128 + signal_int;
 }
 
-void	signal_handler3(int signal_int)
-{
-	if (signal_int == SIGINT)
-	{
-		rl_on_new_line();
-		rl_replace_line("", 1);
-	}
-	g_error_code = 128 + signal_int;
-}
-
 void	_set_signal(int flag)
 {
 	struct sigaction	sa;
@@ -67,6 +57,5 @@ void	_set_signal(int flag)
 	else if (flag == 3)
 	{
 		signal(SIGINT, SIG_DFL);
-		signal(SIGQUIT, signal_handler3);
 	}
 }

@@ -77,10 +77,10 @@ void	cmd_path_check(char **path, char **cmd,
 	char	*cmd_folder_path;
 	char	**envp;
 
+	envp = envp_list_to_arr(envp_list);
 	if (path != NULL)
 	{
 		i = 0;
-		envp = envp_list_to_arr(envp_list);
 		execve(cmd[0], cmd, envp);
 		while (path[i])
 		{
@@ -91,7 +91,7 @@ void	cmd_path_check(char **path, char **cmd,
 			free(cmd_file_path);
 			i++;
 		}
-		free_cmd(envp);
 	}
 	execve(cmd[0], cmd, envp);
+	free_cmd(envp);
 }
