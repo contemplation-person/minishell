@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:51:34 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/03 15:34:03 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 14:36:47 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,4 @@ int	get_token(t_tlist_info *list, char *input, int start)
 		add_substr(list, input, start, end - 1);
 		return (end - start);
 	}
-}
-
-void	add_substr(t_tlist_info *list, char *str, int start, int end)
-{
-	char	*word;
-
-	word = ft_substr(str, start, end - start + 1);
-	if (!word)
-		return ;
-	list_add(list, word);
-	free(word);
 }

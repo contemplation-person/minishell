@@ -6,35 +6,32 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 12:40:15 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/05 10:28:44 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/17 16:14:40 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redirection.h"
 
-t_rnode	*get_redirection(t_tnode *cmd_list)
+void	get_redirection(t_rnode **r_list, t_tnode *cmd_list)
 {
 	t_tnode	*curr;
-	t_rnode	*rd_head;
 
-	rd_head = NULL;
 	curr = cmd_list;
 	while (curr)
 	{
 		if (curr->next && is_redirection(curr->token))
 		{
-			add_redirection(&rd_head, curr);
+			add_redirection(r_list, curr);
 			curr = curr->next->next;
 		}
 		else
 			curr = curr->next;
 	}
-	if (check_redirection(rd_head) == -1)
+	if (check_redirection(*r_list) == -1)
 	{
-		free_rlist(rd_head);
-		rd_head = NULL;
+		free_rlist(*r_list);
+		*r_list = NULL;
 	}
-	return (rd_head);
 }
 
 int	is_redirection(char *token)
@@ -42,11 +39,11 @@ int	is_redirection(char *token)
 	if (!ft_strncmp(token, ">", 2))
 		return (1);
 	else if (!ft_strncmp(token, ">>", 3))
-		return (1);
+		return (2);
 	else if (!ft_strncmp(token, "<", 2))
-		return (1);
+		return (3);
 	else if (!ft_strncmp(token, "<<", 3))
-		return (1);
+		return (4);
 	return (0);
 }
 
@@ -85,24 +82,24 @@ t_rnode	*set_redirection(t_tnode *node)
 	return (new_node);
 }
 
-void	change_fds(t_fds *fds, t_fds *temp)
+int	get_fds(t_rnode *head)
 {
-	if (temp->in_fd != -1)
+	t_rnode	*curr;
+	int		check;
+
+	check = 0;
+	curr = head;
+	while (curr)
 	{
-		if (fds->in_fd > 0)
-			close(fds->in_fd);
-		fds->in_fd = temp->in_fd;
+		if (curr->redirection == 1)
+			check |= set_outfile(curr);
+		else if (curr->redirection == 2)
+			check |= set_addfile(curr);
+		else if (curr->redirection == 3)
+			check |= set_infile(curr);
+		else if (curr->redirection == 4)
+			check |= set_here_doc(curr);
+		curr = curr->next;
 	}
-	if (temp->out_fd != -1)
-	{
-		if (fds->out_fd > 0)
-			close(fds->out_fd);
-		fds->out_fd = temp->out_fd;
-	}
-	if (access(HERE_DOC_NAME, F_OK) == 0)
-	{
-		if (fds->in_fd > 0)
-			close(fds->in_fd);
-		fds->in_fd = open(HERE_DOC_NAME, O_RDONLY);
-	}
+	return (!check);
 }

@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tree2.c                                            :+:      :+:    :+:   */
+/*   pipex_solo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/04 19:41:54 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/13 18:32:40 by gyim             ###   ########seoul.kr  */
+/*   Created: 2022/09/28 20:09:00 by juha              #+#    #+#             */
+/*   Updated: 2023/01/17 16:24:03 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "pipex_bonus.h"
 
-void	del_tree(t_tree_node *node)
-{	
-	if (node->left != NULL)
-	{
-		del_tree(node->left);
-		free(node->left);
-	}
-	if (node->right != NULL)
-	{
-		del_tree(node->right);
-		free(node->right);
-	}
-	free_tlist(node->op);
-	free_tlist(node->words);
+int	pipex2(t_cplist *cmd_pipe_list, t_fds *fds, \
+			t_env_info_list *envp_list)
+{
+	t_pipe				p;
+	t_using_pipe		channel;
+
+	p.fds = fds;
+	init(&p, &channel, cmd_pipe_list, envp_list);
+	set_collabo(&p, p.envp);
+	if (get_fds(cmd_pipe_list->rd_head))
+		excute_cmd(cmd_pipe_list, envp_list);
+	free_t_pipe(&p);
+	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_list2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:27:53 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/05 16:29:06 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 18:33:22 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_tnode	*last_prev_node(t_tnode *head)
 	return (prev);
 }
 
-void	free_list(t_tnode *head)
+void	free_tlist(t_tnode *head)
 {
 	t_tnode	*curr;
 	t_tnode	*next;
@@ -41,19 +41,6 @@ void	free_list(t_tnode *head)
 		free(curr);
 		curr = next;
 	}
-}
-
-void	print_list(t_tnode *head)
-{
-	t_tnode	*curr;
-
-	curr = head;
-	while (curr)
-	{
-		printf("[%s]", curr->token);
-		curr = curr->next;
-	}
-	ft_putchar_fd('\n', STDOUT_FILENO);
 }
 
 void	list_add(t_tlist_info *list, char *str)

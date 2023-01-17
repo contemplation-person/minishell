@@ -6,7 +6,7 @@
 /*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:04:03 by juha              #+#    #+#             */
-/*   Updated: 2023/01/04 16:29:57 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/17 15:03:32 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ int			builtin_exit(
 
 t_bool		builtin_export(
 				t_env_info_list *minishell_envp, char **export_str);
-void		builtin_pwd(char **excute_str_form);
+void		builtin_pwd(void);
 t_bool		builtin_unset(t_env_info_list *l, char **unset_name);
 
+int			is_unchanged_dir(t_env_info_list *envp, \
+							char **old_pwd, char *new_pwd);
+t_env_info	*find_env(t_env_info_list *envp, char *key);
 #endif

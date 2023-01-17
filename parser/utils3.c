@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tree2.c                                            :+:      :+:    :+:   */
+/*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/04 19:41:54 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/13 18:32:40 by gyim             ###   ########seoul.kr  */
+/*   Created: 2023/01/16 07:56:29 by gyim              #+#    #+#             */
+/*   Updated: 2023/01/17 16:21:30 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-void	del_tree(t_tree_node *node)
-{	
-	if (node->left != NULL)
+int	op_valid_check(t_tnode *prev, t_tnode *curr)
+{
+	if (curr == NULL)
 	{
-		del_tree(node->left);
-		free(node->left);
-	}
-	if (node->right != NULL)
-	{
-		del_tree(node->right);
-		free(node->right);
-	}
-	free_tlist(node->op);
-	free_tlist(node->words);
+		if (is_redirection(prev->token) || is_pipe(prev->token)
+			|| is_double_op(prev->token))
+			return (-1);
+	}	
+	if (is_redirection(prev->token) && !is_word(curr->token))
+		return (-1);
+	if (is_pipe(prev->token) && is_double_op(curr->token))
+		return (-1);
+	if (is_double_op(prev->token) && is_double_op(curr->token))
+		return (-1);
+	return (0);
 }

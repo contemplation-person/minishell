@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tree2.c                                            :+:      :+:    :+:   */
+/*   utils2_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/04 19:41:54 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/13 18:32:40 by gyim             ###   ########seoul.kr  */
+/*   Created: 2023/01/16 14:32:25 by gyim              #+#    #+#             */
+/*   Updated: 2023/01/16 14:33:27 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "pipex_bonus.h"
 
-void	del_tree(t_tree_node *node)
-{	
-	if (node->left != NULL)
+int	pipex_error_code(t_pipe *p)
+{
+	if (WIFEXITED(p->status))
+		g_error_code = WEXITSTATUS(p->status);
+	else if (WIFSIGNALED(p->status))
 	{
-		del_tree(node->left);
-		free(node->left);
+		g_error_code = WTERMSIG(p->status);
+		ft_putstr_fd("\n", STDERR_FILENO);
 	}
-	if (node->right != NULL)
-	{
-		del_tree(node->right);
-		free(node->right);
-	}
-	free_tlist(node->op);
-	free_tlist(node->words);
+	free_t_pipe(p);
+	return (g_error_code);
 }
