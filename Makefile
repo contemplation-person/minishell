@@ -6,7 +6,7 @@
 #    By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2023/01/16 14:38:46 by gyim             ###   ########seoul.kr   #
+#    Updated: 2023/01/17 14:02:11 by gyim             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ SRC 			:=	parser/parser.c	\
 					excute/pipe_list.c \
 					excute/utils.c \
 					excute/fd.c \
-					excute/heredoc.c \
+					excute/heredoc_temp.c \
 					excute/split_cmd.c \
 					excute/search_tree.c \
 					redirection/redirection.c \

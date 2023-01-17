@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/16 15:51:48 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/17 14:35:15 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,6 @@ int	get_error_code(int *status)
 	return (g_error_code);
 }
 
-
-
 void	excute_all(t_cplist *cmd_pipe_list, t_fds *fds,
 				t_env_info_list *envp_list)
 {
@@ -78,7 +76,7 @@ void	excute_all(t_cplist *cmd_pipe_list, t_fds *fds,
 
 	argc = cplist_len(cmd_pipe_list);
 	reset_fds(fds);
-	create_heredoc(cmd_pipe_list);
+	create_heredoc(cmd_pipe_list) == FALSE);
 	_set_signal(2);
 	if (argc <= 1)
 		pipex2(cmd_pipe_list, fds, envp_list);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc.c                                          :+:      :+:    :+:   */
+/*   heredoc_temp.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 23:12:15 by juha              #+#    #+#             */
-/*   Updated: 2023/01/17 14:07:54 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/17 14:33:54 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ t_bool	create_heredoc(t_cplist *cplist)
 				if (fork_heredoc(rtemp, exit_code) == FALSE)
 				{
 					free(exit_code);
-					break ;
+					return (FALSE);
 				}
 				free(exit_code);
 			}
