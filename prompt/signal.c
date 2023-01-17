@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 18:15:47 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/17 16:40:12 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/17 18:57:18 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,17 @@ void	signal_handler2(int signal_int)
 	g_error_code = 128 + signal_int;
 }
 
+void	signal_handler3(int signal_int)
+{
+	if (signal_int == SIGINT)
+	{
+		write(1, "\n", 1);
+		// rl_replace_line("", 1);
+		rl_redisplay();
+	}
+	g_error_code = 128 + signal_int;
+}
+
 void	_set_signal(int flag)
 {
 	struct sigaction	sa;
@@ -56,5 +67,6 @@ void	_set_signal(int flag)
 	else if (flag == 3)
 	{
 		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, signal_handler3);
 	}
 }

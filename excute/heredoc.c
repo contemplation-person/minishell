@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 23:12:15 by juha              #+#    #+#             */
-/*   Updated: 2023/01/17 17:15:09 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/17 18:43:25 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	write_child(t_rnode *rnode, char *exit_code)
 	int		fd;
 	char	*ret;
 
-	_set_signal(3); // <- 자식시그널 - 자식 동작 : read 루프를 돌아 부모에게 heredoc 전달
+	 _set_signal(3); // <- 자식시그널 - 자식 동작 : read 루프를 돌아 부모에게 heredoc 전달
 	fd = open(rnode->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	while (1)
 	{
@@ -62,8 +62,11 @@ t_bool	fork_heredoc(t_rnode *rnode, char *exit_code)
 {
 	int			pid;
 	int			status;
+	char		*heredoc_name;
 
-	rnode->file = access_file();
+	heredoc_name = access_file();
+	free(rnode->file);
+	rnode->file = heredoc_name;
 	pid = fork();
 	if (pid == 0)
 		write_child(rnode, exit_code);
@@ -72,6 +75,9 @@ t_bool	fork_heredoc(t_rnode *rnode, char *exit_code)
 	{
 		if (status == SIGINT) // signal
 		{
+			unlink(rnode->file);
+			free(rnode->file);
+			rnode->file = NULL;
 			return (FALSE);
 		}
 	}
@@ -94,7 +100,11 @@ t_bool	create_heredoc(t_cplist *cplist)
 			{
 				exit_code = rtemp->file;
 				rtemp->file = ft_strdup("");
-				fork_heredoc(rtemp, exit_code);
+				if (fork_heredoc(rtemp, exit_code) == FALSE)
+				{
+					free(exit_code);
+					return (FALSE);
+				}
 				free(exit_code);
 			}
 			rtemp = rtemp->next;
