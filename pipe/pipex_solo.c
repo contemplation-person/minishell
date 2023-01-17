@@ -21,8 +21,8 @@ int	pipex2(t_cplist *cmd_pipe_list, t_fds *fds, \
 	p.fds = fds;
 	init(&p, &channel, cmd_pipe_list, envp_list);
 	set_collabo(&p, p.envp);
-	get_fds(cmd_pipe_list->rd_head);
-	excute_cmd(cmd_pipe_list, envp_list);
+	if (get_fds(cmd_pipe_list->rd_head))
+		excute_cmd(cmd_pipe_list, envp_list);
 	free_t_pipe(&p);
 	return (0);
 }

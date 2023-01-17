@@ -82,10 +82,12 @@ t_rnode	*set_redirection(t_tnode *node)
 	return (new_node);
 }
 
-void	get_fds(t_rnode *head)
+int	get_fds(t_rnode *head)
 {
 	t_rnode	*curr;
+	int		check;
 
+	check = 0;
 	curr = head;
 	while (curr)
 	{
@@ -96,7 +98,8 @@ void	get_fds(t_rnode *head)
 		else if (curr->redirection == 3)
 			set_infile(curr);
 		else if (curr->redirection == 4)
-			set_here_doc(curr);
+			check = set_here_doc(curr);
 		curr = curr->next;
 	}
+	return (!check);
 }

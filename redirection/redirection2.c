@@ -78,7 +78,6 @@ int	set_here_doc(t_rnode *node)
 	here_doc_fd = open(node->file, O_RDONLY, 0644);
 	if (here_doc_fd == -1)
 	{
-		write(2, "Permission denied\n", 18);
 		g_error_code = 1;
 		return (-1);
 	}

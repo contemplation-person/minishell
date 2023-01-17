@@ -18,7 +18,7 @@ void	get_redirection(t_rnode **r_list, t_tnode *cmd_list);
 int		is_redirection(char *token);
 void	add_redirection(t_rnode	**r_list, t_tnode *node);
 t_rnode	*set_redirection(t_tnode *node);
-void	get_fds(t_rnode *head);
+int		get_fds(t_rnode *head);
 
 void	change_fds(t_fds *fds, t_fds *temp);
 int		set_fds(t_fds *fds, t_rnode *node, t_env_info_list *envp_list);
