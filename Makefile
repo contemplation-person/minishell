@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+         #
+#    By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2023/01/17 15:01:28 by juha             ###   ########seoul.kr   #
+#    Updated: 2023/01/17 16:32:33 by gyim             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ READLINE_LIB	:=	-lreadline -L$(shell brew --prefix readline)/lib
 READLINE_INC	:=	$(shell brew --prefix readline)/include
 CC 				:=	cc
 SANITIZE		:= 	-g -fsanitize=address
-CFLAGS 			:=	-Wall -Werror -Wextra -I$(READLINE_INC)
+CFLAGS 			:=	-g -Wall -Werror -Wextra -I$(READLINE_INC)
 
 SRC 			:=	parser/parser.c	\
 					parser/split_input.c \
@@ -80,7 +80,7 @@ OBJ 			:= $(SRC:.c=.o)
 
 
 $(NAME) : $(OBJ) $(LIBFT) $(FT_PRINTF)
-	$(CC) -o $(NAME) $(OBJ) $(LIBFT) $(FT_PRINTF) $(READLINE_LIB) 
+	$(CC) $(SANITIZE) -o $(NAME) $(OBJ) $(LIBFT) $(FT_PRINTF) $(READLINE_LIB) 
 
 $(LIBFT) :
 	make -j 4 -C libft bonus

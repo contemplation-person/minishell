@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 16:54:16 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/13 09:26:42 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/17 16:38:14 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ char	**get_argv_to_cmd_list(int cnt_cmd, t_cplist *cmd_list)
 		exit(1);
 	while (i < cnt_cmd)
 	{
+		if (!temp->cmd)
+			break ;
 		ret[i] = ft_strdup(temp->cmd);
 		if (!(ret[i]))
 			exit(1);

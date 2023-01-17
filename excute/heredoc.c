@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 23:12:15 by juha              #+#    #+#             */
-/*   Updated: 2023/01/17 14:45:23 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/17 16:40:51 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ static char	*access_file(void)
 			break ;
 		free(ret);
 	}
-	printf("%s\n", ret);
 	return (ret);
 }
 
@@ -102,12 +101,3 @@ t_bool	create_heredoc(t_cplist *cplist)
 	return (TRUE); // 성공하면 실행, 실패하면 모든 노드 프리 후... 프롬프트 시작.
 }
 
-//int	get_heredoc_fd(t_rnode *rd)
-//{
-//	int	fd[2];
-
-//	pipe(fd);
-//	write(fd[WRITE], rd->file, ft_strlen(rd->file));
-//	close(fd[WRITE]);
-//	return (fd[READ]);
-//}
