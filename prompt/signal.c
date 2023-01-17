@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 18:15:47 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/17 18:57:18 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/17 19:09:01 by juha             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,8 @@ void	signal_handler3(int signal_int)
 {
 	if (signal_int == SIGINT)
 	{
-		write(1, "\n", 1);
-		// rl_replace_line("", 1);
-		rl_redisplay();
+		rl_on_new_line();
+		rl_replace_line("", 1);
 	}
 	g_error_code = 128 + signal_int;
 }
@@ -50,6 +49,7 @@ void	signal_handler3(int signal_int)
 void	_set_signal(int flag)
 {
 	struct sigaction	sa;
+
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, SIG_IGN);
 	if (flag == 1)
