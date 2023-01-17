@@ -6,7 +6,7 @@
 #    By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 17:53:25 by juha              #+#    #+#              #
-#    Updated: 2023/01/17 16:32:33 by gyim             ###   ########seoul.kr   #
+#    Updated: 2023/01/17 17:03:32 by gyim             ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,7 +80,7 @@ OBJ 			:= $(SRC:.c=.o)
 
 
 $(NAME) : $(OBJ) $(LIBFT) $(FT_PRINTF)
-	$(CC) $(SANITIZE) -o $(NAME) $(OBJ) $(LIBFT) $(FT_PRINTF) $(READLINE_LIB) 
+	$(CC) -o $(NAME) $(OBJ) $(LIBFT) $(FT_PRINTF) $(READLINE_LIB) 
 
 $(LIBFT) :
 	make -j 4 -C libft bonus

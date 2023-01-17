@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 23:12:15 by juha              #+#    #+#             */
-/*   Updated: 2023/01/17 16:40:51 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/17 17:15:09 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ void	write_child(t_rnode *rnode, char *exit_code)
 			break ;
 		if (!ft_strncmp(exit_code, str, ft_strlen(exit_code))
 			&& ft_strlen(exit_code) == ft_strlen(str))
+		{
+			free(str);
 			break ;
+		}
 		ret = ft_strjoin(str, "\n");
 		write(fd, ret, ft_strlen(ret));
 		free(str);
