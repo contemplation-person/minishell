@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 08:13:54 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/16 10:40:32 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/18 10:06:52 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,28 +40,28 @@ void	skip_s_quote(char *token, int *index)
 		(*index)++;
 }
 
-void	dollar_token_change(char **ret, char *token, t_env_info_list *env_list)
+void	dollar_token_change(char **ret, char *token,
+			t_env_info_list *env_list)
 {
 	int		i;
 	char	*temp;
 	char	*prev;
 	int		start;
+	int		double_quote;
 
+	double_quote = 0;
 	start = 0;
 	i = 0;
 	while (token[i])
 	{
-		if (token[i] == '\'')
-			skip_s_quote(token, &i);
+		check_quote(token, &i, &double_quote);
 		if (token[i + 1] == '$' || token[i + 1] == '\0'
 			|| token[i + 1] == '\"' || token[i + 1] == '\''
 			|| token[i + 1] == ' ')
 		{
 			prev = *ret;
 			temp = dollar_expand(token, start, i, env_list);
-			*ret = ft_strjoin(prev, temp);
-			free(temp);
-			free(prev);
+			ft_strjoin_free(ret, temp, prev);
 			start = i + 1;
 		}
 		i++;

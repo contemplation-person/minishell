@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juha <juha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 23:12:15 by juha              #+#    #+#             */
-/*   Updated: 2023/01/17 19:05:31 by juha             ###   ########seoul.kr  */
+/*   Updated: 2023/01/18 11:07:41 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,7 @@ void	write_child(t_rnode *rnode, char *exit_code)
 	{
 		str = readline("> ");
 		if (!str)
-		{
-			unlink(rnode->file);
-			rnode->file = NULL;
 			break ;
-		}
 		if (!ft_strncmp(exit_code, str, ft_strlen(exit_code))
 			&& ft_strlen(exit_code) == ft_strlen(str))
 		{
@@ -82,9 +78,7 @@ t_bool	fork_heredoc(t_rnode *rnode, char *exit_code)
 	rnode->file = heredoc_name;
 	pid = fork();
 	if (pid == 0)
-	{
 		write_child(rnode, exit_code);
-	}
 	waitpid(pid, &status, 0);
 	if (WIFSIGNALED(status))
 	{
@@ -94,6 +88,7 @@ t_bool	fork_heredoc(t_rnode *rnode, char *exit_code)
 			unlink(rnode->file);
 			free(rnode->file);
 			rnode->file = NULL;
+			g_error_code = status + 128;
 			return (FALSE);
 		}
 	}

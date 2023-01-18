@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:43:32 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/17 16:21:18 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/18 10:03:03 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ char			*find_variable(char *token, int start, int end,
 					t_env_info_list *env_list);
 void			dollar_token_change(char **ret, char *token,
 					t_env_info_list *env_list);
+void			check_quote(char *token, int *i, int *double_quote);
+void			*ft_strjoin_free(char **ret, char *temp, char *prev);
 char			*dollar_expand(char *token, int start, int end,
 					t_env_info_list *env_list);
 char			*p_token_expansion(char *token, t_env_info_list *env_list);

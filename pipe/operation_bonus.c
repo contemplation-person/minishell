@@ -38,7 +38,7 @@ char	**parse_option(t_pipe p)
 {
 	char	**ret;
 
-	ret = ft_split(p.argv[p.operator_cmd], ' ');
+	ret = get_path(p.argv[p.operator_cmd]);
 	ret[0] = access_file(&p, F_OK);
 	return (ret);
 }

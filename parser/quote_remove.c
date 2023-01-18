@@ -6,7 +6,7 @@
 /*   By: gyim <gyim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 18:04:28 by gyim              #+#    #+#             */
-/*   Updated: 2023/01/13 14:28:03 by gyim             ###   ########seoul.kr  */
+/*   Updated: 2023/01/18 10:11:27 by gyim             ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,15 @@ char	*remove_token_quote(char *token)
 void	change_quote_char(char *token)
 {
 	int	i;
+	int	double_quote;
 
 	i = 0;
+	double_quote = 0;
 	while (token[i])
 	{
-		if (token[i] == '\'')
+		if (token[i] == '\"')
+			double_quote = 1 - double_quote;
+		if (token[i] == '\'' && double_quote == 0)
 			token[i] = '\"';
 		i++;
 	}
